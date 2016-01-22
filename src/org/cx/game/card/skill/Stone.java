@@ -1,0 +1,56 @@
+package org.cx.game.card.skill;
+
+import org.cx.game.action.Random;
+import org.cx.game.card.LifeCard;
+import org.cx.game.card.skill.IBuff;
+import org.cx.game.card.skill.IMagic;
+import org.cx.game.card.skill.PassiveSkill;
+import org.cx.game.widget.IControlQueue;
+
+/**
+ * 石化（被动）
+ * @author chenxian
+ *
+ */
+public class Stone extends PassiveSkill {
+
+	private Integer bout = 0;
+	private Integer chance = 0;
+	private LifeCard attacked = null;
+	
+	public Stone(Integer bout, Integer chance) {
+		super(IMagic.Style_Magic);
+		// TODO Auto-generated constructor stub
+		this.bout = bout;
+		this.chance = chance;
+	}
+	
+	@Override
+	public void affect(Object... objects) {
+		// TODO Auto-generated method stub
+		super.affect(objects);
+		
+		Integer speed = this.attacked.getSpeedChance();
+		this.attacked.setSpeedChance(speed-bout*IControlQueue.consume);
+		
+		new StoneBuff(bout,IMagic.Style_Magic,IBuff.Type_Harm,IBuff.Func_Astrict,this.attacked).effect();
+	}
+	
+	@Override
+	public void after(Object[] args) {
+		// TODO Auto-generated method stub
+		this.attacked = (LifeCard) ((Object[]) args[0])[0];
+		if (Random.isTrigger(chance)) {
+			affect();
+		}
+	}
+	
+	@Override
+	public void setOwner(LifeCard life) {
+		// TODO Auto-generated method stub
+		super.setOwner(life);
+		
+		life.getAttack().addIntercepter(this);
+	}
+
+}
