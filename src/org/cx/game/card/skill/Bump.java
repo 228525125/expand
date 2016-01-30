@@ -1,19 +1,28 @@
 package org.cx.game.card.skill;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.cx.game.action.IMove;
 import org.cx.game.action.Random;
 import org.cx.game.card.LifeCard;
 import org.cx.game.card.skill.ActiveSkill;
 import org.cx.game.card.skill.DizzyBuff;
 import org.cx.game.exception.CommandValidatorException;
 import org.cx.game.exception.RuleValidatorException;
+import org.cx.game.tools.Debug;
 import org.cx.game.tools.Util;
 import org.cx.game.validator.IValidator;
 import org.cx.game.validator.NeedConjurerValidator;
 import org.cx.game.validator.Validator;
 import org.cx.game.widget.IGround;
+import org.cx.game.widget.IPlace;
 
+/**
+ * 冲撞
+ * @author chenxian
+ *
+ */
 public class Bump extends ActiveSkill {
 
 	private Integer range = 8;  //范围5-8
@@ -40,23 +49,25 @@ public class Bump extends ActiveSkill {
 		return range;
 	}
 	
-	private Integer step = 0;
+	private Integer step = null;
+	private IPlace place = null;
 	
 	@Override
 	public void useSkill(Object... objects) throws RuleValidatorException {
 		// TODO Auto-generated method stub
-		super.useSkill(objects);
+		super.parameterTypeValidator(objects);
 		
 		LifeCard life = (LifeCard) objects[0];      //life必须相对于owner前后左右四个方向的直线上；
 		LifeCard owner = getOwner();
 		IGround ground = owner.getPlayer().getGround(); 
 		
 		BumpValidator validator = new BumpValidator(life, owner, ground);
-		doValidator(validator);
-		if(hasError())
-			throw new RuleValidatorException(getErrors().getMessage());
+		super.addValidator(validator);
+		
+		super.useSkill(objects);
 		
 		this.step = validator.getStep();
+		this.place = validator.getPlace();
 		
 		life.affected(this);
 	}
@@ -70,11 +81,63 @@ public class Bump extends ActiveSkill {
 		Integer dChance = this.dizzyChance*this.step;
 		
 		LifeCard life = (LifeCard) objects[0];
+		
+		Integer energy = getOwner().getEnergy();
+		if(Debug.isDebug)
+			getOwner().setEnergy(IMove.Energy_Max);
+		getOwner().getMove().setEnergy(IMove.Energy_Max);
+		getOwner().move(this.place);
+		getOwner().getMove().setEnergy(IMove.Energy_Min);
+		if(Debug.isDebug)
+			getOwner().setEnergy(energy);
+		
+		
 		life.getDeath().magicToHp(-atkValue);
 		
 		if(Random.isTrigger(dChance)){
 			new DizzyBuff(this.dizzyBout, life).effect();
 		}
+	}
+	
+	@Override
+	public List<Integer> getConjureRange(IGround ground) {
+		// TODO Auto-generated method stub
+		List<Integer> positionList = new ArrayList<Integer>();
+		LifeCard card = (LifeCard) getOwner();
+		Integer position = card.getContainerPosition();
+		List<Integer> list = ground.line(position, IGround.Relative_Bottom, getRange());
+		for(Integer pos : list){
+			if(!ground.getPlace(pos).isDisable())
+				positionList.add(pos);
+			else
+				break;
+		}
+		
+		list = ground.line(position, IGround.Relative_Right, getRange());
+		for(Integer pos : list){
+			if(!ground.getPlace(pos).isDisable())
+				positionList.add(pos);
+			else
+				break;
+		}
+		
+		list = ground.line(position, IGround.Relative_Top, getRange());
+		for(Integer pos : list){
+			if(!ground.getPlace(pos).isDisable())
+				positionList.add(pos);
+			else
+				break;
+		}
+		
+		list = ground.line(position, IGround.Relative_Left, getRange());
+		for(Integer pos : list){
+			if(!ground.getPlace(pos).isDisable())
+				positionList.add(pos);
+			else
+				break;
+		}
+		
+		return positionList;
 	}
 
 }

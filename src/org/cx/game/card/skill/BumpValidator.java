@@ -14,6 +14,7 @@ public class BumpValidator extends Validator {
 	private LifeCard owner = null;
 	private IGround ground = null;
 	private Integer step = null;
+	private Integer position = null;
 	
 	public BumpValidator(LifeCard affected, LifeCard owner, IGround ground) {
 		// TODO Auto-generated constructor stub
@@ -41,12 +42,27 @@ public class BumpValidator extends Validator {
 				addMessage(I18n.getMessage(this));
 				ret = false;
 			}
+			
+			this.position = pos;
 		}
 		
 		return ret;
 	}
 
+	/**
+	 * 
+	 * @return 移动格数
+	 */
 	public Integer getStep() {
 		return step;
 	}
+
+	/**
+	 * 
+	 * @return 发生撞击后，冲撞者的位置
+	 */
+	public IPlace getPlace() {
+		return this.ground.getPlace(this.position);
+	}
+
 }
