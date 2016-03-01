@@ -15,6 +15,8 @@ public class MaimedBuff extends SimpleBuff {
 	
 	private String name = null;
 	private Integer downEnergyScale;
+	
+	public final static Integer DownEnergyScale_Max = 100;
 
 	public MaimedBuff(Integer bout, Integer style, Integer type, Integer func, Integer downEnergyScale,
 			LifeCard life) {

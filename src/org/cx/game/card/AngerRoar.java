@@ -48,12 +48,6 @@ public class AngerRoar extends CircleRangeMagicCard {
 	}
 
 	@Override
-	public Integer getConjureRange() {
-		// TODO Auto-generated method stub
-		return 1;
-	}
-
-	@Override
 	public Boolean needConjurer() {
 		// TODO Auto-generated method stub
 		return false;

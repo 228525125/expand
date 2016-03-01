@@ -6,25 +6,25 @@ import org.cx.game.action.IApply;
 import org.cx.game.action.IChuck;
 import org.cx.game.card.LifeCard;
 import org.cx.game.card.MagicCard;
-import org.cx.game.card.skill.IBuff;
-import org.cx.game.card.skill.CureTiredBuff;
+import org.cx.game.card.skill.HardSkinBuff;
+import org.cx.game.card.skill.IMagic;
 import org.cx.game.exception.RuleValidatorException;
 
 /**
- * 治疗
+ * 护体石肤
  * @author chenxian
  *
  */
-public class Cure extends MagicCard {
+public class HardSkin extends MagicCard {
 
-	private Integer cureScale;
-	private Integer tireBout;
+	private Integer defUpScale = 0;
 	
-	public Cure(Integer id, Integer consume, Integer style, Integer func, Integer cureScale, Integer tireBout) {
-		super(id, consume, style, func);
+	private LifeCard affected = null;
+	
+	public HardSkin(Integer id, Integer consume, Integer defUpScale) {
+		super(id, consume, IMagic.Style_Magic, IMagic.Func_Gain);
 		// TODO Auto-generated constructor stub
-		this.cureScale = cureScale;
-		this.tireBout = tireBout;
+		this.defUpScale = defUpScale;
 		
 		setParameterTypeValidator(new Class[]{LifeCard.class});
 	}
@@ -32,12 +32,9 @@ public class Cure extends MagicCard {
 	@Override
 	public void affect(Object... objects) throws RuleValidatorException {
 		// TODO Auto-generated method stub
-		
-		LifeCard life = (LifeCard) objects[0];
-		
-		Integer cureValue = life.getHp()*cureScale/100;  //保持下限
-		life.getDeath().magicToHp(cureValue);
-		new CureTiredBuff(tireBout,getStyle(),IBuff.Type_Benefit, getFunc(),life).effect();
+		super.affect(objects);
+
+		new HardSkinBuff(3, defUpScale, this.affected).effect();
 	}
 	
 	@Override
@@ -45,8 +42,14 @@ public class Cure extends MagicCard {
 		// TODO Auto-generated method stub
 		super.apply(objects);
 		
-		LifeCard life = (LifeCard) objects[0];
-		life.affected(this);
+		this.affected = (LifeCard) objects[0];
+		affect();
+	}
+
+	@Override
+	public Boolean needConjurer() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 	/**
@@ -76,9 +79,4 @@ public class Cure extends MagicCard {
 		super.setConjurerList(conjurerList);
 	}
 
-	@Override
-	public Boolean needConjurer() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 }

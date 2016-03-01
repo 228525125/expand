@@ -56,7 +56,7 @@ public class TransmitIn extends MagicCard {
 		
 		LifeCard life = (LifeCard) objects[0];
 		
-		doValidator(new ApplyRangeValidator(this, life.getContainerPosition()));
+		doValidator(new ApplyRangeValidator(this, life.getContainerPosition(), (IGround) life.getContainer()));
 		if(hasError())
 			throw new RuleValidatorException(getErrors().getMessage());
 		
@@ -79,6 +79,15 @@ public class TransmitIn extends MagicCard {
 	public void setChuck(IChuck chuck) {
 		// TODO Auto-generated method stub
 		super.setChuck(chuck);
+	}
+	
+	/**
+	 * 这个方法必须覆盖，利用反射创建这个对象时会用到
+	 */
+	@Override
+	public void setConjurerList(List<Integer> conjurerList) {
+		// TODO Auto-generated method stub
+		super.setConjurerList(conjurerList);
 	}
 
 	@Override
