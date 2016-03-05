@@ -2,8 +2,9 @@ package org.cx.game.card.skill;
 
 import org.cx.game.card.LifeCard;
 import org.cx.game.card.skill.ActiveSkill;
-import org.cx.game.card.skill.IBuff;
-import org.cx.game.card.skill.ITrick;
+import org.cx.game.card.buff.IBuff;
+import org.cx.game.card.trick.FreezeTrick;
+import org.cx.game.card.trick.ITrick;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.widget.IPlace;
 

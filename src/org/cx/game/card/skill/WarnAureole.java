@@ -2,7 +2,8 @@ package org.cx.game.card.skill;
 
 import org.cx.game.card.LifeCard;
 import org.cx.game.card.skill.Aureole;
-import org.cx.game.card.skill.IBuff;
+import org.cx.game.card.buff.IBuff;
+import org.cx.game.card.buff.WarnAureoleBuff;
 import org.cx.game.exception.RuleValidatorException;
 
 /**

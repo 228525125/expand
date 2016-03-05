@@ -2,8 +2,9 @@ package org.cx.game.card.skill;
 
 import org.cx.game.action.Random;
 import org.cx.game.card.LifeCard;
-import org.cx.game.card.skill.IBuff;
-import org.cx.game.card.skill.IMagic;
+import org.cx.game.card.buff.IBuff;
+import org.cx.game.card.buff.WeakBuff;
+import org.cx.game.card.magic.IMagic;
 import org.cx.game.card.skill.PassiveSkill;
 
 /**

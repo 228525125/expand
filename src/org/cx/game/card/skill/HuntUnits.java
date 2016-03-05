@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.cx.game.card.LifeCard;
-import org.cx.game.card.skill.IBuff;
+import org.cx.game.card.buff.IBuff;
 import org.cx.game.card.skill.ISkill;
 import org.cx.game.card.skill.PassiveSkill;
 import org.cx.game.intercepter.Intercepter;

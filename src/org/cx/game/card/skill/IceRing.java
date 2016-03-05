@@ -1,7 +1,8 @@
 package org.cx.game.card.skill;
 
 import org.cx.game.card.LifeCard;
-import org.cx.game.card.skill.IBuff;
+import org.cx.game.card.buff.FreezeBuff;
+import org.cx.game.card.buff.IBuff;
 import org.cx.game.card.skill.CircleRangeAcitveSkill;
 import org.cx.game.exception.RuleValidatorException;
 

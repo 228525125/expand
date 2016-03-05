@@ -7,7 +7,7 @@ import org.cx.game.action.IMove;
 import org.cx.game.action.Random;
 import org.cx.game.card.LifeCard;
 import org.cx.game.card.skill.ActiveSkill;
-import org.cx.game.card.skill.DizzyBuff;
+import org.cx.game.card.buff.DizzyBuff;
 import org.cx.game.exception.CommandValidatorException;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.tools.Debug;

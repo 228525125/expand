@@ -2,7 +2,8 @@ package org.cx.game.card.skill;
 
 import org.cx.game.card.LifeCard;
 import org.cx.game.card.skill.Aureole;
-import org.cx.game.card.skill.IBuff;
+import org.cx.game.card.buff.BarbedAureoleBuff;
+import org.cx.game.card.buff.IBuff;
 
 /**
  * 荆棘光环

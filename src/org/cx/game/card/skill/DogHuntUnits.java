@@ -1,7 +1,7 @@
 package org.cx.game.card.skill;
 
 import org.cx.game.card.LifeCard;
-import org.cx.game.card.skill.IMagic;
+import org.cx.game.card.magic.IMagic;
 
 /**
  * 狗头人围猎

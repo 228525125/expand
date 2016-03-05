@@ -2,7 +2,7 @@ package org.cx.game.card.skill;
 
 import org.cx.game.action.Random;
 import org.cx.game.card.LifeCard;
-import org.cx.game.card.skill.DizzyBuff;
+import org.cx.game.card.buff.DizzyBuff;
 import org.cx.game.card.skill.PassiveSkill;
 import org.cx.game.core.Context;
 import org.cx.game.exception.RuleValidatorException;
