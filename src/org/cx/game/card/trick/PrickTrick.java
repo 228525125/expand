@@ -1,7 +1,9 @@
 package org.cx.game.card.trick;
 
 import org.cx.game.card.LifeCard;
+import org.cx.game.card.buff.IBuff;
 import org.cx.game.card.buff.MaimedBuff;
+import org.cx.game.card.magic.IMagic;
 import org.cx.game.card.trick.Trick;
 import org.cx.game.core.IPlayer;
 import org.cx.game.exception.RuleValidatorException;
@@ -12,26 +14,11 @@ import org.cx.game.widget.IPlace;
  * @author chenxian
  *
  */
-public class PrickTrick extends Trick {
-
-	private Integer maimedBout = 0;
-	private Integer downMoveScale = 0;
+public class PrickTrick extends SimpleTrick {
 	
-	public PrickTrick(Integer bout, Integer style, Integer type, Integer func, Integer maimedBout, Integer downMoveScale,
+	public PrickTrick(Integer bout, Integer effectBout, Integer damageScale, Integer boutDamageScale, Integer energyDownScale,
 			IPlace place, IPlayer player) {
-		super(bout, style, type, func, place, player);
-		// TODO Auto-generated constructor stub
-		this.downMoveScale = downMoveScale;
-		this.maimedBout = maimedBout;
-	}
-	
-	@Override
-	public void affect(Object... objects) throws RuleValidatorException {
-		// TODO Auto-generated method stub
-		super.affect(objects);
-		
-		LifeCard life = (LifeCard) objects[0];
-		new MaimedBuff(getBout(),getStyle(),getType(),getFunc(),downMoveScale,life);
+		super(bout, DEFAULT_TOUCHNUMBEROFTIMES, IMagic.Style_physical, IBuff.Type_Harm, IMagic.Func_Astrict, effectBout, damageScale, boutDamageScale, energyDownScale, 0, 0, 0, place, player);
 	}
 
 }

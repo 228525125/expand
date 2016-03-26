@@ -55,8 +55,7 @@ public class FreezeTrickSkill extends ActiveSkill {
 		super.affect(objects);
 		
 		IPlace place = (IPlace) objects[0];
-		ITrick trick = new FreezeTrick(ITrick.Setup_Bout,getStyle(),IBuff.Type_Harm,getFunc(),freezeBout,damageScale,energyDownScale,speedDownScale,place,getOwner().getPlayer());
-		trick.setup();
+		ITrick trick = new FreezeTrick(ITrick.Setup_Bout,freezeBout,damageScale,energyDownScale,speedDownScale,place,getOwner().getPlayer());
 	}
 	
 	@Override

@@ -14,16 +14,32 @@ import org.cx.game.widget.IPlace;
  *
  */
 public class PrickTrickSkill extends ActiveSkill {
-
-	private Integer downMoveScale = 0;
-	private Integer maimedBout = 0;
 	
+	private Integer maimedBout = 0;
+	private Integer damageScale = 0;
+	private Integer boutDamageScale = 0;
+	private Integer energyDownScale = 0;
+	
+	/**
+	 * 
+	 * @param consume               消耗
+	 * @param cooldown              冷却
+	 * @param velocity              蓄力
+	 * @param style                 
+	 * @param func
+	 * @param maimedBout            残废回合
+	 * @param damageScale           首次触发陷阱，受到伤害的比例，以总生命为基准
+	 * @param boutDamageScale       每回合受到伤害的比例，以总生命为基准
+	 * @param energyDownScale       移动力下降比例，以总移动力为基准
+	 */
 	public PrickTrickSkill(Integer consume, Integer cooldown, Integer velocity,
-			Integer style, Integer func, Integer maimedBout, Integer downMoveScale) {
+			Integer style, Integer func, Integer maimedBout, Integer damageScale, Integer boutDamageScale, Integer energyDownScale) {
 		super(consume, cooldown, velocity, style, func);
 		// TODO Auto-generated constructor stub
-		this.downMoveScale = downMoveScale;
+		this.damageScale = damageScale;
 		this.maimedBout = maimedBout;
+		this.boutDamageScale = boutDamageScale;
+		this.energyDownScale = energyDownScale;
 	}
 
 	@Override
@@ -46,8 +62,7 @@ public class PrickTrickSkill extends ActiveSkill {
 		super.affect(objects);
 		
 		IPlace place = (IPlace) objects[0];
-		ITrick trick = new PrickTrick(ITrick.Setup_Bout,getStyle(),IBuff.Type_Harm,getFunc(),maimedBout,downMoveScale,place,getOwner().getPlayer());
-		trick.setup();
+		ITrick trick = new PrickTrick(ITrick.Setup_Bout,maimedBout, damageScale, boutDamageScale, energyDownScale,place,getOwner().getPlayer());
 	}
 
 }

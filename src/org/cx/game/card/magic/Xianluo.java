@@ -12,21 +12,32 @@ import org.cx.game.card.buff.MaimedBuff;
 import org.cx.game.card.magic.IMagic;
 import org.cx.game.card.trick.ITrick;
 import org.cx.game.card.trick.PrickTrick;
+import org.cx.game.card.trick.XianluoTrick;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.validator.ApplyRangeValidator;
 import org.cx.game.widget.IGround;
+import org.cx.game.widget.IPlace;
 import org.cx.game.widget.Place;
 
 public class Xianluo extends MagicCard {
 
 	private Integer bout = 2;
+	private Integer defDownScale = 0;
 	
-	public Xianluo(Integer id, Integer consume, Integer bout) {
+	/**
+	 * 
+	 * @param id
+	 * @param consume
+	 * @param bout             持续回合
+	 * @param defDownScale     防御下降比例
+	 */
+	public Xianluo(Integer id, Integer consume, Integer bout, Integer defDownScale) {
 		super(id, consume, IMagic.Style_physical, IMagic.Func_Astrict);
 		// TODO Auto-generated constructor stub
 		this.bout = bout;
+		this.defDownScale = defDownScale;
 		
-		setParameterTypeValidator(new Class[]{Place.class});
+		setParameterTypeValidator(new Class[]{IPlace.class});
 	}
 	
 	@Override
@@ -34,13 +45,13 @@ public class Xianluo extends MagicCard {
 		// TODO Auto-generated method stub
 		super.apply(objects);
 		
-		Place place = (Place) objects[0];
+		IPlace place = (IPlace) objects[0];
 		
 		doValidator(new ApplyRangeValidator(this, place.getPosition(), (IGround)place.getContainer()));
 		if(hasError())
 			throw new RuleValidatorException(getErrors().getMessage());
 		
-		place.getTrickList().add(new PrickTrick(ITrick.Setup_Bout, getStyle(), IBuff.Type_Harm, getFunc(), bout, MaimedBuff.DownEnergyScale_Max, place, getPlayer()));
+		ITrick trick = new XianluoTrick(ITrick.Setup_Bout, bout, defDownScale, place, getPlayer());
 	}
 
 	@Override
