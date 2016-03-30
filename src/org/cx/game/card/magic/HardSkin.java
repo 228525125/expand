@@ -1,5 +1,6 @@
 package org.cx.game.card.magic;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.cx.game.action.IApply;
@@ -9,6 +10,7 @@ import org.cx.game.card.MagicCard;
 import org.cx.game.card.buff.HardSkinBuff;
 import org.cx.game.card.magic.IMagic;
 import org.cx.game.exception.RuleValidatorException;
+import org.cx.game.widget.IGround;
 
 /**
  * 护体石肤
@@ -18,12 +20,13 @@ import org.cx.game.exception.RuleValidatorException;
 public class HardSkin extends MagicCard {
 
 	private Integer defUpScale = 0;
-	
+	private Integer bout = 0;
 	private LifeCard affected = null;
 	
-	public HardSkin(Integer id, Integer consume, Integer defUpScale) {
+	public HardSkin(Integer id, Integer consume, Integer bout, Integer defUpScale) {
 		super(id, consume, IMagic.Style_Magic, IMagic.Func_Gain);
 		// TODO Auto-generated constructor stub
+		this.bout = bout;
 		this.defUpScale = defUpScale;
 		
 		setParameterTypeValidator(new Class[]{LifeCard.class});
@@ -34,7 +37,7 @@ public class HardSkin extends MagicCard {
 		// TODO Auto-generated method stub
 		super.affect(objects);
 
-		new HardSkinBuff(3, defUpScale, this.affected).effect();
+		new HardSkinBuff(this.bout, defUpScale, this.affected).effect();
 	}
 	
 	@Override
@@ -49,7 +52,17 @@ public class HardSkin extends MagicCard {
 	@Override
 	public Boolean needConjurer() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
+	}
+	
+	@Override
+	public List<Integer> getApplyRange(IGround ground) {
+		// TODO Auto-generated method stub
+		List<Integer> positionList = new ArrayList<Integer>();
+		LifeCard conjure = getConjurer();
+		Integer position = conjure.getContainerPosition();
+		positionList.add(position);
+		return positionList;
 	}
 	
 	/**

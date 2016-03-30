@@ -20,8 +20,7 @@ public class HardSkinBuff extends SimpleBuff {
 		// TODO Auto-generated method stub
 		super.effect();
 		
-		Integer defUpValue = getOwner().getAttacked().getImmuneDamageRatio()*this.defUpScale/100;
-		addToKeepImmuneDamageRatio(defUpValue);
+		addToKeepImmuneDamageRatio(defUpScale);
 		
 		affect();
 	}
