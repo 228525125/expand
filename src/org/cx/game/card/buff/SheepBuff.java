@@ -13,8 +13,8 @@ import org.cx.game.observer.NotifyInfo;
  */
 public class SheepBuff extends Buff {
 
-	public SheepBuff(Integer bout, Integer style, Integer type, Integer func, LifeCard life) {
-		super(bout, style, type, func, life);
+	public SheepBuff(Integer bout, LifeCard life) {
+		super(bout, life);
 		// TODO Auto-generated constructor stub
 	}
 	

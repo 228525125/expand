@@ -15,8 +15,8 @@ public class WarnAureole extends Aureole {
 
 	private Integer immuneDamageRatio = 0;
 	
-	public WarnAureole(Integer style, Integer range, Integer immuneDamageRatio) {
-		super(style, range);
+	public WarnAureole(Integer range, Integer immuneDamageRatio) {
+		super(range);
 		// TODO Auto-generated constructor stub
 		this.immuneDamageRatio = immuneDamageRatio;
 	}
@@ -45,7 +45,7 @@ public class WarnAureole extends Aureole {
 		super.affect(objects);
 		LifeCard life = (LifeCard) objects[0];
 		
-		new WarnAureoleBuff(MaxBout, getStyle(), IBuff.Type_Benefit, getFunc(), immuneDamageRatio, life).effect();
+		new WarnAureoleBuff(MaxBout, immuneDamageRatio, life).effect();
 	}
 
 	@Override

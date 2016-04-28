@@ -19,9 +19,8 @@ public class BarbedAureoleBuff extends Buff {
 	 * @param returnRatio 反伤比 基于100
 	 * @param life
 	 */
-	public BarbedAureoleBuff(Integer bout, Integer style, Integer type,
-			Integer func, Integer returnRatio, LifeCard life) {
-		super(bout, style, type, func, life);
+	public BarbedAureoleBuff(Integer bout, Integer returnRatio, LifeCard life) {
+		super(bout, life);
 		// TODO Auto-generated constructor stub
 		this.returnRatio = returnRatio;
 	}

@@ -16,8 +16,8 @@ public class Hide extends ActiveSkill {
 	private Integer bout;
 	
 	public Hide(Integer consume, Integer cooldown, Integer velocity,
-			Integer style, Integer func, Integer bout) {
-		super(consume, cooldown, velocity, style, func);
+			Integer bout) {
+		super(consume, cooldown, velocity);
 		// TODO Auto-generated constructor stub
 		this.bout = bout;
 	}
@@ -33,7 +33,7 @@ public class Hide extends ActiveSkill {
 		// TODO Auto-generated method stub
 		super.affect(objects);
 		
-		new HideBuff(bout,getStyle(),IBuff.Type_Neutral,getFunc(),getOwner()).effect();
+		new HideBuff(bout,getOwner()).effect();
 	}
 	
 	@Override

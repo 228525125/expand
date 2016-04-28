@@ -23,8 +23,8 @@ public class DamageResistBuff extends Buff {
 	 * @param offsetScale 抵消比例
 	 * @param life
 	 */
-	public DamageResistBuff(Integer bout, Integer style, Integer type, Integer func, Integer defendValue, Integer offsetScale, LifeCard life) {
-		super(bout, style, type, func, life);
+	public DamageResistBuff(Integer bout, Integer defendValue, Integer offsetScale, LifeCard life) {
+		super(bout, life);
 		// TODO Auto-generated constructor stub
 		this.defendValue = defendValue;
 		this.offsetScale = offsetScale;

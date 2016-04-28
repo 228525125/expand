@@ -21,8 +21,8 @@ public class AimShoot extends SimplePassiveSkill {
 	 * @param style
 	 * @param upScale 提升加成比例
 	 */
-	public AimShoot(Integer style, Integer upScale) {
-		super(style);
+	public AimShoot(Integer upScale) {
+		super();
 		// TODO Auto-generated constructor stub
 		this.upScale = upScale;
 	}

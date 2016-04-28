@@ -35,9 +35,9 @@ public abstract class SimpleTrick extends Trick {
 	 * @param place               陷阱位置
 	 * @param player
 	 */
-	public SimpleTrick(Integer bout, Integer touchNumberOfTimes, Integer style, Integer type, Integer func, Integer effectBout, Integer damageScale, Integer boutDamageScale,
+	public SimpleTrick(Integer bout, Integer touchNumberOfTimes, Integer effectBout, Integer damageScale, Integer boutDamageScale,
 			Integer energyDownScale, Integer speedDownScale, Integer atkDownScale, Integer defDownScale, IPlace place, IPlayer player) {
-		super(bout, touchNumberOfTimes, style, type, func, place, player);
+		super(bout, touchNumberOfTimes, place, player);
 		// TODO Auto-generated constructor stub
 		this.effectBout = effectBout;
 		this.damageScale = damageScale;
@@ -47,6 +47,8 @@ public abstract class SimpleTrick extends Trick {
 		this.atkDownScale = atkDownScale;
 		this.defDownScale = defDownScale;
 	}
+	
+	public abstract SimpleTrickBuff getTrickBuff();
 
 	@Override
 	public void affect(Object... objects) throws RuleValidatorException {
@@ -63,7 +65,16 @@ public abstract class SimpleTrick extends Trick {
 				life.getDeath().magicToHp(-damage);
 		}
 		
-		new SimpleTrickBuff(effectBout,getStyle(),getType(),getFunc(),this.boutDamageScale,this.energyDownScale,this.speedDownScale,this.atkDownScale,this.defDownScale,life).effect();
+		SimpleTrickBuff buff = getTrickBuff();
+		buff.setAtkDownScale(atkDownScale);
+		buff.setBout(effectBout);
+		buff.setDamageScale(boutDamageScale);
+		buff.setDefDownScale(defDownScale);
+		buff.setEnergyDownScale(energyDownScale);
+		buff.setSpeedDownScale(speedDownScale);
+		buff.setOwner(life);
+		buff.effect();
+		//new SimpleTrickBuff(effectBout,this.boutDamageScale,this.energyDownScale,this.speedDownScale,this.atkDownScale,this.defDownScale,life).effect();
 	}
 
 	protected Integer getEffectBout() {

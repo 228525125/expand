@@ -17,8 +17,8 @@ public class HunterTab extends ActiveSkill {
 	private Integer damageScale;
 	
 	public HunterTab(Integer consume, Integer cooldown, Integer velocity,
-			Integer style, Integer func, Integer bout, Integer damageScale) {
-		super(consume, cooldown, velocity, style, func);
+			Integer bout, Integer damageScale) {
+		super(consume, cooldown, velocity);
 		// TODO Auto-generated constructor stub
 		this.bout = bout;
 		this.damageScale = damageScale;
@@ -37,7 +37,7 @@ public class HunterTab extends ActiveSkill {
 		super.affect(objects);
 		
 		LifeCard life = (LifeCard) objects[0];
-		new HunterTabBuff(bout,getStyle(),IBuff.Type_Harm, getFunc(), damageScale,life).effect();
+		new HunterTabBuff(bout, damageScale, life).effect();
 	}
 	
 	@Override

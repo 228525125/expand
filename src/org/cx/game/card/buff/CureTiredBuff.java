@@ -19,9 +19,9 @@ import org.cx.game.observer.NotifyInfo;
  */
 public class CureTiredBuff extends Buff {
 	
-	public CureTiredBuff(Integer bout, Integer style, Integer type, Integer func,
+	public CureTiredBuff(Integer bout,
 			LifeCard life) {
-		super(bout, style, type, func, life);
+		super(bout, life);
 		// TODO Auto-generated constructor stub
 	}
 

@@ -32,7 +32,7 @@ public class Xianluo extends MagicCard {
 	 * @param defDownScale     防御下降比例
 	 */
 	public Xianluo(Integer id, Integer consume, Integer bout, Integer defDownScale) {
-		super(id, consume, IMagic.Style_physical, IMagic.Func_Astrict);
+		super(id, consume);
 		// TODO Auto-generated constructor stub
 		this.bout = bout;
 		this.defDownScale = defDownScale;

@@ -9,9 +9,9 @@ import org.cx.game.card.LifeCard;
  */
 public class MagicShieldBuff extends DamageResistBuff {
 
-	public MagicShieldBuff(Integer bout, Integer style, Integer type, Integer func, Integer defendValue,
+	public MagicShieldBuff(Integer bout, Integer defendValue,
 			Integer offsetScale, LifeCard life) {
-		super(bout, defendValue, offsetScale, style, type, func, life);
+		super(bout, defendValue, offsetScale, life);
 		// TODO Auto-generated constructor stub
 	}
 

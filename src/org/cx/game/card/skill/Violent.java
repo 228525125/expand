@@ -13,8 +13,8 @@ import org.cx.game.tools.Util;
  */
 public class Violent extends SimplePassiveSkill {
 
-	public Violent(Integer style) {
-		super(style);
+	public Violent() {
+		super();
 		// TODO Auto-generated constructor stub
 	}
 

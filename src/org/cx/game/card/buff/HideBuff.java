@@ -12,9 +12,9 @@ import org.cx.game.intercepter.Intercepter;
  */
 public class HideBuff extends Buff {
 
-	public HideBuff(Integer bout, Integer style, Integer type, Integer func,
+	public HideBuff(Integer bout,
 			LifeCard life) {
-		super(bout, style, type, func, life);
+		super(bout, life);
 		// TODO Auto-generated constructor stub
 	}
 

@@ -2,7 +2,9 @@ package org.cx.game.card.trick;
 
 import org.cx.game.card.LifeCard;
 import org.cx.game.card.buff.FreezeBuff;
+import org.cx.game.card.buff.FreezeTrickBuff;
 import org.cx.game.card.buff.IBuff;
+import org.cx.game.card.buff.SimpleTrickBuff;
 import org.cx.game.card.magic.IMagic;
 import org.cx.game.card.trick.Trick;
 import org.cx.game.core.IPlayer;
@@ -33,8 +35,14 @@ public class FreezeTrick extends SimpleTrick {
 	 */
 	public FreezeTrick(Integer bout, Integer effectBout, Integer damageScale, Integer energyDownScale, Integer speedDownScale,
 			IPlace place, IPlayer player) {
-		super(bout, DEFAULT_TOUCHNUMBEROFTIMES, IMagic.Style_Magic, IBuff.Type_Harm, IMagic.Func_Astrict, effectBout, damageScale, 0, energyDownScale, speedDownScale, 0, 0, place, player);
+		super(bout, DEFAULT_TOUCHNUMBEROFTIMES, effectBout, damageScale, 0, energyDownScale, speedDownScale, 0, 0, place, player);
 		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public SimpleTrickBuff getTrickBuff() {
+		// TODO Auto-generated method stub
+		return new FreezeTrickBuff();             //这里先随便构造一个buff，SimpleTrick里面才会对buff进行赋值
 	}
 
 }

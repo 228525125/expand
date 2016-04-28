@@ -17,8 +17,8 @@ public class HolyBody extends ActiveSkill {
 	private Integer bout = 3;
 	
 	public HolyBody(Integer consume, Integer cooldown, Integer velocity,
-			Integer style, Integer func, Integer bout) {
-		super(consume, cooldown, velocity, style, func);
+			Integer bout) {
+		super(consume, cooldown, velocity);
 		// TODO Auto-generated constructor stub
 		this.bout = bout;
 		setParameterTypeValidator(new Class[]{LifeCard.class});
@@ -37,7 +37,7 @@ public class HolyBody extends ActiveSkill {
 		
 		LifeCard life = (LifeCard) objects[0];
 		
-		new HolyBodyBuff(bout, IMagic.Style_Magic, IBuff.Type_Benefit, IMagic.Func_Other, life).effect();;
+		new HolyBodyBuff(bout, life).effect();;
 	}
 
 }

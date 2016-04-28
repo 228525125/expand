@@ -11,6 +11,16 @@ public class SimpleTrickBuff extends SimpleBuff {
 	private Integer defDownScale = 0;
 	
 	/**
+	 * 本构造函数只用于 abstract SimpleTrickBuff getTrickBuff();
+	 * @param bout
+	 * @param life
+	 */
+	public SimpleTrickBuff(Integer bout, LifeCard life) {
+		// TODO Auto-generated constructor stub
+		super(bout,life);
+	}
+	
+	/**
 	 * 
 	 * @param bout
 	 * @param style
@@ -23,9 +33,8 @@ public class SimpleTrickBuff extends SimpleBuff {
 	 * @param defDownScale           防御力下降比例，以当前防御力为基数，ImmuneDamageRatio = 当前ImmuneDamageRatio + defDownScale；
 	 * @param life
 	 */
-	public SimpleTrickBuff(Integer bout, Integer style, Integer type,
-			Integer func, Integer damageScale, Integer energyDownScale, Integer speedDownScale, Integer atkDownScale, Integer defDownScale, LifeCard life) {
-		super(bout, style, type, func, life);
+	public SimpleTrickBuff(Integer bout, Integer damageScale, Integer energyDownScale, Integer speedDownScale, Integer atkDownScale, Integer defDownScale, LifeCard life) {
+		super(bout, life);
 		// TODO Auto-generated constructor stub
 		this.damageScale = damageScale;
 		this.energyDownScale = energyDownScale;
@@ -72,6 +81,46 @@ public class SimpleTrickBuff extends SimpleBuff {
 		super.effect();
 		
 		affect();
+	}
+
+	public Integer getDamageScale() {
+		return damageScale;
+	}
+
+	public void setDamageScale(Integer damageScale) {
+		this.damageScale = damageScale;
+	}
+
+	public Integer getEnergyDownScale() {
+		return energyDownScale;
+	}
+
+	public void setEnergyDownScale(Integer energyDownScale) {
+		this.energyDownScale = energyDownScale;
+	}
+
+	public Integer getSpeedDownScale() {
+		return speedDownScale;
+	}
+
+	public void setSpeedDownScale(Integer speedDownScale) {
+		this.speedDownScale = speedDownScale;
+	}
+
+	public Integer getAtkDownScale() {
+		return atkDownScale;
+	}
+
+	public void setAtkDownScale(Integer atkDownScale) {
+		this.atkDownScale = atkDownScale;
+	}
+
+	public Integer getDefDownScale() {
+		return defDownScale;
+	}
+
+	public void setDefDownScale(Integer defDownScale) {
+		this.defDownScale = defDownScale;
 	}
 
 }

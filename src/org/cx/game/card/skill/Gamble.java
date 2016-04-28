@@ -24,8 +24,8 @@ public class Gamble extends ActiveSkill{
 	private Integer downDef = 0;     //受伤比升高
 	private Integer bout = 2;
 	
-	public Gamble(Integer consume, Integer cooldown, Integer velocity, Integer style, Integer func, Integer range, Integer maxTime, Integer downDef, Integer bout) {
-		super(consume, cooldown, velocity, style, func);
+	public Gamble(Integer consume, Integer cooldown, Integer velocity, Integer range, Integer maxTime, Integer downDef, Integer bout) {
+		super(consume, cooldown, velocity);
 		// TODO Auto-generated constructor stub
 		this.range = range;
 		this.maxTime = maxTime;
@@ -63,7 +63,7 @@ public class Gamble extends ActiveSkill{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		new GambleBuff(bout, getStyle(), IBuff.Type_Harm, getFunc(), downDef, life).effect();
+		new GambleBuff(bout, downDef, life).effect();
 	}
 	
 	@Override

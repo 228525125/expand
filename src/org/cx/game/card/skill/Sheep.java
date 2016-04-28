@@ -15,9 +15,9 @@ public class Sheep extends ActiveSkill {
 	
 	private Integer bout;
 	
-	public Sheep(Integer consume, Integer cooldown, Integer velocity, Integer style, Integer func,
+	public Sheep(Integer consume, Integer cooldown, Integer velocity,
 			Integer bout) {
-		super(consume, cooldown, velocity, style, func);
+		super(consume, cooldown, velocity);
 		// TODO Auto-generated constructor stub
 		this.bout = bout;
 		setParameterTypeValidator(new Class[]{LifeCard.class});
@@ -35,7 +35,7 @@ public class Sheep extends ActiveSkill {
 		super.affect(objects);
 		
 		LifeCard life = (LifeCard) objects[0];
-		new SheepBuff(bout,getStyle(), IBuff.Type_Harm, getFunc(), life).effect();
+		new SheepBuff(bout, life).effect();
 	}
 	
 	@Override

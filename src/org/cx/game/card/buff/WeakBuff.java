@@ -7,9 +7,9 @@ public class WeakBuff extends SimpleBuff {
 
 	private Integer atkDownScale = 0;
 	
-	public WeakBuff(Integer bout, Integer style, Integer type, Integer func,
+	public WeakBuff(Integer bout,
 			Integer atkDownScale ,LifeCard life) {
-		super(bout, style, type, func, life);
+		super(bout, life);
 		// TODO Auto-generated constructor stub
 		this.atkDownScale = atkDownScale;
 	}

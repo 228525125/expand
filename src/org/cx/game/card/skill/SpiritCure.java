@@ -18,8 +18,8 @@ public class SpiritCure extends ActiveSkill {
 	private Integer scale = 0;
 
 	public SpiritCure(Integer consume, Integer cooldown, Integer velocity,
-			Integer style, Integer func, Integer bout, Integer scale) {
-		super(consume, cooldown, velocity, style, func);
+			Integer bout, Integer scale) {
+		super(consume, cooldown, velocity);
 		// TODO Auto-generated constructor stub
 		this.scale = scale;
 		this.bout = bout;
@@ -38,7 +38,7 @@ public class SpiritCure extends ActiveSkill {
 		super.affect(objects);
 		
 		LifeCard affected = (LifeCard) objects[0];
-		new SpiritCureBuff(bout, IMagic.Style_Magic, IBuff.Type_Benefit, scale, IMagic.Func_Other, affected).effect();
+		new SpiritCureBuff(bout,  scale, affected).effect();
 	}
 	
 	@Override

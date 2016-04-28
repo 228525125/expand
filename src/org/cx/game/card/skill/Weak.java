@@ -26,7 +26,7 @@ public class Weak extends PassiveSkill {
 	 * @param chance 触发几率
 	 */
 	public Weak(Integer bout, Integer downScale, Integer chance) {
-		super(IMagic.Style_Magic);
+		super();
 		// TODO Auto-generated constructor stub
 		this.chance = chance;
 		this.bout = bout;
@@ -38,7 +38,7 @@ public class Weak extends PassiveSkill {
 		// TODO Auto-generated method stub
 		super.affect(objects);
 
-		new WeakBuff(bout, IMagic.Style_Magic, IBuff.Type_Harm, IMagic.Func_SustainedHarm, downScale, this.attacked).effect();
+		new WeakBuff(bout, downScale, this.attacked).effect();
 	}
 	
 	@Override

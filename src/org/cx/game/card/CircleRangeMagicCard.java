@@ -18,9 +18,8 @@ public abstract class CircleRangeMagicCard extends MagicCard {
 	private Integer radius;
 	private LifeCard affected;
 	
-	public CircleRangeMagicCard(Integer id, Integer consume, Integer style,
-			Integer func, Integer radius) {
-		super(id, consume, style, func);
+	public CircleRangeMagicCard(Integer id, Integer consume, Integer radius) {
+		super(id, consume);
 		// TODO Auto-generated constructor stub
 		this.radius = radius;
 	}

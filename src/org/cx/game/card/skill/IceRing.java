@@ -17,8 +17,8 @@ public class IceRing extends CircleRangeAcitveSkill {
 	private Integer atkScale;
 	
 	public IceRing(Integer consume, Integer cooldown, Integer velocity,
-			Integer style, Integer func, Integer range, Integer bout, Integer atkScale) {
-		super(consume, cooldown, velocity, style, func, range);
+			Integer range, Integer bout, Integer atkScale) {
+		super(consume, cooldown, velocity, range);
 		// TODO Auto-generated constructor stub
 		this.bout = bout;
 		this.atkScale = atkScale;
@@ -30,7 +30,7 @@ public class IceRing extends CircleRangeAcitveSkill {
 		super.affect(objects);
 		
 		LifeCard life = (LifeCard) objects[0];
-		new FreezeBuff(bout,getStyle(),IBuff.Type_Harm, getFunc(),life.getAttack().getAtk()*atkScale/100,100,0,life).effect();
+		new FreezeBuff(bout,life.getAttack().getAtk()*atkScale/100,100,0,life).effect();
 	}
 
 	@Override

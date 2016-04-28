@@ -14,8 +14,8 @@ public class CrossbowArc extends ArcRangeActiveSkill {
 	private Integer atkScale = 0;
 	
 	public CrossbowArc(Integer consume, Integer cooldown, Integer velocity,
-			Integer style, Integer func, Integer radius, Integer atkScale) {
-		super(consume, cooldown, velocity, style, func, radius);
+			Integer radius, Integer atkScale) {
+		super(consume, cooldown, velocity, radius);
 		// TODO Auto-generated constructor stub
 		this.atkScale = atkScale;
 	}

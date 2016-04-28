@@ -16,8 +16,8 @@ public class Aid extends ActiveSkill {
 	private LifeCard aidObj = null;
 	private Integer bout = 0;
 	
-	public Aid(Integer consume, Integer cooldown, Integer velocity, Integer style, Integer func, Integer bout) {
-		super(consume, cooldown, velocity, style, func);
+	public Aid(Integer consume, Integer cooldown, Integer velocity, Integer bout) {
+		super(consume, cooldown, velocity);
 		// TODO Auto-generated constructor stub
 		this.bout = bout;
 		setParameterTypeValidator(new Class[]{LifeCard.class});
@@ -35,7 +35,7 @@ public class Aid extends ActiveSkill {
 		super.affect(objects);
 		
 		this.aidObj = (LifeCard) objects[0];
-		new AidBuff(bout,getStyle(), IBuff.Type_Benefit, getFunc(), getOwner(),aidObj).effect();
+		new AidBuff(bout, getOwner(),aidObj).effect();
 	}
 	
 	@Override

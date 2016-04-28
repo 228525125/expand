@@ -18,8 +18,8 @@ public class GambleBuff extends SimpleBuff {
 	 * @param downImmuneDamageRatio 免伤比降低值 
 	 * @param life
 	 */
-	public GambleBuff(Integer bout, Integer style, Integer type, Integer func, Integer downImmuneDamageRatio, LifeCard life) {
-		super(bout, style, type, func, life);
+	public GambleBuff(Integer bout, Integer downImmuneDamageRatio, LifeCard life) {
+		super(bout, life);
 		// TODO Auto-generated constructor stub
 		this.downImmuneDamageRatio = downImmuneDamageRatio;
 		this.speedChance = life.getAttack().getSpeedChance();

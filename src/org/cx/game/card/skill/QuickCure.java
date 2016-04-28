@@ -19,14 +19,12 @@ public class QuickCure extends ActiveSkill {
 	 * @param consume
 	 * @param cooldown
 	 * @param velocity
-	 * @param style
-	 * @param func
 	 * @param atkScaleForHp 攻击力转化为恢复量的比例
 	 * @param remainHpScale 目标剩余HP转化为恢复量的比例
 	 */
 	public QuickCure(Integer consume, Integer cooldown, Integer velocity,
-			Integer style, Integer func, Integer atkScaleForHp, Integer remainHpScale) {
-		super(consume, cooldown, velocity, style, func);
+			Integer atkScaleForHp, Integer remainHpScale) {
+		super(consume, cooldown, velocity);
 		// TODO Auto-generated constructor stub
 		this.atkScaleForHp = atkScaleForHp;
 		this.remainHpScale = remainHpScale;

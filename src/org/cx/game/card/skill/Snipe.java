@@ -21,8 +21,8 @@ public class Snipe extends PassiveSkill {
 	private Integer elevateScale;
 	private Integer elevateChance;
 	
-	public Snipe(Integer style, Integer step, Integer elevateScale) {
-		super(style);
+	public Snipe(Integer step, Integer elevateScale) {
+		super();
 		// TODO Auto-generated constructor stub
 		this.step = step;
 		this.elevateScale = elevateScale;

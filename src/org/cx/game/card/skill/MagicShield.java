@@ -32,8 +32,8 @@ public class MagicShield extends ActiveSkill{
 	 * @param bout
 	 * @param life
 	 */
-	public MagicShield(Integer consume, Integer cooldown, Integer velocity, Integer style, Integer func, Integer defendValue, Integer offsetScale, Integer bout) {
-		super(consume, cooldown, velocity, style, func);
+	public MagicShield(Integer consume, Integer cooldown, Integer velocity, Integer defendValue, Integer offsetScale, Integer bout) {
+		super(consume, cooldown, velocity);
 		// TODO Auto-generated constructor stub
 		this.defendValue = defendValue;
 		this.offsetScale = offsetScale;
@@ -51,7 +51,7 @@ public class MagicShield extends ActiveSkill{
 		// TODO Auto-generated method stub
 		super.affect(objects);
 		
-		new MagicShieldBuff(bout, defendValue, offsetScale, getStyle(), IBuff.Type_Neutral, getFunc(), getOwner()).effect();
+		new MagicShieldBuff(bout, defendValue, offsetScale, getOwner()).effect();
 	}
 	
 	@Override

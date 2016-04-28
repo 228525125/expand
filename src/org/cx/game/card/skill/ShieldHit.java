@@ -26,8 +26,8 @@ public class ShieldHit extends ActiveSkill {
 	 * @param bout 眩晕回合
 	 * @param life
 	 */
-	public ShieldHit(Integer consume, Integer cooldown, Integer velocity, Integer style, Integer func, Integer atkScale, Integer bout) {
-		super(consume, cooldown, velocity, style, func);
+	public ShieldHit(Integer consume, Integer cooldown, Integer velocity, Integer atkScale, Integer bout) {
+		super(consume, cooldown, velocity);
 		// TODO Auto-generated constructor stub
 		this.atkScale = atkScale;
 		this.bout = bout;

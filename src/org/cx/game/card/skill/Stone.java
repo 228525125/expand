@@ -20,7 +20,7 @@ public class Stone extends PassiveSkill {
 	private LifeCard attacked = null;
 	
 	public Stone(Integer bout, Integer chance) {
-		super(IMagic.Style_Magic);
+		super();
 		// TODO Auto-generated constructor stub
 		this.bout = bout;
 		this.chance = chance;
@@ -34,7 +34,7 @@ public class Stone extends PassiveSkill {
 		Integer speed = this.attacked.getSpeedChance();
 		this.attacked.setSpeedChance(speed-bout*IControlQueue.consume);
 		
-		new StoneBuff(bout,IMagic.Style_Magic,IBuff.Type_Harm,IBuff.Func_Astrict,this.attacked).effect();
+		new StoneBuff(bout,this.attacked).effect();
 	}
 	
 	@Override

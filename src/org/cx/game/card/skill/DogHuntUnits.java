@@ -14,7 +14,7 @@ public class DogHuntUnits extends HuntUnits {
 	private Integer upImmuneDamageRatio = 0;
 	
 	public DogHuntUnits(Integer range, Integer defScale) {
-		super(IMagic.Style_physical, range);
+		super(range);
 		// TODO Auto-generated constructor stub
 		this.defScale = defScale;
 	}

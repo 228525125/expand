@@ -33,8 +33,8 @@ public class FreezeTrickSkill extends ActiveSkill {
 	 * @param speedDownScale 攻击速度降低比例
 	 */
 	public FreezeTrickSkill(Integer consume, Integer cooldown,
-			Integer velocity, Integer style, Integer func,Integer freezeBout, Integer damageScale, Integer energyDownScale, Integer speedDownScale) {
-		super(consume, cooldown, velocity, style, func);
+			Integer velocity, Integer freezeBout, Integer damageScale, Integer energyDownScale, Integer speedDownScale) {
+		super(consume, cooldown, velocity);
 		// TODO Auto-generated constructor stub
 		this.freezeBout = freezeBout;
 		this.damageScale = damageScale;

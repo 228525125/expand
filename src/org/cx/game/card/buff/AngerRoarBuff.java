@@ -12,8 +12,8 @@ public class AngerRoarBuff extends SimpleBuff {
 
 	private Integer upAtkScale;
 	
-	public AngerRoarBuff(Integer bout, Integer style, Integer type, Integer func, Integer upAtkScale,  LifeCard life) {
-		super(bout, style, type, func, life);
+	public AngerRoarBuff(Integer bout, Integer upAtkScale,  LifeCard life) {
+		super(bout, life);
 		// TODO Auto-generated constructor stub
 		this.upAtkScale = upAtkScale;
 	}

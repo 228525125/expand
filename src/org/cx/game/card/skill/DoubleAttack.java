@@ -21,9 +21,9 @@ public class DoubleAttack extends PassiveSkill {
 	private Integer chance;
 	private LifeCard attacked;
 	
-	public DoubleAttack(Integer style, Integer chance) {
+	public DoubleAttack(Integer chance) {
 		// TODO Auto-generated constructor stub
-		super(style);
+		super();
 		this.chance = chance;
 	}
 	

@@ -20,8 +20,8 @@ public class Cure extends MagicCard {
 	private Integer cureScale;
 	private Integer tireBout;
 	
-	public Cure(Integer id, Integer consume, Integer style, Integer func, Integer cureScale, Integer tireBout) {
-		super(id, consume, style, func);
+	public Cure(Integer id, Integer consume, Integer cureScale, Integer tireBout) {
+		super(id, consume);
 		// TODO Auto-generated constructor stub
 		this.cureScale = cureScale;
 		this.tireBout = tireBout;
@@ -37,7 +37,7 @@ public class Cure extends MagicCard {
 		
 		Integer cureValue = life.getHp()*cureScale/100;  //保持下限
 		life.getDeath().magicToHp(cureValue);
-		new CureTiredBuff(tireBout,getStyle(),IBuff.Type_Benefit, getFunc(),life).effect();
+		new CureTiredBuff(tireBout,life).effect();
 	}
 	
 	@Override

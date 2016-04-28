@@ -31,8 +31,8 @@ public class WoundHealing extends ActiveSkill {
 	 * @param tireBout 疲劳回合
 	 * @param life
 	 */
-	public WoundHealing(Integer consume, Integer cooldown, Integer velocity, Integer style, Integer func, Integer bout, Integer renewScale, Integer tireBout) {
-		super(consume, cooldown, velocity, style, func);
+	public WoundHealing(Integer consume, Integer cooldown, Integer velocity, Integer bout, Integer renewScale, Integer tireBout) {
+		super(consume, cooldown, velocity);
 		// TODO Auto-generated constructor stub
 		this.renewScale = renewScale;
 		this.bout = bout;
@@ -52,8 +52,8 @@ public class WoundHealing extends ActiveSkill {
 		super.affect(objects);
 		
 		LifeCard life = (LifeCard) objects[0];		
-		new WoundHealingBuff(bout,renewScale,getStyle(), IBuff.Type_Benefit, getFunc(), life).effect();
-		new CureTiredBuff(tireBout,getStyle(),IBuff.Type_Neutral,getFunc(),life).effect();
+		new WoundHealingBuff(bout,renewScale, life).effect();
+		new CureTiredBuff(tireBout,life).effect();
 	}
 	
 	@Override

@@ -20,8 +20,8 @@ public class DispelMagic extends ActiveSkill {
 	 * @param dispelNumber 移除数量
 	 * @param life
 	 */
-	public DispelMagic(Integer consume, Integer cooldown, Integer velocity, Integer style, Integer func, Integer dispelNumber) {
-		super(consume, cooldown, velocity, style, func);
+	public DispelMagic(Integer consume, Integer cooldown, Integer velocity, Integer dispelNumber) {
+		super(consume, cooldown, velocity);
 		// TODO Auto-generated constructor stub
 		this.dispelNumber = dispelNumber;
 		setParameterTypeValidator(new Class[]{LifeCard.class});
@@ -41,7 +41,7 @@ public class DispelMagic extends ActiveSkill {
 		LifeCard life = (LifeCard) objects[0];
 		Integer i = 0;
 		for(IBuff buff : life.getBuffList()){
-			if(IBuff.Style_Magic==buff.getStyle()&&IBuff.Type_Harm==buff.getType()){
+			if(IBuff.Style_Magic==buff.getStyle()&&IBuff.Type_Harm==buff.getHostility()){
 				buff.invalid();
 				i += 1;
 				if(i==dispelNumber)

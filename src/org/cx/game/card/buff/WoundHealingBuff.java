@@ -18,8 +18,8 @@ public class WoundHealingBuff extends Buff {
 	 * @param renewScale 每回合恢复HP总量的百分比
 	 * @param life
 	 */
-	public WoundHealingBuff(Integer bout, Integer style, Integer type, Integer func, Integer renewScale, LifeCard life) {
-		super(bout, style, type, func, life);
+	public WoundHealingBuff(Integer bout, Integer renewScale, LifeCard life) {
+		super(bout, life);
 		// TODO Auto-generated constructor stub
 		this.renewScale = renewScale;
 	}

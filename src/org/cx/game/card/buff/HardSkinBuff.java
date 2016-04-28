@@ -10,7 +10,7 @@ public class HardSkinBuff extends SimpleBuff {
 	private Integer defUpScale = 0;
 	
 	public HardSkinBuff(Integer bout, Integer defUpScale, LifeCard life) {
-		super(bout, IMagic.Style_Magic, IBuff.Type_Benefit, IMagic.Func_Gain, life);
+		super(bout, life);
 		// TODO Auto-generated constructor stub
 		this.defUpScale = defUpScale;
 	}

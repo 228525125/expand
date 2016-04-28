@@ -16,9 +16,8 @@ public class WarnAureoleBuff extends SimpleBuff {
 	 * @param immuneDamageRatio 增加免伤比 基准100
 	 * @param life
 	 */
-	public WarnAureoleBuff(Integer bout, Integer style, Integer type,
-			Integer func, Integer immuneDamageRatio, LifeCard life) {
-		super(bout, style, type, func, life);
+	public WarnAureoleBuff(Integer bout, Integer immuneDamageRatio, LifeCard life) {
+		super(bout, life);
 		// TODO Auto-generated constructor stub
 		this.immuneDamageRatio = immuneDamageRatio;
 	}

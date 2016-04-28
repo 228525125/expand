@@ -16,8 +16,8 @@ public class IceVallum extends ActiveSkill {
 	private Integer bout;
 	
 	public IceVallum(Integer consume, Integer cooldown, Integer velocity,
-			Integer style, Integer func, Integer bout) {
-		super(consume, cooldown, velocity, style, func);
+			 Integer bout) {
+		super(consume, cooldown, velocity);
 		// TODO Auto-generated constructor stub
 		this.bout = bout;
 	}
@@ -34,7 +34,7 @@ public class IceVallum extends ActiveSkill {
 		super.affect(objects);
 		
 		LifeCard life = (LifeCard) objects[0];
-		new IceVallumBuff(bout, getStyle(), IBuff.Type_Neutral, getFunc(), life).effect();
+		new IceVallumBuff(bout, life).effect();
 	}
 	
 	@Override

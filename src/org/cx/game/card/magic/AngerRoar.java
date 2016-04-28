@@ -18,9 +18,9 @@ public class AngerRoar extends CircleRangeMagicCard {
 	private Integer bout;
 	private Integer atkScale;
 	
-	public AngerRoar(Integer id, Integer consume, Integer style, Integer func, Integer radius, Integer bout,
+	public AngerRoar(Integer id, Integer consume, Integer radius, Integer bout,
 			Integer atkScale) {
-		super(id, consume, style, func, radius);
+		super(id, consume, radius);
 		// TODO Auto-generated constructor stub
 		this.bout = bout;
 		this.atkScale = atkScale;
@@ -33,7 +33,7 @@ public class AngerRoar extends CircleRangeMagicCard {
 		LifeCard life = (LifeCard) objects[0];
 		
 		if(life.getPlayer().equals(getOwner()))
-			new AngerRoarBuff(bout,getStyle(), IBuff.Type_Benefit, getFunc(), atkScale, life).effect();
+			new AngerRoarBuff(bout,atkScale, life).effect();
 	}
 	
 	@Override

@@ -20,8 +20,8 @@ public class IceStorm extends ActiveSkill {
 	private Integer damage;
 	private Integer freezeChance;
 	
-	public IceStorm(Integer consume, Integer cooldown, Integer velocity, Integer style, Integer func, Integer damage, Integer freezeChance) {
-		super(consume, cooldown, velocity, style, func);
+	public IceStorm(Integer consume, Integer cooldown, Integer velocity, Integer damage, Integer freezeChance) {
+		super(consume, cooldown, velocity);
 		// TODO Auto-generated constructor stub
 		this.damage = damage;
 		this.freezeChance = freezeChance;

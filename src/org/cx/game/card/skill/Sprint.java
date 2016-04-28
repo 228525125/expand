@@ -29,8 +29,8 @@ public class Sprint extends PassiveSkill {
 	 * @param upAtkScale 攻击提升比例
 	 * @param life
 	 */
-	public Sprint(Integer style, Integer atkScale) {
-		super(style);
+	public Sprint(Integer atkScale) {
+		super();
 		// TODO Auto-generated constructor stub
 		this.upAtkScale = atkScale;
 		

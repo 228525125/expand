@@ -14,8 +14,8 @@ import org.cx.game.intercepter.Intercepter;
  */
 public class AddAmmoBuff extends Buff {
 
-	public AddAmmoBuff(Integer bout, Integer style, Integer type, Integer func, LifeCard life) {
-		super(bout, style, type, func, life);
+	public AddAmmoBuff(Integer bout, LifeCard life) {
+		super(bout, life);
 		// TODO Auto-generated constructor stub
 	}
 	

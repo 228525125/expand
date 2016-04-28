@@ -16,8 +16,8 @@ public class DamageIncrease extends PassiveSkill {
 
 	private Integer bout = 0;
 	private Integer scale = 0;
-	public DamageIncrease(Integer style, Integer bout, Integer scale) {
-		super(style);
+	public DamageIncrease(Integer bout, Integer scale) {
+		super();
 		// TODO Auto-generated constructor stub
 		this.bout = bout;
 		this.scale = scale;
@@ -29,7 +29,7 @@ public class DamageIncrease extends PassiveSkill {
 		super.affect(objects);
 		
 		LifeCard attacked = (LifeCard) ((Object[]) objects[0])[0];
-		new DamageIncreaseBuff(bout, getStyle(), IBuff.Type_Neutral, getFunc(), scale, attacked).effect();
+		new DamageIncreaseBuff(bout, scale, attacked).effect();
 	}
 
 	@Override

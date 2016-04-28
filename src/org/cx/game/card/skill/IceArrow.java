@@ -32,8 +32,8 @@ public class IceArrow extends ActiveSkill {
 	 * @param life
 	 */
 	public IceArrow(Integer consume, Integer cooldown, Integer velocity,
-			Integer style, Integer func, Integer bout, Integer attackScale, Integer energyScale, Integer speedScale) {
-		super(consume, cooldown, velocity, style, func);
+			Integer bout, Integer attackScale, Integer energyScale, Integer speedScale) {
+		super(consume, cooldown, velocity);
 		// TODO Auto-generated constructor stub
 		this.bout = bout;
 		this.attackScale = attackScale;
@@ -56,7 +56,7 @@ public class IceArrow extends ActiveSkill {
 		LifeCard affected = (LifeCard) objects[0];
 		Integer atk = getOwner().getAttack().getAtk();
 		affected.getDeath().magicToHp(-atk*attackScale/100);
-		new FreezeBuff(bout,getStyle(),IBuff.Type_Harm, getFunc(),0,energyScale,speedScale,affected).effect();
+		new FreezeBuff(bout,0,energyScale,speedScale,affected).effect();
 	}
 	
 	@Override

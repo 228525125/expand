@@ -17,8 +17,8 @@ public class AssistAttack extends ActiveSkill {
 	private LifeCard aidObj = null;
 	
 	public AssistAttack(Integer consume, Integer cooldown, Integer velocity,
-			Integer style, Integer func, Integer bout) {
-		super(consume, cooldown, velocity, style, func);
+			 Integer bout) {
+		super(consume, cooldown, velocity);
 		// TODO Auto-generated constructor stub
 		this.bout = bout;
 		setParameterTypeValidator(new Class[]{LifeCard.class});
@@ -36,7 +36,7 @@ public class AssistAttack extends ActiveSkill {
 		super.affect(objects);
 		
 		this.aidObj = (LifeCard) objects[0];
-		new AssistAttackBuff(bout, getStyle(), IBuff.Type_Benefit, getFunc(), getOwner(), aidObj).effect();
+		new AssistAttackBuff(bout, getOwner(), aidObj).effect();
 	}
 	
 	@Override

@@ -14,8 +14,8 @@ public class BarbedAureole extends Aureole {
 
 	private Integer returnRatio = 0;
 	
-	public BarbedAureole(Integer style, Integer range, Integer returnRatio) {
-		super(style, range);
+	public BarbedAureole(Integer range, Integer returnRatio) {
+		super(range);
 		// TODO Auto-generated constructor stub
 		this.returnRatio = returnRatio;
 	}
@@ -39,7 +39,7 @@ public class BarbedAureole extends Aureole {
 		
 		LifeCard life = (LifeCard) objects[0];
 		
-		new BarbedAureoleBuff(MaxBout, getStyle(), IBuff.Type_Benefit, getFunc(), returnRatio, life).effect();
+		new BarbedAureoleBuff(MaxBout, returnRatio, life).effect();
 	}
 
 	@Override

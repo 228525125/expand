@@ -22,8 +22,8 @@ public class Cure extends ActiveSkill {
 	 * @param cureValue 治疗量的下限，上限与攻击力相同
 	 * @param life
 	 */
-	public Cure(Integer consume, Integer cooldown, Integer velocity, Integer style, Integer func, Integer atkScaleForHp, Integer tireBout) {
-		super(consume, cooldown, velocity, style, func);
+	public Cure(Integer consume, Integer cooldown, Integer velocity, Integer atkScaleForHp, Integer tireBout) {
+		super(consume, cooldown, velocity);
 		// TODO Auto-generated constructor stub
 		this.atkScaleForHp = atkScaleForHp;
 		this.tireBout = tireBout;
@@ -45,7 +45,7 @@ public class Cure extends ActiveSkill {
 		
 		Integer cureValue = getOwner().getAttack().getAtk()*atkScaleForHp/100;  //保持下限 
 		life.getDeath().magicToHp(cureValue);
-		new CureTiredBuff(tireBout,getStyle(),IBuff.Type_Benefit, getFunc(),life).effect();
+		new CureTiredBuff(tireBout,life).effect();
 	}
 	
 	@Override

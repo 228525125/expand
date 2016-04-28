@@ -10,7 +10,7 @@ import org.cx.game.intercepter.IIntercepter;
 import org.cx.game.observer.NotifyInfo;
 
 /**
- * 击晕 attack （没有使用）
+ * 击晕  （没有使用）
  * @author chenxian
  *
  */
@@ -20,9 +20,9 @@ public class AttackDizzy extends PassiveSkill {
 	private LifeCard attacked;
 	private Integer bout;
 	
-	public AttackDizzy(Integer style, Integer bout, Integer chance) {
+	public AttackDizzy(Integer bout, Integer chance) {
 		// TODO Auto-generated constructor stub
-		super(style);
+		super();
 		this.chance = chance;
 	}
 	

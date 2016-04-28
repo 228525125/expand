@@ -16,8 +16,8 @@ public abstract class Spurting extends PassiveSkill {
 
 	private Integer atkScale = 0;
 	
-	public Spurting(Integer style, Integer atkScale) {
-		super(style);
+	public Spurting(Integer atkScale) {
+		super();
 		// TODO Auto-generated constructor stub
 		this.atkScale = atkScale;
 	}

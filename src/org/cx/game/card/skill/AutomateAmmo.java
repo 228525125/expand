@@ -1,6 +1,7 @@
 package org.cx.game.card.skill;
 
 import org.cx.game.card.skill.ActiveSkill;
+import org.cx.game.card.buff.AddAmmoBuff;
 import org.cx.game.card.buff.IBuff;
 import org.cx.game.card.buff.TiredAttackBuff;
 import org.cx.game.exception.RuleValidatorException;
@@ -12,10 +13,13 @@ import org.cx.game.exception.RuleValidatorException;
  */
 public class AutomateAmmo extends ActiveSkill {
 
+	private Integer bout = 3;
+	
 	public AutomateAmmo(Integer consume, Integer cooldown, Integer velocity,
-			Integer style, Integer func) {
-		super(consume, cooldown, velocity, style, func);
+			Integer bout) {
+		super(consume, cooldown, velocity);
 		// TODO Auto-generated constructor stub
+		this.bout = bout;
 	}
 	
 	@Override
@@ -23,12 +27,8 @@ public class AutomateAmmo extends ActiveSkill {
 		// TODO Auto-generated method stub
 		super.affect(objects);
 		
-		for(IBuff buff : getOwner().getBuffList()){
-			if (buff instanceof TiredAttackBuff) {
-				buff.invalid();
-				break;
-			}
-		}
+		IBuff buff = new AddAmmoBuff(bout, getOwner());
+		buff.effect();
 	}
 	
 	@Override

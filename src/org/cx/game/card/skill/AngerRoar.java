@@ -16,9 +16,9 @@ public class AngerRoar extends CircleRangeAcitveSkill {
 	private Integer bout;
 	private Integer atkScale;
 	
-	public AngerRoar(Integer consume, Integer cooldown, Integer velocity, Integer style, Integer func, Integer radius, Integer bout,
+	public AngerRoar(Integer consume, Integer cooldown, Integer velocity, Integer radius, Integer bout,
 			Integer atkScale) {
-		super(consume, cooldown, velocity, style, func, radius);
+		super(consume, cooldown, velocity, radius);
 		// TODO Auto-generated constructor stub'
 		this.bout = bout;
 		this.atkScale = atkScale;
@@ -32,7 +32,7 @@ public class AngerRoar extends CircleRangeAcitveSkill {
 		LifeCard life = (LifeCard) objects[0];
 		
 		if(life.getPlayer().equals(getOwner().getPlayer()))
-			new AngerRoarBuff(bout,getStyle(), IBuff.Type_Benefit, getFunc(), atkScale, life).effect();
+			new AngerRoarBuff(bout, atkScale, life).effect();
 	}
 
 	@Override

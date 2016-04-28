@@ -23,9 +23,9 @@ public class HunterTabBuff extends Buff {
 	 * @param damageScale 远程伤害增加百分比，计算的时候：100+damageScale
 	 * @param life
 	 */
-	public HunterTabBuff(Integer bout, Integer style, Integer type, Integer func,
+	public HunterTabBuff(Integer bout,
 			Integer damageScale, LifeCard life) {
-		super(bout, style, type, func, life);
+		super(bout, life);
 		// TODO Auto-generated constructor stub
 		this.damageScale = damageScale;
 	}

@@ -19,8 +19,8 @@ public class SpearLine extends Spurting {
 	 * @param atkScale 溅射伤害比例，基数是自身atk
 	 * @param life
 	 */
-	public SpearLine(Integer style, Integer atkScale) {
-		super(style, atkScale);
+	public SpearLine(Integer atkScale) {
+		super(atkScale);
 		// TODO Auto-generated constructor stub
 	}
 

@@ -5,11 +5,16 @@ import org.cx.game.card.buff.ImmuneBuff;
 import org.cx.game.intercepter.IIntercepter;
 import org.cx.game.intercepter.Intercepter;
 
+/**
+ * 冰冻壁垒
+ * @author chenxian
+ *
+ */
 public class IceVallumBuff extends ImmuneBuff {
 
-	public IceVallumBuff(Integer bout, Integer style, Integer type, Integer func,
+	public IceVallumBuff(Integer bout,
 			LifeCard life) {
-		super(bout, style, type, func, life);
+		super(bout, life);
 		// TODO Auto-generated constructor stub
 		setPhysical(true);
 		setMagic(true);

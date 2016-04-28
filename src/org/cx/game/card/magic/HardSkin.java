@@ -24,7 +24,7 @@ public class HardSkin extends MagicCard {
 	private LifeCard affected = null;
 	
 	public HardSkin(Integer id, Integer consume, Integer bout, Integer defUpScale) {
-		super(id, consume, IMagic.Style_Magic, IMagic.Func_Gain);
+		super(id, consume);
 		// TODO Auto-generated constructor stub
 		this.bout = bout;
 		this.defUpScale = defUpScale;

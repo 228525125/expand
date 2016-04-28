@@ -31,9 +31,9 @@ public class Bump extends ActiveSkill {
 	private Integer dizzyChance = 0;  //每一格增加击晕几率
 	
 	public Bump(Integer consume, Integer cooldown, Integer velocity,
-			Integer style, Integer func, Integer range, Integer atkScale, 
+			Integer range, Integer atkScale, 
 			Integer dizzyChance, Integer dizzyBout) {
-		super(consume, cooldown, velocity, style, func);
+		super(consume, cooldown, velocity);
 		// TODO Auto-generated constructor stub
 		this.range = range;
 		this.dizzyChance = dizzyChance;

@@ -30,8 +30,8 @@ public class FreezeBuff extends SimpleBuff {
 	 * @param speedScale 攻击速度降低比例 基准100
 	 * @param life
 	 */
-	public FreezeBuff(Integer bout, Integer style, Integer type, Integer func, Integer damage, Integer energyScale, Integer speedScale, LifeCard life) {
-		super(bout, style, type, func, life);
+	public FreezeBuff(Integer bout, Integer damage, Integer energyScale, Integer speedScale, LifeCard life) {
+		super(bout, life);
 		// TODO Auto-generated constructor stub
 		this.energyDownScale = energyScale;
 		this.speedDownScale = speedScale;

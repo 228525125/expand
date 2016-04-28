@@ -15,8 +15,8 @@ public class CrossbowCircle extends CircleRangeAcitveSkill {
 	private Integer atkScale = 0;
 	
 	public CrossbowCircle(Integer consume, Integer cooldown, Integer velocity,
-			Integer style, Integer func, Integer radius, Integer atkScale, Integer range) {
-		super(consume, cooldown, velocity, style, func, radius);
+			Integer radius, Integer atkScale, Integer range) {
+		super(consume, cooldown, velocity, radius);
 		// TODO Auto-generated constructor stub
 		this.atkScale = atkScale;
 		this.range = range;

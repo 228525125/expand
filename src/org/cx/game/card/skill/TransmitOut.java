@@ -20,8 +20,8 @@ public class TransmitOut extends ActiveSkill {
 	
 	private Integer range = 8;
 	
-	public TransmitOut(Integer consume, Integer cooldown, Integer velocity, Integer style, Integer func, Integer range) {
-		super(consume, cooldown, velocity, style, func);
+	public TransmitOut(Integer consume, Integer cooldown, Integer velocity, Integer range) {
+		super(consume, cooldown, velocity);
 		// TODO Auto-generated constructor stub
 		setParameterTypeValidator(new Class[]{LifeCard.class});		
 	}

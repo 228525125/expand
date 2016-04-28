@@ -9,9 +9,9 @@ public class TransmitBackBuff extends Buff {
 
 	private Integer position;
 	
-	public TransmitBackBuff(Integer bout, Integer style, Integer type, Integer func, Integer position,
+	public TransmitBackBuff(Integer bout, Integer position,
 			LifeCard life) {
-		super(bout, style, type, func, life);
+		super(bout, life);
 		// TODO Auto-generated constructor stub
 		this.position = position;
 	}

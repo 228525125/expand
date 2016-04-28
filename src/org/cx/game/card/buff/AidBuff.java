@@ -14,8 +14,8 @@ public class AidBuff extends Buff {
 
 	private LifeCard aider = null;
 	
-	public AidBuff(Integer bout, Integer style, Integer type, Integer func, LifeCard aider, LifeCard life) {
-		super(bout, style, type, func, life);
+	public AidBuff(Integer bout, LifeCard aider, LifeCard life) {
+		super(bout, life);
 		// TODO Auto-generated constructor stub
 		this.aider = aider;
 	}

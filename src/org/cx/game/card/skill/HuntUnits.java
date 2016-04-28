@@ -19,8 +19,8 @@ public abstract class HuntUnits extends PassiveSkill {
 
 	private Integer range = 0;
 	
-	public HuntUnits(Integer style, Integer range) {
-		super(style);
+	public HuntUnits(Integer range) {
+		super();
 		// TODO Auto-generated constructor stub
 		this.range = range;
 	}

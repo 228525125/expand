@@ -20,14 +20,12 @@ public class SpiritCureBuff extends Buff {
 	/**
 	 * 
 	 * @param bout
-	 * @param style
-	 * @param type
 	 * @param elevateScale 治疗效果提升比例
 	 * @param life
 	 */
-	public SpiritCureBuff(Integer bout, Integer style, Integer type, Integer func,
+	public SpiritCureBuff(Integer bout,
 			Integer elevateScale, LifeCard life) {
-		super(bout, style, type, func, life);
+		super(bout, life);
 		// TODO Auto-generated constructor stub
 		this.elevateScale = elevateScale;
 	}

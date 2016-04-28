@@ -33,8 +33,8 @@ public class PrickTrickSkill extends ActiveSkill {
 	 * @param energyDownScale       移动力下降比例，以总移动力为基准
 	 */
 	public PrickTrickSkill(Integer consume, Integer cooldown, Integer velocity,
-			Integer style, Integer func, Integer maimedBout, Integer damageScale, Integer boutDamageScale, Integer energyDownScale) {
-		super(consume, cooldown, velocity, style, func);
+			 Integer maimedBout, Integer damageScale, Integer boutDamageScale, Integer energyDownScale) {
+		super(consume, cooldown, velocity);
 		// TODO Auto-generated constructor stub
 		this.damageScale = damageScale;
 		this.maimedBout = maimedBout;

@@ -22,8 +22,8 @@ import org.cx.game.widget.IPlace;
  */
 public class TransmitIn extends MagicCard {
 
-	public TransmitIn(Integer id, Integer consume, Integer style, Integer func) {
-		super(id, consume, style, func);
+	public TransmitIn(Integer id, Integer consume) {
+		super(id, consume);
 		// TODO Auto-generated constructor stub
 		
 		setParameterTypeValidator(new Class[]{LifeCard.class});

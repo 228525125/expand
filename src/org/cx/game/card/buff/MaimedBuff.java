@@ -18,9 +18,9 @@ public class MaimedBuff extends SimpleBuff {
 	
 	public final static Integer DownEnergyScale_Max = 100;
 
-	public MaimedBuff(Integer bout, Integer style, Integer type, Integer func, Integer downEnergyScale,
+	public MaimedBuff(Integer bout, Integer downEnergyScale,
 			LifeCard life) {
-		super(bout, style, type, func, life);
+		super(bout, life);
 		// TODO Auto-generated constructor stub
 		this.downEnergyScale = downEnergyScale;
 	}

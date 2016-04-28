@@ -22,9 +22,9 @@ public class AssistDefendBuff extends Buff {
 
 	private LifeCard aider;
 	
-	public AssistDefendBuff(Integer bout, Integer style, Integer type, Integer func,
+	public AssistDefendBuff(Integer bout,
 			LifeCard aider, LifeCard life) {
-		super(bout, style, type, func, life);
+		super(bout, life);
 		// TODO Auto-generated constructor stub
 		this.aider = aider;
 	}

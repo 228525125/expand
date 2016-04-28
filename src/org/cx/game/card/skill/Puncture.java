@@ -25,9 +25,9 @@ public class Puncture extends PassiveSkill {
 	 * @param downScale 免伤比下降比例
 	 * @param life
 	 */
-	public Puncture(Integer style, Integer chance, Integer downImmuneDamageRatio) {
+	public Puncture(Integer chance, Integer downImmuneDamageRatio) {
 		// TODO Auto-generated constructor stub
-		super(style);
+		super();
 		this.chance = chance;
 		this.downScale = downImmuneDamageRatio;
 	}

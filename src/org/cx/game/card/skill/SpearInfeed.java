@@ -14,8 +14,8 @@ import org.cx.game.widget.IGround;
  */
 public class SpearInfeed extends Spurting {
 
-	public SpearInfeed(Integer style, Integer atkScale) {
-		super(style, atkScale);
+	public SpearInfeed(Integer atkScale) {
+		super(atkScale);
 		// TODO Auto-generated constructor stub
 	}
 

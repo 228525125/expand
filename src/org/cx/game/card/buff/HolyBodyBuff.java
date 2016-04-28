@@ -6,11 +6,15 @@ import org.cx.game.card.buff.Buff;
 import org.cx.game.intercepter.IIntercepter;
 import org.cx.game.intercepter.Intercepter;
 
+/**
+ * 神圣护体
+ * @author chenxian
+ *
+ */
 public class HolyBodyBuff extends Buff {
 
-	public HolyBodyBuff(Integer bout, Integer style, Integer type,
-			Integer func,LifeCard life) {
-		super(bout, style, type, func, life);
+	public HolyBodyBuff(Integer bout, LifeCard life) {
+		super(bout, life);
 		// TODO Auto-generated constructor stub
 	}
 

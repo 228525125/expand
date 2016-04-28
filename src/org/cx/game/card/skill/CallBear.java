@@ -17,9 +17,9 @@ import org.cx.game.widget.IGround;
  */
 public class CallBear extends ActiveSkill {
 
-	public CallBear(Integer consume, Integer cooldown, Integer velocity,
-			Integer style, Integer func) {
-		super(consume, cooldown, velocity, style, func);
+	public CallBear(Integer consume, Integer cooldown, Integer velocity
+			) {
+		super(consume, cooldown, velocity);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -35,7 +35,7 @@ public class CallBear extends ActiveSkill {
 		super.affect(objects);
 		
 		List<Integer> cid = new ArrayList<Integer>();
-		cid.add(10000);
+		cid.add(10000);                                    //没有定义bear
 		List<ICard> list = CardFactory.getInstances(cid);
 		LifeCard bear = (LifeCard) list.get(0);
 		IGround ground = getOwner().getPlayer().getGround();

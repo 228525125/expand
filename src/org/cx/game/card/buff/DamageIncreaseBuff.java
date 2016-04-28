@@ -22,8 +22,8 @@ public class DamageIncreaseBuff extends Buff {
 	 * @param scale 每次递增比例
 	 * @param life
 	 */
-	public DamageIncreaseBuff(Integer bout, Integer style, Integer type, Integer func, Integer scale, LifeCard life) {
-		super(bout, style, type, func, life);
+	public DamageIncreaseBuff(Integer bout, Integer scale, LifeCard life) {
+		super(bout, life);
 		// TODO Auto-generated constructor stub
 		setDuplication(true);       //默认是false
 		this.scale = scale;

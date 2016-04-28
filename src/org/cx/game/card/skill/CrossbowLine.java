@@ -14,8 +14,8 @@ public class CrossbowLine extends LineRangeActiveSkill {
 	private Integer atkScale = 0;
 	
 	public CrossbowLine(Integer consume, Integer cooldown, Integer velocity,
-			Integer style, Integer func, Integer length, Integer atkScale) {
-		super(consume, cooldown, velocity, style, func, length);
+			 Integer length, Integer atkScale) {
+		super(consume, cooldown, velocity, length);
 		// TODO Auto-generated constructor stub
 		this.atkScale = atkScale;
 	}

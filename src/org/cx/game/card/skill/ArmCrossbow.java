@@ -1,16 +1,15 @@
 package org.cx.game.card.skill;
 
-import org.cx.game.card.skill.IdentifyPassiveSkill;
 
 /**
  * 手弩
  * @author chenxian
  *
  */
-public class ArmCrossbow extends IdentifyPassiveSkill {
+public class ArmCrossbow extends PassiveSkill {
 
-	public ArmCrossbow(Integer style) {
-		super(style);
+	public ArmCrossbow() {
+		super();
 		// TODO Auto-generated constructor stub
 	}
 

@@ -8,28 +8,21 @@ import org.cx.game.action.IChuck;
 import org.cx.game.card.LifeCard;
 import org.cx.game.card.MagicCard;
 import org.cx.game.card.buff.IBuff;
-import org.cx.game.card.buff.SharpToothBuff;
+import org.cx.game.card.buff.QianggongBuff;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.widget.IGround;
 
-/**
- * 铁齿铜牙
- * @author chenxian
- *
- */
-public class SharpTooth extends MagicCard {
+public class Qianggong extends MagicCard {
 
 	private Integer atkUpScale = 0;
 	private Integer bout = 0;
 	private LifeCard affected = null;
 	
-	public SharpTooth(Integer id, Integer consume, Integer bout, Integer atkUpScale) {
+	public Qianggong(Integer id, Integer consume, Integer bout, Integer atkUpScale) {
 		super(id, consume);
 		// TODO Auto-generated constructor stub
-		this.atkUpScale = atkUpScale;
 		this.bout = bout;
-		
-		setParameterTypeValidator(new Class[]{LifeCard.class});
+		this.atkUpScale = atkUpScale;
 	}
 
 	@Override
@@ -39,21 +32,21 @@ public class SharpTooth extends MagicCard {
 	}
 	
 	@Override
-	public void affect(Object... objects) throws RuleValidatorException {
-		// TODO Auto-generated method stub
-		super.affect(objects);
-		
-		IBuff buff = new SharpToothBuff(this.bout, this.atkUpScale, this.affected);
-		buff.effect();
-	}
-	
-	@Override
 	public void apply(Object... objects) throws RuleValidatorException {
 		// TODO Auto-generated method stub
 		super.apply(objects);
 		
 		this.affected = (LifeCard) objects[0];
 		affect();
+	}
+	
+	@Override
+	public void affect(Object... objects) throws RuleValidatorException {
+		// TODO Auto-generated method stub
+		super.affect(objects);
+		
+		IBuff buff = new QianggongBuff(bout, atkUpScale, affected);
+		buff.effect();
 	}
 	
 	@Override
