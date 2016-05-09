@@ -23,6 +23,8 @@ public class Qianggong extends MagicCard {
 		// TODO Auto-generated constructor stub
 		this.bout = bout;
 		this.atkUpScale = atkUpScale;
+		
+		setParameterTypeValidator(new Class[]{LifeCard.class}, "stirps", new Object[]{LifeCard.Stirps_Beast});
 	}
 
 	@Override

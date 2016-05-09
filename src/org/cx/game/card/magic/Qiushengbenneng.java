@@ -23,6 +23,8 @@ public class Qiushengbenneng extends MagicCard {
 		// TODO Auto-generated constructor stub
 		this.bout = bout;
 		this.energyUpScale = energyUpScale;
+		
+		setParameterTypeValidator(new Class[]{LifeCard.class});
 	}
 
 	@Override
