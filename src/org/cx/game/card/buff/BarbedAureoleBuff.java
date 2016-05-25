@@ -5,7 +5,11 @@ import org.cx.game.card.LifeCard;
 import org.cx.game.card.buff.Buff;
 import org.cx.game.intercepter.IIntercepter;
 import org.cx.game.intercepter.Intercepter;
-
+/**
+ * 荆棘光环
+ * @author chenxian
+ *
+ */
 public class BarbedAureoleBuff extends Buff {
 
 	private Integer returnRatio = 0;
@@ -35,7 +39,9 @@ public class BarbedAureoleBuff extends Buff {
 				// TODO Auto-generated method stub
 				LifeCard attack = (LifeCard) ((Object[]) args[0])[0];
 				
-				affect(attack);
+				if(IAttack.Mode_Near==attack.getAttack().getMode()){        //判断近战或远程
+					affect(attack);
+				}
 			}
 		};
 		
@@ -48,12 +54,10 @@ public class BarbedAureoleBuff extends Buff {
 		// TODO Auto-generated method stub
 		LifeCard attack = (LifeCard) objects[0];
 		
-		if(IAttack.Mode_Near==attack.getAttack().getMode()){        //判断近战或远程
-			Integer atk = attack.getAttack().getAtk();
-			Integer damage = atk*returnRatio/100;
-			attack.getDeath().magicToHp(-damage);
+		Integer atk = attack.getAttack().getAtk();
+		Integer damage = atk*returnRatio/100;
+		attack.getDeath().magicToHp(-damage);
 			
-			super.affect(objects);
-		}
+		super.affect(objects);
 	}
 }
