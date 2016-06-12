@@ -37,7 +37,7 @@ public abstract class HuntUnits extends PassiveSkill {
 		return range;
 	}
 
-	public Integer getUnitNumber() {
+	protected Integer getUnitNumber() {
 		Integer number = 0;
 		
 		IGround ground = getOwner().getPlayer().getGround();

@@ -57,4 +57,12 @@ public class Cure extends ActiveSkill {
 		life.affected(this);
 	}
 
+	public Integer getAtkScaleForHp() {
+		return atkScaleForHp;
+	}
+
+	public void setAtkScaleForHp(Integer atkScaleForHp) {
+		this.atkScaleForHp = atkScaleForHp;
+	}
+	
 }
