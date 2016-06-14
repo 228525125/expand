@@ -1,5 +1,8 @@
 package org.cx.game.card.skill;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.cx.game.card.LifeCard;
 import org.cx.game.card.skill.ActiveSkill;
 import org.cx.game.card.buff.IBuff;
@@ -38,16 +41,20 @@ public class DispelMagic extends ActiveSkill {
 		// TODO Auto-generated method stub
 		super.affect(objects);
 		
+		List<IBuff> buffList = new ArrayList<IBuff>();
 		LifeCard life = (LifeCard) objects[0];
 		Integer i = 0;
 		for(IBuff buff : life.getBuffList()){
-			if(IBuff.Style_Magic==buff.getStyle()&&IBuff.Type_Harm==buff.getHostility()){
-				buff.invalid();
+			if(IBuff.Style_Magic==buff.getStyle()/*&&IBuff.Type_Harm==buff.getHostility()*/){
+				buffList.add(buff);
 				i += 1;
 				if(i==dispelNumber)
 					break;
 			}
 		}
+		
+		for(IBuff buff : buffList)
+			buff.invalid();
 	}
 	
 	@Override
