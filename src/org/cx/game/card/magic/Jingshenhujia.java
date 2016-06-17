@@ -1,31 +1,26 @@
 package org.cx.game.card.magic;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.cx.game.action.IApply;
 import org.cx.game.action.IChuck;
-import org.cx.game.card.ICard;
 import org.cx.game.card.LifeCard;
 import org.cx.game.card.MagicCard;
-import org.cx.game.card.buff.HardSkinBuff;
-import org.cx.game.card.magic.IMagic;
-import org.cx.game.core.Context;
+import org.cx.game.card.buff.JingshenhujiaBuff;
 import org.cx.game.exception.RuleValidatorException;
-import org.cx.game.widget.IGround;
 
 /**
- * 护体石肤
- * @author chenxian
+ * 精神护甲
+ * @author krw
  *
  */
-public class HardSkin extends MagicCard {
+public class Jingshenhujia extends MagicCard {
 
 	private Integer defUpScale = 0;
 	private Integer bout = 0;
 	private LifeCard affected = null;
 	
-	public HardSkin(Integer id, Integer consume, Integer bout, Integer defUpScale) {
+	public Jingshenhujia(Integer id, Integer consume, Integer bout, Integer defUpScale) {
 		super(id, consume);
 		// TODO Auto-generated constructor stub
 		this.bout = bout;
@@ -35,11 +30,17 @@ public class HardSkin extends MagicCard {
 	}
 
 	@Override
+	public Boolean needConjurer() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	@Override
 	public void affect(Object... objects) throws RuleValidatorException {
 		// TODO Auto-generated method stub
 		super.affect(objects);
-
-		new HardSkinBuff(this.bout, defUpScale, this.affected).effect();
+		
+		new JingshenhujiaBuff(this.bout, this.defUpScale, this.affected).effect();
 	}
 	
 	@Override
@@ -49,31 +50,6 @@ public class HardSkin extends MagicCard {
 		
 		this.affected = (LifeCard) objects[0];
 		affect();
-	}
-
-	@Override
-	public Boolean needConjurer() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
-	@Override
-	public List<Integer> getApplyRange(IGround ground) {
-		// TODO Auto-generated method stub
-		List<Integer> positionList = new ArrayList<Integer>();
-		List<Integer> ids = new ArrayList<Integer>();
-		List<LifeCard> cardList = ground.list(getPlayer());
-		for(LifeCard card : cardList){
-			ids.add(card.getId());
-		}
-		List<Integer> stirps = Context.queryLifeStirps(LifeCard.Stirps_Beast);
-		ids.retainAll(stirps);
-		
-		List<ICard> list = ground.listForID(getPlayer(), ids);
-		for(ICard card : list){
-			positionList.add(card.getContainerPosition());
-		}
-		return positionList;
 	}
 	
 	/**

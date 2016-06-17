@@ -5,10 +5,12 @@ import java.util.List;
 
 import org.cx.game.action.IApply;
 import org.cx.game.action.IChuck;
+import org.cx.game.card.ICard;
 import org.cx.game.card.LifeCard;
 import org.cx.game.card.MagicCard;
 import org.cx.game.card.buff.IBuff;
 import org.cx.game.card.buff.SharpToothBuff;
+import org.cx.game.core.Context;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.widget.IGround;
 
@@ -35,7 +37,7 @@ public class SharpTooth extends MagicCard {
 	@Override
 	public Boolean needConjurer() {
 		// TODO Auto-generated method stub
-		return true;
+		return false;
 	}
 	
 	@Override
@@ -60,9 +62,18 @@ public class SharpTooth extends MagicCard {
 	public List<Integer> getApplyRange(IGround ground) {
 		// TODO Auto-generated method stub
 		List<Integer> positionList = new ArrayList<Integer>();
-		LifeCard conjure = getConjurer();
-		Integer position = conjure.getContainerPosition();
-		positionList.add(position);
+		List<Integer> ids = new ArrayList<Integer>();
+		List<LifeCard> cardList = ground.list(getPlayer());
+		for(LifeCard card : cardList){
+			ids.add(card.getId());
+		}
+		List<Integer> stirps = Context.queryLifeStirps(LifeCard.Stirps_Beast);
+		ids.retainAll(stirps);
+		
+		List<ICard> list = ground.listForID(getPlayer(), ids);
+		for(ICard card : list){
+			positionList.add(card.getContainerPosition());
+		}
 		return positionList;
 	}
 	

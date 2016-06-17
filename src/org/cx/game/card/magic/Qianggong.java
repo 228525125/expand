@@ -58,8 +58,8 @@ public class Qianggong extends MagicCard {
 		// TODO Auto-generated method stub
 		List<Integer> positionList = new ArrayList<Integer>();
 		List<Integer> ids = new ArrayList<Integer>();
-		List<ICard> cardList = ground.list();
-		for(ICard card : cardList){
+		List<LifeCard> cardList = ground.list(getPlayer());
+		for(LifeCard card : cardList){
 			ids.add(card.getId());
 		}
 		List<Integer> stirps = Context.queryLifeStirps(LifeCard.Stirps_Beast);
