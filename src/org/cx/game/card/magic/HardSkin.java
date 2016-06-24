@@ -21,15 +21,15 @@ import org.cx.game.widget.IGround;
  */
 public class HardSkin extends MagicCard {
 
-	private Integer defUpScale = 0;
+	private Integer damageDownValue = 0;
 	private Integer bout = 0;
 	private LifeCard affected = null;
 	
-	public HardSkin(Integer id, Integer consume, Integer bout, Integer defUpScale) {
+	public HardSkin(Integer id, Integer consume, Integer bout, Integer damageDownValue) {
 		super(id, consume);
 		// TODO Auto-generated constructor stub
 		this.bout = bout;
-		this.defUpScale = defUpScale;
+		this.damageDownValue = damageDownValue;
 		
 		setParameterTypeValidator(new Class[]{LifeCard.class});
 	}
@@ -39,7 +39,7 @@ public class HardSkin extends MagicCard {
 		// TODO Auto-generated method stub
 		super.affect(objects);
 
-		new HardSkinBuff(this.bout, defUpScale, this.affected).effect();
+		new HardSkinBuff(this.bout, damageDownValue, this.affected).effect();
 	}
 	
 	@Override

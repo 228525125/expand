@@ -49,14 +49,5 @@ public class StoneBuff extends Buff {
 		affect();
 		
 	}
-	
-	@Override
-	public void affect(Object... objects) {
-		// TODO Auto-generated method stub
-		super.affect(objects);
-		
-		//不能反击
-		getOwner().getAttacked().setAttackBackChance(0);		
-	}
 
 }

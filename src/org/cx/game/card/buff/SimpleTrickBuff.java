@@ -8,7 +8,6 @@ public class SimpleTrickBuff extends SimpleBuff {
 	private Integer energyDownScale = 0;
 	private Integer speedDownScale = 0;
 	private Integer atkDownScale = 0;
-	private Integer defDownScale = 0;
 	
 	/**
 	 * 本构造函数只用于 abstract SimpleTrickBuff getTrickBuff();
@@ -30,17 +29,15 @@ public class SimpleTrickBuff extends SimpleBuff {
 	 * @param energyDownScale        精力下降比例，以总精力为基数
 	 * @param speedDownScale         攻击速度下降比例，以总攻击速度为基数
 	 * @param atkDownScale           攻击力下降比例，以当前攻击力为基数
-	 * @param defDownScale           防御力下降比例，以当前防御力为基数，ImmuneDamageRatio = 当前ImmuneDamageRatio + defDownScale；
 	 * @param life
 	 */
-	public SimpleTrickBuff(Integer bout, Integer damageScale, Integer energyDownScale, Integer speedDownScale, Integer atkDownScale, Integer defDownScale, LifeCard life) {
+	public SimpleTrickBuff(Integer bout, Integer damageScale, Integer energyDownScale, Integer speedDownScale, Integer atkDownScale, LifeCard life) {
 		super(bout, life);
 		// TODO Auto-generated constructor stub
 		this.damageScale = damageScale;
 		this.energyDownScale = energyDownScale;
 		this.speedDownScale = speedDownScale;
 		this.atkDownScale = atkDownScale;
-		this.defDownScale = defDownScale;
 	}
 	
 	@Override
@@ -68,9 +65,6 @@ public class SimpleTrickBuff extends SimpleBuff {
 			Integer atkDownValue = atk*atkDownScale/100;
 			addToKeepAtk(-atkDownValue);
 		}
-		
-		if(0!=this.defDownScale)
-			addToKeepImmuneDamageRatio(defDownScale);           //免伤比同为一种比例，因此直接计算
 		
 		super.affect(objects);
 	}
@@ -113,14 +107,6 @@ public class SimpleTrickBuff extends SimpleBuff {
 
 	public void setAtkDownScale(Integer atkDownScale) {
 		this.atkDownScale = atkDownScale;
-	}
-
-	public Integer getDefDownScale() {
-		return defDownScale;
-	}
-
-	public void setDefDownScale(Integer defDownScale) {
-		this.defDownScale = defDownScale;
 	}
 
 }

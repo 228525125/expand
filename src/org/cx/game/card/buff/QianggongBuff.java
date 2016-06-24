@@ -9,12 +9,12 @@ import org.cx.game.core.Context;
 
 public class QianggongBuff extends SimpleBuff {
 
-	private Integer atkUpScale = 0;
+	private Integer atkUpValue = 0;
 	
-	public QianggongBuff(Integer bout, Integer atkUpScale, LifeCard life) {
+	public QianggongBuff(Integer bout, Integer atkUpValue, LifeCard life) {
 		super(bout, life);
 		// TODO Auto-generated constructor stub
-		this.atkUpScale = atkUpScale;
+		this.atkUpValue = atkUpValue;
 	}
 	
 	@Override
@@ -22,7 +22,6 @@ public class QianggongBuff extends SimpleBuff {
 		// TODO Auto-generated method stub
 		super.effect();
 		
-		Integer atkUpValue = getOwner().getAttack().getAtk() * atkUpScale/100;
 		addToKeepAtk(atkUpValue);
 		
 		affect();

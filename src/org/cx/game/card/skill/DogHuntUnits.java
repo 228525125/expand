@@ -10,13 +10,12 @@ import org.cx.game.card.magic.IMagic;
  */
 public class DogHuntUnits extends HuntUnits {
 
-	private Integer defScale = 0;
-	private Integer upImmuneDamageRatio = 0;
+	private Integer atkValue = 0;
 	
-	public DogHuntUnits(Integer range, Integer defScale) {
+	public DogHuntUnits(Integer range, Integer atkValue) {
 		super(range);
 		// TODO Auto-generated constructor stub
-		this.defScale = defScale;
+		this.atkValue = atkValue;
 	}
 	
 	@Override
@@ -31,16 +30,18 @@ public class DogHuntUnits extends HuntUnits {
 		affect();
 	}
 	
+	private Integer upAtkValue = 0;
+	
 	@Override
 	public void affect(Object... objects) {
 		// TODO Auto-generated method stub
 		super.affect(objects);
 		
-		Integer immuneDamageRatio = getOwner().getAttacked().getImmuneDamageRatio();
-		getOwner().getAttacked().setImmuneDamageRatio(immuneDamageRatio - upImmuneDamageRatio);
+		Integer atk = getOwner().getAttack().getAtk();
+		getOwner().getAttack().setAtk(atk - this.upAtkValue);
 		
-		upImmuneDamageRatio = defScale*getUnitNumber();
-		getOwner().getAttacked().addToImmuneDamageRatio(upImmuneDamageRatio);
+		this.upAtkValue = atkValue*getUnitNumber();
+		getOwner().getAttack().addToAtk(this.upAtkValue);
 	}
 	
 	@Override
@@ -48,7 +49,7 @@ public class DogHuntUnits extends HuntUnits {
 		// TODO Auto-generated method stub
 		super.setOwner(life);
 		
-		life.getAttacked().addIntercepter(this);
+		life.getAttack().addIntercepter(this);
 		life.getMove().addIntercepter(this);
 	}
 }

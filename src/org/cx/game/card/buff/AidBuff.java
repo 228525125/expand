@@ -26,10 +26,7 @@ public class AidBuff extends Buff {
 		LifeCard attack = (LifeCard) ((Object[]) objects[0])[0];
 		
 		try {
-			Integer attackBackChance = aider.getAttacked().getAttackBackChance();
-			aider.getAttacked().setAttackBackChance(0);      //援助者不应该反击，而应该是被援助者反击
-			aider.attacked(attack);
-			aider.getAttacked().setAttackBackChance(attackBackChance);
+			aider.attacked(attack, attack.getAttack().clone());
 		} catch (RuleValidatorException e) {
 			// TODO Auto-generated catch block
 			//不会发生异常

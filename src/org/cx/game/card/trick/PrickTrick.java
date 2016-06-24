@@ -20,7 +20,7 @@ public class PrickTrick extends SimpleTrick {
 	
 	public PrickTrick(Integer bout, Integer effectBout, Integer damageScale, Integer boutDamageScale, Integer energyDownScale,
 			IPlace place, IPlayer player) {
-		super(bout, DEFAULT_TOUCHNUMBEROFTIMES, effectBout, damageScale, boutDamageScale, energyDownScale, 0, 0, 0, place, player);
+		super(bout, DEFAULT_TOUCHNUMBEROFTIMES, effectBout, damageScale, boutDamageScale, energyDownScale, 0, 0, place, player);
 	}
 
 	@Override

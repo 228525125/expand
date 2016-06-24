@@ -6,12 +6,12 @@ import org.cx.game.card.buff.IBuff;
 
 public class DunpaifangyuAureole extends Aureole {
 
-	private Integer atkDownScale = 0;
+	private Integer atkDownValue = 0;
 	
-	public DunpaifangyuAureole(Integer range, Integer atkDownScale) {
+	public DunpaifangyuAureole(Integer range, Integer atkDownValue) {
 		super(range);
 		// TODO Auto-generated constructor stub
-		this.atkDownScale = atkDownScale;
+		this.atkDownValue = atkDownValue;
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class DunpaifangyuAureole extends Aureole {
 		
 		LifeCard life = (LifeCard) objects[0];
 		
-		new DunpaifangyuAureoleBuff(MaxBout, atkDownScale, life).effect();
+		new DunpaifangyuAureoleBuff(MaxBout, atkDownValue, life).effect();
 	}
 
 }

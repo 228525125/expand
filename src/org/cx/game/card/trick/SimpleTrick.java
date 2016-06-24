@@ -16,7 +16,6 @@ public abstract class SimpleTrick extends Trick {
 	private Integer energyDownScale = 0;
 	private Integer speedDownScale = 0;
 	private Integer atkDownScale = 0;
-	private Integer defDownScale = 0;
 	
 	/**
 	 * 
@@ -31,12 +30,11 @@ public abstract class SimpleTrick extends Trick {
 	 * @param energyDownScale     移动范围下降比例，以总精力值为基数
 	 * @param speedDownScale      攻击速度下降比例，以总攻击速度为基数
 	 * @param atkDownScale        攻击力下降比例，以当前攻击力为基数
-	 * @param defDownScale        防御力下降比例，以当前防御力为基数
 	 * @param place               陷阱位置
 	 * @param player
 	 */
 	public SimpleTrick(Integer bout, Integer touchNumberOfTimes, Integer effectBout, Integer damageScale, Integer boutDamageScale,
-			Integer energyDownScale, Integer speedDownScale, Integer atkDownScale, Integer defDownScale, IPlace place, IPlayer player) {
+			Integer energyDownScale, Integer speedDownScale, Integer atkDownScale, IPlace place, IPlayer player) {
 		super(bout, touchNumberOfTimes, place, player);
 		// TODO Auto-generated constructor stub
 		this.effectBout = effectBout;
@@ -45,7 +43,6 @@ public abstract class SimpleTrick extends Trick {
 		this.energyDownScale = energyDownScale;
 		this.speedDownScale = speedDownScale;
 		this.atkDownScale = atkDownScale;
-		this.defDownScale = defDownScale;
 	}
 	
 	public abstract SimpleTrickBuff getTrickBuff();
@@ -69,7 +66,6 @@ public abstract class SimpleTrick extends Trick {
 		buff.setAtkDownScale(atkDownScale);
 		buff.setBout(effectBout);
 		buff.setDamageScale(boutDamageScale);
-		buff.setDefDownScale(defDownScale);
 		buff.setEnergyDownScale(energyDownScale);
 		buff.setSpeedDownScale(speedDownScale);
 		buff.setOwner(life);
@@ -99,10 +95,6 @@ public abstract class SimpleTrick extends Trick {
 
 	protected Integer getAtkDownScale() {
 		return atkDownScale;
-	}
-
-	protected Integer getDefDownScale() {
-		return defDownScale;
 	}
 	
 }

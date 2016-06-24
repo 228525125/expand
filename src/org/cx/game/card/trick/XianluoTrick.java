@@ -11,7 +11,7 @@ public class XianluoTrick extends SimpleTrick {
 			Integer defDownScale,
 			IPlace place, IPlayer player) {
 		super(bout, DEFAULT_TOUCHNUMBEROFTIMES, effectBout, 0,0,
-				100, 0, 0, defDownScale, place,
+				100, 0, 0, place,
 				player);
 		// TODO Auto-generated constructor stub
 	}

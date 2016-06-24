@@ -7,12 +7,12 @@ import org.cx.game.intercepter.Intercepter;
 
 public class DunpaifangyuAureoleBuff extends Buff {
 
-	private Integer atkDownScale = 0;
+	private Integer atkDownValue = 0;
 	
-	public DunpaifangyuAureoleBuff(Integer bout, Integer atkDownScale, LifeCard life) {
+	public DunpaifangyuAureoleBuff(Integer bout, Integer atkDownValue, LifeCard life) {
 		super(bout, life);
 		// TODO Auto-generated constructor stub
-		this.atkDownScale = atkDownScale;
+		this.atkDownValue = atkDownValue;
 	}
 	
 	@Override
@@ -23,20 +23,10 @@ public class DunpaifangyuAureoleBuff extends Buff {
 			@Override
 			public void before(Object[] args) {
 				// TODO Auto-generated method stub
-				LifeCard attack = (LifeCard) ((Object[]) args[0])[0];
+				IAttack attack = (IAttack) ((Object[]) args[0])[1];
 				
-				if(IAttack.Mode_Far.equals(attack.getAttack().getMode())){					
+				if(IAttack.Mode_Far.equals(attack.getMode())){					
 					affect(attack);
-				}
-			}
-			
-			@Override
-			public void finish(Object[] args) {
-				// TODO Auto-generated method stub
-				LifeCard attack = (LifeCard) ((Object[]) args[0])[0];
-				
-				if(IAttack.Mode_Far.equals(attack.getAttack().getMode())){					
-					attack.getAttack().setAtk(attack_atk);
 				}
 			}
 		};
@@ -46,17 +36,13 @@ public class DunpaifangyuAureoleBuff extends Buff {
 		super.effect();
 	}
 	
-	private Integer attack_atk = 0;
-	
 	@Override
 	public void affect(Object... objects) {
 		// TODO Auto-generated method stub
-		LifeCard attack = (LifeCard) objects[0];
+		IAttack attack = (IAttack) objects[0];
 		
-		attack_atk = attack.getAttack().getAtk();
-		attack.getAttack().setAtk(attack_atk+(attack_atk*atkDownScale/100));
+		attack.addToAtk(atkDownValue);
 		
 		super.affect(objects);
 	}
-
 }

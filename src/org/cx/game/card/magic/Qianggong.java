@@ -26,7 +26,7 @@ public class Qianggong extends MagicCard {
 		this.bout = bout;
 		this.atkUpScale = atkUpScale;
 		
-		setParameterTypeValidator(new Class[]{LifeCard.class}, "stirps", new Object[]{LifeCard.Stirps_Beast});
+		setParameterTypeValidator(new Class[]{LifeCard.class}, new String[]{"stirps"}, new Object[]{LifeCard.Stirps_Beast});
 	}
 
 	@Override

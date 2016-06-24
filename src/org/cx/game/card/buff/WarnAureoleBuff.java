@@ -39,8 +39,7 @@ public class WarnAureoleBuff extends SimpleBuff {
 	@Override
 	public void affect(Object... objects) {
 		// TODO Auto-generated method stub
-		addToKeepImmuneDamageRatio(immuneDamageRatio/100);
-		
+		//业务逻辑，暂没想好
 		super.affect(objects);
 	}
 
