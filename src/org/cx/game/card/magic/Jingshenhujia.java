@@ -16,15 +16,15 @@ import org.cx.game.exception.RuleValidatorException;
  */
 public class Jingshenhujia extends MagicCard {
 
-	private Integer defUpScale = 0;
+	private Integer hpUpValue = 0;
 	private Integer bout = 0;
 	private LifeCard affected = null;
 	
-	public Jingshenhujia(Integer id, Integer consume, Integer bout, Integer defUpScale) {
+	public Jingshenhujia(Integer id, Integer consume, Integer bout, Integer hpUpValue) {
 		super(id, consume);
 		// TODO Auto-generated constructor stub
 		this.bout = bout;
-		this.defUpScale = defUpScale;
+		this.hpUpValue = hpUpValue;
 		
 		setParameterTypeValidator(new Class[]{LifeCard.class});
 	}
@@ -40,7 +40,7 @@ public class Jingshenhujia extends MagicCard {
 		// TODO Auto-generated method stub
 		super.affect(objects);
 		
-		new JingshenhujiaBuff(this.bout, this.defUpScale, this.affected).effect();
+		new JingshenhujiaBuff(this.bout, this.hpUpValue, this.affected).effect();
 	}
 	
 	@Override

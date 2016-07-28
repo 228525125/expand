@@ -17,13 +17,13 @@ import org.cx.game.exception.RuleValidatorException;
  */
 public class Cure extends MagicCard {
 
-	private Integer cureScale;
+	private Integer cureValue;
 	private Integer tireBout;
 	
-	public Cure(Integer id, Integer consume, Integer cureScale, Integer tireBout) {
+	public Cure(Integer id, Integer consume, Integer cureValue, Integer tireBout) {
 		super(id, consume);
 		// TODO Auto-generated constructor stub
-		this.cureScale = cureScale;
+		this.cureValue = cureValue;
 		this.tireBout = tireBout;
 		
 		setParameterTypeValidator(new Class[]{LifeCard.class});
@@ -35,7 +35,6 @@ public class Cure extends MagicCard {
 		
 		LifeCard life = (LifeCard) objects[0];
 		
-		Integer cureValue = life.getHp()*cureScale/100;  //保持下限
 		life.getDeath().magicToHp(cureValue);
 		new CureTiredBuff(tireBout,life).effect();
 	}

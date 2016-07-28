@@ -11,13 +11,13 @@ import org.cx.game.card.buff.TongchoudikaiAureoleBuff;
  */
 public class TongchoudikaiAureole extends Aureole {
 	
-	private Integer atkUpScale;
+	private Integer atkUpValue;
 	
-	public TongchoudikaiAureole(Integer range, Integer atkUpScale) {
+	public TongchoudikaiAureole(Integer range, Integer atkUpValue) {
 		// TODO Auto-generated constructor stub
 		super(range);
 		
-		this.atkUpScale = atkUpScale;
+		this.atkUpValue = atkUpValue;
 	}
 	
 	@Override
@@ -51,7 +51,7 @@ public class TongchoudikaiAureole extends Aureole {
 		
 		LifeCard life = (LifeCard) objects[0];
 		
-		new TongchoudikaiAureoleBuff(MaxBout, atkUpScale, getOwner(), life).effect();
+		new TongchoudikaiAureoleBuff(MaxBout, atkUpValue, getOwner(), life).effect();
 	}
 	
 }

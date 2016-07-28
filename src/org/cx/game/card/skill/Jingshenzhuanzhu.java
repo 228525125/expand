@@ -16,7 +16,7 @@ public class Jingshenzhuanzhu extends PassiveSkill {
 		this.cureUpScale = cureUpScale;
 	}
 	
-	private Integer atkScaleForHp = 0;
+	private Integer cureValue = 0;
 	
 	@Override
 	public void before(Object[] args) {
@@ -25,8 +25,8 @@ public class Jingshenzhuanzhu extends PassiveSkill {
 		ISkill magic = (ISkill) ((Object[]) args[0])[0];
 		if (magic instanceof Cure) {
 			Cure cure = (Cure) magic;
-			atkScaleForHp = cure.getAtkScaleForHp();
-			cure.setAtkScaleForHp(atkScaleForHp*(100+this.cureUpScale)/100);
+			cureValue = cure.getCureValue();
+			cure.setCureValue(cureValue*(100+this.cureUpScale)/100);
 			affect();
 		}
 	}
@@ -38,7 +38,7 @@ public class Jingshenzhuanzhu extends PassiveSkill {
 		ISkill magic = (ISkill) ((Object[]) args[0])[0];
 		if (magic instanceof Cure) {
 			Cure cure = (Cure) magic;
-			cure.setAtkScaleForHp(atkScaleForHp);
+			cure.setCureValue(cureValue);
 		}
 	}
 	

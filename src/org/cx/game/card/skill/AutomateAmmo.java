@@ -1,29 +1,25 @@
 package org.cx.game.card.skill;
 
-import org.cx.game.card.skill.ActiveSkill;
+import org.cx.game.card.LifeCard;
 import org.cx.game.card.buff.AddAmmoBuff;
 import org.cx.game.card.buff.IBuff;
-import org.cx.game.card.buff.TiredAttackBuff;
-import org.cx.game.exception.RuleValidatorException;
 
 /**
  * 自动装弹
  * @author chenxian
  *
  */
-public class AutomateAmmo extends ActiveSkill {
+public class AutomateAmmo extends PassiveSkill {
 
 	private Integer bout = 3;
 	
-	public AutomateAmmo(Integer consume, Integer cooldown, Integer velocity,
-			Integer bout) {
-		super(consume, cooldown, velocity);
+	public AutomateAmmo(Integer bout) {
 		// TODO Auto-generated constructor stub
 		this.bout = bout;
 	}
 	
 	@Override
-	public void affect(Object... objects) throws RuleValidatorException {
+	public void affect(Object... objects){
 		// TODO Auto-generated method stub
 		super.affect(objects);
 		
@@ -32,17 +28,23 @@ public class AutomateAmmo extends ActiveSkill {
 	}
 	
 	@Override
-	public Integer getRange() {
+	public String getIntercepterMethod() {
 		// TODO Auto-generated method stub
-		return 1;
+		return "setActivate";
 	}
 	
 	@Override
-	public void useSkill(Object... objects) throws RuleValidatorException {
+	public void finish(Object[] args) {
 		// TODO Auto-generated method stub
-		super.useSkill(objects);
-		
-		affect(objects);
+		if(getOwner().getMove().getMoveable())
+			affect();
 	}
-
+	
+	@Override
+	public void setOwner(LifeCard life) {
+		// TODO Auto-generated method stub
+		super.setOwner(life);
+		
+		life.addIntercepter(this);
+	}
 }

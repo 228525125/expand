@@ -46,7 +46,12 @@ public class AssistDefendBuff extends Buff {
 				if(distance<=moveRange){     //判断攻击目标是否在援助者移动范围内
 					List<Integer> list = ground.route(aider.getContainerPosition(), attacked.getContainerPosition());
 					Integer movePosition = list.get(list.size()-1);
-					aider.setActivate(true);            //激活
+					try {
+						aider.activate(true);
+					} catch (RuleValidatorException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}            //激活
 					try {
 						aider.move(ground.getPlace(movePosition));
 						aider.attack(attacked);
@@ -54,7 +59,12 @@ public class AssistDefendBuff extends Buff {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} finally {
-						aider.setActivate(false);           //结束
+						try {
+							aider.activate(false);
+						} catch (RuleValidatorException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}           //结束
 					}
 				}
 			}

@@ -31,7 +31,7 @@ public class KuangquanbingBuff extends Buff {
 		}
 		
 		if(ls.isEmpty()){
-			getOwner().setActivate(false);
+			getOwner().getPlayer().getContext().done();       //结束该回合
 		}else{
 			try {
 				getOwner().attack(ls.get(0));

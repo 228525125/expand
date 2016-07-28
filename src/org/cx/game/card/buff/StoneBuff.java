@@ -35,16 +35,18 @@ public class StoneBuff extends Buff {
 		for(IBuff buff : buffs)
 			buff.invalid();
 		
-		IIntercepter activateIn = new Intercepter("setActivate") {    //当activate状态为true时，表示从石化中恢复
+		IIntercepter activateIn = new Intercepter() {    //当activate状态为true时，表示从石化中恢复
 			
 			@Override
 			public void before(Object[] args) {
 				// TODO Auto-generated method stub
-				if((Boolean)args[0])
+				Boolean activation = (Boolean)((Object[])args[0])[0];
+				
+				if(activation)
 					invalid();
 			}
 		};
-		recordIntercepter(getOwner(), activateIn);
+		recordIntercepter(getOwner().getActivate(), activateIn);
 
 		affect();
 		

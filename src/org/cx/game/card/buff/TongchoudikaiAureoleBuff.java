@@ -11,21 +11,20 @@ import org.cx.game.intercepter.Intercepter;
  */
 public class TongchoudikaiAureoleBuff extends Buff {
 
-	private Integer atkUpScale;  
+	private Integer atkUpValue;  
 	private LifeCard host;       //光环效果的发起人
 	
-	public TongchoudikaiAureoleBuff(Integer bout, Integer atkUpScale, LifeCard host, LifeCard life) {
+	public TongchoudikaiAureoleBuff(Integer bout, Integer atkUpValue, LifeCard host, LifeCard life) {
 		super(bout, life);
 		// TODO Auto-generated constructor stub
-		this.atkUpScale = atkUpScale;
+		this.atkUpValue = atkUpValue;
 		this.host = host;
 	}
 
 	@Override
 	public void affect(Object... objects) {
 		// TODO Auto-generated method stub
-		Integer atk = this.host.getAtk();
-		this.host.getAttack().addToAtk(atk*atkUpScale/100);
+		this.host.getAttack().addToAtk(atkUpValue);
 		
 		super.affect(objects);
 	}
