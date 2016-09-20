@@ -34,7 +34,7 @@ public class Stone extends PassiveSkill {
 		Integer speed = this.attacked.getSpeedChance();
 		this.attacked.setSpeedChance(speed-bout*IControlQueue.consume);
 		
-		this.attacked.getAttacked().setAttackBack(false);
+		this.attacked.getAttacked().setFightBack(false);
 		
 		new StoneBuff(bout,this.attacked).effect();
 	}

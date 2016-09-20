@@ -1,17 +1,13 @@
 package org.cx.game.card.skill;
 
-import org.cx.game.card.LifeCard;
-import org.cx.game.card.skill.SimplePassiveSkill;
-import org.cx.game.exception.RuleValidatorException;
-import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.Util;
 
 /**
- * 狂怒，生命值的比例转换为攻击速度的比例
+ * 狂怒，生命值的比例转换为攻击速度的比例 (重新设计)
  * @author chenxian
  *
  */
-public class Violent extends SimplePassiveSkill {
+public class Violent extends PassiveSkill {
 
 	public Violent() {
 		super();
@@ -26,7 +22,7 @@ public class Violent extends SimplePassiveSkill {
 		Double d = Util.format(1d-hp2.doubleValue()/hp1.doubleValue(), "0.00");
 		Integer chance = Util.convertInteger(d*100);
 		
-		addToKeepSpeedChance(chance);
+		//addToKeepSpeedChance(chance);
 		
 		affect();
 	}

@@ -1,18 +1,13 @@
 package org.cx.game.card.skill;
 
-import java.text.DecimalFormat;
-
 import org.cx.game.card.LifeCard;
-import org.cx.game.card.skill.SimplePassiveSkill;
-import org.cx.game.observer.NotifyInfo;
-import org.cx.game.tools.Util;
 
 /**
- * 瞄准射击
+ * 瞄准射击(需重新设计)
  * @author chenxian
  *
  */
-public class AimShoot extends SimplePassiveSkill {
+public class AimShoot extends PassiveSkill {
 	
 	private Integer upScale = 0;
 	
@@ -31,12 +26,7 @@ public class AimShoot extends SimplePassiveSkill {
 	public void before(Object[] args) {
 		// TODO Auto-generated method stub
 		LifeCard life = (LifeCard) ((Object[]) args[0])[0];
-		if(getOwner().getMove().getEnergy()>life.getMove().getEnergy()){
-			Double d = 1-Util.format(getOwner().getMove().getEnergy().doubleValue()/life.getMove().getEnergy().doubleValue(), "0.00");
-			Integer upAtkValue = Util.convertInteger(d * getOwner().getAttack().getAtk() * upScale/100);
-			addToEruptAtk(upAtkValue);
-			affect();
-		}
+		
 	}
 
 	@Override

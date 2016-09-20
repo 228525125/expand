@@ -40,8 +40,10 @@ public class DogHuntUnits extends HuntUnits {
 		Integer atk = getOwner().getAttack().getAtk();
 		getOwner().getAttack().setAtk(atk - this.upAtkValue);
 		
-		this.upAtkValue = atkValue*getUnitNumber();
-		getOwner().getAttack().addToAtk(this.upAtkValue);
+		if(0<getUnitNumber()){
+			this.upAtkValue = atkValue*getUnitNumber();
+			getOwner().getAttack().addToAtk(this.upAtkValue);
+		}
 	}
 	
 	@Override

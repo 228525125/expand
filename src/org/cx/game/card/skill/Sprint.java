@@ -2,10 +2,8 @@ package org.cx.game.card.skill;
 
 import org.cx.game.card.LifeCard;
 import org.cx.game.card.skill.PassiveSkill;
-import org.cx.game.card.skill.SimplePassiveSkill;
 import org.cx.game.intercepter.IIntercepter;
 import org.cx.game.intercepter.Intercepter;
-import org.cx.game.observer.NotifyInfo;
 import org.cx.game.widget.IPlace;
 
 /**
