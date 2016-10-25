@@ -48,8 +48,6 @@ public class Sprint extends PassiveSkill {
 	@Override
 	public void before(Object[] args) {
 		// TODO Auto-generated method stub
-		super.before(args);
-		
 		this.begin = getOwner().getContainerPosition();
 		this.end = ((IPlace)((Object[]) args[0])[0]).getPosition();
 		
@@ -62,8 +60,6 @@ public class Sprint extends PassiveSkill {
 	@Override
 	public void after(Object[] args) {
 		// TODO Auto-generated method stub
-		super.after(args);
-		
 		affect();
 	}
 	
@@ -85,5 +81,11 @@ public class Sprint extends PassiveSkill {
 		super.setOwner(life);
 		
 		life.getMove().addIntercepter(this);
+	}
+
+	@Override
+	public void finish(Object[] args) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -45,7 +45,7 @@ public class QuickCure extends ActiveSkill {
 		LifeCard life = (LifeCard) objects[0];
 		
 		Integer cureValue = getOwner().getAttack().getAtk()*atkScaleForHp/100 + life.getHp()*(15+(100-(life.getHp()-life.getDeath().getHp())*100/life.getHp())/remainHpScale);  //恢复总生命值=攻击力*2+目标生命值总量*（15+目标受伤比例/5） 
-		life.getDeath().magicToHp(cureValue);
+		life.getDeath().addToHp(cureValue);
 	}
 	
 	@Override

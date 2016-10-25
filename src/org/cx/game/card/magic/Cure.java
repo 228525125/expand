@@ -35,7 +35,7 @@ public class Cure extends MagicCard {
 		
 		LifeCard life = (LifeCard) objects[0];
 		
-		life.getDeath().magicToHp(cureValue);
+		life.getDeath().addToHp(cureValue);
 		new CureTiredBuff(tireBout,life).effect();
 	}
 	

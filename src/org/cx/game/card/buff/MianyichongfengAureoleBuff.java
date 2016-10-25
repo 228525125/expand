@@ -49,7 +49,7 @@ public class MianyichongfengAureoleBuff extends Buff {
 			buff.invalid();
 			
 		LifeCard attack = (LifeCard) magic.getOwner();
-		attack.getDeath().attackToDamage(-attack.getAttack().getAtk());
+		attack.getDeath().addToHp(-attack.getAttack().getAtk());
 	}
 
 }

@@ -43,9 +43,19 @@ public class Daoqie extends PassiveSkill {
 	@Override
 	public void after(Object[] args) {
 		// TODO Auto-generated method stub
-		super.after(args);
-		
 		if(Random.isTrigger(chance))
 			affect();
+	}
+
+	@Override
+	public void before(Object[] args) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void finish(Object[] args) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -48,4 +48,16 @@ public class BarbedAureole extends Aureole {
 		return BarbedAureole.class;
 	}
 
+	@Override
+	public void after(Object[] args) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void before(Object[] args) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

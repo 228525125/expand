@@ -54,4 +54,10 @@ public class DogHuntUnits extends HuntUnits {
 		life.getAttack().addIntercepter(this);
 		life.getMove().addIntercepter(this);
 	}
+
+	@Override
+	public void finish(Object[] args) {
+		// TODO Auto-generated method stub
+		
+	}
 }

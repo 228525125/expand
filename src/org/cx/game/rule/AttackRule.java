@@ -58,6 +58,12 @@ public class AttackRule implements IRule {
 				if(getOwner().getCounterAttack()){
 					getOwner().setCounterAttack(false);
 				}
+				
+				//判断潜行状态
+				LifeCard owner = getOwner().getOwner();
+				if(owner.getMove().getHide()){
+					owner.getMove().changeHide(false);
+				}
 			}
 		}
 	}

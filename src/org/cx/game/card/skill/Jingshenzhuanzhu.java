@@ -49,4 +49,10 @@ public class Jingshenzhuanzhu extends PassiveSkill {
 		
 		life.getAffected().addIntercepter(this);
 	}
+
+	@Override
+	public void after(Object[] args) {
+		// TODO Auto-generated method stub
+		
+	}
 }

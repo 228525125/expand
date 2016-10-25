@@ -90,25 +90,6 @@ public abstract class PassiveSkill extends Observable implements IPassiveSkill {
 		this.owner = life;		
 	}
 	
-
-	@Override
-	public void after(Object[] args) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
-	public void finish(Object[] args) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
-	public void before(Object[] args) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 	@Override
 	public Boolean isInvoke() {
 		// TODO Auto-generated method stub

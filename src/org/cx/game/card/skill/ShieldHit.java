@@ -48,7 +48,7 @@ public class ShieldHit extends ActiveSkill {
 		LifeCard life = (LifeCard) objects[0];
 		IAttack attack = life.getAttack();
 		Integer atk = attack.getAtk();
-		life.getDeath().magicToHp(-atk*atkScale/100);
+		life.getDeath().addToHp(-atk*atkScale/100);
 		
 		Integer speed = attack.getSpeedChance();
 		attack.setSpeedChance(speed-bout*IControlQueue.consume);

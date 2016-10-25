@@ -93,7 +93,7 @@ public class Bump extends ActiveSkill {
 			getOwner().setEnergy(energy);
 		
 		
-		life.getDeath().magicToHp(-atkValue);
+		life.getDeath().addToHp(-atkValue);
 		
 		if(Random.isTrigger(dChance)){
 			new BumpDizzyBuff(this.dizzyBout, life).effect();

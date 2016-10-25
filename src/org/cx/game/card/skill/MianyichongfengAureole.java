@@ -39,4 +39,16 @@ public class MianyichongfengAureole extends Aureole {
 		new MianyichongfengAureoleBuff(MaxBout, life).effect();
 	}
 
+	@Override
+	public void before(Object[] args) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void after(Object[] args) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

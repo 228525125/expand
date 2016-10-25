@@ -5,6 +5,7 @@ import java.util.Observable;
 import org.cx.game.action.Death;
 import org.cx.game.action.IDeath;
 import org.cx.game.core.IPlayer;
+import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
 
 public class DeathRule implements IRule {
@@ -21,6 +22,17 @@ public class DeathRule implements IRule {
 		// TODO Auto-generated method stub
 		if (arg instanceof NotifyInfo) {
 			NotifyInfo info = (NotifyInfo) arg;
+			
+			if(NotifyInfo.Card_LifeCard_State_Hp.equals(info.getType())){
+				if(this.death.getHp().equals(0)){
+					try {
+						this.death.getOwner().death();
+					} catch (RuleValidatorException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
 			
 			if(NotifyInfo.Card_LifeCard_Action_Death.equals(info.getType())){
 				getOwner().setStatus(IDeath.Status_Death);

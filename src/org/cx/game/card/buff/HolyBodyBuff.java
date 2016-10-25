@@ -23,7 +23,7 @@ public class HolyBodyBuff extends Buff {
 		// TODO Auto-generated method stub
 		super.affect(objects);
 		
-		getOwner().getDeath().magicToHp(1);
+		getOwner().getDeath().addToHp(1);
 	}
 	
 	@Override

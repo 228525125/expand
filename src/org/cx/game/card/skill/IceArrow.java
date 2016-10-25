@@ -55,7 +55,7 @@ public class IceArrow extends ActiveSkill {
 		
 		LifeCard affected = (LifeCard) objects[0];
 		Integer atk = getOwner().getAttack().getAtk();
-		affected.getDeath().magicToHp(-atk*attackScale/100);
+		affected.getDeath().addToHp(-atk*attackScale/100);
 		new FreezeBuff(bout,0,energyScale,speedScale,affected).effect();
 	}
 	

@@ -4,8 +4,10 @@ import java.util.Map;
 import java.util.Observable;
 
 import org.cx.game.card.LifeCard;
+import org.cx.game.card.effect.QuickAttack;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.widget.IControlQueue;
+import org.cx.game.widget.ControlQueue.Place;
 
 public class ControlQueueRule implements IRule {
 
@@ -28,6 +30,11 @@ public class ControlQueueRule implements IRule {
 			}
 			
 			if(NotifyInfo.Card_LifeCard_State_Speed.equals(info.getType())){
+				Map bean = (Map) info.getInfo();
+				LifeCard life = (LifeCard) bean.get("card");
+				Place place = getOwner().getPlace(life);
+				place.loadSpeed();
+				
 				getOwner().refurbish();
 			}
 		}

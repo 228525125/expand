@@ -29,7 +29,7 @@ public class WoundHealingBuff extends Buff {
 		// TODO Auto-generated method stub
 		Integer hp = getOwner().getHp();
 		Integer cureValue = hp*renewScale/100;
-		getOwner().getDeath().magicToHp(cureValue);
+		getOwner().getDeath().addToHp(cureValue);
 		
 		super.affect(objects);
 	}

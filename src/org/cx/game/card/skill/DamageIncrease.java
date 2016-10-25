@@ -51,4 +51,16 @@ public class DamageIncrease extends PassiveSkill {
 		life.getAttack().addIntercepter(this);
 	}
 
+	@Override
+	public void before(Object[] args) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void finish(Object[] args) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -56,7 +56,7 @@ public class BarbedAureoleBuff extends Buff {
 		
 		Integer atk = attack.getAttack().getAtk();
 		Integer damage = atk*returnRatio/100;
-		attack.getDeath().magicToHp(-damage);
+		attack.getDeath().addToHp(-damage);
 			
 		super.affect(objects);
 	}

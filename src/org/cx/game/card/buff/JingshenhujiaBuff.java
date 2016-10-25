@@ -20,7 +20,7 @@ public class JingshenhujiaBuff extends Buff {
 		Integer hp = getOwner().getHp();
 		hp += hpUpValue;
 		getOwner().setHp(hp);                        //增加上限
-		getOwner().getDeath().magicToHp(hpUpValue);
+		getOwner().getDeath().addToHp(hpUpValue);
 	}
 	
 	@Override
@@ -41,7 +41,7 @@ public class JingshenhujiaBuff extends Buff {
 		getOwner().setHp(hpLimit);
 		Integer hpValue = getOwner().getDeath().getHp();
 		hpValue = hpValue>hpLimit ? hpValue - hpLimit : 0;       //超出HP上限部分
-		getOwner().getDeath().magicToHp(-hpValue);
+		getOwner().getDeath().addToHp(-hpValue);
 	}
 
 }

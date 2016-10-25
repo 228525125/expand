@@ -41,4 +41,10 @@ public class SpearInfeed extends Spurting {
 		affected = (LifeCard) ((Object[]) args[0])[0];
 	}
 
+	@Override
+	public void finish(Object[] args) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

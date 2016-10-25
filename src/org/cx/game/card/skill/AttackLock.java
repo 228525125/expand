@@ -11,7 +11,8 @@ import org.cx.game.widget.IGround;
 
 /**
  * 锁定攻击目标，该动作发生在attack时，不管是否击中目标
- * 锁定需要在反击之前，因此将以下方法移至attack中，本对象暂不使用
+ * 锁定需要在反击之前，因此将以下方法移至attack中
+ * 本对象暂不使用
  * @author chenxian
  *
  */
@@ -57,5 +58,17 @@ public class AttackLock extends PassiveSkill {
 		&& 1==distance                                           //近身
 		&& !exist)                                               //判断是否被锁定过                                                 
 			affect();
+	}
+
+	@Override
+	public void finish(Object[] args) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void before(Object[] args) {
+		// TODO Auto-generated method stub
+		
 	}
 }

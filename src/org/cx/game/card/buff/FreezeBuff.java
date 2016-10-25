@@ -50,7 +50,7 @@ public class FreezeBuff extends SimpleBuff {
 	public void affect(Object... objects) {
 		// TODO Auto-generated method stub
 		
-		getOwner().getDeath().magicToHp(-damage);         //造成伤害
+		getOwner().getDeath().addToHp(-damage);         //造成伤害
 			
 		Integer energy = getOwner().getMove().getEnergy();
 		Integer energyDownValue = energy*energyDownScale/100;

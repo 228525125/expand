@@ -45,7 +45,7 @@ public class IceStorm extends ActiveSkill {
 			IPlace p = ground.getPlace(position);
 			LifeCard life = p.getLife();
 			if(null!=life){
-				life.getDeath().magicToHp(damage);
+				life.getDeath().addToHp(damage);
 				if(Random.isTrigger(freezeChance)){
 					
 				}

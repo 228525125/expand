@@ -45,7 +45,7 @@ public class SimpleTrickBuff extends SimpleBuff {
 		// TODO Auto-generated method stub
 		if(0!=this.damageScale){
 			Integer damage = getOwner().getHp()*damageScale/100;
-			getOwner().getDeath().magicToHp(-damage);
+			getOwner().getDeath().addToHp(-damage);
 		}
 		
 		if(0!=this.energyDownScale){

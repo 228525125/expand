@@ -26,7 +26,7 @@ public class CrossbowArc extends ArcRangeActiveSkill {
 		super.affect(objects);
 		
 		LifeCard life = (LifeCard) objects[0];
-		life.getDeath().magicToHp(-getOwner().getAttack().getAtk()*atkScale/100);
+		life.getDeath().addToHp(-getOwner().getAttack().getAtk()*atkScale/100);
 	}
 
 	@Override

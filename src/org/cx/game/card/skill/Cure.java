@@ -52,7 +52,7 @@ public class Cure extends PassiveSkill {
 		super.affect(objects);
 		 
 		LifeCard patient = getPatient();
-		patient.getDeath().magicToHp(cureValue);
+		patient.getDeath().addToHp(cureValue);
 		new CureTiredBuff(tireBout,patient).effect();
 	}
 
@@ -93,5 +93,17 @@ public class Cure extends PassiveSkill {
 		}
 		
 		return life;
+	}
+
+	@Override
+	public void before(Object[] args) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void after(Object[] args) {
+		// TODO Auto-generated method stub
+		
 	}
 }

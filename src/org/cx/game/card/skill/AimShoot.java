@@ -41,4 +41,16 @@ public class AimShoot extends PassiveSkill {
 		return true;
 	}
 
+	@Override
+	public void finish(Object[] args) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void after(Object[] args) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

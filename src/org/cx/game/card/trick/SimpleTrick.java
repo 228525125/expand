@@ -56,10 +56,7 @@ public abstract class SimpleTrick extends Trick {
 		
 		if(this.damageScale>0){
 			Integer damage = life.getHp()*damageScale/100;
-			if(IMagic.Style_physical.equals(getStyle()))
-				life.getDeath().attackToDamage(-damage);
-			else
-				life.getDeath().magicToHp(-damage);
+			life.getDeath().addToHp(-damage);
 		}
 		
 		SimpleTrickBuff buff = getTrickBuff();

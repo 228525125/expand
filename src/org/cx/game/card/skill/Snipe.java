@@ -65,4 +65,10 @@ public class Snipe extends PassiveSkill {
 		life.getAttack().addIntercepter(this);
 	}
 
+	@Override
+	public void after(Object[] args) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

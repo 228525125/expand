@@ -13,4 +13,22 @@ public class ArmCrossbow extends PassiveSkill {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public void finish(Object[] args) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void after(Object[] args) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void before(Object[] args) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

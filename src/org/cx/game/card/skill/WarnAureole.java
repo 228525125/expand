@@ -53,4 +53,10 @@ public class WarnAureole extends Aureole {
 		// TODO Auto-generated method stub
 		return WarnAureoleBuff.class;
 	}
+
+	@Override
+	public void after(Object[] args) {
+		// TODO Auto-generated method stub
+		
+	}
 }

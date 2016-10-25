@@ -28,7 +28,7 @@ public abstract class Spurting extends PassiveSkill {
 	public void affect(Object... objects) {
 		// TODO Auto-generated method stub
 		LifeCard life = (LifeCard) objects[0];
-		life.getDeath().magicToHp(-getOwner().getAttack().getAtk()*atkScale/100);
+		life.getDeath().addToHp(-getOwner().getAttack().getAtk()*atkScale/100);
 		
 		super.affect(objects);
 	}

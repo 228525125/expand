@@ -51,4 +51,10 @@ public class Violent extends PassiveSkill {
 		return 0;
 	}
 
+	@Override
+	public void after(Object[] args) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

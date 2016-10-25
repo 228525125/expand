@@ -47,4 +47,16 @@ public class AutomateAmmo extends PassiveSkill {
 		
 		life.addIntercepter(this);
 	}
+
+	@Override
+	public void after(Object[] args) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void before(Object[] args) {
+		// TODO Auto-generated method stub
+		
+	}
 }

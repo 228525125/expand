@@ -27,7 +27,6 @@ import org.cx.game.intercepter.IntercepterAscComparator;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.out.JsonOut;
 import org.cx.game.tools.I18n;
-import org.cx.game.tools.PropertiesUtil;
 import org.cx.game.validator.Errors;
 import org.cx.game.validator.IValidator;
 import org.cx.game.validator.ParameterTypeValidator;
