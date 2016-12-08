@@ -10,6 +10,11 @@ import org.cx.game.card.skill.PassiveSkill;
  */
 public abstract class Anger extends PassiveSkill {
 	
+	public Anger(Integer id) {
+		// TODO Auto-generated constructor stub
+		super(id);
+	}
+	
 	@Override
 	public void setOwner(LifeCard life) {
 		// TODO Auto-generated method stub

@@ -12,6 +12,11 @@ public abstract class Declare extends PassiveSkill {
 	
 	public abstract Boolean getTrigger();
 	
+	public Declare(Integer id) {
+		// TODO Auto-generated constructor stub
+		super(id);
+	}
+	
 	@Override
 	public void setOwner(LifeCard life) {
 		// TODO Auto-generated method stub

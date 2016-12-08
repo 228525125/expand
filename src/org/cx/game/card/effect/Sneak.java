@@ -8,7 +8,14 @@ import org.cx.game.card.skill.PassiveSkill;
  * @author chenxian
  *
  */
-public abstract class Sneak extends PassiveSkill {
+public class Sneak extends PassiveSkill {
+	
+	public static final Integer Sneak_ID = 10200002;
+	
+	public Sneak() {
+		// TODO Auto-generated constructor stub
+		super(Sneak_ID);
+	}
 
 	@Override
 	public void setOwner(LifeCard life) {
@@ -30,6 +37,18 @@ public abstract class Sneak extends PassiveSkill {
 		super.affect(objects);
 		
 		getOwner().getMove().changeHide(true);
+	}
+
+	@Override
+	public void before(Object[] args) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void finish(Object[] args) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

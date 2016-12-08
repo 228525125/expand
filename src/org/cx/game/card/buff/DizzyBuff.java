@@ -18,10 +18,12 @@ import org.cx.game.widget.IControlQueue;
  */
 public class DizzyBuff extends Buff {
 
+	public static final Integer DizzyBuff_ID = 10350001;
+	
 	private String name = null;
 	
-	public DizzyBuff(Integer bout, LifeCard life) {
-		super(bout, life);
+	public DizzyBuff(Integer id, Integer bout, LifeCard life) {
+		super(DizzyBuff_ID, bout, life);
 		// TODO Auto-generated constructor stub
 	}
 

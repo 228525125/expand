@@ -4,17 +4,17 @@ import java.util.List;
 
 import org.cx.game.action.Random;
 import org.cx.game.card.LifeCard;
-import org.cx.game.card.magic.IMagic;
 import org.cx.game.intercepter.IIntercepter;
 import org.cx.game.intercepter.Intercepter;
 import org.cx.game.tools.Debug;
 
 public class AttackLockBuff extends Buff {
 
+	public static final Integer AttackLockBuff_ID = 10300001;
 	private LifeCard attack = null;
 	
 	public AttackLockBuff(Integer bout, LifeCard attack, LifeCard life) {
-		super(bout, life);
+		super(AttackLockBuff_ID, bout, life);
 		// TODO Auto-generated constructor stub
 		this.attack = attack;
 		setDuplication(true);         //允许同时被多人锁定

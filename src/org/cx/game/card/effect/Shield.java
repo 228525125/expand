@@ -1,24 +1,22 @@
 package org.cx.game.card.effect;
 
-import java.util.Map;
-
 import org.cx.game.card.LifeCard;
+import org.cx.game.card.buff.IBuff;
+import org.cx.game.card.buff.ShieldBuff;
 import org.cx.game.card.skill.PassiveSkill;
-import org.cx.game.widget.ControlQueue.Place;
-import org.cx.game.widget.IControlQueue;
 
 /**
- * 速攻
+ * 护盾
  * @author chenxian
  *
  */
-public class QuickAttack extends PassiveSkill {
+public class Shield extends PassiveSkill {
 
-	public static final Integer QuickAttack_ID = 10200003;
+	public static final Integer Shield_ID = 10200004;
 	
-	public QuickAttack() {
+	public Shield() {
 		// TODO Auto-generated constructor stub
-		super(QuickAttack_ID);
+		super(Shield_ID);
 	}
 	
 	@Override
@@ -28,13 +26,20 @@ public class QuickAttack extends PassiveSkill {
 		
 		life.getCall().addIntercepter(this);
 	}
-
+	
+	@Override
+	public void affect(Object... objects) {
+		// TODO Auto-generated method stub
+		super.affect(objects);
+		
+		IBuff buff = new ShieldBuff(getOwner());
+		buff.effect();
+	}
+	
 	@Override
 	public void after(Object[] args) {
 		// TODO Auto-generated method stub
-		IControlQueue queue = getOwner().getPlayer().getContext().getQueue();
-		Place place = queue.getPlace(getOwner());
-		queue.moveToPrior(place);
+		affect();
 	}
 
 	@Override
@@ -48,5 +53,5 @@ public class QuickAttack extends PassiveSkill {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 }

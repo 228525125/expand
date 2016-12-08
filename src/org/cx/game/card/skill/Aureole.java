@@ -20,8 +20,8 @@ public abstract class Aureole extends PassiveSkill {
 	private Integer range = 0;
 	private List<LifeCard> affectedList = new ArrayList<LifeCard>();
 	
-	public Aureole(Integer range) {
-		super();
+	public Aureole(Integer id, Integer range) {
+		super(id);
 		// TODO Auto-generated constructor stub
 		this.range = range;
 	}

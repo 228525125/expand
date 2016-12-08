@@ -18,10 +18,12 @@ import org.cx.game.widget.IGround;
  */
 public class AttackLock extends PassiveSkill {
 
+	public static final Integer AttackLock_ID = 100111;
+	
 	private LifeCard attacked = null;
 	
 	public AttackLock(LifeCard life) {
-		super();
+		super(AttackLock_ID);
 		// TODO Auto-generated constructor stub
 		setOwner(life);
 	}

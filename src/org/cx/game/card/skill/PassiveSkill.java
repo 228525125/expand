@@ -28,19 +28,19 @@ import org.cx.game.tools.I18n;
  */
 public abstract class PassiveSkill extends Observable implements IPassiveSkill {
 
+	private Integer id;
 	private String cType;
 	private String name;
 	private LifeCard owner;
 	private Map<String,List<IIntercepter>> intercepterList = new HashMap<String,List<IIntercepter>>();
 	private Boolean isDelete = false;
-	private String action = null;
-	private Integer style = IMagic.Style_physical;       //AttackBack、AttackLock等会用到
-	private Integer func = IMagic.Func_Other;	
+	private String action = null;	
 	
 	private List<Map<IInterceptable, IIntercepter>> resetList = new ArrayList<Map<IInterceptable, IIntercepter>>();
 	
-	public PassiveSkill() {
+	public PassiveSkill(Integer id) {
 		// TODO Auto-generated constructor stub
+		this.id = id;
 		addObserver(new JsonOut());
 		
 		/* 取类名 */
@@ -48,9 +48,6 @@ public abstract class PassiveSkill extends Observable implements IPassiveSkill {
 		String packageName = this.getClass().getPackage().getName();
 		this.cType = allName.substring(packageName.length()+1);
 		setAction("Skill");
-		
-		this.func = Context.getMagicFunction(allName);
-		this.style = Context.getMagicStyle(allName);
 	}
 	
 	private final static String UseSkill = "_UseSkill";
@@ -66,6 +63,12 @@ public abstract class PassiveSkill extends Observable implements IPassiveSkill {
 		map.put("position", owner.getContainerPosition());
 		NotifyInfo info = new NotifyInfo(getAction()+UseSkill,map);
 		notifyObservers(info);
+	}
+	
+	@Override
+	public Integer getId() {
+		// TODO Auto-generated method stub
+		return id;
 	}
 	
 	@Override
@@ -152,14 +155,6 @@ public abstract class PassiveSkill extends Observable implements IPassiveSkill {
 		this.action = action;
 	}
 	
-	public Integer getStyle() {
-		return style;
-	}
-	
-	public Integer getFunc() {
-		return func;
-	}
-	
 	@Override
 	public Integer getOrder() {
 		// TODO Auto-generated method stub
@@ -191,5 +186,16 @@ public abstract class PassiveSkill extends Observable implements IPassiveSkill {
 		return this.isDelete;
 	}
 
+	@Override
+	public Boolean contains(Integer tag) {
+		// TODO Auto-generated method stub
+		List<Integer> objectList = Context.queryForTag(tag);
+		return objectList.contains(getId());
+	}
 
+	@Override
+	public List<Integer> queryForCategory(Integer category) {
+		// TODO Auto-generated method stub
+		return Context.queryForCategory(category);
+	}
 }

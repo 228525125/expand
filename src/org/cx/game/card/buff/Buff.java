@@ -30,6 +30,7 @@ import org.cx.game.tools.I18n;
  */
 public abstract class Buff extends Observable implements IBuff {
 
+	private Integer id = 0;                         //buff的id 对应magic的id
 	private String cType = null;                    //类名
 	private String name = null;
 	private LifeCard owner;
@@ -38,16 +39,14 @@ public abstract class Buff extends Observable implements IBuff {
 	private Boolean isDelete = false;
 	private String action = null;
 	private Integer bout = 0;
-	private Integer style = IMagic.Style_physical;       //风格，法术、物理   
-	private Integer hostility = IBuff.Type_Neutral;        //类型，受益、受损、中性    
 	private Integer beginBout = 0;
 	private Boolean duplication = false;  //是否可以叠加
-	private Integer func = IMagic.Func_Damage;      //功能类型
 	
 	protected final static String Affect = "_Affect";
 
-	public Buff(Integer bout, LifeCard life) {
+	public Buff(Integer id, Integer bout, LifeCard life) {
 		// TODO Auto-generated constructor stub
+		this.id = id;
 		this.owner = life;
 		this.bout = bout;
 		recordIntercepter(life.getPlayer().getContext(), this);
@@ -58,10 +57,12 @@ public abstract class Buff extends Observable implements IBuff {
 		String packageName = this.getClass().getPackage().getName();
 		this.cType = allName.substring(packageName.length()+1);
 		setAction("Buff");
-		
-		this.func = Context.getMagicFunction(allName);
-		this.style = Context.getMagicStyle(allName);
-		this.hostility = Context.getMagicHostility(allName);
+	}
+	
+	@Override
+	public Integer getId() {
+		// TODO Auto-generated method stub
+		return this.id;
 	}
 	
 	@Override
@@ -169,14 +170,6 @@ public abstract class Buff extends Observable implements IBuff {
 		resetList.add(entry);
 	}
 	
-	public Integer getStyle() {
-		return style;
-	}
-
-	public Integer getHostility() {
-		return hostility;
-	}
-	
 	public Boolean isDuplication() {
 		return duplication;
 	}
@@ -191,10 +184,6 @@ public abstract class Buff extends Observable implements IBuff {
 
 	public void setAction(String action) {
 		this.action = action;
-	}
-
-	public Integer getFunc() {
-		return func;
 	}
 
 	@Override
@@ -286,6 +275,19 @@ public abstract class Buff extends Observable implements IBuff {
 	public Boolean isDelete() {
 		// TODO Auto-generated method stub
 		return this.isDelete;
+	}
+	
+	@Override
+	public Boolean contains(Integer tag) {
+		// TODO Auto-generated method stub
+		List<Integer> objectList = Context.queryForTag(tag);
+		return objectList.contains(getId());
+	}
+
+	@Override
+	public List<Integer> queryForCategory(Integer category) {
+		// TODO Auto-generated method stub
+		return Context.queryForCategory(category);
 	}
 
 }
