@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.cx.game.action.Random;
 import org.cx.game.card.LifeCard;
+import org.cx.game.card.effect.Taunt;
 import org.cx.game.intercepter.IIntercepter;
 import org.cx.game.intercepter.Intercepter;
 import org.cx.game.tools.Debug;
@@ -11,10 +12,12 @@ import org.cx.game.tools.Debug;
 public class AttackLockBuff extends Buff {
 
 	public static final Integer AttackLockBuff_ID = 10300001;
+	public static final Integer Lock_Bout = 2;
 	private LifeCard attack = null;
 	
-	public AttackLockBuff(Integer bout, LifeCard attack, LifeCard life) {
-		super(AttackLockBuff_ID, bout, life);
+	
+	public AttackLockBuff(LifeCard attack, LifeCard life) {
+		super(AttackLockBuff_ID, Lock_Bout, life);
 		// TODO Auto-generated constructor stub
 		this.attack = attack;
 		setDuplication(true);         //允许同时被多人锁定
@@ -57,7 +60,8 @@ public class AttackLockBuff extends Buff {
 				List<IBuff> buffs = getOwner().getBuff(AttackLockBuff.class);
 				for(IBuff buff : buffs){
 					AttackLockBuff alb = (AttackLockBuff) buff;
-					if(attacked.equals(alb.getLocker())){
+					if(attacked.equals(alb.getLocker())                //被攻击者是锁定对象
+					|| attacked.containsSkill(Taunt.class)){           //或者被攻击者具有嘲讽技能          
 						locked = true;
 						break;
 					}
@@ -100,6 +104,10 @@ public class AttackLockBuff extends Buff {
 		recordIntercepter(getOwner().getMove(), moveIn);
 	}
 
+	/**
+	 * 发起锁定的一方
+	 * @return
+	 */
 	public LifeCard getLocker() {
 		return attack;
 	}

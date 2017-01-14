@@ -1,11 +1,14 @@
 package org.cx.game.card.skill;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.cx.game.action.IDeath;
 import org.cx.game.card.LifeCard;
 import org.cx.game.card.buff.AttackLockBuff;
 import org.cx.game.card.buff.IBuff;
+import org.cx.game.card.buff.TauntBuff;
+import org.cx.game.card.effect.Taunt;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.widget.IGround;
 
@@ -37,7 +40,7 @@ public class AttackLock extends PassiveSkill {
 		for(IBuff buff : buffs)
 			buff.invalid();
 		
-		new AttackLockBuff(2,getOwner(),attacked).effect();
+		new AttackLockBuff(getOwner(),attacked).effect();
 	}
 	
 	@Override
@@ -54,11 +57,19 @@ public class AttackLock extends PassiveSkill {
 			}
 		}
 		
+		Boolean taunt = true;
 		IGround ground = getOwner().getPlayer().getGround();
+		
+		if(getOwner().containsBuff(TauntBuff.class)){
+			TauntBuff buff = (TauntBuff) getOwner().getBuff(TauntBuff.class);
+			taunt = attacked.equals(buff.getTaunter());
+		}
+		
 		Integer distance = ground.easyDistance(attacked.getContainerPosition(), getOwner().getContainerPosition());
 		if(IDeath.Status_Live == attacked.getDeath().getStatus()
 		&& 1==distance                                           //近身
-		&& !exist)                                               //判断是否被锁定过                                                 
+		&& !exist                                                //判断是否被锁定过
+		&& taunt)                                               //判断是否受到身边具有嘲讽的敌人的影响                                
 			affect();
 	}
 

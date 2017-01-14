@@ -4,17 +4,19 @@ import org.cx.game.card.LifeCard;
 import org.cx.game.card.skill.PassiveSkill;
 
 /**
- * 宣言，子类将宣言效果写在affect方法里面，将触发条件写在getTrigger方法里面；
+ * 协助
  * @author chenxian
  *
  */
-public abstract class Declare extends PassiveSkill {
+public abstract class TeamWork extends PassiveSkill {
 	
-	public abstract Boolean isTrigger();
+	public Boolean isTrigger(){
+		return getOwner().getPlayer().getCallCountOfBout()>0;
+	}
 	
-	public Declare(Integer id) {
-		// TODO Auto-generated constructor stub
+	public TeamWork(Integer id) {
 		super(id);
+		// TODO Auto-generated constructor stub
 	}
 	
 	@Override
@@ -24,11 +26,24 @@ public abstract class Declare extends PassiveSkill {
 		
 		life.getCall().addIntercepter(this);
 	}
-	
+
+	@Override
+	public void before(Object[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void finish(Object[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
 	@Override
 	public void after(Object[] args) {
 		// TODO Auto-generated method stub
 		if(isTrigger())
 			affect();
 	}
+
 }
