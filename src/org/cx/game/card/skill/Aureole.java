@@ -17,6 +17,9 @@ import org.cx.game.widget.IGround;
  */
 public abstract class Aureole extends PassiveSkill {
 
+	public final static Integer Default_Range = 3;
+	public final static Integer Default_AureoleBuff_Bout = 99;
+	
 	private Integer range = 0;
 	private List<LifeCard> affectedList = new ArrayList<LifeCard>();
 	

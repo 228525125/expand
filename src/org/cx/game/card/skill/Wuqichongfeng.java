@@ -1,24 +1,16 @@
-package org.cx.game.card.effect;
-
-import java.util.Map;
+package org.cx.game.card.skill;
 
 import org.cx.game.card.LifeCard;
-import org.cx.game.card.skill.PassiveSkill;
-import org.cx.game.widget.ControlQueue.Place;
 import org.cx.game.widget.IControlQueue;
+import org.cx.game.widget.ControlQueue.Place;
 
-/**
- * 速攻
- * @author chenxian
- *
- */
-public class QuickAttack extends PassiveSkill {
+public class Wuqichongfeng extends PassiveSkill {
 
-	public static final Integer QuickAttack_ID = 10200003;
+	public final static Integer Wuqichongfeng_ID = 10200007;
 	
-	public QuickAttack() {
+	public Wuqichongfeng() {
+		super(Wuqichongfeng_ID);
 		// TODO Auto-generated constructor stub
-		super(QuickAttack_ID);
 	}
 	
 	@Override
@@ -40,21 +32,23 @@ public class QuickAttack extends PassiveSkill {
 	}
 
 	@Override
-	public void after(Object[] args) {
-		// TODO Auto-generated method stub
-		affect();
-	}
-
-	@Override
 	public void before(Object[] args) {
 		// TODO Auto-generated method stub
-		
+		LifeCard hero = getOwner().getPlayer().getHeroCard();
+		if(null!=hero.getAttack().getWeapon())
+			affect();
 	}
 
 	@Override
 	public void finish(Object[] args) {
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	@Override
+	public void after(Object[] args) {
+		// TODO Auto-generated method stub
+
 	}
 
 }
