@@ -1,68 +1,65 @@
-package org.cx.game.card.skill;
+package org.cx.game.card.buff;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.cx.game.card.LifeCard;
-import org.cx.game.card.buff.IBuff;
 import org.cx.game.exception.RuleValidatorException;
-import org.cx.game.intercepter.IIntercepter;
 import org.cx.game.intercepter.Intercepter;
 import org.cx.game.widget.IGround;
 
 /**
- * 光环
+ * 秘法
  * @author chenxian
  *
  */
-public abstract class Aureole extends PassiveSkill {
-
-	public final static Integer Default_Range = 3;
-	public final static Integer Default_AureoleBuff_Bout = 99;
+public abstract class MysteryBuff extends Buff {
 	
-	private Integer range = 0;
+	public final static Integer Default_Bout = 99;
+	public final static Integer Default_Range = 5;
+	
+	private Integer range = Default_Range;
 	private List<LifeCard> affectedList = new ArrayList<LifeCard>();
-	
-	public Aureole(Integer id, Integer range) {
-		super(id);
+	public MysteryBuff(Integer id, LifeCard life) {
+		super(id, Default_Bout, life);
 		// TODO Auto-generated constructor stub
-		this.range = range;
 	}
-
+	
 	@Override
-	public void setOwner(LifeCard life) {
+	public void effect() {
 		// TODO Auto-generated method stub
-		super.setOwner(life);
+		super.effect();
 		
-		life.getCall().addIntercepter(new Intercepter(){
+		Intercepter callIn = new Intercepter(){
 			@Override
 			public void after(Object[] args) {
 				// TODO Auto-generated method stub
 				refurbish();
-				getOwner().getPlayer().getContext().addIntercepter(this);
 			}
-		});
+		};
+		recordIntercepter(getOwner().getCall(), callIn);
 		
-		life.getDeath().addIntercepter(new Intercepter(){
+		Intercepter deathIn = new Intercepter(){
 			@Override
 			public void after(Object[] args) {
 				// TODO Auto-generated method stub
-				getOwner().getPlayer().getContext().deleteIntercepter(this);
 				for(LifeCard life : affectedList){
 					List<IBuff> buffs = life.getBuff(getBuffClass());
 					if(buffs.isEmpty())
 						buffs.get(0).invalid();
 				}
 			}
-		});
+		};
+		recordIntercepter(getOwner().getDeath(), deathIn);
 		
-		life.getMove().addIntercepter(new Intercepter(){
+		Intercepter moveIn = new Intercepter(){
 			@Override
 			public void finish(Object[] args) {
 				// TODO Auto-generated method stub
 				refurbish();
 			}
-		});
+		};
+		recordIntercepter(getOwner().getMove(), moveIn);
 	}
 
 	public Integer getRange() {
@@ -119,6 +116,7 @@ public abstract class Aureole extends PassiveSkill {
 	@Override
 	public void finish(Object[] args) {
 		// TODO Auto-generated method stub
+		super.finish(args);
 		refurbish();
 	}
 
@@ -127,11 +125,4 @@ public abstract class Aureole extends PassiveSkill {
 		// TODO Auto-generated method stub
 		return "deploy";
 	}
-
-	@Override
-	public Boolean isInvoke() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
 }
