@@ -27,7 +27,7 @@ public abstract class Anger extends PassiveSkill {
 	public void after(Object[] args) {
 		// TODO Auto-generated method stub
 		Integer hp = (Integer)args[0];
-		if(hp<0)
+		if(hp<0 && activation)
 			affect();
 	}
 	

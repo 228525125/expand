@@ -34,7 +34,8 @@ public abstract class PassiveSkill extends Observable implements IPassiveSkill {
 	private LifeCard owner;
 	private Map<String,List<IIntercepter>> intercepterList = new HashMap<String,List<IIntercepter>>();
 	private Boolean isDelete = false;
-	private String action = null;	
+	private String action = null;
+	protected Boolean activation = false;
 	
 	private List<Map<IInterceptable, IIntercepter>> resetList = new ArrayList<Map<IInterceptable, IIntercepter>>();
 	
@@ -197,5 +198,17 @@ public abstract class PassiveSkill extends Observable implements IPassiveSkill {
 	public List<Integer> queryForCategory(Integer category) {
 		// TODO Auto-generated method stub
 		return Context.queryForCategory(category);
+	}
+	
+	@Override
+	public void activate() {
+		// TODO Auto-generated method stub
+		this.activation = true;
+	}
+	
+	@Override
+	public void invalid() {
+		// TODO Auto-generated method stub
+		this.activation = false;
 	}
 }

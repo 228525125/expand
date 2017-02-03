@@ -17,7 +17,7 @@ import org.cx.game.widget.IGround;
  */
 public abstract class Aureole extends PassiveSkill {
 
-	public final static Integer Default_Range = 3;
+	public final static Integer Default_Effect_Range = 3;
 	public final static Integer Default_AureoleBuff_Bout = 99;
 	
 	private Integer range = 0;
@@ -86,16 +86,8 @@ public abstract class Aureole extends PassiveSkill {
 	}
 
 	private void refurbish(){
-		List<LifeCard> ls = new ArrayList<LifeCard>();
-		
 		IGround ground = getOwner().getPlayer().getGround();
-		List<Integer> list = ground.easyAreaForDistance(getOwner().getContainerPosition(), getRange(), IGround.Contain);
-		for(Integer position : list){
-			LifeCard life = ground.getCard(position);
-			if(null!=life){
-				ls.add(life);
-			}
-		}
+		List<LifeCard> ls = ground.list(getOwner().getContainerPosition(), getRange(), IGround.Contain);
 		
 		List<LifeCard> tempList = new ArrayList<LifeCard>();  //将离开范围的life去掉buff
 		tempList.addAll(affectedList);

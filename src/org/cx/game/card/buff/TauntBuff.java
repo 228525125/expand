@@ -7,11 +7,10 @@ import org.cx.game.card.LifeCard;
 public class TauntBuff extends Buff {
 
 	public final static Integer TauntBuff_ID = 10300006;
-	public final static Integer Taunt_Bout = 99;
 	private LifeCard taunter = null;
 	
 	public TauntBuff(LifeCard taunter, LifeCard life) {
-		super(TauntBuff_ID, Taunt_Bout, life);
+		super(TauntBuff_ID, IBuff.Max_Bout, life);
 		// TODO Auto-generated constructor stub
 		this.taunter = taunter;
 	}

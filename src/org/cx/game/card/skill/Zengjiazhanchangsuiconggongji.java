@@ -1,6 +1,8 @@
 package org.cx.game.card.skill;
 
 import org.cx.game.card.LifeCard;
+import org.cx.game.card.buff.IBuff;
+import org.cx.game.card.buff.ZengjiazhanchangsuiconggongjiBuff;
 import org.cx.game.card.effect.Declare;
 import org.cx.game.widget.IPlace;
 /**
@@ -14,11 +16,13 @@ public class Zengjiazhanchangsuiconggongji extends Declare {
 	private Integer atkUpValue = 0;
 	private Integer step = 1;
 	private LifeCard lifeCard = null;
+	private Integer bout = 0;
 	
-	public Zengjiazhanchangsuiconggongji(Integer atkUpValue) {
+	public Zengjiazhanchangsuiconggongji(Integer atkUpValue, Integer bout) {
 		super(Zengjiazhanchangsuiconggongji_ID);
 		// TODO Auto-generated constructor stub
 		this.atkUpValue = atkUpValue;
+		this.bout = bout;
 	}
 	
 	@Override
@@ -26,7 +30,8 @@ public class Zengjiazhanchangsuiconggongji extends Declare {
 		// TODO Auto-generated method stub
 		super.affect(objects);
 		
-		lifeCard.getAttack().addToAtk(atkUpValue);
+		IBuff buff = new ZengjiazhanchangsuiconggongjiBuff(atkUpValue, bout, this.lifeCard);
+		buff.effect();
 	}
 
 	@Override
