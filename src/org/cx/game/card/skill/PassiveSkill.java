@@ -31,11 +31,16 @@ public abstract class PassiveSkill extends Observable implements IPassiveSkill {
 	private Integer id;
 	private String cType;
 	private String name;
+	private String depiction = null;
 	private LifeCard owner;
 	private Map<String,List<IIntercepter>> intercepterList = new HashMap<String,List<IIntercepter>>();
 	private Boolean isDelete = false;
 	private String action = null;
-	protected Boolean activation = false;
+	
+	/**
+	 * 控制效果是否有效的标记，当invalid被调用该标记为false；另外该标记应该在调用affect之前被判断；
+	 */
+	protected Boolean activation = true;
 	
 	private List<Map<IInterceptable, IIntercepter>> resetList = new ArrayList<Map<IInterceptable, IIntercepter>>();
 	
@@ -82,6 +87,13 @@ public abstract class PassiveSkill extends Observable implements IPassiveSkill {
 		if(null==name)
 			name = I18n.getMessage(this, "name");
 		return name;
+	}
+	
+	public String getDepiction() {
+		// TODO Auto-generated method stub
+		if(null==depiction)
+			depiction = I18n.getMessage(this, "depiction");
+		return depiction;
 	}
 
 	public LifeCard getOwner() {

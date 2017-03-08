@@ -2,24 +2,25 @@ package org.cx.game.card.buff;
 
 import org.cx.game.card.LifeCard;
 
-public class ZengjiazhanchangsuiconggongjiBuff extends Buff {
+public class ZengjiagongjiBuff extends Buff {
 
-	public final static Integer ZengjiazhanchangsuiconggongjiBuff_ID = 10300008;
+	public final static Integer ZengjiagongjiBuff_ID = 10300002;
 	
-	private Integer atkUpValue = 0;
+	private Integer atk = 0;
 	
-	public ZengjiazhanchangsuiconggongjiBuff(Integer atkUpValue, Integer bout, LifeCard life) {
-		super(ZengjiazhanchangsuiconggongjiBuff_ID, bout, life);
+	public ZengjiagongjiBuff(Integer bout, Integer atk, LifeCard life) {
+		super(ZengjiagongjiBuff_ID, bout, life);
 		// TODO Auto-generated constructor stub
-		this.atkUpValue = atkUpValue;
+		
+		this.atk = atk;
 	}
-
+	
 	@Override
 	public void affect(Object... objects) {
 		// TODO Auto-generated method stub
 		super.affect(objects);
 		
-		getOwner().getAttack().addToAtk(atkUpValue);
+		getOwner().getAttack().addToAtk(this.atk);
 	}
 	
 	@Override
@@ -35,7 +36,7 @@ public class ZengjiazhanchangsuiconggongjiBuff extends Buff {
 		// TODO Auto-generated method stub
 		super.invalid();
 		
-		getOwner().getAttack().addToAtk(-atkUpValue);
+		getOwner().getAttack().addToAtk(-this.atk);
 	}
-	
+
 }

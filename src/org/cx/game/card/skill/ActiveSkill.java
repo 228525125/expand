@@ -8,6 +8,7 @@ import java.util.Observable;
 
 import org.cx.game.card.LifeCard;
 import org.cx.game.card.magic.IMagic;
+import org.cx.game.core.Context;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.intercepter.IIntercepter;
 import org.cx.game.intercepter.Intercepter;
@@ -23,8 +24,10 @@ public abstract class ActiveSkill extends Observable implements IActiveSkill {
 
 	private final static String UseSkill = "_UseSkill";
 	
+	private Integer id;
 	private String cType = null;
 	private String name = null;
+	private String depiction = null;
 	private LifeCard owner;
 	private Map<String,List<IIntercepter>> intercepterList = new HashMap<String,List<IIntercepter>>();
 	private String action = null;
@@ -53,8 +56,9 @@ public abstract class ActiveSkill extends Observable implements IActiveSkill {
 	 * @param style 魔法/物理
 	 * @param func 限制/直接伤害/其他 
 	 */
-	public ActiveSkill(Integer consume, Integer cooldown, Integer velocity) {
+	public ActiveSkill(Integer id, Integer consume, Integer cooldown) {
 		// TODO Auto-generated constructor stub
+		this.id = id;
 		this.consume = consume;
 		this.cooldown = cooldown;
 		//this.velocity = velocity;
@@ -143,6 +147,12 @@ public abstract class ActiveSkill extends Observable implements IActiveSkill {
 	}
 	
 	@Override
+	public Integer getId() {
+		// TODO Auto-generated method stub
+		return this.id;
+	}
+	
+	@Override
 	public String getCode() {
 		// TODO Auto-generated method stub
 		return code;
@@ -190,6 +200,14 @@ public abstract class ActiveSkill extends Observable implements IActiveSkill {
 		if(null==name)
 			name = I18n.getMessage(this, "name");
 		return name;
+	}
+	
+
+	public String getDepiction() {
+		// TODO Auto-generated method stub
+		if(null==depiction)
+			depiction = I18n.getMessage(this, "depiction");
+		return depiction;
 	}
 
 	@Override
@@ -292,5 +310,18 @@ public abstract class ActiveSkill extends Observable implements IActiveSkill {
 	public Boolean hasError() {
 		// TODO Auto-generated method stub
 		return errors.hasError();
+	}
+	
+	@Override
+	public Boolean contains(Integer tag) {
+		// TODO Auto-generated method stub
+		List<Integer> objectList = Context.queryForTag(tag);
+		return objectList.contains(getId());
+	}
+	
+	@Override
+	public List<Integer> queryForCategory(Integer category) {
+		// TODO Auto-generated method stub
+		return Context.queryForCategory(category);
 	}
 }

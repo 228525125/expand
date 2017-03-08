@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.cx.game.card.LifeCard;
 import org.cx.game.card.skill.PassiveSkill;
+import org.cx.game.core.Context;
 import org.cx.game.core.IPlayer;
 import org.cx.game.widget.IGround;
 
@@ -13,6 +14,8 @@ import org.cx.game.widget.IGround;
  *
  */
 public abstract class Declare extends PassiveSkill {
+	
+	protected final static Integer Stirps_Null = 0;
 	
 	public abstract Boolean isTrigger(Object[] args);
 	
@@ -40,9 +43,12 @@ public abstract class Declare extends PassiveSkill {
 	 * 查询战吼目标
 	 * @param position 当前随从的位置
 	 * @param step 搜索范围
+	 * @param self 是否友方
+	 * @param hero 是否英雄
+	 * @param stirps 种族
 	 * @return
 	 */
-	protected LifeCard queryTarget(Integer position,Integer step){
+	protected LifeCard queryTarget(Integer position,Integer step, Boolean self, Boolean hero, Integer stirps){
 		LifeCard life = null;
 		IPlayer player = getOwner().getPlayer();
 		IGround ground = getOwner().getPlayer().getGround();
@@ -50,10 +56,28 @@ public abstract class Declare extends PassiveSkill {
 		
 		for(Integer p : list){
 			LifeCard card = ground.getCard(p);
-			if(null!=card && card.getPlayer().equals(player)){
-				life = card;
-				break;
+			
+			if(null==card){
+				continue;
 			}
+			
+			if(null!=self && !self.equals(card.getPlayer().equals(player))){
+				continue;
+			}
+			
+			if(null!=hero && !hero.equals(card.getHero())){
+				continue;
+			}
+			
+			if(!Integer.valueOf(0).equals(stirps)){
+				List<Integer> tags = Context.queryForObject(card.getId());
+				if(!tags.contains(stirps)){
+					continue;
+				}
+			}
+			
+			life = card;
+			break;
 		}
 		
 		return life;

@@ -66,6 +66,9 @@ public class MishuzengjianengliAureoleBuff extends Buff {
 		
 		this.host.getAttack().addToAtk(-atkUpTotal);
 		this.host.getDeath().addToHp(-hpUpTotal);
+		
+		this.atkUpTotal = 0;
+		this.hpUpTotal = 0;
 	}
 	
 }

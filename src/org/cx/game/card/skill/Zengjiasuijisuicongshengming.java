@@ -6,6 +6,11 @@ import java.util.List;
 import org.cx.game.card.LifeCard;
 import org.cx.game.widget.IGround;
 
+/**
+ * 在你的回合结束时，使另一个随机友方随从获得生命值
+ * @author chenxian
+ *
+ */
 public class Zengjiasuijisuicongshengming extends PassiveSkill {
 
 	public final static Integer Zengjiasuijisuicongshengming_ID = 10100006;

@@ -33,6 +33,7 @@ public abstract class Buff extends Observable implements IBuff {
 	private Integer id = 0;                         //buff的id 对应magic的id
 	private String cType = null;                    //类名
 	private String name = null;
+	private String depiction = null;
 	private LifeCard owner;
 	private Map<String,List<IIntercepter>> intercepterList = new HashMap<String,List<IIntercepter>>();
 	private List<Map<IInterceptable, IIntercepter>> resetList = new ArrayList<Map<IInterceptable, IIntercepter>>();
@@ -102,6 +103,13 @@ public abstract class Buff extends Observable implements IBuff {
 		if(null==name)
 			name = I18n.getMessage(this, "name");
 		return name;
+	}
+	
+	public String getDepiction() {
+		// TODO Auto-generated method stub
+		if(null==depiction)
+			depiction = I18n.getMessage(this, "depiction");
+		return depiction;
 	}
 	
 	@Override

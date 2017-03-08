@@ -32,7 +32,7 @@ public class Morale extends PassiveSkill {
 		// TODO Auto-generated method stub
 		super.affect(objects);
 		
-		IControlQueue queue = getOwner().getPlayer().getContext().getQueue();
+		IControlQueue queue = getOwner().getPlayer().getContext().getControlQueue();
 		Place place = queue.getPlace(getOwner());
 		queue.moveToPrior(place);
 	}

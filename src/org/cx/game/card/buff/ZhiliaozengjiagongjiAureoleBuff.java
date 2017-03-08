@@ -60,6 +60,7 @@ public class ZhiliaozengjiagongjiAureoleBuff extends Buff {
 		super.invalid();
 		
 		this.host.getAttack().addToAtk(-atkUpTotal);
+		this.atkUpTotal = 0;
 	}
 
 }
