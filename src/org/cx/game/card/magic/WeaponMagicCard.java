@@ -27,7 +27,7 @@ public abstract class WeaponMagicCard extends MagicCard {
 		// TODO Auto-generated method stub
 		super.affect(objects);
 		
-		IWeapon weapon = new Weapon(this.atk,this.wear,getOwner().getHeroCard());
+		IWeapon weapon = new Weapon(this.atk,this.wear, this,getOwner().getHeroCard());
 		weapon.equip();
 	}
 	

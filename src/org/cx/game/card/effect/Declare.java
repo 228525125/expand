@@ -53,6 +53,7 @@ public abstract class Declare extends PassiveSkill {
 		IPlayer player = getOwner().getPlayer();
 		IGround ground = getOwner().getPlayer().getGround();
 		List<Integer> list =  ground.easyAreaForDistance(position, step, IGround.Contain);
+		list.remove(position);       //排除自己
 		
 		for(Integer p : list){
 			LifeCard card = ground.getCard(p);
