@@ -223,4 +223,10 @@ public abstract class PassiveSkill extends Observable implements IPassiveSkill {
 		// TODO Auto-generated method stub
 		this.activation = false;
 	}
+	
+	@Override
+	public Boolean isTrigger(Object[] args) {
+		// TODO Auto-generated method stub
+		return true;
+	}
 }

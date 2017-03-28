@@ -45,7 +45,7 @@ public class Zhaohuanzengjiagongji extends PassiveSkill {
 		this.atkUpTotal += this.atkUpValue;
 	}
 	
-	private Boolean isTrigger(Object[] args){
+	public Boolean isTrigger(Object[] args){
 		Boolean ret = false;
 		
 		if(super.activation){

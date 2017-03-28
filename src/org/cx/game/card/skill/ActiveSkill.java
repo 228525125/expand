@@ -324,4 +324,10 @@ public abstract class ActiveSkill extends Observable implements IActiveSkill {
 		// TODO Auto-generated method stub
 		return Context.queryForCategory(category);
 	}
+	
+	@Override
+	public Boolean isTrigger(Object[] args) {
+		// TODO Auto-generated method stub
+		return true;
+	}
 }

@@ -43,6 +43,15 @@ public class AttackLockBuff extends Buff {
 	@Override
 	public void effect() {
 		// TODO Auto-generated method stub
+		List<IBuff> buffs = getOwner().getBuff(AttackLockBuff.class);
+		for(IBuff buff : buffs){
+			AttackLockBuff alb = (AttackLockBuff) buff;				
+			if(alb.getLocker().equals(attack)){
+				alb.invalid();
+				break;
+			}
+		}
+		
 		super.effect();
 		
 		attack.addNexusBuff(this);

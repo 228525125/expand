@@ -1,11 +1,14 @@
 package org.cx.game.card.magic;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.cx.game.action.IApply;
 import org.cx.game.action.IChuck;
+import org.cx.game.card.LifeCard;
 import org.cx.game.card.MagicCard;
 import org.cx.game.exception.RuleValidatorException;
+import org.cx.game.widget.IGround;
 import org.cx.game.widget.IWeapon;
 
 public class WuqishengjiMagic extends MagicCard {
@@ -15,6 +18,8 @@ public class WuqishengjiMagic extends MagicCard {
 	private Integer atkUpValue = 0;
 	private Integer wearUpValue = 0;
 	
+	private IWeapon weapon = null;
+	
 	public WuqishengjiMagic(Integer atkUpValue, Integer wearUpValue, Integer consume) {
 		super(WuqishengjiMagic_ID, consume);
 		// TODO Auto-generated constructor stub
@@ -23,11 +28,19 @@ public class WuqishengjiMagic extends MagicCard {
 	}
 	
 	@Override
+	public void apply(Object... objects) throws RuleValidatorException {
+		// TODO Auto-generated method stub
+		super.apply(objects);
+		
+		LifeCard hero = getOwner().getHeroCard();
+		hero.affected(this);
+	}
+	
+	@Override
 	public void affect(Object... objects) throws RuleValidatorException {
 		// TODO Auto-generated method stub
 		super.affect(objects);
 		
-		IWeapon weapon = getOwner().getHeroCard().getAttack().getWeapon();
 		weapon.addToAtk(this.atkUpValue);
 		weapon.addToWear(this.wearUpValue);
 	}
@@ -35,14 +48,16 @@ public class WuqishengjiMagic extends MagicCard {
 	@Override
 	public Boolean isTrigger(Object[] args) {
 		// TODO Auto-generated method stub
-		IWeapon weapon = getOwner().getHeroCard().getAttack().getWeapon();
+		weapon = getOwner().getHeroCard().getAttack().getWeapon();
 		return null!=weapon;
 	}
-
+	
 	@Override
-	public Boolean needConjurer() {
+	public List<Integer> getApplyRange(IGround ground) {
 		// TODO Auto-generated method stub
-		return false;
+		List<Integer> list = new ArrayList<Integer>();
+		list.add(getOwner().getHeroCard().getContainerPosition());
+		return list;
 	}
 	
 	/**

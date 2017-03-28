@@ -1,5 +1,6 @@
 package org.cx.game.card.magic;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.cx.game.action.IApply;
@@ -7,18 +8,21 @@ import org.cx.game.action.IChuck;
 import org.cx.game.card.LifeCard;
 import org.cx.game.card.MagicCard;
 import org.cx.game.exception.RuleValidatorException;
+import org.cx.game.widget.IGround;
 
 public class ZhisidajiMagic extends MagicCard {
 	
 	public final static Integer ZhisidajiMagic_ID = 10150005;
 	
-	private Integer harm = 0;
+	private Integer harm1 = 0;
+	private Integer harm2 = 0;
 
-	public ZhisidajiMagic(Integer harm, Integer consume) {
+	public ZhisidajiMagic(Integer harm1, Integer harm2, Integer consume) {
 		super(ZhisidajiMagic_ID, consume);
 		// TODO Auto-generated constructor stub
 		
-		this.harm = harm;
+		this.harm1 = harm1;
+		this.harm2 = harm2;
 		
 		setParameterTypeValidator(new Class[]{LifeCard.class});
 	}
@@ -30,7 +34,7 @@ public class ZhisidajiMagic extends MagicCard {
 		
 		LifeCard life = (LifeCard) objects[0];
 		Integer hp = getOwner().getHeroCard().getDeath().getHp();
-		Integer hrm = hp<12 ? this.harm*150/100 : this.harm;
+		Integer hrm = hp<12 ? this.harm2 : this.harm1;
 		life.getAffected().magicHarm(hrm);
 	}
 	
@@ -42,11 +46,22 @@ public class ZhisidajiMagic extends MagicCard {
 		LifeCard life = (LifeCard) objects[0];
 		life.affected(this);
 	}
-
+	
 	@Override
-	public Boolean needConjurer() {
+	public List<Integer> getApplyRange(IGround ground) {
 		// TODO Auto-generated method stub
-		return false;
+		List<Integer> positionList = new ArrayList<Integer>();
+		LifeCard conjure = getConjurer();
+		Integer position = conjure.getContainerPosition();
+		positionList = ground.easyAreaForDistance(position, conjure.getAttack().getRange(), IGround.Contain);
+		positionList.remove(position);
+		
+		List<Integer> list = new ArrayList<Integer>();
+		for(Integer pos : positionList){
+			if(null!=ground.getCard(pos))
+				list.add(pos);
+		}
+		return list;
 	}
 	
 	/**

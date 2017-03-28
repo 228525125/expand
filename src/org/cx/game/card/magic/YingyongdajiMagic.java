@@ -1,24 +1,28 @@
 package org.cx.game.card.magic;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.cx.game.action.IApply;
 import org.cx.game.action.IChuck;
 import org.cx.game.card.LifeCard;
 import org.cx.game.card.MagicCard;
+import org.cx.game.card.buff.IBuff;
+import org.cx.game.card.buff.ZengjiagongjiBuff;
 import org.cx.game.exception.RuleValidatorException;
+import org.cx.game.widget.IGround;
 
 public class YingyongdajiMagic extends MagicCard {
 
 	public final static Integer YingyongdajiMagic_ID = 10150004;
 	
-	private Integer harm = 0;
+	private Integer atk = 0;
 	
-	public YingyongdajiMagic(Integer harm, Integer consume) {
+	public YingyongdajiMagic(Integer atk, Integer consume) {
 		super(YingyongdajiMagic_ID, consume);
 		// TODO Auto-generated constructor stub
 		
-		this.harm = harm;
+		this.atk = atk;
 		
 		setParameterTypeValidator(new Class[]{LifeCard.class});
 	}
@@ -29,7 +33,8 @@ public class YingyongdajiMagic extends MagicCard {
 		super.affect(objects);
 		
 		LifeCard life = (LifeCard) objects[0];
-		life.getAffected().magicHarm(harm);
+		IBuff buff = new ZengjiagongjiBuff(1, atk, life);
+		buff.effect();
 	}
 	
 	@Override
@@ -40,11 +45,13 @@ public class YingyongdajiMagic extends MagicCard {
 		LifeCard life = (LifeCard) objects[0];
 		life.affected(this);
 	}
-
+	
 	@Override
-	public Boolean needConjurer() {
+	public List<Integer> getApplyRange(IGround ground) {
 		// TODO Auto-generated method stub
-		return false;
+		List<Integer> list = new ArrayList<Integer>();
+		list.add(getOwner().getHeroCard().getContainerPosition());
+		return list;
 	}
 	
 	/**

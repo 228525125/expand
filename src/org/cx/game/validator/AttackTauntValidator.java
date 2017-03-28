@@ -1,6 +1,7 @@
 package org.cx.game.validator;
 
 import org.cx.game.card.LifeCard;
+import org.cx.game.card.buff.IBuff;
 import org.cx.game.card.buff.TauntBuff;
 import org.cx.game.command.CommandBuffer;
 import org.cx.game.tools.I18n;
@@ -27,8 +28,11 @@ public class AttackTauntValidator extends SelectLifeCardValidator {
 		
 		Boolean taunt = true;
 		if(getLifeCard().containsBuff(TauntBuff.class)){
-			TauntBuff buff = (TauntBuff) getLifeCard().getBuff(TauntBuff.class);
-			taunt = attacked.equals(buff.getTaunter());
+			for(IBuff buff : getLifeCard().getBuff(TauntBuff.class)){
+				TauntBuff tauntBuff = (TauntBuff) buff;
+				taunt = attacked.equals(tauntBuff.getTaunter());
+				break;
+			}
 		}
 		
 		if(ret&&taunt){

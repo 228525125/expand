@@ -17,8 +17,6 @@ public abstract class Declare extends PassiveSkill {
 	
 	protected final static Integer Stirps_Null = 0;
 	
-	public abstract Boolean isTrigger(Object[] args);
-	
 	public Declare(Integer id) {
 		// TODO Auto-generated constructor stub
 		super(id);

@@ -298,4 +298,9 @@ public abstract class Buff extends Observable implements IBuff {
 		return Context.queryForCategory(category);
 	}
 
+	@Override
+	public Boolean isTrigger(Object[] args) {
+		// TODO Auto-generated method stub
+		return true;
+	}
 }
