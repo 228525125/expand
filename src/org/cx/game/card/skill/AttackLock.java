@@ -8,7 +8,7 @@ import org.cx.game.card.LifeCard;
 import org.cx.game.card.buff.AttackLockBuff;
 import org.cx.game.card.buff.IBuff;
 import org.cx.game.card.buff.TauntBuff;
-import org.cx.game.card.effect.Taunt;
+import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.widget.IGround;
 
@@ -65,7 +65,7 @@ public class AttackLock extends PassiveSkill {
 			taunt = attacked.equals(buff.getTaunter());
 		}
 		
-		Integer distance = ground.easyDistance(attacked.getContainerPosition(), getOwner().getContainerPosition());
+		Integer distance = ground.distance(attacked.getContainerPosition(), getOwner().getContainerPosition());
 		if(IDeath.Status_Live == attacked.getDeath().getStatus()
 		&& 1==distance                                           //近身
 		&& !exist                                                //判断是否被锁定过

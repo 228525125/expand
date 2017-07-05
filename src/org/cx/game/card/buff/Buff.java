@@ -50,7 +50,7 @@ public abstract class Buff extends Observable implements IBuff {
 		this.id = id;
 		this.owner = life;
 		this.bout = bout;
-		recordIntercepter(life.getPlayer().getContext(), this);
+		recordIntercepter(life.getPlayer(), this);
 		
 		addObserver(new JsonOut());
 		
@@ -135,15 +135,14 @@ public abstract class Buff extends Observable implements IBuff {
 		map.put("position", getOwner().getContainerPosition());
 		NotifyInfo info = new NotifyInfo(getAction()+Affect,map);
 		notifyObservers(info);
-		
-		if(0==beginBout)
-			beginBout = getOwner().getPlayer().getContext().getBout();
 	}
 	
 	@Override
 	public void effect() {
 		// TODO Auto-generated method stub
 		owner.addBuff(this);
+		
+		beginBout = getOwner().getPlayer().getBout();
 	}
 	
 	@Override
@@ -209,11 +208,8 @@ public abstract class Buff extends Observable implements IBuff {
 	@Override
 	public void finish(Object[] args) {
 		// TODO Auto-generated method stub
-		if(0==beginBout)
-			beginBout = getOwner().getPlayer().getContext().getBout();
-		
-		Integer curBout = getOwner().getPlayer().getContext().getBout();
-		if((curBout-beginBout)==bout){
+		Integer curBout = getOwner().getPlayer().getBout();
+		if((curBout-beginBout)>bout){
 			invalid();
 		}
 	}
@@ -291,11 +287,20 @@ public abstract class Buff extends Observable implements IBuff {
 		List<Integer> objectList = Context.queryForTag(tag);
 		return objectList.contains(getId());
 	}
+	
+	@Override
+	public List<Integer> queryTagForCategory(Integer category) {
+		// TODO Auto-generated method stub
+		List<Integer> list1 =  Context.queryForCategory(category);
+		List<Integer> list2 = Context.queryForObject(getId());
+		list2.retainAll(list1);
+		return list2;
+	}
 
 	@Override
-	public List<Integer> queryForCategory(Integer category) {
+	public List<Integer> queryTagForObject() {
 		// TODO Auto-generated method stub
-		return Context.queryForCategory(category);
+		return Context.queryForObject(getId());
 	}
 
 	@Override

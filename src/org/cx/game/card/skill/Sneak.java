@@ -1,24 +1,22 @@
-package org.cx.game.card.effect;
+package org.cx.game.card.skill;
 
 import org.cx.game.card.LifeCard;
-import org.cx.game.card.buff.IBuff;
-import org.cx.game.card.buff.ShieldBuff;
 import org.cx.game.card.skill.PassiveSkill;
 
 /**
- * 护盾
+ * 潜行
  * @author chenxian
  *
  */
-public class Shield extends PassiveSkill {
-
-	public static final Integer Shield_ID = 10200004;
+public class Sneak extends PassiveSkill {
 	
-	public Shield() {
+	public static final Integer Sneak_ID = 10200002;
+	
+	public Sneak() {
 		// TODO Auto-generated constructor stub
-		super(Shield_ID);
+		super(Sneak_ID);
 	}
-	
+
 	@Override
 	public void setOwner(LifeCard life) {
 		// TODO Auto-generated method stub
@@ -28,18 +26,17 @@ public class Shield extends PassiveSkill {
 	}
 	
 	@Override
+	public void after(Object[] args) {
+		// TODO Auto-generated method stub
+		affect();
+	}
+	
+	@Override
 	public void affect(Object... objects) {
 		// TODO Auto-generated method stub
 		super.affect(objects);
 		
-		IBuff buff = new ShieldBuff(getOwner());
-		buff.effect();
-	}
-	
-	@Override
-	public void after(Object[] args) {
-		// TODO Auto-generated method stub
-		affect();
+		getOwner().getMove().changeHide(true);
 	}
 
 	@Override
@@ -53,5 +50,5 @@ public class Shield extends PassiveSkill {
 		// TODO Auto-generated method stub
 		
 	}
-	
+
 }

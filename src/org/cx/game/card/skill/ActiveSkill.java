@@ -6,9 +6,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 
+import org.cx.game.action.IUpgrade;
+import org.cx.game.action.UpgradeDecorator;
 import org.cx.game.card.LifeCard;
 import org.cx.game.card.magic.IMagic;
 import org.cx.game.core.Context;
+import org.cx.game.core.IPlayer;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.intercepter.IIntercepter;
 import org.cx.game.intercepter.Intercepter;
@@ -19,34 +22,15 @@ import org.cx.game.validator.Errors;
 import org.cx.game.validator.IValidator;
 import org.cx.game.validator.ParameterTypeValidator;
 import org.cx.game.widget.IGround;
+import org.cx.game.widget.building.BuildingUpgrade;
 
-public abstract class ActiveSkill extends Observable implements IActiveSkill {
+public abstract class ActiveSkill extends Skill implements IActiveSkill {
 
-	private final static String UseSkill = "_UseSkill";
-	
-	private Integer id;
-	private String cType = null;
-	private String name = null;
-	private String depiction = null;
-	private LifeCard owner;
-	private Map<String,List<IIntercepter>> intercepterList = new HashMap<String,List<IIntercepter>>();
-	private String action = null;
 	private String code = "";
-	private Integer consume = 0;              //消耗能量
+	//private Integer consume = 0;              //消耗能量
 	private Integer cooldown = 1;             //冷却回合
-	private Integer cooldownBout = 0;         //冷却剩余回合数
+	private Integer cooldownRemain = 0;         //冷却剩余回合数
 	//private Integer velocity = 0;             //瞬发/蓄力
-	
-	private List<IValidator> validatorList = new ArrayList<IValidator>();
-	private Errors errors = new Errors();
-	
-	private IIntercepter cooldownBoutIntercepter = new Intercepter("addBout") {      //当回合数变化时，计算冷却时间
-		@Override
-		public void after(Object[] args) {
-			// TODO Auto-generated method stub
-			cooldownBout = cooldownBout>0 ? --cooldownBout : 0;
-		}
-	};
 	
 	/**
 	 * 
@@ -56,30 +40,12 @@ public abstract class ActiveSkill extends Observable implements IActiveSkill {
 	 * @param style 魔法/物理
 	 * @param func 限制/直接伤害/其他 
 	 */
-	public ActiveSkill(Integer id, Integer consume, Integer cooldown) {
+	public ActiveSkill(Integer id, Integer cooldown) {
 		// TODO Auto-generated constructor stub
-		this.id = id;
-		this.consume = consume;
+		super(id);
 		this.cooldown = cooldown;
+		//this.consume = consume;
 		//this.velocity = velocity;
-		
-		addObserver(new JsonOut());
-		
-		/* 取类名 */
-		String allName = this.getClass().getName();
-		String packageName = this.getClass().getPackage().getName();
-		this.cType = allName.substring(packageName.length()+1);
-		setAction("Skill");
-	}
-	
-	public IIntercepter getCooldownBoutIntercepter() {
-		return cooldownBoutIntercepter;
-	}
-
-	@Override
-	public void affect(Object... objects)  throws RuleValidatorException {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	private ParameterTypeValidator parameterTypeValidator = null;
@@ -121,14 +87,14 @@ public abstract class ActiveSkill extends Observable implements IActiveSkill {
 		if(hasError())
 			throw new RuleValidatorException(getErrors().getMessage());
 		
-		cooldownBout = cooldown;
+		cooldownRemain = cooldown;
 		
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("player", owner.getPlayer());
-		map.put("container", owner.getContainer());
-		map.put("card", owner);
+		map.put("player", getOwner().getPlayer());
+		map.put("container", getOwner().getContainer());
+		map.put("card", getOwner());
 		map.put("skill", this);
-		map.put("position", owner.getContainerPosition());
+		map.put("position", getOwner().getContainerPosition());
 		NotifyInfo info = new NotifyInfo(getAction()+UseSkill,map);
 		notifyObservers(info);           //通知所有卡片对象，被动技能发动		
 	}
@@ -142,32 +108,14 @@ public abstract class ActiveSkill extends Observable implements IActiveSkill {
 		List<Integer> positionList = new ArrayList<Integer>();
 		LifeCard card = (LifeCard) getOwner();
 		Integer position = card.getContainerPosition();
-		positionList = ground.easyAreaForDistance(position, getRange(), IGround.Contain);
+		positionList = ground.areaForDistance(position, getRange(), IGround.Contain);
 		return positionList;
-	}
-	
-	@Override
-	public Integer getId() {
-		// TODO Auto-generated method stub
-		return this.id;
 	}
 	
 	@Override
 	public String getCode() {
 		// TODO Auto-generated method stub
 		return code;
-	}
-
-	@Override
-	public Integer getConsume() {
-		// TODO Auto-generated method stub
-		return consume;
-	}
-	
-	@Override
-	public void setConsume(Integer consume) {
-		// TODO Auto-generated method stub
-		this.consume = consume;
 	}
 	
 	public Integer getCooldown() {
@@ -178,94 +126,16 @@ public abstract class ActiveSkill extends Observable implements IActiveSkill {
 		this.cooldown = cooldown;
 	}
 	
-	public Integer getCooldownBout() {
-		return cooldownBout;
+	public Integer getCooldownRemain() {
+		return cooldownRemain;
 	}
 
-	public void setCooldownBout(Integer cooldownBout) {
-		this.cooldownBout = cooldownBout;
-	}
-
-	public LifeCard getOwner() {
-		return owner;
+	public void setCooldownRemain(Integer cooldownRemain) {
+		this.cooldownRemain = cooldownRemain;
 	}
 	
-	@Override
-	public void setOwner(LifeCard life) {
-		// TODO Auto-generated method stub
-		this.owner = life;
-	}
-
-	public String getName() {
-		if(null==name)
-			name = I18n.getMessage(this, "name");
-		return name;
-	}
-	
-
-	public String getDepiction() {
-		// TODO Auto-generated method stub
-		if(null==depiction)
-			depiction = I18n.getMessage(this, "depiction");
-		return depiction;
-	}
-
-	@Override
-	public String getCType() {
-		// TODO Auto-generated method stub
-		return cType;
-	}
-	
-	@Override
-	public void addIntercepter(IIntercepter intercepter) {
-		// TODO Auto-generated method stub
-		List<IIntercepter> intercepters = intercepterList.get(intercepter.getIntercepterMethod());
-		if(null!=intercepters){
-			intercepters.add(intercepter);
-		}else{
-			intercepters = new ArrayList<IIntercepter>();
-			intercepters.add(intercepter);
-			intercepterList.put(intercepter.getIntercepterMethod(), intercepters);
-		}
-	}
-
-	@Override
-	public void deleteIntercepter(IIntercepter intercepter) {
-		// TODO Auto-generated method stub
-		/*List<IIntercepter> list = intercepterList.get(intercepter.getIntercepterMethod());
-		if(null!=list){
-			list.remove(intercepter);
-		}*/
-		
-		intercepter.delete();
-	}
-
-	@Override
-	public void clear() {
-		// TODO Auto-generated method stub
-		intercepterList.clear();
-	}
-
-	@Override
-	public Map<String,List<IIntercepter>> getIntercepterList() {
-		// TODO Auto-generated method stub
-		return intercepterList;
-	}
-
-	public String getAction() {
-		return action;
-	}
-
-	public void setAction(String action) {
-		this.action = action;
-	}
-	
-	@Override
-	public void notifyObservers(Object arg) {
-		// TODO Auto-generated method stub
-		super.setChanged();
-		super.notifyObservers(arg);
-	}
+	private List<IValidator> validatorList = new ArrayList<IValidator>();
+	private Errors errors = new Errors();
 
 	@Override
 	public void addValidator(IValidator validator) {
@@ -310,24 +180,5 @@ public abstract class ActiveSkill extends Observable implements IActiveSkill {
 	public Boolean hasError() {
 		// TODO Auto-generated method stub
 		return errors.hasError();
-	}
-	
-	@Override
-	public Boolean contains(Integer tag) {
-		// TODO Auto-generated method stub
-		List<Integer> objectList = Context.queryForTag(tag);
-		return objectList.contains(getId());
-	}
-	
-	@Override
-	public List<Integer> queryForCategory(Integer category) {
-		// TODO Auto-generated method stub
-		return Context.queryForCategory(category);
-	}
-	
-	@Override
-	public Boolean isTrigger(Object[] args) {
-		// TODO Auto-generated method stub
-		return true;
 	}
 }

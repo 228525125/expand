@@ -11,8 +11,8 @@ public class ZengjiagongjiActive extends ActiveSkill {
 	private Integer atk = 0;
 	private Integer bout = 0;
 	
-	public ZengjiagongjiActive(Integer consume, Integer cooldown, Integer bout, Integer atk) {
-		super(ZengjiagongjiActive_ID, consume, cooldown);
+	public ZengjiagongjiActive(Integer cooldown, Integer bout, Integer atk) {
+		super(ZengjiagongjiActive_ID, cooldown);
 		// TODO Auto-generated constructor stub
 		this.bout = bout;
 		this.atk = atk;
@@ -33,12 +33,11 @@ public class ZengjiagongjiActive extends ActiveSkill {
 	}
 	
 	@Override
-	public void affect(Object... objects) throws RuleValidatorException {
+	public void affect(Object... objects) {
 		// TODO Auto-generated method stub
 		super.affect(objects);
 		
 		IBuff buff = new ZengjiagongjiBuff(this.bout, this.atk, getOwner());
 		buff.effect();
 	}
-
 }

@@ -12,7 +12,7 @@ import org.cx.game.tools.I18n;
 import org.cx.game.widget.IControlQueue;
 
 /**
- * 眩晕，实现方式：增加speedChance值
+ * 眩晕
  * @author chenxian
  *
  */
@@ -20,9 +20,7 @@ public class DizzyBuff extends Buff {
 
 	public static final Integer DizzyBuff_ID = 10350001;
 	
-	private String name = null;
-	
-	public DizzyBuff(Integer id, Integer bout, LifeCard life) {
+	public DizzyBuff(Integer bout, LifeCard life) {
 		super(DizzyBuff_ID, bout, life);
 		// TODO Auto-generated constructor stub
 	}
@@ -39,25 +37,35 @@ public class DizzyBuff extends Buff {
 		for(IBuff buff : buffs)
 			buff.invalid();
 		
-		IIntercepter activateIn = new Intercepter("setActivate") {    //当activate状态为true时，表示从眩晕中恢复
-			
+		/*
+		 * 晕迷中的单位无法反击
+		 */
+		getOwner().getAttacked().setFightBack(false);
+		
+		IIntercepter activateIn = new Intercepter() {    //当activate状态为true时，将激活状态改为false
+
 			@Override
-			public void before(Object[] args) {
+			public void after(Object[] args) {
 				// TODO Auto-generated method stub
-				if((Boolean)args[0])
-					invalid();
+				if((Boolean)((Object[])args[0])[0])
+					affect();
 			}
 		};
-		recordIntercepter(getOwner(), activateIn);
 		
-		affect();
+		recordIntercepter(getOwner().getActivate(), activateIn);
 	}
 	
 	@Override
-	public String getName() {
+	public void affect(Object... objects) {
 		// TODO Auto-generated method stub
-		if(null==name)
-			name = I18n.getMessage(this, "name");
-		return name;
+		super.affect(objects);
+		
+		try {
+			getOwner().getActivate().action(false);
+		} catch (RuleValidatorException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		getOwner().getAttacked().setFightBack(false);
 	}
 }

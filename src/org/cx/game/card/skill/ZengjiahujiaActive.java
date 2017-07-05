@@ -8,8 +8,8 @@ public class ZengjiahujiaActive extends ActiveSkill {
 	
 	private Integer armour = 0;
 
-	public ZengjiahujiaActive(Integer consume, Integer cooldown, Integer armour) {
-		super(ZengjiahujiaActive_ID, consume, cooldown);
+	public ZengjiahujiaActive(Integer cooldown, Integer armour) {
+		super(ZengjiahujiaActive_ID, cooldown);
 		// TODO Auto-generated constructor stub
 		this.armour = armour;
 	}
@@ -29,7 +29,7 @@ public class ZengjiahujiaActive extends ActiveSkill {
 	}
 	
 	@Override
-	public void affect(Object... objects) throws RuleValidatorException {
+	public void affect(Object... objects) {
 		// TODO Auto-generated method stub
 		super.affect(objects);
 		

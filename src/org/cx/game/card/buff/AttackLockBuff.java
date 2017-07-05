@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.cx.game.action.Random;
 import org.cx.game.card.LifeCard;
-import org.cx.game.card.effect.Taunt;
+import org.cx.game.card.skill.TauntActive;
 import org.cx.game.intercepter.IIntercepter;
 import org.cx.game.intercepter.Intercepter;
 import org.cx.game.tools.Debug;
@@ -70,7 +70,7 @@ public class AttackLockBuff extends Buff {
 				for(IBuff buff : buffs){
 					AttackLockBuff alb = (AttackLockBuff) buff;
 					if(attacked.equals(alb.getLocker())                //被攻击者是锁定对象
-					|| attacked.containsSkill(Taunt.class)){           //或者被攻击者具有嘲讽技能          
+					|| attacked.containsSkill(TauntActive.class)){           //或者被攻击者具有嘲讽技能          
 						locked = true;
 						break;
 					}
