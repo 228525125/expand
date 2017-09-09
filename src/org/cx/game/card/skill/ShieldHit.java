@@ -20,12 +20,9 @@ public class ShieldHit extends ActiveSkill {
 	
 	/**
 	 * 
-	 * @param consume
 	 * @param cooldown
-	 * @param applyType
 	 * @param atkScale 攻击比例
 	 * @param bout 眩晕回合
-	 * @param life
 	 */
 	public ShieldHit(Integer cooldown, Integer atkScale, Integer bout) {
 		super(ShieldHit_ID, cooldown);

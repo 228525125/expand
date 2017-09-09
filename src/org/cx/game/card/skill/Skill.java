@@ -33,7 +33,7 @@ public abstract class Skill extends Observable implements ISkill {
 		// TODO Auto-generated constructor stub
 		this.id = id;
 		
-		addObserver(new JsonOut());
+		addObserver(JsonOut.getInstance());
 		
 		/* 取类名 */
 		String allName = this.getClass().getName();

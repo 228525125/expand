@@ -48,10 +48,4 @@ public class SkillUpgrade extends Upgrade implements IUpgrade {
 		this.consume = consume;
 	}
 
-	@Override
-	public Integer getProcess() {
-		// TODO Auto-generated method stub
-		return 100;
-	}
-
 }

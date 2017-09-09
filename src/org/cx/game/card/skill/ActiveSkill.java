@@ -27,25 +27,18 @@ import org.cx.game.widget.building.BuildingUpgrade;
 public abstract class ActiveSkill extends Skill implements IActiveSkill {
 
 	private String code = "";
-	//private Integer consume = 0;              //消耗能量
 	private Integer cooldown = 1;             //冷却回合
 	private Integer cooldownRemain = 0;         //冷却剩余回合数
-	//private Integer velocity = 0;             //瞬发/蓄力
 	
 	/**
 	 * 
-	 * @param consume 消耗能量
-	 * @param cooldown 冷却回合
-	 * @param velocity 瞬发/蓄力
-	 * @param style 魔法/物理
-	 * @param func 限制/直接伤害/其他 
+	 * @param id 
+	 * @param cooldown 冷却回合 
 	 */
 	public ActiveSkill(Integer id, Integer cooldown) {
 		// TODO Auto-generated constructor stub
 		super(id);
 		this.cooldown = cooldown;
-		//this.consume = consume;
-		//this.velocity = velocity;
 	}
 	
 	private ParameterTypeValidator parameterTypeValidator = null;

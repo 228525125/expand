@@ -52,7 +52,7 @@ public abstract class Buff extends Observable implements IBuff {
 		this.bout = bout;
 		recordIntercepter(life.getPlayer(), this);
 		
-		addObserver(new JsonOut());
+		addObserver(JsonOut.getInstance());
 		
 		String allName = this.getClass().getName();
 		String packageName = this.getClass().getPackage().getName();
