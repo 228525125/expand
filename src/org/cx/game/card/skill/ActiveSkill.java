@@ -22,7 +22,6 @@ import org.cx.game.validator.Errors;
 import org.cx.game.validator.IValidator;
 import org.cx.game.validator.ParameterTypeValidator;
 import org.cx.game.widget.IGround;
-import org.cx.game.widget.building.BuildingUpgrade;
 
 public abstract class ActiveSkill extends Skill implements IActiveSkill {
 

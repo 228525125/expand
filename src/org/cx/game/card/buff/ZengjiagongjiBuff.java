@@ -20,7 +20,7 @@ public class ZengjiagongjiBuff extends Buff {
 		// TODO Auto-generated method stub
 		super.affect(objects);
 		
-		getOwner().getAttack().addToAtk(this.atk);
+		getOwner().getAttack().addToExtraAtk(this.atk);
 	}
 	
 	@Override
@@ -36,7 +36,7 @@ public class ZengjiagongjiBuff extends Buff {
 		// TODO Auto-generated method stub
 		super.invalid();
 		
-		getOwner().getAttack().addToAtk(-this.atk);
+		getOwner().getAttack().addToExtraAtk(-this.atk);
 	}
 
 }

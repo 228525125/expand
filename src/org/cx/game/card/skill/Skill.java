@@ -7,6 +7,7 @@ import java.util.Observable;
 
 import org.cx.game.action.IUpgrade;
 import org.cx.game.action.UpgradeDecorator;
+import org.cx.game.action.UpgradeSkill;
 import org.cx.game.card.ICard;
 import org.cx.game.card.LifeCard;
 import org.cx.game.core.Context;
@@ -16,7 +17,6 @@ import org.cx.game.intercepter.IIntercepter;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.out.JsonOut;
 import org.cx.game.tools.I18n;
-import org.cx.game.widget.building.BuildingUpgrade;
 
 public abstract class Skill extends Observable implements ISkill {
 
@@ -143,7 +143,7 @@ public abstract class Skill extends Observable implements ISkill {
 
 	public IUpgrade getUpgrade() {
 		if(null==upgrade){
-			IUpgrade upgrade = new SkillUpgrade();
+			IUpgrade upgrade = new UpgradeSkill();
 			upgrade.setOwner(this);
 			this.upgrade = new UpgradeDecorator(upgrade);
 		}
