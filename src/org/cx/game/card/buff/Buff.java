@@ -50,7 +50,7 @@ public abstract class Buff extends Observable implements IBuff {
 		this.id = id;
 		this.owner = life;
 		this.bout = bout;
-		recordIntercepter(life.getPlayer(), this);
+		recordIntercepter(life.getPlayer().getAddBoutAction(), this);
 		
 		addObserver(JsonOut.getInstance());
 		
@@ -132,7 +132,7 @@ public abstract class Buff extends Observable implements IBuff {
 		map.put("container", getOwner().getContainer());
 		map.put("card", getOwner());
 		map.put("buff", this);
-		map.put("position", getOwner().getContainerPosition());
+		map.put("position", getOwner().getPosition());
 		NotifyInfo info = new NotifyInfo(getAction()+Affect,map);
 		notifyObservers(info);
 	}

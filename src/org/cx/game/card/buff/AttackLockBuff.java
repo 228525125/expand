@@ -24,15 +24,6 @@ public class AttackLockBuff extends Buff {
 	}
 	
 	@Override
-	public void affect(Object... objects) {
-		// TODO Auto-generated method stub
-		super.affect(objects);
-		
-		if(!Debug.isDebug)
-			getOwner().getPlayer().getContext().done();
-	}
-	
-	@Override
 	public void invalid() {
 		// TODO Auto-generated method stub
 		super.invalid();

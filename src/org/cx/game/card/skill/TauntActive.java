@@ -32,8 +32,8 @@ public class TauntActive extends ActiveSkill {
 	private List<LifeCard> getAffectedList() {
 		List<LifeCard> ls = new ArrayList<LifeCard>();
 		IPlayer player = getOwner().getPlayer();
-		IGround ground = player.getGround();
-		Integer position = getOwner().getContainerPosition();
+		IGround ground = player.getContext().getGround();
+		Integer position = getOwner().getPosition();
 		List<Integer> list = ground.areaForDistance(position, getRange(), IGround.Contain);
 		list.remove(position);
 		

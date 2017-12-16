@@ -39,7 +39,7 @@ public abstract class Aureole extends PassiveSkill {
 			public void after(Object[] args) {
 				// TODO Auto-generated method stub
 				refurbish();
-				getOwner().getPlayer().getContext().addIntercepter(this);
+				getOwner().getPlayer().getAddBoutAction().addIntercepter(this);
 			}
 		});
 		
@@ -47,7 +47,7 @@ public abstract class Aureole extends PassiveSkill {
 			@Override
 			public void after(Object[] args) {
 				// TODO Auto-generated method stub
-				getOwner().getPlayer().getContext().deleteIntercepter(this);
+				getOwner().getPlayer().getAddBoutAction().deleteIntercepter(this);
 				for(LifeCard life : affectedList){
 					List<IBuff> buffs = life.getBuff(getBuffClass());
 					if(buffs.isEmpty())
@@ -86,8 +86,8 @@ public abstract class Aureole extends PassiveSkill {
 	}
 
 	private void refurbish(){
-		IGround ground = getOwner().getPlayer().getGround();
-		List<LifeCard> ls = ground.list(getOwner().getContainerPosition(), getRange(), IGround.Contain);
+		IGround ground = getOwner().getPlayer().getContext().getGround();
+		List<LifeCard> ls = ground.list(getOwner().getPosition(), getRange(), IGround.Contain);
 		
 		List<LifeCard> tempList = new ArrayList<LifeCard>();  //将离开范围的life去掉buff
 		tempList.addAll(affectedList);

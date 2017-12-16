@@ -45,7 +45,12 @@ public class ShieldHit extends ActiveSkill {
 		
 		LifeCard life = (LifeCard) objects[0];
 		Integer atk = getOwner().getAtk();
-		life.getDeath().addToHp(-atk*atkScale/100);
+		try {
+			life.getDeath().addToHp(-atk*atkScale/100);
+		} catch (RuleValidatorException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		new DizzyBuff(bout, life).effect();
 	}

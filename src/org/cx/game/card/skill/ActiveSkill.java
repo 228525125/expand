@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.Observable;
 
 import org.cx.game.action.IUpgrade;
-import org.cx.game.action.UpgradeDecorator;
 import org.cx.game.card.LifeCard;
 import org.cx.game.card.magic.IMagic;
 import org.cx.game.core.Context;
@@ -86,7 +85,7 @@ public abstract class ActiveSkill extends Skill implements IActiveSkill {
 		map.put("container", getOwner().getContainer());
 		map.put("card", getOwner());
 		map.put("skill", this);
-		map.put("position", getOwner().getContainerPosition());
+		map.put("position", getOwner().getPosition());
 		NotifyInfo info = new NotifyInfo(getAction()+UseSkill,map);
 		notifyObservers(info);           //通知所有卡片对象，被动技能发动		
 	}
@@ -99,7 +98,7 @@ public abstract class ActiveSkill extends Skill implements IActiveSkill {
 	public List<Integer> getConjureRange(IGround ground){
 		List<Integer> positionList = new ArrayList<Integer>();
 		LifeCard card = (LifeCard) getOwner();
-		Integer position = card.getContainerPosition();
+		Integer position = card.getPosition();
 		positionList = ground.areaForDistance(position, getRange(), IGround.Contain);
 		return positionList;
 	}

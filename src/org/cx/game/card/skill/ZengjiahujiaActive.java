@@ -27,12 +27,4 @@ public class ZengjiahujiaActive extends ActiveSkill {
 		
 		getOwner().affected(this);
 	}
-	
-	@Override
-	public void affect(Object... objects) {
-		// TODO Auto-generated method stub
-		super.affect(objects);
-		
-		getOwner().getAttacked().addToArmour(this.armour);
-	}
 }

@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Observable;
 
 import org.cx.game.action.IUpgrade;
-import org.cx.game.action.UpgradeDecorator;
 import org.cx.game.action.UpgradeSkill;
 import org.cx.game.card.ICard;
 import org.cx.game.card.LifeCard;
@@ -58,7 +57,7 @@ public abstract class Skill extends Observable implements ISkill {
 		map.put("container", owner.getContainer());
 		map.put("card", owner);
 		map.put("skill", this);
-		map.put("position", owner.getContainerPosition());
+		map.put("position", owner.getPosition());
 		NotifyInfo info = new NotifyInfo(getAction()+UseSkill,map);
 		notifyObservers(info);
 	}
@@ -145,14 +144,9 @@ public abstract class Skill extends Observable implements ISkill {
 		if(null==upgrade){
 			IUpgrade upgrade = new UpgradeSkill();
 			upgrade.setOwner(this);
-			this.upgrade = new UpgradeDecorator(upgrade);
+			this.upgrade = upgrade;
 		}
 		return upgrade;
-	}
-
-	public void setUpgrade(IUpgrade upgrade) {
-		upgrade.setOwner(this);
-		this.upgrade = new UpgradeDecorator(upgrade);
 	}
 	
 	@Override

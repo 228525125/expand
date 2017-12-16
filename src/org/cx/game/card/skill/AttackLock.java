@@ -58,14 +58,14 @@ public class AttackLock extends PassiveSkill {
 		}
 		
 		Boolean taunt = true;
-		IGround ground = getOwner().getPlayer().getGround();
+		IGround ground = getOwner().getPlayer().getContext().getGround();
 		
 		if(getOwner().containsBuff(TauntBuff.class)){
 			TauntBuff buff = (TauntBuff) getOwner().getBuff(TauntBuff.class);
 			taunt = attacked.equals(buff.getTaunter());
 		}
 		
-		Integer distance = ground.distance(attacked.getContainerPosition(), getOwner().getContainerPosition());
+		Integer distance = ground.distance(attacked.getPosition(), getOwner().getPosition());
 		if(IDeath.Status_Live == attacked.getDeath().getStatus()
 		&& 1==distance                                           //近身
 		&& !exist                                                //判断是否被锁定过
