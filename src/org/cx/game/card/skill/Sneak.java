@@ -36,7 +36,7 @@ public class Sneak extends PassiveSkill {
 		// TODO Auto-generated method stub
 		super.affect(objects);
 		
-		getOwner().getMove().changeHide(true);
+		getOwner().getMove().setHide(true);
 	}
 
 	@Override

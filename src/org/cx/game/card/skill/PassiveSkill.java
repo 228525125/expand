@@ -35,6 +35,9 @@ public abstract class PassiveSkill extends Skill implements IPassiveSkill {
 	
 	private Boolean isDelete = false;
 	
+	private Integer atk = 0;
+	private Integer def = 0;
+	
 	public PassiveSkill(Integer id) {
 		// TODO Auto-generated constructor stub
 		super(id);
@@ -86,5 +89,17 @@ public abstract class PassiveSkill extends Skill implements IPassiveSkill {
 	public Boolean isDelete() {
 		// TODO Auto-generated method stub
 		return this.isDelete;
+	}
+	
+	@Override
+	public Integer getAtk() {
+		// TODO Auto-generated method stub
+		return this.atk;
+	}
+	
+	@Override
+	public Integer getDef() {
+		// TODO Auto-generated method stub
+		return this.def;
 	}
 }

@@ -43,6 +43,9 @@ public abstract class Buff extends Observable implements IBuff {
 	private Integer beginBout = 0;
 	private Boolean duplication = false;  //是否可以叠加
 	
+	private Integer atk = 0;
+	private Integer def = 0;
+	
 	protected final static String Affect = "_Affect";
 
 	public Buff(Integer id, Integer bout, LifeCard life) {
@@ -84,6 +87,26 @@ public abstract class Buff extends Observable implements IBuff {
 	
 	public void setOwner(LifeCard owner){
 		this.owner = owner;
+	}
+	
+	@Override
+	public Integer getAtk() {
+		// TODO Auto-generated method stub
+		return this.atk;
+	}
+	
+	public void setAtk(Integer atk) {
+		this.atk = atk;
+	}
+	
+	@Override
+	public Integer getDef() {
+		// TODO Auto-generated method stub
+		return this.def;
+	}
+	
+	public void setDef(Integer def) {
+		this.def = def;
 	}
 	
 	@Override
