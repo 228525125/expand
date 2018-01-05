@@ -7,7 +7,6 @@ import java.util.Observable;
 
 import org.cx.game.action.IUpgrade;
 import org.cx.game.action.UpgradeSkill;
-import org.cx.game.card.ICard;
 import org.cx.game.card.LifeCard;
 import org.cx.game.core.Context;
 import org.cx.game.exception.RuleValidatorException;
@@ -54,7 +53,7 @@ public abstract class Skill extends Observable implements ISkill {
 		// TODO Auto-generated method stub
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("player", owner.getPlayer());
-		map.put("container", owner.getContainer());
+		map.put("container", owner.getGround());
 		map.put("card", owner);
 		map.put("skill", this);
 		map.put("position", owner.getPosition());
@@ -140,7 +139,7 @@ public abstract class Skill extends Observable implements ISkill {
 
 	private IUpgrade upgrade = null;
 
-	public IUpgrade getUpgrade() {
+	public IUpgrade getUpgrade() {		
 		if(null==upgrade){
 			IUpgrade upgrade = new UpgradeSkill();
 			upgrade.setOwner(this);

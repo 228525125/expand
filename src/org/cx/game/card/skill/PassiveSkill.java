@@ -1,24 +1,6 @@
 package org.cx.game.card.skill;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Observable;
-import java.util.Map.Entry;
-
-import org.cx.game.card.ICard;
-import org.cx.game.card.LifeCard;
-import org.cx.game.card.magic.IMagic;
-import org.cx.game.core.Context;
-import org.cx.game.exception.RuleValidatorException;
-import org.cx.game.intercepter.IInterceptable;
 import org.cx.game.intercepter.IIntercepter;
-import org.cx.game.intercepter.IntercepterAscComparator;
-import org.cx.game.observer.NotifyInfo;
-import org.cx.game.out.JsonOut;
-import org.cx.game.tools.I18n;
 
 /**
  * 被动技能

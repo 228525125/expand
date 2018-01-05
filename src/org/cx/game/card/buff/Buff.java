@@ -152,7 +152,7 @@ public abstract class Buff extends Observable implements IBuff {
 		// TODO Auto-generated method stub
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("player", getOwner().getPlayer());
-		map.put("container", getOwner().getContainer());
+		map.put("container", getOwner().getGround());
 		map.put("card", getOwner());
 		map.put("buff", this);
 		map.put("position", getOwner().getPosition());

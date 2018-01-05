@@ -82,7 +82,7 @@ public abstract class ActiveSkill extends Skill implements IActiveSkill {
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("player", getOwner().getPlayer());
-		map.put("container", getOwner().getContainer());
+		map.put("container", getOwner().getGround());
 		map.put("card", getOwner());
 		map.put("skill", this);
 		map.put("position", getOwner().getPosition());
