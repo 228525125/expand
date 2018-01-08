@@ -18,8 +18,7 @@ import org.cx.game.tools.I18n;
 
 public abstract class Skill extends Observable implements ISkill {
 
-	private Integer id;
-	private String cType;
+	private Integer type;
 	private String name;
 	private String depiction = null;
 	private LifeCard owner;
@@ -27,16 +26,12 @@ public abstract class Skill extends Observable implements ISkill {
 	
 	protected final static String UseSkill = "_UseSkill";
 	
-	public Skill(Integer id) {
+	public Skill(Integer type) {
 		// TODO Auto-generated constructor stub
-		this.id = id;
+		this.type = type;
 		
 		addObserver(JsonOut.getInstance());
 		
-		/* 取类名 */
-		String allName = this.getClass().getName();
-		String packageName = this.getClass().getPackage().getName();
-		this.cType = allName.substring(packageName.length()+1);
 		setAction("Skill");
 	}
 	
@@ -62,15 +57,9 @@ public abstract class Skill extends Observable implements ISkill {
 	}
 	
 	@Override
-	public Integer getId() {
+	public Integer getType() {
 		// TODO Auto-generated method stub
-		return id;
-	}
-	
-	@Override
-	public String getCType() {
-		// TODO Auto-generated method stub
-		return cType;
+		return type;
 	}
 	
 	public String getName() {
@@ -113,14 +102,14 @@ public abstract class Skill extends Observable implements ISkill {
 	public Boolean contains(Integer tag) {
 		// TODO Auto-generated method stub
 		List<Integer> objectList = Context.queryForTag(tag);
-		return objectList.contains(getId());
+		return objectList.contains(getType());
 	}
 
 	@Override
 	public List<Integer> queryTagForCategory(Integer category) {
 		// TODO Auto-generated method stub
 		List<Integer> list1 =  Context.queryForCategory(category);
-		List<Integer> list2 = Context.queryForObject(getId());
+		List<Integer> list2 = Context.queryForObject(getType());
 		list2.retainAll(list1);
 		return list2;
 	}
@@ -128,7 +117,7 @@ public abstract class Skill extends Observable implements ISkill {
 	@Override
 	public List<Integer> queryTagForObject() {
 		// TODO Auto-generated method stub
-		return Context.queryForObject(getId());
+		return Context.queryForObject(getType());
 	}
 	
 	@Override

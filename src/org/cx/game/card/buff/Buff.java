@@ -30,7 +30,7 @@ import org.cx.game.tools.I18n;
  */
 public abstract class Buff extends Observable implements IBuff {
 
-	private Integer id = 0;                         //buff的id 对应magic的id
+	private Integer type = 0;                         //buff的id 对应magic的id
 	private String cType = null;                    //类名
 	private String name = null;
 	private String depiction = null;
@@ -48,9 +48,9 @@ public abstract class Buff extends Observable implements IBuff {
 	
 	protected final static String Affect = "_Affect";
 
-	public Buff(Integer id, Integer bout, LifeCard life) {
+	public Buff(Integer type, Integer bout, LifeCard life) {
 		// TODO Auto-generated constructor stub
-		this.id = id;
+		this.type = type;
 		this.owner = life;
 		this.bout = bout;
 		recordIntercepter(life.getPlayer().getAddBoutAction(), this);
@@ -64,9 +64,9 @@ public abstract class Buff extends Observable implements IBuff {
 	}
 	
 	@Override
-	public Integer getId() {
+	public Integer getType() {
 		// TODO Auto-generated method stub
-		return this.id;
+		return this.type;
 	}
 	
 	@Override
@@ -107,12 +107,6 @@ public abstract class Buff extends Observable implements IBuff {
 	
 	public void setDef(Integer def) {
 		this.def = def;
-	}
-	
-	@Override
-	public String getCType() {
-		// TODO Auto-generated method stub
-		return cType;
 	}
 	
 	public String getName() {
@@ -308,14 +302,14 @@ public abstract class Buff extends Observable implements IBuff {
 	public Boolean contains(Integer tag) {
 		// TODO Auto-generated method stub
 		List<Integer> objectList = Context.queryForTag(tag);
-		return objectList.contains(getId());
+		return objectList.contains(getType());
 	}
 	
 	@Override
 	public List<Integer> queryTagForCategory(Integer category) {
 		// TODO Auto-generated method stub
 		List<Integer> list1 =  Context.queryForCategory(category);
-		List<Integer> list2 = Context.queryForObject(getId());
+		List<Integer> list2 = Context.queryForObject(getType());
 		list2.retainAll(list1);
 		return list2;
 	}
@@ -323,7 +317,7 @@ public abstract class Buff extends Observable implements IBuff {
 	@Override
 	public List<Integer> queryTagForObject() {
 		// TODO Auto-generated method stub
-		return Context.queryForObject(getId());
+		return Context.queryForObject(getType());
 	}
 
 	@Override
