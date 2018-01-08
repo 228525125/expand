@@ -1,9 +1,10 @@
-package org.cx.game.card.buff;
+package org.cx.game.magic.buff;
 
 import java.util.List;
 
-import org.cx.game.card.LifeCard;
-import org.cx.game.card.magic.IMagic;
+import org.cx.game.corps.Corps;
+import org.cx.game.magic.buff.IBuff;
+import org.cx.game.magic.IMagic;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.intercepter.IIntercepter;
 import org.cx.game.intercepter.Intercepter;
@@ -20,8 +21,8 @@ public class DizzyBuff extends Buff {
 
 	public static final Integer DizzyBuff_ID = 10350001;
 	
-	public DizzyBuff(Integer bout, LifeCard life) {
-		super(DizzyBuff_ID, bout, life);
+	public DizzyBuff(Integer bout, Corps corps) {
+		super(DizzyBuff_ID, bout, corps);
 		// TODO Auto-generated constructor stub
 	}
 

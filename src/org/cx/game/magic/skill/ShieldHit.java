@@ -1,10 +1,10 @@
-package org.cx.game.card.skill;
+package org.cx.game.magic.skill;
 
 import org.cx.game.action.IAttack;
-import org.cx.game.card.LifeCard;
-import org.cx.game.card.skill.ActiveSkill;
-import org.cx.game.card.buff.DizzyBuff;
+import org.cx.game.corps.Corps;
+import org.cx.game.magic.skill.ActiveSkill;
 import org.cx.game.exception.RuleValidatorException;
+import org.cx.game.magic.buff.DizzyBuff;
 import org.cx.game.widget.IControlQueue;
 
 /**
@@ -29,7 +29,7 @@ public class ShieldHit extends ActiveSkill {
 		// TODO Auto-generated constructor stub
 		this.atkScale = atkScale;
 		this.bout = bout;
-		setParameterTypeValidator(new Class[]{LifeCard.class});
+		setParameterTypeValidator(new Class[]{Corps.class});
 	}
 
 	@Override
@@ -43,16 +43,16 @@ public class ShieldHit extends ActiveSkill {
 		// TODO Auto-generated method stub
 		super.affect(objects);
 		
-		LifeCard life = (LifeCard) objects[0];
+		Corps corps = (Corps) objects[0];
 		Integer atk = getOwner().getAtk();
 		try {
-			life.getDeath().addToHp(-atk*atkScale/100);
+			corps.getDeath().addToHp(-atk*atkScale/100);
 		} catch (RuleValidatorException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		new DizzyBuff(bout, life).effect();
+		new DizzyBuff(bout, corps).effect();
 	}
 	
 	@Override
@@ -60,8 +60,8 @@ public class ShieldHit extends ActiveSkill {
 		// TODO Auto-generated method stub
 		super.useSkill(objects);
 		
-		LifeCard life = (LifeCard) objects[0];
-		life.affected(this);
+		Corps corps = (Corps) objects[0];
+		corps.affected(this);
 	}
 	
 

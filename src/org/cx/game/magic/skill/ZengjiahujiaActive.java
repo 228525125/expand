@@ -1,4 +1,4 @@
-package org.cx.game.card.skill;
+package org.cx.game.magic.skill;
 
 import org.cx.game.exception.RuleValidatorException;
 

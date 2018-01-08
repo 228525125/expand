@@ -1,13 +1,13 @@
-package org.cx.game.card.buff;
+package org.cx.game.magic.buff;
 
-import org.cx.game.card.LifeCard;
+import org.cx.game.corps.Corps;
 
 public class ZengjiagongjiBuff extends Buff {
 
 	public final static Integer ZengjiagongjiBuff_ID = 10300002;
 	
-	public ZengjiagongjiBuff(Integer bout, Integer atk, LifeCard life) {
-		super(ZengjiagongjiBuff_ID, bout, life);
+	public ZengjiagongjiBuff(Integer bout, Integer atk, Corps corps) {
+		super(ZengjiagongjiBuff_ID, bout, corps);
 		// TODO Auto-generated constructor stub
 		
 		setAtk(atk);

@@ -1,4 +1,4 @@
-package org.cx.game.card.buff;
+package org.cx.game.magic.buff;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,8 +9,8 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Map.Entry;
 
-import org.cx.game.card.LifeCard;
-import org.cx.game.card.magic.IMagic;
+import org.cx.game.corps.Corps;
+import org.cx.game.magic.IMagic;
 import org.cx.game.core.Context;
 import org.cx.game.intercepter.IInterceptable;
 import org.cx.game.intercepter.IIntercepter;
@@ -23,7 +23,7 @@ import org.cx.game.tools.I18n;
  * buff持续回合数计算方式：1、buff第一次影响单位的回合开始计算；
  * 2、从添加buff的回合开始计算
  * 目前采用第2种
- * 添加Buff使用lifecard addBuff，删除Buff使用buff invalid
+ * 添加Buff使用Corps addBuff，删除Buff使用buff invalid
  * 生命周期：effect -> affect -> invalid  = 生效 -> 产生影响 -> 失效
  * @author chenxian
  *
@@ -31,10 +31,9 @@ import org.cx.game.tools.I18n;
 public abstract class Buff extends Observable implements IBuff {
 
 	private Integer type = 0;                         //buff的id 对应magic的id
-	private String cType = null;                    //类名
 	private String name = null;
 	private String depiction = null;
-	private LifeCard owner;
+	private Corps owner;
 	private Map<String,List<IIntercepter>> intercepterList = new HashMap<String,List<IIntercepter>>();
 	private List<Map<IInterceptable, IIntercepter>> resetList = new ArrayList<Map<IInterceptable, IIntercepter>>();
 	private Boolean isDelete = false;
@@ -48,19 +47,14 @@ public abstract class Buff extends Observable implements IBuff {
 	
 	protected final static String Affect = "_Affect";
 
-	public Buff(Integer type, Integer bout, LifeCard life) {
+	public Buff(Integer type, Integer bout, Corps corps) {
 		// TODO Auto-generated constructor stub
 		this.type = type;
-		this.owner = life;
+		this.owner = corps;
 		this.bout = bout;
-		recordIntercepter(life.getPlayer().getAddBoutAction(), this);
+		recordIntercepter(corps.getPlayer().getAddBoutAction(), this);
 		
 		addObserver(JsonOut.getInstance());
-		
-		String allName = this.getClass().getName();
-		String packageName = this.getClass().getPackage().getName();
-		this.cType = allName.substring(packageName.length()+1);
-		setAction("Buff");
 	}
 	
 	@Override
@@ -81,11 +75,11 @@ public abstract class Buff extends Observable implements IBuff {
 		this.bout = bout;
 	}
 
-	public LifeCard getOwner() {
+	public Corps getOwner() {
 		return owner;
 	}
 	
-	public void setOwner(LifeCard owner){
+	public void setOwner(Corps owner){
 		this.owner = owner;
 	}
 	

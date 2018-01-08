@@ -1,14 +1,14 @@
-package org.cx.game.card.skill;
+package org.cx.game.magic.skill;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.cx.game.action.IDeath;
-import org.cx.game.card.LifeCard;
-import org.cx.game.card.buff.AttackLockBuff;
-import org.cx.game.card.buff.IBuff;
-import org.cx.game.card.buff.TauntBuff;
+import org.cx.game.corps.Corps;
+import org.cx.game.magic.buff.IBuff;
 import org.cx.game.exception.RuleValidatorException;
+import org.cx.game.magic.buff.AttackLockBuff;
+import org.cx.game.magic.buff.TauntBuff;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.widget.IGround;
 
@@ -23,12 +23,12 @@ public class AttackLock extends PassiveSkill {
 
 	public static final Integer AttackLock_ID = 100111;
 	
-	private LifeCard attacked = null;
+	private Corps attacked = null;
 	
-	public AttackLock(LifeCard life) {
+	public AttackLock(Corps corps) {
 		super(AttackLock_ID);
 		// TODO Auto-generated constructor stub
-		setOwner(life);
+		setOwner(corps);
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class AttackLock extends PassiveSkill {
 	@Override
 	public void after(Object[] args) {
 		// TODO Auto-generated method stub
-		attacked = (LifeCard) ((Object[]) args[0])[0];
+		attacked = (Corps) ((Object[]) args[0])[0];
 		
 		List<IBuff> buffs = attacked.getBuff(AttackLockBuff.class);
 		Boolean exist = false;

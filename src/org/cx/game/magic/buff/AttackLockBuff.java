@@ -1,23 +1,23 @@
-package org.cx.game.card.buff;
+package org.cx.game.magic.buff;
 
 import java.util.List;
 
 import org.cx.game.action.Random;
-import org.cx.game.card.LifeCard;
-import org.cx.game.card.skill.TauntActive;
+import org.cx.game.corps.Corps;
 import org.cx.game.intercepter.IIntercepter;
 import org.cx.game.intercepter.Intercepter;
+import org.cx.game.magic.skill.TauntActive;
 import org.cx.game.tools.Debug;
 
 public class AttackLockBuff extends Buff {
 
 	public static final Integer AttackLockBuff_ID = 10300001;
 	public static final Integer Lock_Bout = 2;
-	private LifeCard attack = null;
+	private Corps attack = null;
 	
 	
-	public AttackLockBuff(LifeCard attack, LifeCard life) {
-		super(AttackLockBuff_ID, Lock_Bout, life);
+	public AttackLockBuff(Corps attack, Corps corps) {
+		super(AttackLockBuff_ID, Lock_Bout, corps);
 		// TODO Auto-generated constructor stub
 		this.attack = attack;
 		setDuplication(true);         //允许同时被多人锁定
@@ -54,7 +54,7 @@ public class AttackLockBuff extends Buff {
 			@Override
 			public void before(Object[] args) {
 				// TODO Auto-generated method stub				
-				LifeCard attacked = (LifeCard) ((Object[]) args[0])[0];
+				Corps attacked = (Corps) ((Object[]) args[0])[0];
 				
 				Boolean locked = false;
 				List<IBuff> buffs = getOwner().getBuff(AttackLockBuff.class);
@@ -108,7 +108,7 @@ public class AttackLockBuff extends Buff {
 	 * 发起锁定的一方
 	 * @return
 	 */
-	public LifeCard getLocker() {
+	public Corps getLocker() {
 		return attack;
 	}
 

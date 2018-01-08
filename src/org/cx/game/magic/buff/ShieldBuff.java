@@ -1,6 +1,7 @@
-package org.cx.game.card.buff;
+package org.cx.game.magic.buff;
 
-import org.cx.game.card.LifeCard;
+import org.cx.game.corps.Corps;
+import org.cx.game.magic.buff.IBuff;
 import org.cx.game.intercepter.IIntercepter;
 import org.cx.game.intercepter.Intercepter;
 
@@ -13,8 +14,8 @@ public class ShieldBuff extends Buff {
 
 	public static final Integer ShieldBuff_ID = 10300004;
 	
-	public ShieldBuff(LifeCard life) {
-		super(ShieldBuff_ID, IBuff.Max_Bout, life);
+	public ShieldBuff(Corps corps) {
+		super(ShieldBuff_ID, IBuff.Max_Bout, corps);
 		// TODO Auto-generated constructor stub
 	}
 	

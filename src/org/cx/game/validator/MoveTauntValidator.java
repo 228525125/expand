@@ -1,7 +1,7 @@
 package org.cx.game.validator;
 
-import org.cx.game.card.buff.TauntBuff;
 import org.cx.game.command.CommandBuffer;
+import org.cx.game.magic.buff.TauntBuff;
 import org.cx.game.tools.I18n;
 
 /**
@@ -9,7 +9,7 @@ import org.cx.game.tools.I18n;
  * @author chenxian
  *
  */
-public class MoveTauntValidator extends SelectLifeCardValidator {
+public class MoveTauntValidator extends SelectCorpsValidator {
 
 	public MoveTauntValidator(CommandBuffer buffer) {
 		super(buffer);
@@ -22,7 +22,7 @@ public class MoveTauntValidator extends SelectLifeCardValidator {
 		Boolean ret = super.validate();
 		
 		Boolean tauntValidate = true;
-		if(getLifeCard().containsBuff(TauntBuff.class)){
+		if(getCorps().containsBuff(TauntBuff.class)){
 			tauntValidate = false;
 		}
 		

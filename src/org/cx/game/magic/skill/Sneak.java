@@ -1,7 +1,7 @@
-package org.cx.game.card.skill;
+package org.cx.game.magic.skill;
 
-import org.cx.game.card.LifeCard;
-import org.cx.game.card.skill.PassiveSkill;
+import org.cx.game.corps.Corps;
+import org.cx.game.magic.skill.PassiveSkill;
 
 /**
  * 潜行
@@ -18,11 +18,11 @@ public class Sneak extends PassiveSkill {
 	}
 
 	@Override
-	public void setOwner(LifeCard life) {
+	public void setOwner(Corps corps) {
 		// TODO Auto-generated method stub
-		super.setOwner(life);
+		super.setOwner(corps);
 		
-		life.getCall().addIntercepter(this);
+		corps.getCall().addIntercepter(this);
 	}
 	
 	@Override

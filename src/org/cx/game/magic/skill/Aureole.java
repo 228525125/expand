@@ -1,10 +1,10 @@
-package org.cx.game.card.skill;
+package org.cx.game.magic.skill;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.cx.game.card.LifeCard;
-import org.cx.game.card.buff.IBuff;
+import org.cx.game.corps.Corps;
+import org.cx.game.magic.buff.IBuff;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.intercepter.IIntercepter;
 import org.cx.game.intercepter.Intercepter;
@@ -21,7 +21,7 @@ public abstract class Aureole extends PassiveSkill {
 	public final static Integer Default_AureoleBuff_Bout = 99;
 	
 	private Integer range = 0;
-	private List<LifeCard> affectedList = new ArrayList<LifeCard>();
+	private List<Corps> affectedList = new ArrayList<Corps>();
 	
 	public Aureole(Integer id, Integer range) {
 		super(id);
@@ -30,11 +30,11 @@ public abstract class Aureole extends PassiveSkill {
 	}
 
 	@Override
-	public void setOwner(LifeCard life) {
+	public void setOwner(Corps corps) {
 		// TODO Auto-generated method stub
-		super.setOwner(life);
+		super.setOwner(corps);
 		
-		life.getCall().addIntercepter(new Intercepter(){
+		corps.getCall().addIntercepter(new Intercepter(){
 			@Override
 			public void after(Object[] args) {
 				// TODO Auto-generated method stub
@@ -43,20 +43,20 @@ public abstract class Aureole extends PassiveSkill {
 			}
 		});
 		
-		life.getDeath().addIntercepter(new Intercepter(){
+		corps.getDeath().addIntercepter(new Intercepter(){
 			@Override
 			public void after(Object[] args) {
 				// TODO Auto-generated method stub
 				getOwner().getPlayer().getAddBoutAction().deleteIntercepter(this);
-				for(LifeCard life : affectedList){
-					List<IBuff> buffs = life.getBuff(getBuffClass());
+				for(Corps corps : affectedList){
+					List<IBuff> buffs = corps.getBuff(getBuffClass());
 					if(buffs.isEmpty())
 						buffs.get(0).invalid();
 				}
 			}
 		});
 		
-		life.getMove().addIntercepter(new Intercepter(){
+		corps.getMove().addIntercepter(new Intercepter(){
 			@Override
 			public void finish(Object[] args) {
 				// TODO Auto-generated method stub
@@ -73,12 +73,12 @@ public abstract class Aureole extends PassiveSkill {
 		this.range = range;
 	}
 	
-	public abstract void leave(LifeCard life);
+	public abstract void leave(Corps corps);
 	public abstract Class getBuffClass();
 	
-	public void into(LifeCard life){
+	public void into(Corps corps){
 		try {
-			life.affected(this);
+			corps.affected(this);
 		} catch (RuleValidatorException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -87,22 +87,22 @@ public abstract class Aureole extends PassiveSkill {
 
 	private void refurbish(){
 		IGround ground = getOwner().getPlayer().getContext().getGround();
-		List<LifeCard> ls = ground.list(getOwner().getPosition(), getRange(), IGround.Contain);
+		List<Corps> ls = ground.list(getOwner().getPosition(), getRange(), IGround.Contain);
 		
-		List<LifeCard> tempList = new ArrayList<LifeCard>();  //将离开范围的life去掉buff
+		List<Corps> tempList = new ArrayList<Corps>();  //将离开范围的corps去掉buff
 		tempList.addAll(affectedList);
 		
 		tempList.removeAll(ls);
-		for(LifeCard life : tempList){
-			leave(life);
+		for(Corps corps : tempList){
+			leave(corps);
 		}
 		
-		tempList.clear();                 //将新进范围的life加上buff
+		tempList.clear();                 //将新进范围的corps加上buff
 		tempList.addAll(ls);
 		
 		tempList.removeAll(affectedList);
-		for(LifeCard life : tempList){
-			into(life);
+		for(Corps corps : tempList){
+			into(corps);
 		}
 		
 		affectedList = ls;

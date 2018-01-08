@@ -1,16 +1,17 @@
-package org.cx.game.card.buff;
+package org.cx.game.magic.buff;
 
 import java.util.List;
 
-import org.cx.game.card.LifeCard;
+import org.cx.game.corps.Corps;
+import org.cx.game.magic.buff.IBuff;
 
 public class TauntBuff extends Buff {
 
 	public final static Integer TauntBuff_ID = 10300006;
-	private LifeCard taunter = null;
+	private Corps taunter = null;
 	
-	public TauntBuff(LifeCard taunter, LifeCard life) {
-		super(TauntBuff_ID, IBuff.Max_Bout, life);
+	public TauntBuff(Corps taunter, Corps corps) {
+		super(TauntBuff_ID, IBuff.Max_Bout, corps);
 		// TODO Auto-generated constructor stub
 		this.taunter = taunter;
 	}
@@ -38,7 +39,7 @@ public class TauntBuff extends Buff {
 		affect();
 	}
 
-	public LifeCard getTaunter() {
+	public Corps getTaunter() {
 		return taunter;
 	}
 }

@@ -1,14 +1,14 @@
-package org.cx.game.card.skill;
+package org.cx.game.magic.skill;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.cx.game.card.LifeCard;
-import org.cx.game.card.buff.TauntBuff;
-import org.cx.game.card.skill.PassiveSkill;
+import org.cx.game.corps.Corps;
 import org.cx.game.core.Context;
 import org.cx.game.core.IPlayer;
+import org.cx.game.magic.skill.PassiveSkill;
 import org.cx.game.exception.RuleValidatorException;
+import org.cx.game.magic.buff.TauntBuff;
 import org.cx.game.widget.IGround;
 
 /**
@@ -29,8 +29,8 @@ public class TauntActive extends ActiveSkill {
 		// TODO Auto-generated constructor stub
 	}
 	
-	private List<LifeCard> getAffectedList() {
-		List<LifeCard> ls = new ArrayList<LifeCard>();
+	private List<Corps> getAffectedList() {
+		List<Corps> ls = new ArrayList<Corps>();
 		IPlayer player = getOwner().getPlayer();
 		IGround ground = player.getContext().getGround();
 		Integer position = getOwner().getPosition();
@@ -38,17 +38,17 @@ public class TauntActive extends ActiveSkill {
 		list.remove(position);
 		
 		for(Integer p : list){
-			LifeCard card = ground.getCard(p);
+			Corps corps = ground.getCorps(p);
 			
-			if(null==card){
+			if(null==corps){
 				continue;
 			}
 			
-			if(card.getPlayer().equals(player)){
+			if(corps.getPlayer().equals(player)){
 				continue;
 			}
 			
-			ls.add(card);
+			ls.add(corps);
 			break;
 		}
 		
@@ -60,10 +60,10 @@ public class TauntActive extends ActiveSkill {
 		// TODO Auto-generated method stub
 		super.useSkill(objects);
 		
-		List<LifeCard> ls = getAffectedList();
+		List<Corps> ls = getAffectedList();
 		
-		for(LifeCard life : ls){
-			life.affected(this);
+		for(Corps corps : ls){
+			corps.affected(this);
 		}
 	}
 	
@@ -72,8 +72,8 @@ public class TauntActive extends ActiveSkill {
 		// TODO Auto-generated method stub
 		super.affect(objects);
 		
-		LifeCard life = (LifeCard) objects[0];
-		new TauntBuff(getOwner(),life).effect();
+		Corps corps = (Corps) objects[0];
+		new TauntBuff(getOwner(),corps).effect();
 	}
 
 }
