@@ -35,7 +35,7 @@ public class RunbackPolicy extends Policy {
 		Corps owner = (Corps) getOwner().getOwner();
 		
 		IGround ground = GroundFactory.getGround();
-		Integer position = ground.getPointByWay(owner.getPosition(), this.guardPosition, owner.getMove().getEnergy(), owner.getMove().getType());
+		Integer position = ground.getPointByWay(owner.getPosition(), this.guardPosition, owner.getMove().getEnergy(), owner.getMove().getType(), owner.getPlayer());
 		
 		this.cmdStr = "move ground place"+position+";";
 		
