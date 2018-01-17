@@ -15,7 +15,7 @@ public class ContextFactory {
 	}
 
 	public static IContext getInstance(IGround ground, IPlayer... players){
-		context = new SimpleContext(ground, players);
+		context = new Context(ground, players);
 
 		for(int i=0;i<players.length;i++){
 			players[i].setContext(context);

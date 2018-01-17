@@ -13,13 +13,13 @@ import org.cx.game.action.Attacked;
 import org.cx.game.action.Call;
 import org.cx.game.action.Death;
 import org.cx.game.action.Move;
-import org.cx.game.action.UpgradeBuilding;
 import org.cx.game.action.UpgradeHero;
 import org.cx.game.action.UpgradeCorps;
 import org.cx.game.action.UpgradeSkill;
 import org.cx.game.core.Player;
-import org.cx.game.corps.Corps;
+import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Hero;
+import org.cx.game.corps.Corps;
 import org.cx.game.magic.trick.ITrick;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.widget.Cemetery;
@@ -34,13 +34,14 @@ import org.cx.game.widget.building.OptionBuild;
 import org.cx.game.widget.building.OptionBuildingUpgrade;
 import org.cx.game.widget.building.OptionCall;
 import org.cx.game.widget.building.OptionRevive;
+import org.cx.game.widget.building.UpgradeBuilding;
 import org.cx.game.widget.treasure.EmpiricValue;
 import org.cx.game.widget.treasure.Resource;
 import org.cx.game.widget.treasure.SkillCount;
 import org.cx.game.widget.treasure.TreasureEquipment;
 import org.cx.game.widget.treasure.TreasureResource;
 
-public class JsonOut extends Response {
+public class JsonOut extends AbstractResponse {
 	
 	@Override
 	public void update(Observable o, Object arg) {
@@ -56,7 +57,7 @@ public class JsonOut extends Response {
 	}
 	
 	@Override
-	public Object convert(Response resp) {
+	public Object convert(AbstractResponse resp) {
 		// TODO Auto-generated method stub
 		return JSONObject.fromObject(resp,getConfig());
 	}
@@ -291,7 +292,7 @@ public class JsonOut extends Response {
 					// TODO Auto-generated method stub
 					Cemetery obj = (Cemetery) arg0;
 					String corpsList = "";
-					for(Corps corps : obj.getList()){
+					for(AbstractCorps corps : obj.getList()){
 						corpsList += corps.getName();
 					}
 					

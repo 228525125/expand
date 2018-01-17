@@ -1,7 +1,7 @@
 package org.cx.game.command;
 
 import org.cx.game.core.IPlayer;
-import org.cx.game.corps.Corps;
+import org.cx.game.corps.AbstractCorps;
 import org.cx.game.exception.ValidatorException;
 import org.cx.game.validator.SelectCorpsValidator;
 
@@ -18,7 +18,7 @@ public class ChuckCommand extends InteriorCommand {
 		// TODO Auto-generated method stub
 		super.execute();
 		
-		Corps corps = buffer.getCorps();
+		AbstractCorps corps = buffer.getCorps();
 		corps.chuck();
 	}
 }

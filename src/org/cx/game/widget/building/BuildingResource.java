@@ -5,7 +5,7 @@ import java.util.Map;
 import org.cx.game.widget.treasure.IResource;
 import org.cx.game.widget.treasure.Resource;
 
-public class BuildingResource extends Building {
+public class BuildingResource extends AbstractBuilding {
 	
 	private IResource resource = null;
 	

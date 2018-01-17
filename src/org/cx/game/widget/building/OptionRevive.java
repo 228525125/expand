@@ -8,14 +8,13 @@ import java.util.Observer;
 
 import org.cx.game.action.Execute;
 import org.cx.game.action.IExecute;
-import org.cx.game.corps.CorpsFactory;
-import org.cx.game.corps.Corps;
 import org.cx.game.corps.Hero;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.I18n;
 import org.cx.game.validator.CallConsumeValidator;
 import org.cx.game.validator.CallRangeValidator;
+import org.cx.game.widget.AbstractPlace;
 import org.cx.game.widget.IGround;
 import org.cx.game.widget.Place;
 
@@ -24,17 +23,17 @@ import org.cx.game.widget.Place;
  * @author chenxian
  *
  */
-public class OptionRevive extends Option implements IOption {
+public class OptionRevive extends AbstractOption implements IOption {
 
 	private String name = null;
-	private Corps hero = null;
+	private Hero hero = null;
 
-	public OptionRevive(Corps hero) {
+	public OptionRevive(Hero hero) {
 		// TODO Auto-generated constructor stub
 		this.hero = hero;
 		this.hero.getDeath().addObserver(new OptionObserver());
 		
-		setParameterTypeValidator(new Class[]{Place.class}, new String[]{"empty"}, new Object[]{true});
+		setParameterTypeValidator(new Class[]{AbstractPlace.class}, new String[]{"empty"}, new Object[]{true});
 	}
 	
 	@Override
@@ -89,7 +88,7 @@ public class OptionRevive extends Option implements IOption {
 				
 				if(NotifyInfo.Corps_Death.equals(info.getType())){
 					Map bean = (Map) info.getInfo();
-					Corps hero = (Corps) bean.get("card");
+					Hero hero = (Hero) bean.get("card");
 					
 					setSpacingWait(hero.getUpgrade().getLevel());
 					cooling();
@@ -101,9 +100,9 @@ public class OptionRevive extends Option implements IOption {
 	
 	public class OptionReviveExecute extends Execute implements IExecute {
 		
-		private Corps hero = null;
+		private Hero hero = null;
 
-		public OptionReviveExecute(Corps hero) {
+		public OptionReviveExecute(Hero hero) {
 			// TODO Auto-generated constructor stub
 			this.hero = hero;
 		}
@@ -115,7 +114,7 @@ public class OptionRevive extends Option implements IOption {
 			
 			super.action(objects);
 			
-			Place place = (Place) objects[0];
+			AbstractPlace place = (Place) objects[0];
 			this.hero.call(place,1);
 		}
 	}

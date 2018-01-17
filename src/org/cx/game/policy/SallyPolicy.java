@@ -6,7 +6,6 @@ import org.cx.game.command.Invoker;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.ValidatorException;
 import org.cx.game.policy.IPolicy;
-import org.cx.game.policy.Policy;
 import org.cx.game.policy.formula.ChujifanweineidedirenFormula;
 import org.cx.game.policy.formula.NotLockFormula;
 import org.cx.game.policy.formula.NotStagnantFormula;
@@ -17,7 +16,7 @@ import org.cx.game.policy.formula.StagnantFormula;
  * @author chenxian
  *
  */
-public class SallyPolicy extends Policy {
+public class SallyPolicy extends AbstractPolicy {
 
 	private Integer guardPosition = null;
 	private String cmdStr = "";

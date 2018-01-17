@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.cx.game.action.Execute;
 import org.cx.game.action.IExecute;
+import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.CorpsFactory;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
@@ -18,7 +19,7 @@ import org.cx.game.widget.IGround;
 import org.cx.game.widget.Place;
 import org.cx.game.widget.building.OptionBuild.OptionBuildExecute;
 
-public class OptionCall extends Option implements IOption {
+public class OptionCall extends AbstractOption implements IOption {
 
 	private Integer corpsID = 0;
 	private String name = null;
@@ -64,17 +65,17 @@ public class OptionCall extends Option implements IOption {
 	public void execute(Object...objects) throws RuleValidatorException {
 		// TODO Auto-generated method stub
 		Place place = (Place) objects[0];
-		Corps corps = (Corps) CorpsFactory.getInstance(corpsID, getOwner().getPlayer());
+		AbstractCorps corps = (AbstractCorps) CorpsFactory.getInstance(corpsID, getOwner().getPlayer());
 		
 		if(null!=place.getCorps())            //如果是补充兵源，就判断招募的兵源是否一致
-			getExecute().addValidator(new CallUnitEqualValidator(place.getCorps(), corps));
+			getExecute().addValidator(new CallUnitEqualValidator(place.getCorps(), (Corps) corps));
 		
-		getExecute().addValidator(new CallConsumeValidator(corps, getNumber()));
+		getExecute().addValidator(new CallConsumeValidator((Corps) corps, getNumber()));
 		getExecute().addValidator(new CallRangeValidator(getOwner(), place));
-		getExecute().addValidator(new RationLimitValidator(corps, getNumber()));
+		getExecute().addValidator(new RationLimitValidator((Corps) corps, getNumber()));
 		//验证单个队伍人口上限
 		
-		getExecute().addValidator(new CallNopValidator(corps, getNumber(), getOwner()));
+		getExecute().addValidator(new CallNopValidator((Corps) corps, getNumber(), getOwner()));
 		
 		super.execute(objects);		
 	}
@@ -113,7 +114,7 @@ public class OptionCall extends Option implements IOption {
 			
 			Place place = (Place) objects[0];
 			
-			Corps corps = (Corps) CorpsFactory.getInstance(corpsID, getOwner().getOwner().getPlayer());
+			AbstractCorps corps = (AbstractCorps) CorpsFactory.getInstance(corpsID, getOwner().getOwner().getPlayer());
 			corps.call(place, getNumber());
 		}
 	}

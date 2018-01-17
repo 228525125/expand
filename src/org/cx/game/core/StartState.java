@@ -7,19 +7,17 @@ import java.util.Random;
 import java.util.Set;
 
 import org.cx.game.corps.CorpsFactory;
-import org.cx.game.corps.Corps;
 import org.cx.game.corps.Hero;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.widget.GroundFactory;
 import org.cx.game.widget.IGround;
-import org.cx.game.widget.Place;
 import org.cx.game.widget.building.IBuilding;
 import org.cx.game.widget.building.IOption;
 import org.cx.game.widget.building.OptionRevive;
 import org.cx.game.widget.treasure.ITreasure;
 
-public class StartState extends PlayState {
+public class StartState extends AbstractPlayState {
 	
 	@Override
 	public void deploy() throws RuleValidatorException {
@@ -95,7 +93,7 @@ public class StartState extends PlayState {
 		 */
 		for(IPlayer player : context.getPlayerList()){
 			for(Integer heroID : player.getHeroIDList()){
-				Corps hero = (Corps) CorpsFactory.getInstance(heroID, player);
+				Hero hero = (Hero) CorpsFactory.getInstance(heroID, player);
 				IBuilding town = ground.getBuilding(player.getHomePosition());
 				IOption reviveOption = new OptionRevive(hero);
 				reviveOption.setOwner(town);

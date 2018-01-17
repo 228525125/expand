@@ -1,6 +1,7 @@
 package org.cx.game.validator;
 
 import org.cx.game.command.CommandBuffer;
+import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 import org.cx.game.tools.I18n;
 
@@ -23,10 +24,10 @@ public class SelectCorpsValidator extends Validator {
 	public Boolean validate() {
 		// TODO Auto-generated method stub
 		Boolean ret = true; 
-		Corps corps = buffer.getCorps(); ;
+		AbstractCorps corps = buffer.getCorps(); ;
 		
 		if(null!=corps){
-			this.corps = corps;
+			this.corps = (Corps) corps;
 			ret = true;
 		}else{
 			addMessage(I18n.getMessage(SelectCorpsValidator.class.getName()));

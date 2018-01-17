@@ -6,8 +6,8 @@ import org.cx.game.corps.Corps;
 import org.cx.game.magic.buff.IBuff;
 import org.cx.game.magic.IMagic;
 import org.cx.game.exception.RuleValidatorException;
+import org.cx.game.intercepter.AbstractIntercepter;
 import org.cx.game.intercepter.IIntercepter;
-import org.cx.game.intercepter.Intercepter;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.I18n;
 import org.cx.game.widget.IControlQueue;
@@ -17,13 +17,19 @@ import org.cx.game.widget.IControlQueue;
  * @author chenxian
  *
  */
-public class DizzyBuff extends Buff {
+public class DizzyBuff extends AbstractBuff {
 
 	public static final Integer DizzyBuff_ID = 10350001;
 	
 	public DizzyBuff(Integer bout, Corps corps) {
 		super(DizzyBuff_ID, bout, corps);
 		// TODO Auto-generated constructor stub
+	}
+	
+	@Override
+	public Corps getOwner() {
+		// TODO Auto-generated method stub
+		return (Corps) super.getOwner();
 	}
 
 	@Override
@@ -43,7 +49,7 @@ public class DizzyBuff extends Buff {
 		 */
 		getOwner().getAttacked().setFightBack(false);
 		
-		IIntercepter activateIn = new Intercepter() {    //当activate状态为true时，将激活状态改为false
+		IIntercepter activateIn = new AbstractIntercepter() {    //当activate状态为true时，将激活状态改为false
 
 			@Override
 			public void after(Object[] args) {

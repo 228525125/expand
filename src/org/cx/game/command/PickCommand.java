@@ -1,6 +1,7 @@
 package org.cx.game.command;
 
 import org.cx.game.core.IPlayer;
+import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.ValidatorException;
 import org.cx.game.validator.AttackableValidator;
@@ -40,7 +41,7 @@ public class PickCommand extends InteriorCommand {
 		// TODO Auto-generated method stub
 		super.execute();
 		
-		Corps corps = (Corps) buffer.getCorps();
+		AbstractCorps corps = buffer.getCorps();
 		Place place = (Place) parameter;
 		ITreasure treasure = place.getTreasure();
 		corps.pick(treasure);

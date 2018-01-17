@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.cx.game.widget.treasure.IResource;
 
-public class BuildingCall extends Building implements IBuilding {
+public class BuildingCall extends AbstractBuilding implements IBuilding {
 
 	private Integer corpsID = null;       //可招募单位
 	private Integer nop = 0;             //当前可招募数量

@@ -2,7 +2,7 @@ package org.cx.game.core;
 
 import java.util.List;
 
-import org.cx.game.action.Action;
+import org.cx.game.action.AbstractAction;
 import org.cx.game.action.IAction;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.widget.IGround;
@@ -11,33 +11,37 @@ import org.cx.game.widget.building.BuildingResource;
 import org.cx.game.widget.building.BuildingTown;
 import org.cx.game.widget.building.IBuilding;
 
-public class SimpleContext extends Context {
+public class Context extends AbstractContext {
 
-	public SimpleContext(IGround ground, IPlayer[] players) {
+	private int bout = 0;  //回合	
+	private Integer day = 0; //天
+	private Integer week = 0; //星期几
+	
+	public Context(IGround ground, IPlayer[] players) {
 		super(ground, players);
 		// TODO Auto-generated constructor stub
 	}
 	
 	@Override
-	public PlayState getStartState() {
+	public AbstractPlayState getStartState() {
 		// TODO Auto-generated method stub
 		return new StartState();
 	}
 	
 	@Override
-	public PlayState getDeployState() {
+	public AbstractPlayState getDeployState() {
 		// TODO Auto-generated method stub
 		return new DeployState();
 	}
 	
 	@Override
-	public PlayState getDoneState() {
+	public AbstractPlayState getDoneState() {
 		// TODO Auto-generated method stub
 		return new DoneState();
 	}
 	
 	@Override
-	public PlayState getFinishState() {
+	public AbstractPlayState getFinishState() {
 		// TODO Auto-generated method stub
 		return new FinishState();
 	}
@@ -49,6 +53,16 @@ public class SimpleContext extends Context {
 		super.start();
 	}
 	
+	@Override
+	public int getBout() {
+		return bout;
+	}
+	
+	@Override
+	public void addBout() throws RuleValidatorException{
+		getAddBoutAction().execute();
+	}
+	
 	private IAction addBoutAction = null;
 	
 	public IAction getAddBoutAction(){
@@ -58,11 +72,7 @@ public class SimpleContext extends Context {
 		}
 		return this.addBoutAction;
 	}
-	
-	public void addBout() throws RuleValidatorException{
-		getAddBoutAction().execute();
-	}
-	
+
 	@Override
 	public Integer getDay() {
 		// TODO Auto-generated method stub
@@ -109,7 +119,7 @@ public class SimpleContext extends Context {
 		getAddWeekAction().execute();
 	}
 	
-	public class ContextAddBout extends Action implements IAction {
+	public class ContextAddBout extends AbstractAction implements IAction {
 		
 		@Override
 		public void action(Object... objects) throws RuleValidatorException {
@@ -138,7 +148,7 @@ public class SimpleContext extends Context {
 		}
 	}
 	
-	public class ContextAddDay extends Action implements IAction {
+	public class ContextAddDay extends AbstractAction implements IAction {
 		
 		@Override
 		public void action(Object... objects) throws RuleValidatorException {
@@ -175,7 +185,7 @@ public class SimpleContext extends Context {
 		}
 	}
 	
-	public class ContextAddWeek extends Action implements IAction {
+	public class ContextAddWeek extends AbstractAction implements IAction {
 		
 		@Override
 		public void action(Object... objects) throws RuleValidatorException {

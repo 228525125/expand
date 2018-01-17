@@ -10,7 +10,7 @@ import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.magic.buff.AttackLockBuff;
 import org.cx.game.magic.buff.IBuff;
 
-public class ActivateRule extends Rule implements IRule {
+public class ActivateRule extends AbstractRule implements IRule {
 	
 	@Override
 	public void after(Object[] args) {

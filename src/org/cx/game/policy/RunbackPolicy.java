@@ -6,7 +6,6 @@ import org.cx.game.command.Invoker;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.ValidatorException;
 import org.cx.game.policy.IPolicy;
-import org.cx.game.policy.Policy;
 import org.cx.game.policy.formula.MoveableFormula;
 import org.cx.game.policy.formula.NotLockFormula;
 import org.cx.game.policy.formula.NotStagnantFormula;
@@ -18,7 +17,7 @@ import org.cx.game.widget.IGround;
  * @author chenxian
  *
  */
-public class RunbackPolicy extends Policy {
+public class RunbackPolicy extends AbstractPolicy {
 
 	private Integer guardPosition = null;
 	private String cmdStr = "";

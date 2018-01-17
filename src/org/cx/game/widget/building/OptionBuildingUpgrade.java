@@ -12,7 +12,7 @@ import org.cx.game.tools.I18n;
 import org.cx.game.validator.UpgradeConsumeValidator;
 import org.cx.game.widget.IGround;
 
-public class OptionBuildingUpgrade extends Option implements IOption {
+public class OptionBuildingUpgrade extends AbstractOption implements IOption {
 
 	private String name = null;
 	

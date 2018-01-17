@@ -1,7 +1,7 @@
 package org.cx.game.validator;
 
 import org.cx.game.command.CommandBuffer;
-import org.cx.game.corps.Corps;
+import org.cx.game.corps.AbstractCorps;
 import org.cx.game.magic.skill.ISkill;
 import org.cx.game.tools.I18n;
 import org.cx.game.widget.building.IOption;
@@ -9,7 +9,7 @@ import org.cx.game.widget.building.IOption;
 public class QueryCommandValidator extends Validator {
 
 	private String action = null;
-	private Corps corps = null;
+	private AbstractCorps corps = null;
 	private ISkill skill = null;
 	private IOption option = null;
 	

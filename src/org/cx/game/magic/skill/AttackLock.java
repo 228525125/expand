@@ -3,7 +3,9 @@ package org.cx.game.magic.skill;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.cx.game.action.IAction;
 import org.cx.game.action.IDeath;
+import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 import org.cx.game.magic.buff.IBuff;
 import org.cx.game.exception.RuleValidatorException;
@@ -29,6 +31,12 @@ public class AttackLock extends PassiveSkill {
 		super(AttackLock_ID);
 		// TODO Auto-generated constructor stub
 		setOwner(corps);
+	}
+	
+	@Override
+	public Corps getOwner() {
+		// TODO Auto-generated method stub
+		return (Corps) super.getOwner();
 	}
 
 	@Override
@@ -66,7 +74,7 @@ public class AttackLock extends PassiveSkill {
 		}
 		
 		Integer distance = ground.distance(attacked.getPosition(), getOwner().getPosition());
-		if(IDeath.Status_Live == attacked.getDeath().getStatus()
+		if(AbstractCorps.Death_Status_Live == attacked.getDeath().getStatus()
 		&& 1==distance                                           //近身
 		&& !exist                                                //判断是否被锁定过
 		&& taunt)                                               //判断是否受到身边具有嘲讽的敌人的影响                                

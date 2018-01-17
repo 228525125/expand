@@ -3,10 +3,8 @@ package org.cx.game.magic.skill;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.cx.game.corps.Corps;
-import org.cx.game.core.Context;
 import org.cx.game.core.IPlayer;
-import org.cx.game.magic.skill.PassiveSkill;
+import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.magic.buff.TauntBuff;
 import org.cx.game.widget.IGround;
@@ -38,7 +36,7 @@ public class TauntActive extends ActiveSkill {
 		list.remove(position);
 		
 		for(Integer p : list){
-			Corps corps = ground.getCorps(p);
+			Corps corps = (Corps) ground.getCorps(p);
 			
 			if(null==corps){
 				continue;

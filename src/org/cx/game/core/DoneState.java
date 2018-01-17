@@ -4,11 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
 
-public class DoneState extends PlayState {
+public class DoneState extends AbstractPlayState {
 
 	@Override
 	public void deploy() throws RuleValidatorException {
@@ -20,9 +21,9 @@ public class DoneState extends PlayState {
 	@Override
 	public void done() throws RuleValidatorException {
 		// TODO Auto-generated method stub
-		IPlayer curPlayer = context.getControlPlayer();
+		Player curPlayer = (Player) context.getControlPlayer();
 		List<Corps> list = curPlayer.getAttendantList(true);
-		for(Corps corps : list){
+		for(AbstractCorps corps : list){
 			try {
 				corps.activate(false);
 			} catch (RuleValidatorException e) {

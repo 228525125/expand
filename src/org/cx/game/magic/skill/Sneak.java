@@ -1,6 +1,6 @@
 package org.cx.game.magic.skill;
 
-import org.cx.game.corps.Corps;
+import org.cx.game.corps.AbstractCorps;
 import org.cx.game.magic.skill.PassiveSkill;
 
 /**
@@ -18,7 +18,7 @@ public class Sneak extends PassiveSkill {
 	}
 
 	@Override
-	public void setOwner(Corps corps) {
+	public void setOwner(AbstractCorps corps) {
 		// TODO Auto-generated method stub
 		super.setOwner(corps);
 		

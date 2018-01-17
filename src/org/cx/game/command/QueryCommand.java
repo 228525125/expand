@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.cx.game.core.IPlayer;
-import org.cx.game.corps.Corps;
+import org.cx.game.corps.AbstractCorps;
 import org.cx.game.magic.skill.IActiveSkill;
 import org.cx.game.exception.CommandValidatorException;
 import org.cx.game.exception.ValidatorException;
@@ -55,14 +55,14 @@ public class QueryCommand extends InteriorCommand {
 			if(hasError())
 				throw new CommandValidatorException(getErrors().getMessage());
 			
-			Corps corps = (Corps) buffer.getCorps();           
+			AbstractCorps corps = buffer.getCorps();           
 			positionList = ground.queryRange(corps, map.get(parameter));   //这里需要计算
 		}else if("move".equals(parameter)){
 			doValidator(new SelectCorpsValidator(buffer));
 			if(hasError())
 				throw new CommandValidatorException(getErrors().getMessage());
 			
-			Corps corps = (Corps) buffer.getCorps();           
+			AbstractCorps corps = buffer.getCorps();           
 			positionList = ground.queryRange(corps, map.get(parameter));
 		}else if("execute".equals(parameter)){
 			doValidator(new SelectOptionValidator(buffer));
@@ -76,7 +76,7 @@ public class QueryCommand extends InteriorCommand {
 			if(hasError())
 				throw new CommandValidatorException(getErrors().getMessage());
 			
-			Corps corps = (Corps) buffer.getCorps();
+			AbstractCorps corps = buffer.getCorps();
 			positionList = ground.areaForDistance(corps.getPosition(), 1, IGround.Contain);
 		}
 	

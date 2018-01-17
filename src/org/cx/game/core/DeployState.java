@@ -6,7 +6,7 @@ import java.util.Map;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
 
-public class DeployState extends PlayState {
+public class DeployState extends AbstractPlayState {
 	
 	@Override
 	public void deploy() {

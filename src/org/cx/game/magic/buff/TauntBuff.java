@@ -5,7 +5,7 @@ import java.util.List;
 import org.cx.game.corps.Corps;
 import org.cx.game.magic.buff.IBuff;
 
-public class TauntBuff extends Buff {
+public class TauntBuff extends AbstractBuff {
 
 	public final static Integer TauntBuff_ID = 10300006;
 	private Corps taunter = null;
@@ -41,5 +41,11 @@ public class TauntBuff extends Buff {
 
 	public Corps getTaunter() {
 		return taunter;
+	}
+	
+	@Override
+	public Corps getOwner() {
+		// TODO Auto-generated method stub
+		return (Corps) super.getOwner();
 	}
 }

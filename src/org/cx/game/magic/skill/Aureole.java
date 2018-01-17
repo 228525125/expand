@@ -3,11 +3,12 @@ package org.cx.game.magic.skill;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 import org.cx.game.magic.buff.IBuff;
 import org.cx.game.exception.RuleValidatorException;
+import org.cx.game.intercepter.AbstractIntercepter;
 import org.cx.game.intercepter.IIntercepter;
-import org.cx.game.intercepter.Intercepter;
 import org.cx.game.widget.IGround;
 
 /**
@@ -21,7 +22,7 @@ public abstract class Aureole extends PassiveSkill {
 	public final static Integer Default_AureoleBuff_Bout = 99;
 	
 	private Integer range = 0;
-	private List<Corps> affectedList = new ArrayList<Corps>();
+	private List<AbstractCorps> affectedList = new ArrayList<AbstractCorps>();
 	
 	public Aureole(Integer id, Integer range) {
 		super(id);
@@ -30,11 +31,11 @@ public abstract class Aureole extends PassiveSkill {
 	}
 
 	@Override
-	public void setOwner(Corps corps) {
+	public void setOwner(AbstractCorps corps) {
 		// TODO Auto-generated method stub
 		super.setOwner(corps);
 		
-		corps.getCall().addIntercepter(new Intercepter(){
+		corps.getCall().addIntercepter(new AbstractIntercepter(){
 			@Override
 			public void after(Object[] args) {
 				// TODO Auto-generated method stub
@@ -43,12 +44,12 @@ public abstract class Aureole extends PassiveSkill {
 			}
 		});
 		
-		corps.getDeath().addIntercepter(new Intercepter(){
+		corps.getDeath().addIntercepter(new AbstractIntercepter(){
 			@Override
 			public void after(Object[] args) {
 				// TODO Auto-generated method stub
 				getOwner().getPlayer().getAddBoutAction().deleteIntercepter(this);
-				for(Corps corps : affectedList){
+				for(AbstractCorps corps : affectedList){
 					List<IBuff> buffs = corps.getBuff(getBuffClass());
 					if(buffs.isEmpty())
 						buffs.get(0).invalid();
@@ -56,7 +57,7 @@ public abstract class Aureole extends PassiveSkill {
 			}
 		});
 		
-		corps.getMove().addIntercepter(new Intercepter(){
+		corps.getMove().addIntercepter(new AbstractIntercepter(){
 			@Override
 			public void finish(Object[] args) {
 				// TODO Auto-generated method stub
@@ -87,22 +88,24 @@ public abstract class Aureole extends PassiveSkill {
 
 	private void refurbish(){
 		IGround ground = getOwner().getPlayer().getContext().getGround();
-		List<Corps> ls = ground.list(getOwner().getPosition(), getRange(), IGround.Contain);
+		List<AbstractCorps> ls = ground.list(getOwner().getPosition(), getRange(), IGround.Contain);
 		
-		List<Corps> tempList = new ArrayList<Corps>();  //将离开范围的corps去掉buff
+		List<AbstractCorps> tempList = new ArrayList<AbstractCorps>();  //将离开范围的corps去掉buff
 		tempList.addAll(affectedList);
 		
 		tempList.removeAll(ls);
-		for(Corps corps : tempList){
-			leave(corps);
+		for(AbstractCorps corps : tempList){
+			Corps sc = (Corps) corps;
+			leave(sc);
 		}
 		
 		tempList.clear();                 //将新进范围的corps加上buff
 		tempList.addAll(ls);
 		
 		tempList.removeAll(affectedList);
-		for(Corps corps : tempList){
-			into(corps);
+		for(AbstractCorps corps : tempList){
+			Corps sc = (Corps) corps;
+			into(sc);
 		}
 		
 		affectedList = ls;

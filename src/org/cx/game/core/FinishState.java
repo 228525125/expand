@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.cx.game.observer.NotifyInfo;
 
-public class FinishState extends PlayState {
+public class FinishState extends AbstractPlayState {
 
 	@Override
 	public void deploy() {

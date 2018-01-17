@@ -2,7 +2,7 @@ package org.cx.game.magic.buff;
 
 import org.cx.game.corps.Corps;
 
-public class ZengjiagongjiBuff extends Buff {
+public class ZengjiagongjiBuff extends AbstractBuff {
 
 	public final static Integer ZengjiagongjiBuff_ID = 10300002;
 	

@@ -1,6 +1,5 @@
 package org.cx.game.validator;
 
-import org.cx.game.command.CommandBuffer;
 import org.cx.game.corps.Corps;
 import org.cx.game.tools.I18n;
 

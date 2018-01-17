@@ -16,7 +16,7 @@ import org.cx.game.widget.treasure.Resource;
  * @author chenxian
  *
  */
-public class BuildingTown extends Building implements IBuilding {
+public class BuildingTown extends AbstractBuilding implements IBuilding {
 	
 	public BuildingTown(Integer buildingType) {
 		super(buildingType);

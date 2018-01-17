@@ -2,15 +2,15 @@ package org.cx.game.magic.buff;
 
 import org.cx.game.corps.Corps;
 import org.cx.game.magic.buff.IBuff;
+import org.cx.game.intercepter.AbstractIntercepter;
 import org.cx.game.intercepter.IIntercepter;
-import org.cx.game.intercepter.Intercepter;
 
 /**
  * 护盾
  * @author chenxian
  *
  */
-public class ShieldBuff extends Buff {
+public class ShieldBuff extends AbstractBuff {
 
 	public static final Integer ShieldBuff_ID = 10300004;
 	
@@ -24,7 +24,7 @@ public class ShieldBuff extends Buff {
 		// TODO Auto-generated method stub
 		super.effect();
 		
-		IIntercepter inDeath = new Intercepter("addToHp") {
+		IIntercepter inDeath = new AbstractIntercepter("addToHp") {
 			
 			@Override
 			public void before(Object[] args) {

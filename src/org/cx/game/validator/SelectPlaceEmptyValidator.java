@@ -1,7 +1,6 @@
 package org.cx.game.validator;
 
 import org.cx.game.tools.I18n;
-import org.cx.game.widget.IGround;
 import org.cx.game.widget.Place;
 
 public class SelectPlaceEmptyValidator extends Validator {

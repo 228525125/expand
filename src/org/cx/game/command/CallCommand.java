@@ -1,7 +1,7 @@
 package org.cx.game.command;
 
 import org.cx.game.core.IPlayer;
-import org.cx.game.corps.Corps;
+import org.cx.game.corps.AbstractCorps;
 import org.cx.game.exception.ValidatorException;
 import org.cx.game.validator.SelectGroundValidator;
 import org.cx.game.validator.SelectCorpsValidator;
@@ -35,7 +35,7 @@ public class CallCommand extends InteriorCommand {
 		super.execute();
 		
 		Place place = (Place) parameter;
-		Corps corps = (Corps) buffer.getCorps();
+		AbstractCorps corps = (AbstractCorps) buffer.getCorps();
 		//corps.call(place);
 		buffer.clear();
 	}

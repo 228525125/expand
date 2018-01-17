@@ -10,7 +10,7 @@ import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.validator.BuildConsumeValidator;
 import org.cx.game.widget.IGround;
 
-public class OptionBuild extends Option {
+public class OptionBuild extends AbstractOption {
 
 	private String name = null;
 	

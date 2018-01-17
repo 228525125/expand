@@ -3,8 +3,8 @@ package org.cx.game.policy;
 import java.util.List;
 
 import org.cx.game.corps.Corps;
+import org.cx.game.intercepter.AbstractIntercepter;
 import org.cx.game.intercepter.IIntercepter;
-import org.cx.game.intercepter.Intercepter;
 import org.cx.game.widget.Place;
 
 /**
@@ -24,7 +24,7 @@ public class GuardPolicyGroup extends PolicyGroup {
 		// TODO Auto-generated constructor stub
 		super(gpId);
 		
-		this.callIn = new Intercepter() {
+		this.callIn = new AbstractIntercepter() {
 			
 			@Override
 			public void after(Object[] args) {

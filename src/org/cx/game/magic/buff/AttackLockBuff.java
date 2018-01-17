@@ -4,12 +4,12 @@ import java.util.List;
 
 import org.cx.game.action.Random;
 import org.cx.game.corps.Corps;
+import org.cx.game.intercepter.AbstractIntercepter;
 import org.cx.game.intercepter.IIntercepter;
-import org.cx.game.intercepter.Intercepter;
 import org.cx.game.magic.skill.TauntActive;
 import org.cx.game.tools.Debug;
 
-public class AttackLockBuff extends Buff {
+public class AttackLockBuff extends AbstractBuff {
 
 	public static final Integer AttackLockBuff_ID = 10300001;
 	public static final Integer Lock_Bout = 2;
@@ -19,8 +19,14 @@ public class AttackLockBuff extends Buff {
 	public AttackLockBuff(Corps attack, Corps corps) {
 		super(AttackLockBuff_ID, Lock_Bout, corps);
 		// TODO Auto-generated constructor stub
-		this.attack = attack;
+		this.attack = (Corps) attack;
 		setDuplication(true);         //允许同时被多人锁定
+	}
+	
+	@Override
+	public Corps getOwner() {
+		// TODO Auto-generated method stub
+		return (Corps) super.getOwner();
 	}
 	
 	@Override
@@ -47,7 +53,7 @@ public class AttackLockBuff extends Buff {
 		
 		attack.addNexusBuff(this);
 		
-		IIntercepter attackIn = new Intercepter(){
+		IIntercepter attackIn = new AbstractIntercepter() {
 			
 			private boolean invoke = true;
 			
@@ -82,7 +88,7 @@ public class AttackLockBuff extends Buff {
 		};
 		recordIntercepter(getOwner().getAttack(), attackIn);
 		
-		IIntercepter moveIn = new Intercepter() {
+		IIntercepter moveIn = new AbstractIntercepter() {
 			
 			private boolean invoke = true;
 			

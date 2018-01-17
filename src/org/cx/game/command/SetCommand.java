@@ -4,7 +4,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import org.cx.game.core.IPlayer;
-import org.cx.game.corps.Corps;
 import org.cx.game.exception.ValidatorException;
 import org.cx.game.tools.Util;
 import org.cx.game.validator.SelectOptionValidator;

@@ -2,11 +2,12 @@ package org.cx.game.rule;
 
 import org.cx.game.action.Attack;
 import org.cx.game.action.IDeath;
+import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 import org.cx.game.magic.buff.AttackLockBuff;
 import org.cx.game.widget.IGround;
 
-public class AttackRule extends Rule implements IRule {
+public class AttackRule extends AbstractRule implements IRule {
 
 	@Override
 	public void after(Object[] args) {
@@ -16,8 +17,8 @@ public class AttackRule extends Rule implements IRule {
 		
 		IGround ground = getOwner().getOwner().getGround();
 		Integer distance = ground.distance(attacked.getPosition(), attack.getPosition());
-		if(IDeath.Status_Live.equals(attacked.getDeath().getStatus())
-		&& IDeath.Status_Live.equals(attack.getDeath().getStatus())
+		if(AbstractCorps.Death_Status_Live.equals(attacked.getDeath().getStatus())
+		&& AbstractCorps.Death_Status_Live.equals(attack.getDeath().getStatus())
 		&& 1==distance){                                           //近身
 			new AttackLockBuff(attack,attacked).effect();
 		}

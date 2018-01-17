@@ -9,7 +9,6 @@ import org.cx.game.command.Invoker;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.ValidatorException;
 import org.cx.game.policy.IPolicy;
-import org.cx.game.policy.Policy;
 import org.cx.game.policy.formula.AttackableFormula;
 import org.cx.game.policy.formula.LockFormula;
 import org.cx.game.policy.formula.ShechengneidedirenFormula;
@@ -20,7 +19,7 @@ import org.cx.game.policy.formula.StagnantFormula;
  * @author chenxian
  *
  */
-public class AttackPolicy extends Policy {
+public class AttackPolicy extends AbstractPolicy {
 	
 	private String cmdStr = "";
 	

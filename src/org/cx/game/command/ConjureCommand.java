@@ -1,7 +1,7 @@
 package org.cx.game.command;
 
 import org.cx.game.core.IPlayer;
-import org.cx.game.corps.Corps;
+import org.cx.game.corps.AbstractCorps;
 import org.cx.game.magic.skill.IActiveSkill;
 import org.cx.game.magic.skill.ISkill;
 import org.cx.game.exception.ValidatorException;
@@ -34,7 +34,7 @@ public class ConjureCommand extends InteriorCommand {
 		// TODO Auto-generated method stub
 		super.execute();
 		
-		Corps corps = (Corps) buffer.getCorps();		
+		AbstractCorps corps = buffer.getCorps();		
 		IActiveSkill skill = (IActiveSkill) buffer.getSkill();
 		corps.conjure(skill, new Object[]{parameter});
 	}
