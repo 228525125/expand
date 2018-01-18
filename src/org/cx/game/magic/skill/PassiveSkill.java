@@ -6,7 +6,7 @@ import java.util.List;
 import org.cx.game.magic.skill.IPassiveSkill;
 import org.cx.game.widget.IGround;
 import org.cx.game.action.IAction;
-import org.cx.game.action.IUpgrade;
+import org.cx.game.action.Upgrade;
 import org.cx.game.action.UpgradeSkill;
 import org.cx.game.corps.Corps;
 import org.cx.game.intercepter.IIntercepter;
@@ -27,7 +27,7 @@ public abstract class PassiveSkill extends AbstractSkill implements IPassiveSkil
 	private Integer atk = 0;
 	private Integer def = 0;
 	
-	private IUpgrade upgrade = null;
+	private Upgrade upgrade = null;
 	
 	public PassiveSkill(Integer id) {
 		// TODO Auto-generated constructor stub
@@ -117,9 +117,9 @@ public abstract class PassiveSkill extends AbstractSkill implements IPassiveSkil
 		return getOwner().getAttack().getRange();
 	}
 	
-	public IUpgrade getUpgrade() {		
+	public Upgrade getUpgrade() {		
 		if(null==upgrade){
-			IUpgrade upgrade = new UpgradeSkill();
+			Upgrade upgrade = new UpgradeSkill();
 			upgrade.setOwner(this);
 			this.upgrade = upgrade;
 		}

@@ -9,7 +9,7 @@ import org.cx.game.observer.NotifyInfo;
 import org.cx.game.widget.IGround;
 import org.cx.game.widget.treasure.ITreasure;
 
-public class Picked extends AbstractAction implements IPicked {
+public class Picked extends AbstractAction implements IAction {
 
 	@Override
 	public ITreasure getOwner() {

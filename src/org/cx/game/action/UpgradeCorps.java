@@ -9,7 +9,7 @@ import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.PropertiesUtil;
 import org.cx.game.widget.treasure.EmpiricValue;
 
-public class UpgradeCorps extends AbstractUpgrade implements IUpgrade {
+public class UpgradeCorps extends Upgrade implements IAction {
 	
 	public UpgradeCorps(Map<Integer, String> requirement) {
 		super(requirement);

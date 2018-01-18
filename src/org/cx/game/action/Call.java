@@ -13,7 +13,7 @@ import org.cx.game.widget.Place;
 import org.cx.game.widget.treasure.IResource;
 import org.cx.game.widget.treasure.Resource;
 
-public class Call extends AbstractAction implements ICall {
+public class Call extends AbstractAction implements IAction {
 	
 	private IResource consume = new Resource();
 	private Integer ration = 1;
@@ -26,7 +26,6 @@ public class Call extends AbstractAction implements ICall {
 		return (Corps) super.getOwner();
 	}
 
-	@Override
 	public IResource getConsume() {
 		// TODO Auto-generated method stub
 		return consume;
@@ -36,13 +35,11 @@ public class Call extends AbstractAction implements ICall {
 		this.consume = consume;
 	}
 	
-	@Override
 	public Integer getRation() {
 		// TODO Auto-generated method stub
 		return this.ration;
 	}
 	
-	@Override
 	public void setRation(Integer ration) {
 		// TODO Auto-generated method stub
 		if(!ration.equals(this.ration)){

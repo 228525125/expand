@@ -10,33 +10,21 @@ import java.util.Random;
 import java.util.Set;
 import java.util.Map.Entry;
 
-import org.cx.game.action.IAttack;
-import org.cx.game.action.IDeath;
-import org.cx.game.action.IMove;
-import org.cx.game.core.IContext;
 import org.cx.game.core.IPlayer;
 import org.cx.game.core.Player;
 import org.cx.game.corps.AbstractCorps;
-import org.cx.game.corps.CorpsFactory;
 import org.cx.game.corps.Corps;
 import org.cx.game.magic.skill.ISkill;
 import org.cx.game.exception.RuleValidatorException;
-import org.cx.game.intercepter.IIntercepter;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.policy.IPolicyGroup;
 import org.cx.game.tools.CellularDistrict;
 import org.cx.game.tools.Node;
 import org.cx.game.tools.PathFinding;
-import org.cx.game.tools.PropertiesUtil;
-import org.cx.game.tools.Util;
 import org.cx.game.widget.building.BuildingFactory;
 import org.cx.game.widget.building.IBuilding;
 import org.cx.game.widget.building.IOption;
 import org.cx.game.widget.treasure.ITreasure;
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 public class HoneycombGround implements IGround {
 
@@ -90,9 +78,6 @@ public class HoneycombGround implements IGround {
 		cellularDistrict.initCellularDistrict(getMaxSerial(Math.max(xBorder, yBorder)));
 		initCoordinateSystem(getCentrePoint(xBorder, yBorder),Math.max(xBorder, yBorder));		
 		
-		/*
-		 * new Place 需要用到Decorator对象的this
-		 */
 		for(int i=1;i<getXBorder()+1;i++){
 			for(int j=1;j<getYBorder()+1;j++){
 				Integer curPos = Integer.valueOf(""+i+IGround.space+j);
@@ -102,23 +87,6 @@ public class HoneycombGround implements IGround {
 				
 				getEmptyList().add(curPos);      //初始化空位置
 			}
-		}
-		
-		/*
-		 * 放置物品
-		 */
-		for(Entry<Integer, ITreasure> entry : getTreasureMap().entrySet()){
-			Integer position = entry.getKey();
-			Place place = getPlace(position);
-			ITreasure treasure = entry.getValue();
-			place.setTreasure(treasure);
-		}
-		
-		/*
-		 * 设置地形
-		 */
-		for(Integer disable : getDisableList()){
-			getPlace(disable).setDisable(true);
 		}
 		
 		/*
@@ -296,6 +264,10 @@ public class HoneycombGround implements IGround {
 
 	public void setDisableList(List<Integer> disableList) {
 		this.disableList = disableList;
+
+		for(Integer disable : getDisableList()){
+			getPlace(disable).setDisable(true);
+		}
 	}
 	
 	@Override
@@ -338,6 +310,13 @@ public class HoneycombGround implements IGround {
 	
 	public void setTreasureMap(Map<Integer, ITreasure> treasureMap) {
 		this.treasureMap = treasureMap;
+		
+		for(Entry<Integer, ITreasure> entry : treasureMap.entrySet()){
+			Integer position = entry.getKey();
+			Place place = getPlace(position);
+			ITreasure treasure = entry.getValue();
+			place.setTreasure(treasure);
+		}
 	}
 	
 	@Override

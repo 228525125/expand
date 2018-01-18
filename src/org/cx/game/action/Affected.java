@@ -13,7 +13,7 @@ import org.cx.game.observer.NotifyInfo;
  * @author chenxian
  *
  */
-public class Affected extends AbstractAction implements IAffected {
+public class Affected extends AbstractAction implements IAction {
 	
 	@Override
 	public Corps getOwner() {
@@ -21,7 +21,6 @@ public class Affected extends AbstractAction implements IAffected {
 		return (Corps) super.getOwner();
 	}
 	
-	@Override
 	public void magicHarm(Integer harm) {
 		// TODO Auto-generated method stub
 		//getOwner().getDeath().addToHp(harm);

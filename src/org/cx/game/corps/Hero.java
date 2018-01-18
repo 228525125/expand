@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.cx.game.action.IUpgrade;
+import org.cx.game.action.Upgrade;
 import org.cx.game.action.UpgradeHero;
 import org.cx.game.magic.buff.IBuff;
 import org.cx.game.magic.skill.ISkill;
@@ -13,7 +13,7 @@ import org.cx.game.widget.treasure.ITreasure;
 
 public class Hero extends Corps {
 	
-	private IUpgrade upgrade = null;
+	private Upgrade upgrade = null;
 
 	private List<ITreasure> treasures = new ArrayList<ITreasure>();
 	
@@ -43,9 +43,9 @@ public class Hero extends Corps {
 		}
 	}
 	
-	public IUpgrade getUpgrade() {
+	public Upgrade getUpgrade() {
 		if(null==upgrade){
-			IUpgrade upgrade = new UpgradeHero(getUpgradeRequirement());
+			Upgrade upgrade = new UpgradeHero(getUpgradeRequirement());
 			upgrade.setLevel(getLevel());
 			upgrade.setOwner(this);
 			this.upgrade = upgrade;

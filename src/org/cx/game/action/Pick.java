@@ -9,8 +9,10 @@ import org.cx.game.observer.NotifyInfo;
 import org.cx.game.widget.treasure.ITreasure;
 import org.cx.game.widget.treasure.Treasure;
 
-public class Pick extends AbstractAction implements IPick {
+public class Pick extends AbstractAction implements IAction {
 
+	public final static Integer Pick_Range_Defautl = 1;
+	
 	@Override
 	public Corps getOwner() {
 		// TODO Auto-generated method stub

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.cx.game.action.Execute;
-import org.cx.game.action.IExecute;
+import org.cx.game.action.IAction;
 import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.CorpsFactory;
 import org.cx.game.corps.Corps;
@@ -50,11 +50,11 @@ public class OptionCall extends AbstractOption implements IOption {
 		return positionList;
 	}
 	
-	private IExecute execute = null;
+	private Execute execute = null;
 
-	public IExecute getExecute() {
+	public Execute getExecute() {
 		if(null==this.execute){
-			IExecute execute = new OptionCallExecute(this.corpsID);
+			Execute execute = new OptionCallExecute(this.corpsID);
 			execute.setOwner(this);
 			this.execute = execute;
 		}
@@ -98,7 +98,7 @@ public class OptionCall extends AbstractOption implements IOption {
 		return super.getAllow() && IBuilding.Building_Status_Complete.equals(getOwner().getStatus());
 	}
 	
-	public class OptionCallExecute extends Execute implements IExecute {
+	public class OptionCallExecute extends Execute implements IAction {
 		
 		private Integer corpsID = null;
 

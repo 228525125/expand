@@ -14,10 +14,15 @@ import org.cx.game.widget.AbstractPlace;
 import org.cx.game.widget.IGround;
 import org.cx.game.widget.Place;
 
-public class Move extends AbstractAction implements IMove{
+public class Move extends AbstractAction implements IAction {
 
+	public static final Integer Consume = 1; //单格移动消耗
+	public static final Integer Energy_Max = 20;      //最大精力，表示可移动到任意位置
+	public static final Integer Energy_Min = 0;       //最小精力，表示不可移动
+	public static final Integer TurnoverRatio = 60; //资源转换率
+	
 	private Integer energy = 0;
-	private Integer consume = IMove.Consume;        //移动一格的消耗
+	private Integer consume = Consume;        //移动一格的消耗
 	private Integer type = AbstractCorps.Move_Type_Walk;
 	private Boolean moveable = false;   //是否能移动，回合内只能移动一次
 	private Integer flee = 0;         //逃离成功率
@@ -27,13 +32,11 @@ public class Move extends AbstractAction implements IMove{
 	
 	private Integer direction = IGround.Relative_Right;
 	
-	@Override
 	public Integer getType() {
 		// TODO Auto-generated method stub
 		return this.type;
 	}
 	
-	@Override
 	public void setType(Integer type) {
 		// TODO Auto-generated method stub
 		if(!this.type.equals(type))
@@ -58,13 +61,11 @@ public class Move extends AbstractAction implements IMove{
 		}
 	}
 	
-	@Override
 	public Integer getFlee() {
 		// TODO Auto-generated method stub
 		return flee;
 	}
 	
-	@Override
 	public void setFlee(Integer flee) {
 		// TODO Auto-generated method stub
 		if(!this.flee.equals(flee))
@@ -84,12 +85,10 @@ public class Move extends AbstractAction implements IMove{
 			this.hide = hide;
 	}
 
-	@Override
 	public Boolean getMoveable() {
 		return moveable;
 	}
 	
-	@Override
 	public void setMoveable(Boolean moveable) {
 		if(!this.moveable.equals(moveable)){
 			this.moveable = moveable;
@@ -98,24 +97,20 @@ public class Move extends AbstractAction implements IMove{
 				setEnergy(0);
 		}
 	}
-	
-	@Override
+
 	public Integer getDirection() {
 		return direction;
 	}
 
-	@Override
 	public void setDirection(Integer direction) {
 		if(!direction.equals(this.direction))
 			this.direction = direction;
 	}
-	
-	@Override
+
 	public List<Integer> getMovePath() {
 		return path;
 	}
 	
-	@Override
 	public void addMovePath(Integer position) {
 		// TODO Auto-generated method stub
 		this.path.add(position);

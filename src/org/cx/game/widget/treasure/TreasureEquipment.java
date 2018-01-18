@@ -1,6 +1,6 @@
 package org.cx.game.widget.treasure;
 
-import org.cx.game.action.IPicked;
+import org.cx.game.action.IAction;
 import org.cx.game.action.Picked;
 import org.cx.game.corps.Hero;
 import org.cx.game.exception.RuleValidatorException;
@@ -54,20 +54,20 @@ public class TreasureEquipment extends Treasure implements ITreasure {
 		return name;
 	}
 	
-	private IPicked picked = null;
+	private Picked picked = null;
 	
 	@Override
-	public IPicked getPicked() {
+	public Picked getPicked() {
 		// TODO Auto-generated method stub
 		if(null==this.picked){
-			IPicked picked = new TreasureEquipmentPicked();
+			Picked picked = new TreasureEquipmentPicked();
 			picked.setOwner(this);
 			this.picked = picked;
 		}
 		return picked;
 	}
 	
-	public class TreasureEquipmentPicked extends Picked implements IPicked {
+	public class TreasureEquipmentPicked extends Picked implements IAction {
 
 		@Override
 		public void action(Object... objects) throws RuleValidatorException {

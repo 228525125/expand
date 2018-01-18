@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.cx.game.action.Activate;
 import org.cx.game.action.Call;
-import org.cx.game.action.IActivate;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.magic.buff.AttackLockBuff;
@@ -17,7 +16,7 @@ public class ActivateRule extends AbstractRule implements IRule {
 		// TODO Auto-generated method stub
 		Boolean activation = (Boolean)((Object[]) args[0])[0];
 		
-		IActivate activate = getOwner();
+		Activate activate = getOwner();
 		Corps owner = activate.getOwner();
 		
 		if(activation){
@@ -29,7 +28,7 @@ public class ActivateRule extends AbstractRule implements IRule {
 			/*
 			 * 当活力值大于一次行动消耗时，再次获得一次行动
 			 */
-			if(owner.getActivate().getVigour()>=IActivate.ActivationConsume){
+			if(owner.getActivate().getVigour()>=Activate.ActivationConsume){
 				try {
 					owner.activate(true);
 				} catch (RuleValidatorException e) {

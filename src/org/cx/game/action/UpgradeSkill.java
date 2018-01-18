@@ -7,7 +7,7 @@ import org.cx.game.magic.skill.ISkill;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.widget.treasure.SkillCount;
 
-public class UpgradeSkill extends AbstractUpgrade implements IUpgrade {
+public class UpgradeSkill extends Upgrade implements IAction {
 	
 	public UpgradeSkill() {
 		// TODO Auto-generated constructor stub		
@@ -30,10 +30,7 @@ public class UpgradeSkill extends AbstractUpgrade implements IUpgrade {
 	@Override
 	public void action(Object... objects) throws RuleValidatorException {
 		// TODO Auto-generated method stub
-		
-		Integer level = getLevel();
-		level += 1;
-		setLevel(level);
+		super.action(objects);
 		
 		/*
 		 * 扣除技能点

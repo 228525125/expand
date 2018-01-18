@@ -16,7 +16,7 @@ import org.cx.game.widget.IGround;
 import org.cx.game.widget.treasure.ITreasure;
 import org.cx.game.widget.treasure.TreasureEquipment;
 
-public class Attack extends AbstractAction implements IAttack {
+public class Attack extends AbstractAction implements IAction {
 	
 	private Integer mode = AbstractCorps.Attack_Mode_Far;          //模式，近战/远程
 	private Integer range = 1;                        //距离
@@ -72,13 +72,11 @@ public class Attack extends AbstractAction implements IAttack {
 		return this.atk;
 	}
 	
-	@Override
 	public void setAtk(Integer atk) {
 		// TODO Auto-generated method stub
 		this.atk = atk;
 	}
 	
-	@Override
 	public void updateAtk() {
 		// TODO Auto-generated method stub
 		Integer atk = getOwner().getAtk();
@@ -128,7 +126,6 @@ public class Attack extends AbstractAction implements IAttack {
 		}
 	}
 	
-	@Override
 	public void updateExtraAtk() {
 		// TODO Auto-generated method stub
 		Integer levelAtk = getOwner().getUpgrade().getLevel();
@@ -166,22 +163,19 @@ public class Attack extends AbstractAction implements IAttack {
 		this.dmg = dmg;
 	}
 
-	@Override
 	public void updateDmg() {
 		// TODO Auto-generated method stub
 		Integer [] dmg = IntegerToDamage(getOwner().getDmg());
-		ICall call = getOwner().getCall();
+		Call call = getOwner().getCall();
 		Integer d = DamageToInteger(new Integer[]{dmg[0]*call.getNop(),dmg[1]*call.getNop()});
 		setDmg(d);
 	}
 
-	@Override
 	public Integer getLockChance() {
 		// TODO Auto-generated method stub
 		return lockChance;
 	}
 
-	@Override
 	public void setLockChance(Integer lockChance) {
 		// TODO Auto-generated method stub
 		if(!lockChance.equals(this.lockChance)){
@@ -199,13 +193,11 @@ public class Attack extends AbstractAction implements IAttack {
 		}
 	}
 	
-	@Override
 	public Boolean getAttackable() {
 		// TODO Auto-generated method stub
 		return this.attackable;
 	}
 	
-	@Override
 	public void setAttackable(Boolean attackable) {
 		// TODO Auto-generated method stub
 		if(!attackable.equals(this.attackable)){
@@ -231,7 +223,7 @@ public class Attack extends AbstractAction implements IAttack {
 		NotifyInfo info = new NotifyInfo(NotifyInfo.Corps_Attack,map);
 		super.notifyObservers(info);
 		
-		IAttack clone = clone();
+		Attack clone = clone();
 		
 		IGround ground = getOwner().getGround();
 		Integer distance = ground.distance(attacked.getPosition(), getOwner().getPosition());
@@ -262,10 +254,10 @@ public class Attack extends AbstractAction implements IAttack {
 		setAttackable(false);                   //反击同样适用
 	}
 	
-	public IAttack clone() {
+	public Attack clone() {
 		// TODO Auto-generated method stub
 		try {
-			return (IAttack) super.clone();
+			return (Attack) super.clone();
 		} catch (CloneNotSupportedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

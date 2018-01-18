@@ -1,16 +1,16 @@
 package org.cx.game.validator;
 
-import org.cx.game.action.IUpgrade;
+import org.cx.game.action.Upgrade;
 import org.cx.game.core.IPlayer;
 import org.cx.game.tools.I18n;
 import org.cx.game.widget.treasure.IResource;
 
 public class UpgradeConsumeValidator extends Validator {
 
-	private IUpgrade upgrade = null;
+	private Upgrade upgrade = null;
 	private IPlayer player = null;
 	
-	public UpgradeConsumeValidator(IUpgrade upgrade, IPlayer player) {
+	public UpgradeConsumeValidator(Upgrade upgrade, IPlayer player) {
 		// TODO Auto-generated constructor stub
 		this.upgrade = upgrade;
 		this.player = player;

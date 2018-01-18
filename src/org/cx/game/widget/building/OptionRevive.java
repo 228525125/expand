@@ -7,7 +7,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import org.cx.game.action.Execute;
-import org.cx.game.action.IExecute;
+import org.cx.game.action.IAction;
 import org.cx.game.corps.Hero;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
@@ -55,11 +55,11 @@ public class OptionRevive extends AbstractOption implements IOption {
 		return positionList;
 	}
 	
-	private IExecute execute = null;
+	private Execute execute = null;
 
-	public IExecute getExecute() {
+	public Execute getExecute() {
 		if(null==this.execute){
-			IExecute execute = new OptionReviveExecute(this.hero);
+			Execute execute = new OptionReviveExecute(this.hero);
 			execute.setOwner(this);
 			this.execute = execute;
 		}
@@ -98,7 +98,7 @@ public class OptionRevive extends AbstractOption implements IOption {
 		}	
 	}
 	
-	public class OptionReviveExecute extends Execute implements IExecute {
+	public class OptionReviveExecute extends Execute implements IAction {
 		
 		private Hero hero = null;
 

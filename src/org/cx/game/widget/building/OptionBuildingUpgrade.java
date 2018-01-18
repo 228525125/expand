@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.cx.game.action.Execute;
-import org.cx.game.action.IExecute;
-import org.cx.game.action.IUpgrade;
+import org.cx.game.action.IAction;
+import org.cx.game.action.Upgrade;
 import org.cx.game.core.IPlayer;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.tools.I18n;
@@ -48,11 +48,11 @@ public class OptionBuildingUpgrade extends AbstractOption implements IOption {
 		return getOwner().getBuildWait();
 	}
 	
-	private IExecute execute = null;
+	private Execute execute = null;
 
-	public IExecute getExecute() {
+	public Execute getExecute() {
 		if(null==this.execute){
-			IExecute execute = new OptionBuildingUpgradeExecute();
+			Execute execute = new OptionBuildingUpgradeExecute();
 			execute.setOwner(this);
 			this.execute = execute;
 		}
@@ -77,7 +77,7 @@ public class OptionBuildingUpgrade extends AbstractOption implements IOption {
 		getOwner().setStatus(IBuilding.Building_Status_Build);
 	}
 	
-	public class OptionBuildingUpgradeExecute extends Execute implements IExecute{
+	public class OptionBuildingUpgradeExecute extends Execute implements IAction{
 
 		@Override
 		public void action(Object... objects) throws RuleValidatorException {

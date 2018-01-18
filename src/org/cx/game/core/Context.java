@@ -58,11 +58,6 @@ public class Context extends AbstractContext {
 		return bout;
 	}
 	
-	@Override
-	public void addBout() throws RuleValidatorException{
-		getAddBoutAction().execute();
-	}
-	
 	private IAction addBoutAction = null;
 	
 	public IAction getAddBoutAction(){
@@ -91,12 +86,6 @@ public class Context extends AbstractContext {
 	}
 	
 	@Override
-	public void addDay() throws RuleValidatorException {
-		// TODO Auto-generated method stub
-		getAddDayAction().execute();
-	}
-	
-	@Override
 	public Integer getWeek() {
 		// TODO Auto-generated method stub
 		return this.week;
@@ -111,12 +100,6 @@ public class Context extends AbstractContext {
 			this.addWeekAction = aw;
 		}
 		return this.addWeekAction;
-	}
-	
-	@Override
-	public void addWeek() throws RuleValidatorException {
-		// TODO Auto-generated method stub
-		getAddWeekAction().execute();
 	}
 	
 	public class ContextAddBout extends AbstractAction implements IAction {

@@ -1,7 +1,6 @@
 package org.cx.game.rule;
 
 import org.cx.game.action.Attack;
-import org.cx.game.action.IDeath;
 import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 import org.cx.game.magic.buff.AttackLockBuff;

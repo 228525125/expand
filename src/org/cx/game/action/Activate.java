@@ -10,31 +10,29 @@ import org.cx.game.magic.buff.IBuff;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.Debug;
 
-public class Activate extends AbstractAction implements IActivate {
+public class Activate extends AbstractAction implements IAction {
 
+	public static final Integer ActivationConsume = 100;
+	
 	private Boolean activation = false;
 	private Integer speed = 100;
 	private Integer vigour = 0;       //活力，活力为100时，可以行动一次，活力值越多，行动次数越多
 	
-	@Override
 	public Boolean getActivation() {
 		// TODO Auto-generated method stub
 		return this.activation;
 	}
 
-	@Override
 	public void setActivation(Boolean activation) {
 		// TODO Auto-generated method stub
 		this.activation = activation;
 	}
 	
-	@Override
 	public Integer getSpeed() {
 		// TODO Auto-generated method stub
 		return this.speed;
 	}
 	
-	@Override
 	public void setSpeed(Integer speed) {
 		// TODO Auto-generated method stub
 		if(this.speed!=speed){
@@ -42,7 +40,6 @@ public class Activate extends AbstractAction implements IActivate {
 		}
 	}
 	
-	@Override
 	public void addToSpeed(Integer speed) {
 		// TODO Auto-generated method stub
 		if(!Integer.valueOf(0).equals(speed)){
@@ -58,13 +55,11 @@ public class Activate extends AbstractAction implements IActivate {
 		}
 	}
 	
-	@Override
 	public Integer getVigour() {
 		// TODO Auto-generated method stub
 		return this.vigour;
 	}
 	
-	@Override
 	public void addToVigour(Integer vigour) {
 		// TODO Auto-generated method stub
 		if(!Integer.valueOf(0).equals(vigour)){
@@ -96,7 +91,7 @@ public class Activate extends AbstractAction implements IActivate {
 			owner.getMove().setEnergy(owner.getEnergy());
 			owner.getAttacked().setFightBack(true);
 			
-			addToVigour(-IActivate.ActivationConsume);
+			addToVigour(ActivationConsume);
 		}else{
 			owner.getAttack().setAttackable(false);
 			owner.getMove().setMoveable(false);

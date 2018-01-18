@@ -13,7 +13,7 @@ import org.cx.game.observer.NotifyInfo;
  * @author chenxian
  *
  */
-public class Conjure extends AbstractAction implements IConjure {
+public class Conjure extends AbstractAction implements IAction {
 	
 	@Override
 	public Corps getOwner() {

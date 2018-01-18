@@ -1,6 +1,6 @@
 package org.cx.game.command;
 
-import org.cx.game.action.IUpgrade;
+import org.cx.game.action.Upgrade;
 import org.cx.game.core.IPlayer;
 import org.cx.game.magic.skill.ISkill;
 import org.cx.game.exception.RuleValidatorException;
@@ -24,7 +24,7 @@ public class UpgradeCommand extends InteriorCommand {
 		if(null!=buffer.getSkill()){
 			ISkill skill = buffer.getSkill();
 			
-			addValidator(new UpgradeConsumeValidator((IUpgrade)skill.getUpgrade(), skill.getOwner().getPlayer()));
+			addValidator(new UpgradeConsumeValidator((Upgrade)skill.getUpgrade(), skill.getOwner().getPlayer()));
 			
 			doValidator();
 			if(hasError())

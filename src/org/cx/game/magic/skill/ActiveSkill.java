@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.cx.game.action.IAction;
-import org.cx.game.action.IUpgrade;
+import org.cx.game.action.Upgrade;
 import org.cx.game.action.UpgradeSkill;
 import org.cx.game.corps.Corps;
 import org.cx.game.magic.skill.IActiveSkill;
@@ -24,7 +24,7 @@ public abstract class ActiveSkill extends AbstractSkill implements IActiveSkill 
 	private Boolean allow = true;
 	
 	private ProcessActiveSkillCooling coolingProcess = null;      //间隔
-	private IUpgrade upgrade = null;
+	private Upgrade upgrade = null;
 	private Errors errors = new Errors();
 	
 	private List<IValidator> validatorList = new ArrayList<IValidator>();
@@ -131,9 +131,9 @@ public abstract class ActiveSkill extends AbstractSkill implements IActiveSkill 
 			setAllow(true);
 	}
 
-	public IUpgrade getUpgrade() {		
+	public Upgrade getUpgrade() {		
 		if(null==upgrade){
-			IUpgrade upgrade = new UpgradeSkill();
+			Upgrade upgrade = new UpgradeSkill();
 			upgrade.setOwner(this);
 			this.upgrade = upgrade;
 		}

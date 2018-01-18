@@ -6,7 +6,7 @@ import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.widget.treasure.EmpiricValue;
 import org.cx.game.widget.treasure.SkillCount;
 
-public class UpgradeHero extends UpgradeCorps implements IUpgrade {
+public class UpgradeHero extends UpgradeCorps implements IAction {
 
 	public UpgradeHero(Map<Integer, String> requirement) {
 		super(requirement);

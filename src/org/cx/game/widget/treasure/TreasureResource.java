@@ -3,7 +3,7 @@ package org.cx.game.widget.treasure;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.cx.game.action.IPicked;
+import org.cx.game.action.IAction;
 import org.cx.game.action.Picked;
 import org.cx.game.core.IPlayer;
 import org.cx.game.corps.Corps;
@@ -36,20 +36,20 @@ public class TreasureResource extends Treasure implements ITreasure {
 		return name;
 	}
 	
-	private IPicked picked = null;
+	private Picked picked = null;
 	
 	@Override
-	public IPicked getPicked() {
+	public Picked getPicked() {
 		// TODO Auto-generated method stub
 		if(null==this.picked){
-			IPicked picked = new TreasureResourcePicked();
+			Picked picked = new TreasureResourcePicked();
 			picked.setOwner(this);
 			this.picked = picked;
 		}
 		return picked;
 	}
 
-	public class TreasureResourcePicked extends Picked implements IPicked {
+	public class TreasureResourcePicked extends Picked implements IAction {
 
 		@Override
 		public void action(Object... objects) throws RuleValidatorException {

@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.cx.game.action.Execute;
-import org.cx.game.action.IExecute;
-import org.cx.game.core.IPlayer;
+import org.cx.game.action.IAction;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.validator.BuildConsumeValidator;
 import org.cx.game.widget.IGround;
@@ -35,11 +34,11 @@ public class OptionBuild extends AbstractOption {
 		getExecute().addValidator(new BuildConsumeValidator(getOwner()));
 	}
 
-	private IExecute execute = null;
+	private Execute execute = null;
 
-	public IExecute getExecute() {
+	public Execute getExecute() {
 		if(null==this.execute){
-			IExecute execute = new OptionBuildExecute();
+			Execute execute = new OptionBuildExecute();
 			execute.setOwner(this);
 			this.execute = execute;
 		}
@@ -93,7 +92,7 @@ public class OptionBuild extends AbstractOption {
 		building.setStatus(IBuilding.Building_Status_Build);
 	}
 	
-	public class OptionBuildExecute extends Execute implements IExecute {
+	public class OptionBuildExecute extends Execute implements IAction {
 
 		@Override
 		public void action(Object... objects) throws RuleValidatorException {

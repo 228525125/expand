@@ -1,8 +1,6 @@
 package org.cx.game.rule;
 
 import org.cx.game.action.Attacked;
-import org.cx.game.action.IAttack;
-import org.cx.game.action.IDeath;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.magic.buff.TauntBuff;

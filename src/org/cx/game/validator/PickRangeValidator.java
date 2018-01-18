@@ -1,6 +1,6 @@
 package org.cx.game.validator;
 
-import org.cx.game.action.IPick;
+import org.cx.game.action.Pick;
 import org.cx.game.corps.Corps;
 import org.cx.game.tools.I18n;
 import org.cx.game.widget.IGround;
@@ -28,7 +28,7 @@ public class PickRangeValidator extends Validator {
 		Boolean ret = true;
 		IGround ground = this.corps.getPlayer().getContext().getGround();
 		Integer distance = ground.distance(this.corps.getPosition(), this.place.getPosition());
-		if(IPick.Pick_Range_Defautl<distance){
+		if(Pick.Pick_Range_Defautl<distance){
 			ret = false;
 			addMessage(I18n.getMessage(PickRangeValidator.class.getName()));
 		}

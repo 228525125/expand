@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.cx.game.action.IAction;
-import org.cx.game.action.IDeath;
 import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 import org.cx.game.magic.buff.IBuff;

@@ -23,7 +23,7 @@ import org.cx.game.widget.treasure.TreasureEquipment;
  * @author chenxian
  *
  */
-public class Attacked extends AbstractAction implements IAttacked {
+public class Attacked extends AbstractAction implements IAction {
 
 	private Boolean fightBack = false;
 	private Integer def = 0;         //真实防御力
@@ -37,13 +37,11 @@ public class Attacked extends AbstractAction implements IAttacked {
 		return (Corps) super.getOwner();
 	}
 	
-	@Override
 	public Integer getDef() {
 		// TODO Auto-generated method stub
 		return this.def;
 	}
 	
-	@Override
 	public void setDef(Integer def) {
 		// TODO Auto-generated method stub
 		this.def = def;
@@ -57,13 +55,11 @@ public class Attacked extends AbstractAction implements IAttacked {
 		setDef(def + armourDef + landformDef + extraDef);
 	}
 	
-	@Override
 	public Integer getArmourDef() {
 		// TODO Auto-generated method stub
 		return this.armourDef;
 	}
 	
-	@Override
 	public void setArmourDef(Integer armourDef) {
 		// TODO Auto-generated method stub
 		if(!armourDef.equals(this.armourDef)){
@@ -73,7 +69,6 @@ public class Attacked extends AbstractAction implements IAttacked {
 		}
 	}
 	
-	@Override
 	public void updateArmourDef() {
 		// TODO Auto-generated method stub
 		if (getOwner() instanceof Hero) {
@@ -113,7 +108,6 @@ public class Attacked extends AbstractAction implements IAttacked {
 		}
 	}
 	
-	@Override
 	public void updateExtraDef() {
 		// TODO Auto-generated method stub
 		Integer levelDef = getOwner().getUpgrade().getLevel();
@@ -131,13 +125,11 @@ public class Attacked extends AbstractAction implements IAttacked {
 		setExtraDef(levelDef + buffDef + skillDef);
 	}
 
-	@Override
 	public Boolean getFightBack() {
 		// TODO Auto-generated method stub
 		return this.fightBack;
 	}
 	
-	@Override
 	public void setFightBack(Boolean fightBack) {
 		// TODO Auto-generated method stub
 		if(!fightBack.equals(this.fightBack)){
@@ -149,7 +141,7 @@ public class Attacked extends AbstractAction implements IAttacked {
 	public void action(Object...objects) throws RuleValidatorException {
 		// TODO Auto-generated method stub
 		Corps attackLife = (Corps) objects[0];
-		IAttack attack = (IAttack) objects[1];
+		Attack attack = (Attack) objects[1];
 		
 		/*
 		 * 伤害 使用H3计算规则
@@ -174,7 +166,7 @@ public class Attacked extends AbstractAction implements IAttacked {
 		super.notifyObservers(info);
 		
 		//造成的实际伤害
-		IDeath death = getOwner().getDeath();
+		Death death = getOwner().getDeath();
 		death.addToHp(damage);
 		damage = ((DeathAddToHpAction) death.getAddToHpAction()).getDamage();
 		

@@ -1,15 +1,9 @@
 package org.cx.game.widget.building;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
-import org.cx.game.action.IUpgrade;
 import org.cx.game.core.IPlayer;
-import org.cx.game.widget.treasure.IResource;
-import org.cx.game.widget.treasure.Resource;
 
 /**
  * 有内部建筑物的建筑物

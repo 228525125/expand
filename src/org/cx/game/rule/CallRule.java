@@ -1,7 +1,6 @@
 package org.cx.game.rule;
 
 import org.cx.game.action.Call;
-import org.cx.game.action.ICall;
 import org.cx.game.core.IPlayer;
 import org.cx.game.corps.Hero;
 import org.cx.game.corps.Corps;
@@ -33,7 +32,7 @@ public class CallRule extends AbstractRule implements IRule {
 		this.place = (Place)((Object[]) args[0])[0];
 		this.nop = (Integer)((Object[]) args[0])[1];
 		
-		ICall call = getOwner();
+		Call call = getOwner();
 
 		Corps owner = call.getOwner();
 		IGround ground = owner.getPlayer().getContext().getGround();
@@ -63,7 +62,7 @@ public class CallRule extends AbstractRule implements IRule {
 	 */
 	public void finish(Object[] args) {
 		// TODO Auto-generated method stub
-		ICall call = getOwner();
+		Call call = getOwner();
 		Corps owner = call.getOwner();
 		
 		/*

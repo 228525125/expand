@@ -7,7 +7,7 @@ import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
 
-public class Chuck extends AbstractAction implements IChuck {
+public class Chuck extends AbstractAction implements IAction {
 
 	public Chuck() {
 		// TODO Auto-generated constructor stub

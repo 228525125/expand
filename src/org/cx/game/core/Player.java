@@ -15,6 +15,7 @@ import org.cx.game.policy.DonePolicy;
 import org.cx.game.policy.PolicyGroupFactory;
 import org.cx.game.policy.IPolicyGroup;
 import org.cx.game.policy.IPolicy;
+import org.cx.game.widget.treasure.IResource;
 
 public class Player extends AbstractPlayer {
 	
@@ -71,6 +72,14 @@ public class Player extends AbstractPlayer {
 			else
 				break;
 		}
+	}
+	
+	/**
+	 * 用于xml配置
+	 * @param res
+	 */
+	public void setResource(IResource res){
+		super.setResource(res);
 	}
 	
 	public class PlayerAddBout extends AbstractAction implements IAction {

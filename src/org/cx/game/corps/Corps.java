@@ -13,19 +13,9 @@ import org.cx.game.action.Call;
 import org.cx.game.action.Chuck;
 import org.cx.game.action.Conjure;
 import org.cx.game.action.Death;
-import org.cx.game.action.IActivate;
-import org.cx.game.action.IAffected;
-import org.cx.game.action.IAttack;
-import org.cx.game.action.IAttacked;
-import org.cx.game.action.ICall;
-import org.cx.game.action.IChuck;
-import org.cx.game.action.IConjure;
-import org.cx.game.action.IDeath;
-import org.cx.game.action.IMove;
-import org.cx.game.action.IPick;
-import org.cx.game.action.IUpgrade;
 import org.cx.game.action.Move;
 import org.cx.game.action.Pick;
+import org.cx.game.action.Upgrade;
 import org.cx.game.action.UpgradeCorps;
 import org.cx.game.magic.buff.IBuff;
 import org.cx.game.magic.skill.ISkill;
@@ -67,17 +57,17 @@ public class Corps extends AbstractCorps {
 	 */
 	private Boolean activation = false;
 	
-	private IActivate activate = null;
-	private IAttack attack = null;
-	private IAttacked attacked = null;
-	private IConjure conjure = null;
-	private IAffected affected = null;
-	private IMove move = null;
-	private ICall call = null;
-	private IDeath death = null;
-	private IChuck chuck = null;
-	private IUpgrade upgrade = null;
-	private IPick pick = null;
+	private Activate activate = null;
+	private Attack attack = null;
+	private Attacked attacked = null;
+	private Conjure conjure = null;
+	private Affected affected = null;
+	private Move move = null;
+	private Call call = null;
+	private Death death = null;
+	private Chuck chuck = null;
+	private Upgrade upgrade = null;
+	private Pick pick = null;
 	
 	private List<IBuff> nexusBuffList = new ArrayList<IBuff>();
 	private List<IBuff> buffList = new ArrayList<IBuff>();
@@ -465,7 +455,7 @@ public class Corps extends AbstractCorps {
 		}
 	}
 
-	public IActivate getActivate() {
+	public Activate getActivate() {
 		if(null==activate){
 			activate = new Activate();
 			activate.setActivation(activation);
@@ -475,7 +465,7 @@ public class Corps extends AbstractCorps {
 		return activate;
 	}
 	
-	public IAttack getAttack() {
+	public Attack getAttack() {
 		if(null==attack){
 			attack = new Attack();
 			attack.setAtk(getAtk());
@@ -489,7 +479,7 @@ public class Corps extends AbstractCorps {
 		return attack;
 	}
 	
-	public IAttacked getAttacked() {
+	public Attacked getAttacked() {
 		if(null==attacked){
 			attacked = new Attacked();
 			attacked.setDef(getDef());
@@ -498,7 +488,7 @@ public class Corps extends AbstractCorps {
 		return attacked;
 	}
 	
-	public IConjure getConjure() {
+	public Conjure getConjure() {
 		if(null==conjure){
 			conjure = new Conjure();
 			conjure.setOwner(this);
@@ -506,7 +496,7 @@ public class Corps extends AbstractCorps {
 		return conjure;
 	}
 	
-	public IAffected getAffected() {
+	public Affected getAffected() {
 		if(null==affected){
 			affected = new Affected();
 			affected.setOwner(this);
@@ -514,7 +504,7 @@ public class Corps extends AbstractCorps {
 		return affected;
 	}
 	
-	public IMove getMove() {
+	public Move getMove() {
 		if(null==move){
 			move = new Move();
 			move.setEnergy(getEnergy());
@@ -526,7 +516,7 @@ public class Corps extends AbstractCorps {
 		return move;
 	}
 	
-	public ICall getCall() {
+	public Call getCall() {
 		if(null==call){
 			call = new Call();
 			call.setConsume(getConsume());
@@ -537,7 +527,7 @@ public class Corps extends AbstractCorps {
 		return call;
 	}
 	
-	public IDeath getDeath() {
+	public Death getDeath() {
 		if(null==death){
 			death = new Death();
 			death.setHp(getHp());
@@ -546,7 +536,7 @@ public class Corps extends AbstractCorps {
 		return death;
 	}
 
-	public IChuck getChuck() {
+	public Chuck getChuck() {
 		if(null==chuck){
 			chuck = new Chuck();
 			chuck.setOwner(this);
@@ -562,7 +552,7 @@ public class Corps extends AbstractCorps {
 		return upgradeRequirement;
 	}
 
-	public IUpgrade getUpgrade() {
+	public Upgrade getUpgrade() {
 		if(null==upgrade){
 			upgrade = new UpgradeCorps(upgradeRequirement);
 			upgrade.setLevel(getLevel());            //setLevel会触发upgradeRequirement
@@ -571,7 +561,7 @@ public class Corps extends AbstractCorps {
 		return this.upgrade;
 	}
 	
-	public IPick getPick() {
+	public Pick getPick() {
 		if(null==pick){
 			pick = new Pick();
 			pick.setOwner(this);

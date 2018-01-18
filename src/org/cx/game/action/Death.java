@@ -9,7 +9,7 @@ import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.widget.IGround;
 
-public class Death extends AbstractAction implements IDeath {
+public class Death extends AbstractAction implements IAction {
 	
 	private Integer hp = 0;
 	private Integer hpLimit = 0;
@@ -46,7 +46,8 @@ public class Death extends AbstractAction implements IDeath {
 	 */
 	public void addToHp(Integer hp) throws RuleValidatorException {
 		// TODO Auto-generated method stub
-		getAddToHpAction().execute(hp);
+		IAction action = new ActionProxyHelper(getAddToHpAction());
+		action.action(hp);
 	}
 	
 	public Integer getHpLimit() {
@@ -132,9 +133,9 @@ public class Death extends AbstractAction implements IDeath {
 		}
 		
 		@Override
-		public IDeath getOwner() {
+		public Death getOwner() {
 			// TODO Auto-generated method stub
-			return (IDeath) super.getOwner();
+			return (Death) super.getOwner();
 		}
 	}
 }

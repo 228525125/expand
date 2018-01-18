@@ -1,6 +1,5 @@
 package org.cx.game.magic.skill;
 
-import org.cx.game.action.IAttack;
 import org.cx.game.corps.Corps;
 import org.cx.game.magic.skill.ActiveSkill;
 import org.cx.game.exception.RuleValidatorException;
