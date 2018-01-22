@@ -59,16 +59,10 @@ public class Hero extends Corps {
 	
 	public void addTreasure(ITreasure treasure) {
 		this.treasures.add(treasure);
-		
-		getAttack().updateWeaponAtk();
-		getAttacked().updateArmourDef();
 	}
 	
 	public void removeTreasure(ITreasure treasure) {
 		this.treasures.remove(treasure);
-		
-		getAttack().updateWeaponAtk();
-		getAttacked().updateArmourDef();
 	}
 
 	@Override

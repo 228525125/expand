@@ -1,6 +1,8 @@
 package org.cx.game.action;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.cx.game.corps.Corps;
@@ -53,19 +55,6 @@ public class UpgradeCorps extends Upgrade implements IAction {
 	}
 	
 	@Override
-	public void setLevel(Integer level) {
-		// TODO Auto-generated method stub
-		if(!level.equals(getLevel())){
-			super.setLevel(level);
-			
-			if(null!=getOwner()){
-				getOwner().getAttack().updateExtraAtk();
-				getOwner().getAttacked().updateExtraDef();		
-			}
-		}
-	}
-	
-	@Override
 	public Corps getOwner() {
 		// TODO Auto-generated method stub
 		return (Corps) super.getOwner();
@@ -74,10 +63,7 @@ public class UpgradeCorps extends Upgrade implements IAction {
 	@Override
 	public void action(Object... objects) throws RuleValidatorException {
 		// TODO Auto-generated method stub
-		
-		Integer level = getLevel();
-		level += 1;
-		setLevel(level);
+		super.action(objects);
 		
 		/*
 		 * 扣减升级所需经验值

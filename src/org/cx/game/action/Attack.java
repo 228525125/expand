@@ -76,15 +76,6 @@ public class Attack extends AbstractAction implements IAction {
 		// TODO Auto-generated method stub
 		this.atk = atk;
 	}
-	
-	public void updateAtk() {
-		// TODO Auto-generated method stub
-		Integer atk = getOwner().getAtk();
-		Integer weaponAtk = getWeaponAtk();
-		Integer landformAtk = getLandformAtk();
-		Integer extraAtk = getExtraAtk();
-		setAtk(atk + weaponAtk + landformAtk + extraAtk);
-	}
 
 	public Integer getWeaponAtk() {
 		return weaponAtk;
@@ -94,22 +85,7 @@ public class Attack extends AbstractAction implements IAction {
 		// TODO Auto-generated method stub
 		if(!weaponAtk.equals(this.weaponAtk)){
 			this.weaponAtk = weaponAtk;
-		
-			updateAtk();
-		}
-	}
-
-	public void updateWeaponAtk() {
-		if (getOwner() instanceof Hero) {
-			Hero hero = (Hero) getOwner();
-			Integer atk = 0;
-			for(ITreasure treasure : hero.getTreasures()){
-				if (treasure instanceof TreasureEquipment) {
-					TreasureEquipment te = (TreasureEquipment) treasure;
-					atk += te.getAtk();
-				}
-			}
-			setWeaponAtk(atk);
+			getOwner().updateAtk();
 		}
 	}
 
@@ -121,26 +97,8 @@ public class Attack extends AbstractAction implements IAction {
 	public void setExtraAtk(Integer extraAtk) {
 		if(!extraAtk.equals(this.extraAtk)){
 			this.extraAtk = extraAtk;
-		
-			updateAtk();
+			getOwner().updateAtk();
 		}
-	}
-	
-	public void updateExtraAtk() {
-		// TODO Auto-generated method stub
-		Integer levelAtk = getOwner().getUpgrade().getLevel();
-		Integer buffAtk = 0;
-		for(IBuff buff : getOwner().getBuffList()){
-			buffAtk += buff.getAtk();
-		}
-		Integer skillAtk = 0;
-		for(ISkill skill : getOwner().getSkillList()){
-			if (skill instanceof IPassiveSkill) {
-				IPassiveSkill ps = (IPassiveSkill) skill;
-				skillAtk += ps.getAtk();
-			}
-		}
-		setExtraAtk(levelAtk + buffAtk + skillAtk);
 	}
 	
 	public Integer getLandformAtk() {
@@ -150,8 +108,7 @@ public class Attack extends AbstractAction implements IAction {
 	public void setLandformAtk(Integer landformAtk) {
 		if(!landformAtk.equals(this.landformAtk)){
 			this.landformAtk = landformAtk;
-			
-			updateAtk();
+			getOwner().updateAtk();
 		}
 	}
 

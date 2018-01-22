@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.cx.game.action.AbstractAction;
+import org.cx.game.action.ActionProxyHelper;
 import org.cx.game.action.Activate;
 import org.cx.game.action.Affected;
 import org.cx.game.action.Attack;
@@ -13,12 +15,16 @@ import org.cx.game.action.Call;
 import org.cx.game.action.Chuck;
 import org.cx.game.action.Conjure;
 import org.cx.game.action.Death;
+import org.cx.game.action.IAction;
 import org.cx.game.action.Move;
 import org.cx.game.action.Pick;
 import org.cx.game.action.Upgrade;
 import org.cx.game.action.UpgradeCorps;
+import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.magic.buff.IBuff;
 import org.cx.game.magic.skill.ISkill;
+import org.cx.game.observer.NotifyInfo;
+import org.cx.game.observer.NotifyType;
 import org.cx.game.policy.GuardPolicy;
 import org.cx.game.policy.IPolicy;
 import org.cx.game.policy.IPolicyGroup;
@@ -50,12 +56,13 @@ public class Corps extends AbstractCorps {
 	private Integer level = 1;
 	private Integer star = 1;
 	private Boolean hero = false;
+	private Boolean activation = false;            //激活状态
 	
 	private IResource consume = new Resource();
-	/**
-	 * 激活状态
-	 */
-	private Boolean activation = false;
+	private CorpsAddBuffAction addBuffAction = null;
+	private CorpsRemoveBuffAction removeBuffAction = null;
+	private CorpsAddSkillAction addSkillAction = null;
+	
 	
 	private Activate activate = null;
 	private Attack attack = null;
@@ -152,6 +159,15 @@ public class Corps extends AbstractCorps {
 		this.atk = atk;
 	}
 	
+	public void updateAtk() {
+		// TODO Auto-generated method stub
+		Integer atk = this.getAtk();
+		Integer weaponAtk = this.getAttack().getWeaponAtk();
+		Integer landformAtk = this.getAttack().getLandformAtk();
+		Integer extraAtk = this.getAttack().getExtraAtk();
+		this.getAttack().setAtk(atk + weaponAtk + landformAtk + extraAtk);
+	}
+	
 	/**
 	 * 伤害
 	 * @return
@@ -208,6 +224,14 @@ public class Corps extends AbstractCorps {
 	
 	public void setDef(Integer def){
 		this.def = def;
+	}
+	
+	public void updateDef(){
+		Integer def = this.getDef();
+		Integer armourDef = this.getAttacked().getArmourDef();
+		Integer landformDef = this.getAttacked().getLandformDef();
+		Integer extraDef = this.getAttacked().getExtraDef();
+		this.getAttacked().setDef(def + armourDef + landformDef + extraDef);
 	}
 	
 	/**
@@ -327,30 +351,25 @@ public class Corps extends AbstractCorps {
 	public List<IBuff> getBuffList() {
 		return buffList;
 	}
-
-	public void addBuff(IBuff buff){
-		for(IBuff b : this.buffList){     //当添加一个已有的buff,并且不能叠加时，要先删除之前的buff
-			if(b.getClass().equals(buff.getClass())&&!b.isDuplication()){
-				removeBuff(b);
-				break;
-			}
+	
+	public IAction getAddBuffAction(){
+		if(null==this.addBuffAction){
+			this.addBuffAction = new CorpsAddBuffAction();
+			this.addBuffAction.setOwner(this);
 		}
 		
-		this.buffList.add(buff);
-		
-		getAttack().updateExtraAtk();
-		getAttacked().updateExtraDef();
+		return this.addBuffAction;
 	}
 	
-	/**
-	 * 该方法仅用于Buff.invalid
-	 * @param buff
-	 */
-	public void removeBuff(IBuff buff){
-		this.buffList.remove(buff);
+	@Override
+	public IAction getRemoveBuffAction() {
+		// TODO Auto-generated method stub
+		if(null==this.removeBuffAction){
+			this.removeBuffAction = new CorpsRemoveBuffAction();
+			this.removeBuffAction.setOwner(this);
+		}
 		
-		getAttack().updateExtraAtk();
-		getAttacked().updateExtraDef();
+		return this.removeBuffAction;
 	}
 	
 	public List<IBuff> getBuff(Class clazz){
@@ -387,6 +406,16 @@ public class Corps extends AbstractCorps {
 				return true;
 		return false;
 	}
+	
+	@Override
+	public IAction getAddSkillAction() {
+		// TODO Auto-generated method stub
+		if(null==this.addSkillAction){
+			this.addSkillAction = new CorpsAddSkillAction();
+			this.addSkillAction.setOwner(this);
+		}
+		return this.addSkillAction;
+	}
 
 	public List<ISkill> getSkillList() {
 		return skillList;
@@ -415,13 +444,6 @@ public class Corps extends AbstractCorps {
 		}
 		
 		return skill;
-	}
-	
-	public void addSkill(ISkill skill){
-		skill.setOwner(this);
-		skillList.add(skill);
-		getAttack().updateExtraAtk();
-		getAttacked().updateExtraDef();
 	}
 	
 	public Boolean containsSkill(Class clazz){
@@ -567,5 +589,63 @@ public class Corps extends AbstractCorps {
 			pick.setOwner(this);
 		}
 		return this.pick;
+	}
+	
+	public class CorpsAddBuffAction extends AbstractAction implements IAction {
+
+		@Override
+		public void action(Object... objects) throws RuleValidatorException {
+			// TODO Auto-generated method stub
+			IBuff buff = (IBuff) objects[0];
+			
+			for(IBuff b : getBuffList()) {     //当添加一个已有的buff,并且不能叠加时，要先删除之前的buff
+				if(b.getClass().equals(buff.getClass())&&!b.isDuplication()){
+					removeBuff(b);
+					break;
+				}
+			}
+			
+			getBuffList().add(buff);
+		}
+		
+		@Override
+		public Corps getOwner() {
+			// TODO Auto-generated method stub
+			return (Corps) super.getOwner();
+		}
+	}
+	
+	public class CorpsRemoveBuffAction extends AbstractAction implements IAction {
+
+		@Override
+		public void action(Object... objects) throws RuleValidatorException {
+			// TODO Auto-generated method stub
+			IBuff buff = (IBuff) objects[0];
+			
+			getBuffList().remove(buff);
+		}
+		
+		@Override
+		public Corps getOwner() {
+			// TODO Auto-generated method stub
+			return (Corps) super.getOwner();
+		}
+	}
+	
+	public class CorpsAddSkillAction extends AbstractAction implements IAction {
+
+		@Override
+		public void action(Object... objects) throws RuleValidatorException {
+			// TODO Auto-generated method stub
+			ISkill skill = (ISkill) objects[0];
+			skill.setOwner(getOwner());
+			getSkillList().add(skill);
+		}
+		
+		@Override
+		public Corps getOwner() {
+			// TODO Auto-generated method stub
+			return (Corps) super.getOwner();
+		}
 	}
 }

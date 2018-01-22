@@ -70,25 +70,6 @@ public class StartState extends AbstractPlayState {
 		super.notifyObservers(info);
 		
 		/*
-		 * 英雄登场
-		
-		for(IPlayer player : context.getPlayerList()){
-			if(!player.getHeroIDList().isEmpty()){
-				Random random = new Random();
-				Integer heroID = player.getHeroIDList().get((random.nextInt(player.getHeroIDList().size()))-1);
-				Hero hero = (Hero) CorpsFactory.getInstance(heroID, player);
-				Place place = ground.getPlace(player.getHomePosition());
-				
-				try {
-					hero.call(place,1);
-				} catch (RuleValidatorException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		} */
-		
-		/*
 		 * 登记英雄
 		 */
 		for(IPlayer player : context.getPlayerList()){
@@ -102,21 +83,5 @@ public class StartState extends AbstractPlayState {
 				player.addHero(hero);
 			}
 		}
-		
-		
-		/*
-		 * 控制player的hero被激活
-		 
-		Corps hero = context.getControlPlayer().getHero();
-		if(null!=hero){
-			Integer speed = hero.getActivate().getSpeed();
-			hero.getActivate().addToVigour(speed);
-			try {
-				hero.activate(true);
-			} catch (RuleValidatorException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}*/
 	}
 }

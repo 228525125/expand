@@ -1,10 +1,14 @@
 package org.cx.game.widget;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.cx.game.action.AbstractAction;
 import org.cx.game.action.IAction;
 import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
+import org.cx.game.observer.NotifyInfo;
 
 public class Place extends AbstractPlace {
 
@@ -44,16 +48,15 @@ public class Place extends AbstractPlace {
 			getOwner().getOwner().getEmptyList().remove(getPosition());
 			
 			/*
-			 * 生成地形优势
-			 */
-			Integer profession = corps.queryTagForCategory(AbstractCorps.Profession).get(0);
-			corps.getAttack().setLandformAtk(corps.getAtk()*LandformEffect.getAttackAdvantage(profession, getLandform())/100);
-			corps.getAttacked().setLandformDef(corps.getDef()*LandformEffect.getDefendAdvantage(profession, getLandform())/100);
-			
-			/*
 			 * 添加路径
 			 */
 			corps.getMove().addMovePath(getPosition());
+			
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("corps", corps);
+			map.put("place", getOwner());
+			NotifyInfo info = new NotifyInfo(NotifyInfo.Place_In,map);
+			super.notifyObservers(info);
 		}
 		
 		@Override

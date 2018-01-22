@@ -72,10 +72,10 @@ public class TreasureEquipment extends Treasure implements ITreasure {
 		@Override
 		public void action(Object... objects) throws RuleValidatorException {
 			// TODO Auto-generated method stub
-			super.action(objects);
-			
 			Hero hero = (Hero) objects[0];
 			hero.addTreasure(getOwner());
+			
+			super.action(objects);
 		}
 	}
 

@@ -47,14 +47,6 @@ public class Attacked extends AbstractAction implements IAction {
 		this.def = def;
 	}
 	
-	public void updateDef(){
-		Integer def = getOwner().getDef();
-		Integer armourDef = getArmourDef();
-		Integer landformDef = getLandformDef();
-		Integer extraDef = getExtraDef();
-		setDef(def + armourDef + landformDef + extraDef);
-	}
-	
 	public Integer getArmourDef() {
 		// TODO Auto-generated method stub
 		return this.armourDef;
@@ -64,23 +56,7 @@ public class Attacked extends AbstractAction implements IAction {
 		// TODO Auto-generated method stub
 		if(!armourDef.equals(this.armourDef)){
 			this.armourDef = armourDef;
-			
-			updateDef();
-		}
-	}
-	
-	public void updateArmourDef() {
-		// TODO Auto-generated method stub
-		if (getOwner() instanceof Hero) {
-			Hero hero = (Hero) getOwner();
-			Integer def = 0;
-			for(ITreasure treasure : hero.getTreasures()){
-				if (treasure instanceof TreasureEquipment) {
-					TreasureEquipment te = (TreasureEquipment) treasure;
-					def += te.getDef();
-				}
-			}
-			setArmourDef(def);
+			getOwner().updateDef();
 		}
 	}
 	
@@ -91,8 +67,7 @@ public class Attacked extends AbstractAction implements IAction {
 	public void setLandformDef(Integer landformDef) {
 		if(!landformDef.equals(this.landformDef)){
 			this.landformDef = landformDef;
-			
-			updateDef();			
+			getOwner().updateDef();
 		}
 	}
 
@@ -103,26 +78,8 @@ public class Attacked extends AbstractAction implements IAction {
 	public void setExtraDef(Integer extraDef) {
 		if(!extraDef.equals(this.extraDef)){
 			this.extraDef = extraDef;
-			
-			updateDef();
+			getOwner().updateDef();
 		}
-	}
-	
-	public void updateExtraDef() {
-		// TODO Auto-generated method stub
-		Integer levelDef = getOwner().getUpgrade().getLevel();
-		Integer buffDef = 0;
-		for(IBuff buff : getOwner().getBuffList()){
-			buffDef += buff.getDef();
-		}
-		Integer skillDef = 0;
-		for(ISkill skill : getOwner().getSkillList()){
-			if (skill instanceof IPassiveSkill) {
-				IPassiveSkill ps = (IPassiveSkill) skill;
-				skillDef += ps.getDef();
-			}
-		}
-		setExtraDef(levelDef + buffDef + skillDef);
 	}
 
 	public Boolean getFightBack() {
