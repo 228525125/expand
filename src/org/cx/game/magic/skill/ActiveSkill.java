@@ -7,7 +7,7 @@ import java.util.Map;
 
 import org.cx.game.action.IAction;
 import org.cx.game.action.Upgrade;
-import org.cx.game.action.UpgradeSkill;
+import org.cx.game.action.SkillUpgrade;
 import org.cx.game.corps.Corps;
 import org.cx.game.magic.skill.IActiveSkill;
 import org.cx.game.exception.RuleValidatorException;
@@ -23,7 +23,7 @@ public abstract class ActiveSkill extends AbstractSkill implements IActiveSkill 
 	private Integer cooldown = 1;             //冷却回合
 	private Boolean allow = true;
 	
-	private ProcessActiveSkillCooling coolingProcess = null;      //间隔
+	private ActiveSkillCoolingProcess coolingProcess = null;      //间隔
 	private Upgrade upgrade = null;
 	private Errors errors = new Errors();
 	
@@ -126,14 +126,14 @@ public abstract class ActiveSkill extends AbstractSkill implements IActiveSkill 
 		// TODO Auto-generated method stub		
 		if(!Integer.valueOf(0).equals(this.cooldown)){
 			setAllow(false);
-			this.coolingProcess = new ProcessActiveSkillCooling(this.cooldown, this);
+			this.coolingProcess = new ActiveSkillCoolingProcess(this.cooldown, this);
 		}else
 			setAllow(true);
 	}
 
 	public Upgrade getUpgrade() {		
 		if(null==upgrade){
-			Upgrade upgrade = new UpgradeSkill();
+			Upgrade upgrade = new SkillUpgrade();
 			upgrade.setOwner(this);
 			this.upgrade = upgrade;
 		}

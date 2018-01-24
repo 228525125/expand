@@ -31,11 +31,15 @@ public class CorpsPropertyUpdatePlaceInRule extends AbstractRule implements IRul
 	private void updateLandformAtk(Corps corps, Integer landform) {
 		Integer profession = corps.queryTagForCategory(AbstractCorps.Profession).get(0);
 		corps.getAttack().setLandformAtk(corps.getAtk()*LandformEffect.getAttackAdvantage(profession, landform)/100);
+		
+		corps.updateAtk();
 	}
 	
 	private void updateLandformDef(Corps corps, Integer landform) {
 		Integer profession = corps.queryTagForCategory(AbstractCorps.Profession).get(0);
 		corps.getAttacked().setLandformDef(corps.getDef()*LandformEffect.getDefendAdvantage(profession, landform)/100);
+		
+		corps.updateDef();
 	}
 
 }

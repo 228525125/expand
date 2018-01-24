@@ -10,9 +10,9 @@ import org.cx.game.core.IPlayer;
  * @author chenxian
  *
  */
-public class BuildingTown extends AbstractBuilding implements IBuilding {
+public class TownBuilding extends AbstractBuilding implements IBuilding {
 	
-	public BuildingTown(Integer buildingType) {
+	public TownBuilding(Integer buildingType) {
 		super(buildingType);
 		// TODO Auto-generated constructor stub
 		setStatus(IBuilding.Building_Status_Complete);  //城镇在地图上已经形成

@@ -23,12 +23,12 @@ import org.cx.game.widget.Place;
  * @author chenxian
  *
  */
-public class OptionRevive extends AbstractOption implements IOption {
+public class ReviveOption extends AbstractOption implements IOption {
 
 	private String name = null;
 	private Hero hero = null;
 
-	public OptionRevive(Hero hero) {
+	public ReviveOption(Hero hero) {
 		// TODO Auto-generated constructor stub
 		this.hero = hero;
 		this.hero.getDeath().addObserver(new OptionObserver());

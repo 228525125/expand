@@ -14,7 +14,7 @@ import org.cx.game.widget.GroundFactory;
 import org.cx.game.widget.IGround;
 import org.cx.game.widget.building.IBuilding;
 import org.cx.game.widget.building.IOption;
-import org.cx.game.widget.building.OptionRevive;
+import org.cx.game.widget.building.ReviveOption;
 import org.cx.game.widget.treasure.ITreasure;
 
 public class StartState extends AbstractPlayState {
@@ -76,7 +76,7 @@ public class StartState extends AbstractPlayState {
 			for(Integer heroID : player.getHeroIDList()){
 				Hero hero = (Hero) CorpsFactory.getInstance(heroID, player);
 				IBuilding town = ground.getBuilding(player.getHomePosition());
-				IOption reviveOption = new OptionRevive(hero);
+				IOption reviveOption = new ReviveOption(hero);
 				reviveOption.setOwner(town);
 				town.getOptions().add(reviveOption);
 				

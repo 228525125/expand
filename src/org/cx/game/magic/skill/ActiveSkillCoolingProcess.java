@@ -1,12 +1,10 @@
 package org.cx.game.magic.skill;
 
 import org.cx.game.widget.building.AbstractProcess;
-import org.cx.game.widget.building.IOption;
-import org.cx.game.widget.building.ProcessOptionSpacing;
 
-public class ProcessActiveSkillCooling extends AbstractProcess {
+public class ActiveSkillCoolingProcess extends AbstractProcess {
 
-	public ProcessActiveSkillCooling(Integer waitBout, IActiveSkill skill) {
+	public ActiveSkillCoolingProcess(Integer waitBout, IActiveSkill skill) {
 		super(waitBout, skill.getOwner().getPlayer(), skill);
 		// TODO Auto-generated constructor stub
 	}

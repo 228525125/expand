@@ -15,11 +15,11 @@ import org.cx.game.widget.IGround;
  * @author chenxian
  *
  */
-public class TreasureResource extends Treasure implements ITreasure {
+public class ResourceTreasure extends Treasure implements ITreasure {
 
 	private IResource resource = null;
 	
-	public TreasureResource(Integer gold, Integer wood, Integer stone, Integer ore) {
+	public ResourceTreasure(Integer gold, Integer wood, Integer stone, Integer ore) {
 		// TODO Auto-generated constructor stub
 		this.resource = new Resource(gold, wood, stone, ore);
 	}

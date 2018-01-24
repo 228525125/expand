@@ -1,6 +1,6 @@
 package org.cx.game.rule;
 
-import org.cx.game.action.UpgradeCorps;
+import org.cx.game.action.CorpsUpgrade;
 import org.cx.game.corps.Corps;
 import org.cx.game.magic.buff.IBuff;
 import org.cx.game.magic.skill.IPassiveSkill;
@@ -12,13 +12,13 @@ public class CorpsPropertyUpdateUpgradeRule extends AbstractRule implements
 	@Override
 	public Class getInterceptable() {
 		// TODO Auto-generated method stub
-		return UpgradeCorps.class;
+		return CorpsUpgrade.class;
 	}
 	
 	@Override
-	public UpgradeCorps getOwner() {
+	public CorpsUpgrade getOwner() {
 		// TODO Auto-generated method stub
-		return (UpgradeCorps) super.getOwner();
+		return (CorpsUpgrade) super.getOwner();
 	}
 	
 	@Override
@@ -44,6 +44,8 @@ public class CorpsPropertyUpdateUpgradeRule extends AbstractRule implements
 			}
 		}
 		corps.getAttack().setExtraAtk(levelAtk + buffAtk + skillAtk);
+		
+		corps.updateAtk();
 	}
 	
 	static void updateExtraDef(Corps corps) {
@@ -61,6 +63,8 @@ public class CorpsPropertyUpdateUpgradeRule extends AbstractRule implements
 			}
 		}
 		corps.getAttacked().setExtraDef(levelDef + buffDef + skillDef);
+		
+		corps.updateDef();
 	}
 
 }

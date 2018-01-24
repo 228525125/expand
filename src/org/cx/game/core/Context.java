@@ -6,9 +6,9 @@ import org.cx.game.action.AbstractAction;
 import org.cx.game.action.IAction;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.widget.IGround;
-import org.cx.game.widget.building.BuildingCall;
-import org.cx.game.widget.building.BuildingResource;
-import org.cx.game.widget.building.BuildingTown;
+import org.cx.game.widget.building.CallBuilding;
+import org.cx.game.widget.building.ResourceBuilding;
+import org.cx.game.widget.building.TownBuilding;
 import org.cx.game.widget.building.IBuilding;
 
 public class Context extends AbstractContext {
@@ -144,18 +144,18 @@ public class Context extends AbstractContext {
 			IGround ground = getOwner().getGround();
 			List<IBuilding> list = ground.getBuildingList();
 			for(IBuilding building : list){
-				if(building instanceof BuildingTown){
-					BuildingTown town = (BuildingTown) building;
+				if(building instanceof TownBuilding){
+					TownBuilding town = (TownBuilding) building;
 					for(IBuilding innerBuilding :town.getBuildings()){
-						if(innerBuilding instanceof BuildingResource){
-							BuildingResource br = (BuildingResource) innerBuilding;
+						if(innerBuilding instanceof ResourceBuilding){
+							ResourceBuilding br = (ResourceBuilding) innerBuilding;
 							br.output();           
 						}
 					}
 				}
 				
-				if(building instanceof BuildingResource){
-					BuildingResource br = (BuildingResource) building;
+				if(building instanceof ResourceBuilding){
+					ResourceBuilding br = (ResourceBuilding) building;
 					br.output();
 				}
 			}
@@ -181,11 +181,11 @@ public class Context extends AbstractContext {
 			IGround ground = getOwner().getGround();
 			List<IBuilding> list = ground.getBuildingList();
 			for(IBuilding building : list){
-				if(building instanceof BuildingTown){
-					BuildingTown town = (BuildingTown) building;
+				if(building instanceof TownBuilding){
+					TownBuilding town = (TownBuilding) building;
 					for(IBuilding innerBuilding :town.getBuildings()){
-						if(innerBuilding instanceof BuildingCall){
-							BuildingCall bc = (BuildingCall) innerBuilding;
+						if(innerBuilding instanceof CallBuilding){
+							CallBuilding bc = (CallBuilding) innerBuilding;
 							bc.output();           
 						}
 					}

@@ -11,14 +11,14 @@ import org.cx.game.tools.I18n;
  * @author chenxian
  *
  */
-public class TreasureEquipment extends Treasure implements ITreasure {
+public class EquipmentTreasure extends Treasure implements ITreasure {
 
 	private Integer type = null;
 	private String name = null;
 	private Integer atk = 0;
 	private Integer def = 0;
 	
-	public TreasureEquipment(Integer type) {
+	public EquipmentTreasure(Integer type) {
 		// TODO Auto-generated constructor stub
 		this.type = type;
 	}

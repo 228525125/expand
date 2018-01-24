@@ -16,7 +16,7 @@ import org.cx.game.observer.NotifyInfo;
 import org.cx.game.rule.IRule;
 import org.cx.game.widget.treasure.EmpiricValue;
 import org.cx.game.widget.treasure.ITreasure;
-import org.cx.game.widget.treasure.TreasureEquipment;
+import org.cx.game.widget.treasure.EquipmentTreasure;
 
 /**
  * 受到攻击
@@ -56,7 +56,6 @@ public class Attacked extends AbstractAction implements IAction {
 		// TODO Auto-generated method stub
 		if(!armourDef.equals(this.armourDef)){
 			this.armourDef = armourDef;
-			getOwner().updateDef();
 		}
 	}
 	
@@ -67,7 +66,6 @@ public class Attacked extends AbstractAction implements IAction {
 	public void setLandformDef(Integer landformDef) {
 		if(!landformDef.equals(this.landformDef)){
 			this.landformDef = landformDef;
-			getOwner().updateDef();
 		}
 	}
 
@@ -78,7 +76,6 @@ public class Attacked extends AbstractAction implements IAction {
 	public void setExtraDef(Integer extraDef) {
 		if(!extraDef.equals(this.extraDef)){
 			this.extraDef = extraDef;
-			getOwner().updateDef();
 		}
 	}
 
@@ -128,7 +125,7 @@ public class Attacked extends AbstractAction implements IAction {
 		damage = ((DeathAddToHpAction) death.getAddToHpAction()).getDamage();
 		
 		//增加经验值
-		UpgradeCorps uc = (UpgradeCorps) attack.getOwner().getUpgrade();
+		CorpsUpgrade uc = (CorpsUpgrade) attack.getOwner().getUpgrade();
 		uc.addToEmpiricValue(Math.abs(damage));
 		
 		/*

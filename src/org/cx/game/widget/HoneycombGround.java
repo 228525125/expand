@@ -438,7 +438,7 @@ public class HoneycombGround implements IGround {
 		List path = route(getPosition(sc), position, type, sc.getPlayer());
 		path.remove(0);                         //路径包含起点
 		
-		for(int i=0;i<path.size();i++){   
+		for(int i=0;i<path.size();i++){
 			
 			/*
 			 * moveable状态可能会在place.in中改变

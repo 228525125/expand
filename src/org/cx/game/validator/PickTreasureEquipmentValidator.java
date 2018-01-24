@@ -4,7 +4,7 @@ import org.cx.game.corps.Hero;
 import org.cx.game.corps.Corps;
 import org.cx.game.tools.I18n;
 import org.cx.game.widget.Place;
-import org.cx.game.widget.treasure.TreasureEquipment;
+import org.cx.game.widget.treasure.EquipmentTreasure;
 
 /**
  * 只有英雄才能拾取装备
@@ -27,7 +27,7 @@ public class PickTreasureEquipmentValidator extends SelectPlaceExistTreasureVali
 		Boolean ret = super.validate();
 		
 		if(ret){
-			if (getTreasure() instanceof TreasureEquipment) {
+			if (getTreasure() instanceof EquipmentTreasure) {
 				if (!(this.corps instanceof Hero)) {
 					ret = false;
 					addMessage(I18n.getMessage(PickTreasureEquipmentValidator.class.getName()));

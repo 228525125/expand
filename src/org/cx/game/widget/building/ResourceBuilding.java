@@ -5,19 +5,19 @@ import java.util.Map;
 import org.cx.game.widget.treasure.IResource;
 import org.cx.game.widget.treasure.Resource;
 
-public class BuildingResource extends AbstractBuilding {
+public class ResourceBuilding extends AbstractBuilding {
 	
 	private IResource resource = null;
 	
-	public BuildingResource(Integer buildingType) {
+	public ResourceBuilding(Integer buildingType) {
 		super(buildingType);
 		// TODO Auto-generated constructor stub
 		this.resource = new Resource();
 		
-		IOption optionBuild = new OptionBuild();				
+		IOption optionBuild = new BuildOption();				
 		addOption(optionBuild);
 		
-		IOption optionBuildingUpgrade = new OptionBuildingUpgrade();
+		IOption optionBuildingUpgrade = new BuildingUpgradeOption();
 		addOption(optionBuildingUpgrade);
 	}
 

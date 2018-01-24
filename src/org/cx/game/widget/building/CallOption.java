@@ -17,14 +17,14 @@ import org.cx.game.validator.CallUnitEqualValidator;
 import org.cx.game.validator.RationLimitValidator;
 import org.cx.game.widget.IGround;
 import org.cx.game.widget.Place;
-import org.cx.game.widget.building.OptionBuild.OptionBuildExecute;
+import org.cx.game.widget.building.BuildOption.OptionBuildExecute;
 
-public class OptionCall extends AbstractOption implements IOption {
+public class CallOption extends AbstractOption implements IOption {
 
 	private Integer corpsID = 0;
 	private String name = null;
 	
-	public OptionCall(Integer corpsId) {
+	public CallOption(Integer corpsId) {
 		// TODO Auto-generated constructor stub
 		this.corpsID = corpsId;
 		

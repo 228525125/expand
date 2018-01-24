@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.cx.game.action.Upgrade;
-import org.cx.game.action.UpgradeHero;
+import org.cx.game.action.HeroUpgrade;
 import org.cx.game.magic.buff.IBuff;
 import org.cx.game.magic.skill.ISkill;
 import org.cx.game.widget.treasure.IResource;
@@ -45,7 +45,7 @@ public class Hero extends Corps {
 	
 	public Upgrade getUpgrade() {
 		if(null==upgrade){
-			Upgrade upgrade = new UpgradeHero(getUpgradeRequirement());
+			Upgrade upgrade = new HeroUpgrade(getUpgradeRequirement());
 			upgrade.setLevel(getLevel());
 			upgrade.setOwner(this);
 			this.upgrade = upgrade;

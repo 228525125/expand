@@ -7,7 +7,7 @@ import org.cx.game.magic.skill.IPassiveSkill;
 import org.cx.game.widget.IGround;
 import org.cx.game.action.IAction;
 import org.cx.game.action.Upgrade;
-import org.cx.game.action.UpgradeSkill;
+import org.cx.game.action.SkillUpgrade;
 import org.cx.game.corps.Corps;
 import org.cx.game.intercepter.IIntercepter;
 
@@ -119,7 +119,7 @@ public abstract class PassiveSkill extends AbstractSkill implements IPassiveSkil
 	
 	public Upgrade getUpgrade() {		
 		if(null==upgrade){
-			Upgrade upgrade = new UpgradeSkill();
+			Upgrade upgrade = new SkillUpgrade();
 			upgrade.setOwner(this);
 			this.upgrade = upgrade;
 		}

@@ -19,7 +19,7 @@ import org.cx.game.action.IAction;
 import org.cx.game.action.Move;
 import org.cx.game.action.Pick;
 import org.cx.game.action.Upgrade;
-import org.cx.game.action.UpgradeCorps;
+import org.cx.game.action.CorpsUpgrade;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.magic.buff.IBuff;
 import org.cx.game.magic.skill.ISkill;
@@ -155,7 +155,7 @@ public class Corps extends AbstractCorps {
 		return atk;
 	}
 	
-	public void setAtk(Integer atk){
+	public void setAtk(Integer atk) {
 		this.atk = atk;
 	}
 	
@@ -576,7 +576,7 @@ public class Corps extends AbstractCorps {
 
 	public Upgrade getUpgrade() {
 		if(null==upgrade){
-			upgrade = new UpgradeCorps(upgradeRequirement);
+			upgrade = new CorpsUpgrade(upgradeRequirement);
 			upgrade.setLevel(getLevel());            //setLevel会触发upgradeRequirement
 			upgrade.setOwner(this);
 		}

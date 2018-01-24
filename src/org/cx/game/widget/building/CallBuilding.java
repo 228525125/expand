@@ -5,23 +5,23 @@ import java.util.Map;
 
 import org.cx.game.widget.treasure.IResource;
 
-public class BuildingCall extends AbstractBuilding implements IBuilding {
+public class CallBuilding extends AbstractBuilding implements IBuilding {
 
 	private Integer corpsID = null;       //可招募单位
 	private Integer nop = 0;             //当前可招募数量
 	private Integer yield = null;        //产量/天
 	
-	public BuildingCall(Integer corpsID, Integer yield, Integer buildingType) {
+	public CallBuilding(Integer corpsID, Integer yield, Integer buildingType) {
 		// TODO Auto-generated constructor stub
 		super(buildingType);
 		
 		this.corpsID = corpsID;
 		this.yield = yield;
 		
-		IOption optionBuild = new OptionBuild();				
+		IOption optionBuild = new BuildOption();				
 		addOption(optionBuild);
 		
-		IOption callOption = new OptionCall(corpsID);
+		IOption callOption = new CallOption(corpsID);
 		addOption(callOption);
 	}
 

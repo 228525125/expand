@@ -13,9 +13,9 @@ import org.cx.game.action.Attacked;
 import org.cx.game.action.Call;
 import org.cx.game.action.Death;
 import org.cx.game.action.Move;
-import org.cx.game.action.UpgradeHero;
-import org.cx.game.action.UpgradeCorps;
-import org.cx.game.action.UpgradeSkill;
+import org.cx.game.action.HeroUpgrade;
+import org.cx.game.action.CorpsUpgrade;
+import org.cx.game.action.SkillUpgrade;
 import org.cx.game.core.Player;
 import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Hero;
@@ -27,19 +27,19 @@ import org.cx.game.widget.ControlQueue;
 import org.cx.game.widget.HoneycombGround;
 import org.cx.game.widget.Place;
 import org.cx.game.widget.TrickList;
-import org.cx.game.widget.building.BuildingCall;
-import org.cx.game.widget.building.BuildingResource;
-import org.cx.game.widget.building.BuildingTown;
-import org.cx.game.widget.building.OptionBuild;
-import org.cx.game.widget.building.OptionBuildingUpgrade;
-import org.cx.game.widget.building.OptionCall;
-import org.cx.game.widget.building.OptionRevive;
+import org.cx.game.widget.building.CallBuilding;
+import org.cx.game.widget.building.ResourceBuilding;
+import org.cx.game.widget.building.TownBuilding;
+import org.cx.game.widget.building.BuildOption;
+import org.cx.game.widget.building.BuildingUpgradeOption;
+import org.cx.game.widget.building.CallOption;
+import org.cx.game.widget.building.ReviveOption;
 import org.cx.game.widget.building.UpgradeBuilding;
 import org.cx.game.widget.treasure.EmpiricValue;
 import org.cx.game.widget.treasure.Resource;
 import org.cx.game.widget.treasure.SkillCount;
-import org.cx.game.widget.treasure.TreasureEquipment;
-import org.cx.game.widget.treasure.TreasureResource;
+import org.cx.game.widget.treasure.EquipmentTreasure;
+import org.cx.game.widget.treasure.ResourceTreasure;
 
 public class JsonOut extends AbstractResponse {
 	
@@ -230,12 +230,12 @@ public class JsonOut extends AbstractResponse {
 				}
 			});
 			
-			config.registerJsonBeanProcessor(UpgradeHero.class, new JsonBeanProcessor() {
+			config.registerJsonBeanProcessor(HeroUpgrade.class, new JsonBeanProcessor() {
 				
 				@Override
 				public JSONObject processBean(Object arg0, JsonConfig arg1) {
 					// TODO Auto-generated method stub
-					UpgradeHero obj = (UpgradeHero) arg0;
+					HeroUpgrade obj = (HeroUpgrade) arg0;
 					return new JSONObject().element("empiricValue", obj.getEmpiricValue(), getConfig())
 							.element("level", obj.getLevel())
 							.element("levelLimit", obj.getLevelLimit())
@@ -244,12 +244,12 @@ public class JsonOut extends AbstractResponse {
 				}
 			});
 			
-			config.registerJsonBeanProcessor(UpgradeCorps.class, new JsonBeanProcessor() {
+			config.registerJsonBeanProcessor(CorpsUpgrade.class, new JsonBeanProcessor() {
 				
 				@Override
 				public JSONObject processBean(Object arg0, JsonConfig arg1) {
 					// TODO Auto-generated method stub
-					UpgradeCorps obj = (UpgradeCorps) arg0;
+					CorpsUpgrade obj = (CorpsUpgrade) arg0;
 					return new JSONObject().element("level", obj.getLevel())
 							.element("levelLimit", obj.getLevelLimit())
 							.element("requirement", obj.getRequirement(), getConfig())
@@ -257,12 +257,12 @@ public class JsonOut extends AbstractResponse {
 				}
 			});
 			
-			config.registerJsonBeanProcessor(UpgradeSkill.class, new JsonBeanProcessor() {
+			config.registerJsonBeanProcessor(SkillUpgrade.class, new JsonBeanProcessor() {
 				
 				@Override
 				public JSONObject processBean(Object arg0, JsonConfig arg1) {
 					// TODO Auto-generated method stub
-					UpgradeSkill obj = (UpgradeSkill) arg0;
+					SkillUpgrade obj = (SkillUpgrade) arg0;
 					return new JSONObject().element("level", obj.getLevel())
 							.element("levelLimit", obj.getLevelLimit())
 							.element("requirement", obj.getRequirement(), getConfig());
@@ -351,12 +351,12 @@ public class JsonOut extends AbstractResponse {
 				}
 			});
 			
-			config.registerJsonBeanProcessor(BuildingCall.class, new JsonBeanProcessor() {
+			config.registerJsonBeanProcessor(CallBuilding.class, new JsonBeanProcessor() {
 				
 				@Override
 				public JSONObject processBean(Object arg0, JsonConfig arg1) {
 					// TODO Auto-generated method stub
-					BuildingCall obj = (BuildingCall) arg0;
+					CallBuilding obj = (CallBuilding) arg0;
 					return new JSONObject().element("buildWait", obj.getBuildWait())
 							.element("consume", obj.getConsume(), getConfig())
 							.element("name", obj.getName())
@@ -373,12 +373,12 @@ public class JsonOut extends AbstractResponse {
 				}
 			});
 			
-			config.registerJsonBeanProcessor(BuildingResource.class, new JsonBeanProcessor() {
+			config.registerJsonBeanProcessor(ResourceBuilding.class, new JsonBeanProcessor() {
 				
 				@Override
 				public JSONObject processBean(Object arg0, JsonConfig arg1) {
 					// TODO Auto-generated method stub
-					BuildingResource obj = (BuildingResource) arg0;
+					ResourceBuilding obj = (ResourceBuilding) arg0;
 					return new JSONObject().element("buildWait", obj.getBuildWait())
 							.element("consume", obj.getConsume(), getConfig())
 							.element("name", obj.getName())
@@ -393,12 +393,12 @@ public class JsonOut extends AbstractResponse {
 				}
 			});
 			
-			config.registerJsonBeanProcessor(BuildingTown.class, new JsonBeanProcessor() {
+			config.registerJsonBeanProcessor(TownBuilding.class, new JsonBeanProcessor() {
 				
 				@Override
 				public JSONObject processBean(Object arg0, JsonConfig arg1) {
 					// TODO Auto-generated method stub
-					BuildingTown obj = (BuildingTown) arg0;
+					TownBuilding obj = (TownBuilding) arg0;
 					return new JSONObject().element("buildWait", obj.getBuildWait())
 							.element("consume", obj.getConsume(), getConfig())
 							.element("name", obj.getName())
@@ -412,12 +412,12 @@ public class JsonOut extends AbstractResponse {
 				}
 			});
 			
-			config.registerJsonBeanProcessor(OptionBuild.class, new JsonBeanProcessor() {
+			config.registerJsonBeanProcessor(BuildOption.class, new JsonBeanProcessor() {
 				
 				@Override
 				public JSONObject processBean(Object arg0, JsonConfig arg1) {
 					// TODO Auto-generated method stub
-					OptionBuild obj = (OptionBuild) arg0;
+					BuildOption obj = (BuildOption) arg0;
 					return new JSONObject().element("allow", obj.getAllow())
 							.element("executeRemainBout", obj.getExecuteRemainBout())
 							.element("executeWait", obj.getExecuteWait())
@@ -427,12 +427,12 @@ public class JsonOut extends AbstractResponse {
 				}
 			});
 			
-			config.registerJsonBeanProcessor(OptionBuildingUpgrade.class, new JsonBeanProcessor() {
+			config.registerJsonBeanProcessor(BuildingUpgradeOption.class, new JsonBeanProcessor() {
 				
 				@Override
 				public JSONObject processBean(Object arg0, JsonConfig arg1) {
 					// TODO Auto-generated method stub
-					OptionBuildingUpgrade obj = (OptionBuildingUpgrade) arg0;
+					BuildingUpgradeOption obj = (BuildingUpgradeOption) arg0;
 					return new JSONObject().element("allow", obj.getAllow())
 							.element("executeRemainBout", obj.getExecuteRemainBout())
 							.element("executeWait", obj.getExecuteWait())
@@ -442,12 +442,12 @@ public class JsonOut extends AbstractResponse {
 				}
 			});
 			
-			config.registerJsonBeanProcessor(OptionCall.class, new JsonBeanProcessor() {
+			config.registerJsonBeanProcessor(CallOption.class, new JsonBeanProcessor() {
 				
 				@Override
 				public JSONObject processBean(Object arg0, JsonConfig arg1) {
 					// TODO Auto-generated method stub
-					OptionCall obj = (OptionCall) arg0;
+					CallOption obj = (CallOption) arg0;
 					return new JSONObject().element("allow", obj.getAllow())
 							.element("executeRemainBout", obj.getExecuteRemainBout())
 							.element("executeWait", obj.getExecuteWait())
@@ -457,12 +457,12 @@ public class JsonOut extends AbstractResponse {
 				}
 			});
 			
-			config.registerJsonBeanProcessor(OptionRevive.class, new JsonBeanProcessor() {
+			config.registerJsonBeanProcessor(ReviveOption.class, new JsonBeanProcessor() {
 				
 				@Override
 				public JSONObject processBean(Object arg0, JsonConfig arg1) {
 					// TODO Auto-generated method stub
-					OptionRevive obj = (OptionRevive) arg0;
+					ReviveOption obj = (ReviveOption) arg0;
 					return new JSONObject().element("allow", obj.getAllow())
 							.element("executeRemainBout", obj.getExecuteRemainBout())
 							.element("executeWait", obj.getExecuteWait())
@@ -505,12 +505,12 @@ public class JsonOut extends AbstractResponse {
 				}
 			});
 			
-			config.registerJsonBeanProcessor(TreasureEquipment.class, new JsonBeanProcessor() {
+			config.registerJsonBeanProcessor(EquipmentTreasure.class, new JsonBeanProcessor() {
 				
 				@Override
 				public JSONObject processBean(Object arg0, JsonConfig arg1) {
 					// TODO Auto-generated method stub
-					TreasureEquipment obj = (TreasureEquipment) arg0;
+					EquipmentTreasure obj = (EquipmentTreasure) arg0;
 					return new JSONObject().element("atk", obj.getAtk())
 							.element("def", obj.getDef())
 							.element("id", obj.getType())
@@ -519,12 +519,12 @@ public class JsonOut extends AbstractResponse {
 				}
 			});
 
-			config.registerJsonBeanProcessor(TreasureResource.class, new JsonBeanProcessor() {
+			config.registerJsonBeanProcessor(ResourceTreasure.class, new JsonBeanProcessor() {
 				
 				@Override
 				public JSONObject processBean(Object arg0, JsonConfig arg1) {
 					// TODO Auto-generated method stub
-					TreasureResource obj = (TreasureResource) arg0;
+					ResourceTreasure obj = (ResourceTreasure) arg0;
 					return new JSONObject().element("name", obj.getName())
 							.element("position", obj.getPosition())
 							.element("resource", obj.getResource(), getConfig());
@@ -538,7 +538,7 @@ public class JsonOut extends AbstractResponse {
 		
 		Resource r = new Resource("1,2,3,4");
 		
-		TreasureResource tr = new TreasureResource(1, 2, 2, 2);
+		ResourceTreasure tr = new ResourceTreasure(1, 2, 2, 2);
 		System.out.println(JSONObject.fromObject(r,getConfig()));
 	}
 }

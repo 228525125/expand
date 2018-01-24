@@ -11,9 +11,9 @@ import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.PropertiesUtil;
 import org.cx.game.widget.treasure.EmpiricValue;
 
-public class UpgradeCorps extends Upgrade implements IAction {
+public class CorpsUpgrade extends Upgrade implements IAction {
 	
-	public UpgradeCorps(Map<Integer, String> requirement) {
+	public CorpsUpgrade(Map<Integer, String> requirement) {
 		super(requirement);
 		// TODO Auto-generated constructor stub
 	}

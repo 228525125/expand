@@ -4,8 +4,8 @@ import org.cx.game.action.Picked;
 import org.cx.game.corps.Corps;
 import org.cx.game.corps.Hero;
 import org.cx.game.widget.treasure.ITreasure;
-import org.cx.game.widget.treasure.TreasureEquipment;
-import org.cx.game.widget.treasure.TreasureEquipment.TreasureEquipmentPicked;
+import org.cx.game.widget.treasure.EquipmentTreasure;
+import org.cx.game.widget.treasure.EquipmentTreasure.TreasureEquipmentPicked;
 
 public class CorpsPropertyUpdateTreasureEquipmentPickedRule extends AbstractRule implements IRule {
 
@@ -32,24 +32,28 @@ public class CorpsPropertyUpdateTreasureEquipmentPickedRule extends AbstractRule
 	private void updateWeaponAtk(Hero hero) {
 		Integer atk = 0;
 		for(ITreasure treasure : hero.getTreasures()){
-			if (treasure instanceof TreasureEquipment) {
-				TreasureEquipment te = (TreasureEquipment) treasure;
+			if (treasure instanceof EquipmentTreasure) {
+				EquipmentTreasure te = (EquipmentTreasure) treasure;
 				atk += te.getAtk();
 			}
 		}
 		hero.getAttack().setWeaponAtk(atk);
+		
+		hero.updateAtk();
 	}
 	
 	private void updateArmourDef(Hero hero) {
 		// TODO Auto-generated method stub
 		Integer def = 0;
 		for(ITreasure treasure : hero.getTreasures()){
-			if (treasure instanceof TreasureEquipment) {
-				TreasureEquipment te = (TreasureEquipment) treasure;
+			if (treasure instanceof EquipmentTreasure) {
+				EquipmentTreasure te = (EquipmentTreasure) treasure;
 				def += te.getDef();
 			}
 		}
 		hero.getAttacked().setArmourDef(def);
+		
+		hero.updateDef();
 	}
 
 }

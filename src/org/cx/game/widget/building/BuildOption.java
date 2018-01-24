@@ -9,7 +9,7 @@ import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.validator.BuildConsumeValidator;
 import org.cx.game.widget.IGround;
 
-public class OptionBuild extends AbstractOption {
+public class BuildOption extends AbstractOption {
 
 	private String name = null;
 	
@@ -64,8 +64,8 @@ public class OptionBuild extends AbstractOption {
 		/*
 		 * 判断基础建筑物是否建造
 		 */
-		if(getOwner().getOwner() instanceof BuildingTown && !getOwner().getNeedBuilding().isEmpty()){
-			BuildingTown town = (BuildingTown) getOwner().getOwner();
+		if(getOwner().getOwner() instanceof TownBuilding && !getOwner().getNeedBuilding().isEmpty()){
+			TownBuilding town = (TownBuilding) getOwner().getOwner();
 			List<IBuilding> buildings = town.getBuildings();
 			List<Integer> list = new ArrayList<Integer>();
 			for(IBuilding building : buildings){

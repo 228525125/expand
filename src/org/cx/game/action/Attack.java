@@ -14,7 +14,7 @@ import org.cx.game.observer.NotifyInfo;
 import org.cx.game.widget.GroundFactory;
 import org.cx.game.widget.IGround;
 import org.cx.game.widget.treasure.ITreasure;
-import org.cx.game.widget.treasure.TreasureEquipment;
+import org.cx.game.widget.treasure.EquipmentTreasure;
 
 public class Attack extends AbstractAction implements IAction {
 	
@@ -85,7 +85,6 @@ public class Attack extends AbstractAction implements IAction {
 		// TODO Auto-generated method stub
 		if(!weaponAtk.equals(this.weaponAtk)){
 			this.weaponAtk = weaponAtk;
-			getOwner().updateAtk();
 		}
 	}
 
@@ -97,7 +96,6 @@ public class Attack extends AbstractAction implements IAction {
 	public void setExtraAtk(Integer extraAtk) {
 		if(!extraAtk.equals(this.extraAtk)){
 			this.extraAtk = extraAtk;
-			getOwner().updateAtk();
 		}
 	}
 	
@@ -108,7 +106,6 @@ public class Attack extends AbstractAction implements IAction {
 	public void setLandformAtk(Integer landformAtk) {
 		if(!landformAtk.equals(this.landformAtk)){
 			this.landformAtk = landformAtk;
-			getOwner().updateAtk();
 		}
 	}
 
@@ -183,9 +180,11 @@ public class Attack extends AbstractAction implements IAction {
 		Attack clone = clone();
 		
 		IGround ground = getOwner().getGround();
+		
+		//如果是远程，这里要设置为近身攻击模式
 		Integer distance = ground.distance(attacked.getPosition(), getOwner().getPosition());
 		if(1==distance){                                           //近身
-			clone.setMode(AbstractCorps.Attack_Mode_Near);             //如果是远程，这里要设置为近身攻击模式
+			clone.setMode(AbstractCorps.Attack_Mode_Near);             
 		}
 		
 		//判断攻击模式，远程近战伤害减半
