@@ -24,6 +24,12 @@ public class Place extends AbstractPlace {
 		return (Corps) super.getCorps();
 	}
 	
+	@Override
+	public IGroundE getOwner() {
+		// TODO Auto-generated method stub
+		return (IGroundE) super.getOwner();
+	}
+	
 	private IAction placeInAction = null;
 	
 	public IAction getPlaceInAction(){

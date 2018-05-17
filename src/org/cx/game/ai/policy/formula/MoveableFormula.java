@@ -1,14 +1,14 @@
-package org.cx.game.policy.formula;
+package org.cx.game.ai.policy.formula;
 
 import org.cx.game.corps.Corps;
 import org.cx.game.tools.I18n;
 import org.cx.game.validator.Validator;
 
-public class AttackableFormula extends Validator implements IFormula {
-	
-	private Corps corps = null;
+public class MoveableFormula extends Validator {
 
-	public AttackableFormula(Corps corps) {
+	private Corps corps = null;
+	
+	public MoveableFormula(Corps corps) {
 		// TODO Auto-generated constructor stub
 		this.corps = corps;
 	}
@@ -18,7 +18,7 @@ public class AttackableFormula extends Validator implements IFormula {
 		// TODO Auto-generated method stub
 		Boolean ret = false;
 		
-		if(this.corps.getAttack().getAttackable())
+		if(this.corps.getMove().getMoveable())
 			ret = true;
 		else{
 			addMessage(I18n.getMessage(this));

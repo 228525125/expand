@@ -20,17 +20,19 @@ import org.cx.game.action.Move;
 import org.cx.game.action.Pick;
 import org.cx.game.action.Upgrade;
 import org.cx.game.action.CorpsUpgrade;
+import org.cx.game.ai.CorpsAgent;
+import org.cx.game.core.IPlayer;
+import org.cx.game.core.IPlayerE;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.magic.buff.IBuff;
 import org.cx.game.magic.skill.ISkill;
-import org.cx.game.observer.NotifyInfo;
-import org.cx.game.observer.NotifyType;
-import org.cx.game.policy.GuardPolicy;
-import org.cx.game.policy.IPolicy;
-import org.cx.game.policy.IPolicyGroup;
 import org.cx.game.tools.I18n;
+import org.cx.game.widget.IGround;
+import org.cx.game.widget.IGroundE;
 import org.cx.game.widget.treasure.IResource;
 import org.cx.game.widget.treasure.Resource;
+
+import com.sun.org.apache.xml.internal.dtm.ref.CoroutineManager;
 
 public class Corps extends AbstractCorps { 
 	
@@ -67,6 +69,7 @@ public class Corps extends AbstractCorps {
 	private Activate activate = null;
 	private Attack attack = null;
 	private Attacked attacked = null;
+	private CorpsAgent agent = null;
 	private Conjure conjure = null;
 	private Affected affected = null;
 	private Move move = null;
@@ -88,6 +91,22 @@ public class Corps extends AbstractCorps {
 		upgradeRequirement.put(2, "e-100");
 		upgradeRequirement.put(3, "e-200");
 		upgradeRequirement.put(4, "e-400");
+	}
+	
+	@Override
+	public IPlayerE getPlayer() {
+		// TODO Auto-generated method stub
+		return (IPlayerE) super.getPlayer();
+	}
+	
+	@Override
+	public IGroundE getGround() {
+		// TODO Auto-generated method stub
+		return (IGroundE) super.getGround();
+	}
+	
+	public CorpsAgent getAgent() {
+		return agent;
 	}
 	
 	public String getName() {
@@ -452,29 +471,6 @@ public class Corps extends AbstractCorps {
 				return true;
 		}
 		return false;
-	}
-	
-	private IPolicyGroup groupPolicy = null;
-	
-	public void setGroupPolicy(IPolicyGroup gp){
-		this.groupPolicy = gp;
-		this.groupPolicy.setOwner(this);
-	}
-	
-	/**
-	 * 使用AI自动操作
-	 */
-	public void automation(){
-		while (true) {
-			IPolicy policy = this.groupPolicy.getPolicy();
-			if(null!=policy){
-				policy.execute();
-				
-				if(policy instanceof GuardPolicy)
-					break;
-			}else
-				break;
-		}
 	}
 
 	public Activate getActivate() {

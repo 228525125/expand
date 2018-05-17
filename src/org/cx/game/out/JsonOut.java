@@ -308,7 +308,7 @@ public class JsonOut extends AbstractResponse {
 					// TODO Auto-generated method stub
 					HoneycombGround obj = (HoneycombGround) arg0;
 					return new JSONObject().element("buildingList", obj.getBuildingList(), getConfig())
-							.element("disableList", obj.getDisableList())
+							//.element("disableList", obj.getDisableList())
 							.element("emptyList", obj.getEmptyList())
 							.element("imagePath", obj.getImagePath())
 							.element("name", obj.getName())
@@ -325,7 +325,7 @@ public class JsonOut extends AbstractResponse {
 					Place obj = (Place) arg0;
 					return new JSONObject().element("building", obj.getBuilding(), getConfig())
 							.element("cemetery", obj.getCemetery(), getConfig())
-							.element("disable", obj.getDisable())
+							//.element("disable", obj.getDisable())
 							.element("empty", obj.getEmpty())
 							.element("landform", obj.getLandform())
 							.element("life", obj.getCorps(), getConfig())

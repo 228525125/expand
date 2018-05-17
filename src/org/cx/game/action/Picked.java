@@ -7,6 +7,7 @@ import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.widget.IGround;
+import org.cx.game.widget.IGroundE;
 import org.cx.game.widget.treasure.ITreasure;
 
 public class Picked extends AbstractAction implements IAction {
@@ -30,7 +31,7 @@ public class Picked extends AbstractAction implements IAction {
 		NotifyInfo info = new NotifyInfo(NotifyInfo.Treasure_Picked,map);
 		super.notifyObservers(info);
 		
-		IGround ground = corps.getGround();
-		ground.picked(getOwner());
+		IGroundE ground = corps.getGround();
+		ground.removeTreasure(getOwner());
 	}
 }

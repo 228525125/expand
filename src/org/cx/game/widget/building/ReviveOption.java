@@ -16,6 +16,7 @@ import org.cx.game.validator.CallConsumeValidator;
 import org.cx.game.validator.CallRangeValidator;
 import org.cx.game.widget.AbstractPlace;
 import org.cx.game.widget.IGround;
+import org.cx.game.widget.IGroundE;
 import org.cx.game.widget.Place;
 
 /**
@@ -51,7 +52,7 @@ public class ReviveOption extends AbstractOption implements IOption {
 		// TODO Auto-generated method stub
 		List<Integer> positionList = new ArrayList<Integer>();
 		positionList = ground.areaForDistance(getOwner().getPosition(), 1, IGround.Contain);
-		positionList.retainAll(ground.getEmptyList());
+		positionList.retainAll(((IGroundE)ground).getEmptyList());
 		return positionList;
 	}
 	

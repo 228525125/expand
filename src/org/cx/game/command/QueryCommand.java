@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.cx.game.core.IPlayer;
+import org.cx.game.core.IPlayerE;
 import org.cx.game.corps.AbstractCorps;
 import org.cx.game.magic.skill.IActiveSkill;
 import org.cx.game.exception.CommandValidatorException;
@@ -16,13 +17,16 @@ import org.cx.game.validator.SelectCorpsValidator;
 import org.cx.game.validator.SelectOptionValidator;
 import org.cx.game.validator.SelectSkillValidator;
 import org.cx.game.widget.IGround;
+import org.cx.game.widget.IGroundE;
 import org.cx.game.widget.building.IOption;
 
 public class QueryCommand extends InteriorCommand {
 
 	private Map<String, String> map = new HashMap<String, String>();
 	
-	public QueryCommand(IPlayer player) {
+	private IPlayerE player = null;
+	
+	public QueryCommand(IPlayerE player) {
 		// TODO Auto-generated constructor stub
 		super(player);
 		map.put("attack", NotifyInfo.Command_Query_Attack);
@@ -33,6 +37,8 @@ public class QueryCommand extends InteriorCommand {
 		map.put("apply", NotifyInfo.Command_Query_Apply);
 		map.put("execute", NotifyInfo.Command_Query_Execute);
 		map.put("pick", NotifyInfo.Command_Query_Pick);
+		
+		this.player = player;
 	}
 	
 	private List<Integer> positionList = new ArrayList<Integer>();
@@ -42,7 +48,7 @@ public class QueryCommand extends InteriorCommand {
 		// TODO Auto-generated method stub
 		super.execute();
 		
-		IGround ground = player.getContext().getGround();
+		IGroundE ground = this.player.getContext().getGround();
 		
 		if("conjure".equals(parameter)){
 			doValidator(new SelectSkillValidator(buffer));

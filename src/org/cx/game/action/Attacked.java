@@ -135,15 +135,11 @@ public class Attacked extends AbstractAction implements IAction {
 			&& getFightBack()                                           //是否反击过 
 			&& !attack.getCounterAttack()                               //这次攻击方式是否是反击
 			&& 0<getOwner().getAttack().getAtk()){                        //是否有攻击力 
-			try {
-				getOwner().getAttack().setCounterAttack(true);      //设置为反击
-				getOwner().attack(attackLife);
-				getOwner().getAttack().setCounterAttack(false);     //反击结束
-				getOwner().getAttacked().setFightBack(false);
-			} catch (RuleValidatorException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
+			getOwner().getAttack().setCounterAttack(true);      //设置为反击
+			getOwner().attack(attackLife);
+			getOwner().getAttack().setCounterAttack(false);     //反击结束
+			getOwner().getAttacked().setFightBack(false);
 		} 
 	}
 }

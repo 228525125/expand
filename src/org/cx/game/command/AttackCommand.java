@@ -43,7 +43,5 @@ public class AttackCommand extends InteriorCommand {
 			throw new CommandValidatorException(getErrors().getMessage());
 		
 		attack.attack(attacked);
-		if(!Debug.isDebug)
-			player.getContext().done();   //结束本回合
 	}
 }

@@ -1,41 +1,47 @@
-package org.cx.game.policy;
+package org.cx.game.ai.policy;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.cx.game.ai.CorpsAgent;
+import org.cx.game.ai.policy.formula.AttackableFormula;
+import org.cx.game.ai.policy.formula.LockFormula;
+import org.cx.game.ai.policy.formula.ShechengneidedirenFormula;
 import org.cx.game.command.Command;
 import org.cx.game.command.CommandFactory;
-import org.cx.game.command.Invoker;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.ValidatorException;
-import org.cx.game.policy.IPolicy;
-import org.cx.game.policy.formula.AttackableFormula;
-import org.cx.game.policy.formula.LockFormula;
-import org.cx.game.policy.formula.ShechengneidedirenFormula;
-import org.cx.game.policy.formula.StagnantFormula;
 
-/**
- * 攻击策略
- * @author chenxian
- *
- */
-public class AttackPolicy extends AbstractPolicy {
-	
+public class AttackPolicy extends AbstractPolicy<CorpsAgent> {
+
 	private String cmdStr = "";
+	
+	private static AttackPolicy policy = null;
+	
+	private AttackPolicy() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public static AttackPolicy getInstance(){
+		if(null==policy)
+			policy = new AttackPolicy();
+		
+		return policy;
+	}
 	
 	@Override
 	public void calculate() {
 		// TODO Auto-generated method stub
 		super.calculate();
 		
-		Corps owner = (Corps) getOwner().getOwner();
+		Corps corps = getAgent().getOwner();
 		
-		setPri(IPolicy.PRI_Min);
+		setPri(AbstractPolicy.PRI_Min);
 		
 		/*
 		 * 是否可发动攻击
 		 */
-		AttackableFormula af = new AttackableFormula(owner);
+		AttackableFormula af = new AttackableFormula(corps);
 		doValidator(af);
 		if(hasError())
 			return ;
@@ -43,7 +49,7 @@ public class AttackPolicy extends AbstractPolicy {
 		/*
 		 * 判断在攻击范围内，是否有敌人
 		 */
-		ShechengneidedirenFormula scFormula = new ShechengneidedirenFormula(owner);
+		ShechengneidedirenFormula scFormula = new ShechengneidedirenFormula(corps);
 		doValidator(scFormula);
 		
 		if(hasError())
@@ -54,7 +60,7 @@ public class AttackPolicy extends AbstractPolicy {
 		 */
 		List<Corps> lockerList = new ArrayList<Corps>();
 		
-		LockFormula lockFormula = new LockFormula(owner);
+		LockFormula lockFormula = new LockFormula(corps);
 		doValidator(lockFormula);
 		if(hasError()){       //没有被锁，搜索射程范围内的最近的敌人
 			Corps enemy = scFormula.getNearEnemy();
@@ -71,16 +77,16 @@ public class AttackPolicy extends AbstractPolicy {
 	}
 	
 	private void validator(){
-		Corps owner = (Corps) getOwner().getOwner();
-		String cmd = "select ground place"+owner.getPosition()+" corps;";
+		Corps corps = getAgent().getOwner();
+		String cmd = "select ground place"+corps.getPosition()+" corps;";
 		try {
-			Command command= CommandFactory.getInstance(owner.getPlayer(),cmd);
+			Command command= CommandFactory.getInstance(corps.getPlayer(),cmd);
 			command.execute();
 			
-			super.command = CommandFactory.getInstance(owner.getPlayer(),this.cmdStr);
+			super.command = CommandFactory.getInstance(corps.getPlayer(),this.cmdStr);
 			super.command.doValidator();
 			if(!super.command.hasError()){
-				setPri(IPolicy.PRI_High);
+				setPri(AbstractPolicy.PRI_High);
 			}
 		} catch (ValidatorException e) {
 			// TODO Auto-generated catch block

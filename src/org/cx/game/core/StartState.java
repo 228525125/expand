@@ -1,17 +1,16 @@
 package org.cx.game.core;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Random;
-import java.util.Set;
 
+import org.cx.game.corps.Corps;
 import org.cx.game.corps.CorpsFactory;
 import org.cx.game.corps.Hero;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
-import org.cx.game.widget.GroundFactory;
-import org.cx.game.widget.IGround;
+import org.cx.game.tools.XmlConfigureHelper;
+import org.cx.game.widget.AbstractPlace;
+import org.cx.game.widget.HoneycombGround;
 import org.cx.game.widget.building.IBuilding;
 import org.cx.game.widget.building.IOption;
 import org.cx.game.widget.building.ReviveOption;
@@ -45,7 +44,7 @@ public class StartState extends AbstractPlayState {
 		
 		context.switchControl();
 		
-		deploy();		
+		deploy();
 	}
 	
 	/**
@@ -53,7 +52,8 @@ public class StartState extends AbstractPlayState {
 	 */
 	private void provision(){
 		Map<String,Object> map = new HashMap<String,Object>();
-		IGround ground = context.getGround();
+		Context cont = (Context) context;
+		HoneycombGround ground = (HoneycombGround) context.getGround();
 		Map<Integer, Integer> landformMap = ground.getLandformMap();
 		Map<String, Integer> landform = new HashMap<String, Integer>();
 		for(Integer i : landformMap.keySet())
@@ -62,6 +62,14 @@ public class StartState extends AbstractPlayState {
 		Map<String, ITreasure> treasureMap = new HashMap<String, ITreasure>();
 		for(Integer i : ground.getTreasureMap().keySet())
 			treasureMap.put(i.toString(), ground.getTreasureMap().get(i));
+		
+		for(String data : ground.getBuildingData()){
+			XmlConfigureHelper.map_buildingData_building(data, cont);
+		}
+		
+		for(String data : ground.getNpcData()){
+			XmlConfigureHelper.map_npcData_npc(data, cont);
+		}
 		
 		map.put("landform", landform);
 		map.put("buildingList", ground.getBuildingList());

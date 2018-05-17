@@ -7,29 +7,31 @@ import java.util.Map;
 
 import org.cx.game.action.AbstractAction;
 import org.cx.game.action.IAction;
+import org.cx.game.ai.policy.DonePolicy;
+import org.cx.game.command.Command;
+import org.cx.game.command.CommandFactory;
 import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
+import org.cx.game.exception.SyntaxValidatorException;
+import org.cx.game.exception.ValidatorException;
 import org.cx.game.observer.NotifyInfo;
-import org.cx.game.policy.DonePolicy;
-import org.cx.game.policy.PolicyGroupFactory;
-import org.cx.game.policy.IPolicyGroup;
-import org.cx.game.policy.IPolicy;
+import org.cx.game.widget.LandformEffect;
 import org.cx.game.widget.treasure.IResource;
 
-public class Player extends AbstractPlayer {
+public class Player extends AbstractPlayer implements IPlayerE {
 	
 	private Integer bout = 0;
 	
 	private IAction addBoutAction = null;
-	private IPolicyGroup groupPolicy = null;
+	//private IPolicyGroup groupPolicy = null;
 	
 	public Player(Integer id, String name) {
 		super(id, name);
 		// TODO Auto-generated constructor stub
 		
-		this.groupPolicy = PolicyGroupFactory.getInstance(10450001);
-		this.groupPolicy.setOwner(this);
+		//this.groupPolicy = PolicyGroupFactory.getInstance(10450001);
+		//this.groupPolicy.setOwner(this);
 	}
 	
 	@Override
@@ -57,11 +59,23 @@ public class Player extends AbstractPlayer {
 		return list;
 	}
 	
+	@Override
+	public List<Corps> getAttendantList(Integer status) {
+		// TODO Auto-generated method stub
+		return getContext().getGround().getCorpsList(this, status);
+	}
+	
+	@Override
+	public IContextE getContext() {
+		// TODO Auto-generated method stub
+		return (IContextE) super.getContext();
+	}
+	
 	/**
 	 * 使用AI自动操作
 	 */
 	public void automation(){
-		while (this.equals(getContext().getControlPlayer())) {
+		/*while (this.equals(getContext().getControlPlayer())) {
 			IPolicy policy = this.groupPolicy.getPolicy();
 			if(null!=policy){
 				policy.execute();
@@ -71,6 +85,12 @@ public class Player extends AbstractPlayer {
 			}
 			else
 				break;
+		}*/
+		try {
+			getContext().done();
+		} catch (RuleValidatorException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	

@@ -10,6 +10,7 @@ import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.intercepter.AbstractIntercepter;
 import org.cx.game.intercepter.IIntercepter;
 import org.cx.game.widget.IGround;
+import org.cx.game.widget.IGroundE;
 
 /**
  * 光环
@@ -22,7 +23,7 @@ public abstract class Aureole extends PassiveSkill {
 	public final static Integer Default_AureoleBuff_Bout = 99;
 	
 	private Integer range = 0;
-	private List<AbstractCorps> affectedList = new ArrayList<AbstractCorps>();
+	private List<Corps> affectedList = new ArrayList<Corps>();
 	
 	public Aureole(Integer id, Integer range) {
 		super(id);
@@ -49,7 +50,7 @@ public abstract class Aureole extends PassiveSkill {
 			public void after(Object[] args) {
 				// TODO Auto-generated method stub
 				getOwner().getPlayer().getAddBoutAction().deleteIntercepter(this);
-				for(AbstractCorps corps : affectedList){
+				for(Corps corps : affectedList){
 					List<IBuff> buffs = corps.getBuff(getBuffClass());
 					if(buffs.isEmpty())
 						buffs.get(0).invalid();
@@ -87,14 +88,14 @@ public abstract class Aureole extends PassiveSkill {
 	}
 
 	private void refurbish(){
-		IGround ground = getOwner().getPlayer().getContext().getGround();
-		List<AbstractCorps> ls = ground.list(getOwner().getPosition(), getRange(), IGround.Contain);
+		IGroundE ground = getOwner().getPlayer().getContext().getGround();
+		List<Corps> ls = ground.getCorpsList(getOwner().getPosition(), getRange(), IGround.Contain);
 		
-		List<AbstractCorps> tempList = new ArrayList<AbstractCorps>();  //将离开范围的corps去掉buff
+		List<Corps> tempList = new ArrayList<Corps>();  //将离开范围的corps去掉buff
 		tempList.addAll(affectedList);
 		
 		tempList.removeAll(ls);
-		for(AbstractCorps corps : tempList){
+		for(Corps corps : tempList){
 			Corps sc = (Corps) corps;
 			leave(sc);
 		}
@@ -103,7 +104,7 @@ public abstract class Aureole extends PassiveSkill {
 		tempList.addAll(ls);
 		
 		tempList.removeAll(affectedList);
-		for(AbstractCorps corps : tempList){
+		for(Corps corps : tempList){
 			Corps sc = (Corps) corps;
 			into(sc);
 		}

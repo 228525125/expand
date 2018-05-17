@@ -1,15 +1,14 @@
-package org.cx.game.policy.formula;
+package org.cx.game.ai.policy.formula;
 
 import org.cx.game.corps.Corps;
-import org.cx.game.magic.buff.AttackLockBuff;
 import org.cx.game.tools.I18n;
 import org.cx.game.validator.Validator;
 
-public class NotLockFormula extends Validator implements IFormula {
-
-	private Corps corps = null;
+public class AttackableFormula extends Validator {
 	
-	public NotLockFormula(Corps corps) {
+	private Corps corps = null;
+
+	public AttackableFormula(Corps corps) {
 		// TODO Auto-generated constructor stub
 		this.corps = corps;
 	}
@@ -19,14 +18,13 @@ public class NotLockFormula extends Validator implements IFormula {
 		// TODO Auto-generated method stub
 		Boolean ret = false;
 		
-		if(!this.corps.containsBuff(AttackLockBuff.class)){
+		if(this.corps.getAttack().getAttackable())
 			ret = true;
-		}else{
+		else{
 			addMessage(I18n.getMessage(this));
 			ret = false;
 		}
 		
 		return ret;
 	}
-
 }

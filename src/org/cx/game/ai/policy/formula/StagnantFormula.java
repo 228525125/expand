@@ -1,4 +1,4 @@
-package org.cx.game.policy.formula;
+package org.cx.game.ai.policy.formula;
 
 import org.cx.game.corps.Corps;
 import org.cx.game.tools.I18n;
@@ -9,7 +9,7 @@ import org.cx.game.validator.Validator;
  * @author chenxian
  *
  */
-public class StagnantFormula extends Validator implements IFormula {
+public class StagnantFormula extends Validator {
 	
 	private Corps corps = null;
 	private Integer originPosition = null;

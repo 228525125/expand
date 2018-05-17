@@ -6,12 +6,13 @@ import org.cx.game.action.AbstractAction;
 import org.cx.game.action.IAction;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.widget.IGround;
+import org.cx.game.widget.IGroundE;
 import org.cx.game.widget.building.CallBuilding;
 import org.cx.game.widget.building.ResourceBuilding;
 import org.cx.game.widget.building.TownBuilding;
 import org.cx.game.widget.building.IBuilding;
 
-public class Context extends AbstractContext {
+public class Context extends AbstractContext implements IContextE {
 
 	private int bout = 0;  //回合	
 	private Integer day = 0; //天
@@ -20,6 +21,15 @@ public class Context extends AbstractContext {
 	public Context(IGround ground, IPlayer[] players) {
 		super(ground, players);
 		// TODO Auto-generated constructor stub
+	}
+	
+	public IPlayer getPlayer(Integer troop) {
+		// TODO Auto-generated method stub
+		for(IPlayer player : getPlayerList()){
+			if(troop.equals(player.getId()))
+				return player;
+		}
+		return null;
 	}
 	
 	@Override
@@ -100,6 +110,12 @@ public class Context extends AbstractContext {
 			this.addWeekAction = aw;
 		}
 		return this.addWeekAction;
+	}
+	
+	@Override
+	public IGroundE getGround() {
+		// TODO Auto-generated method stub
+		return (IGroundE) super.getGround();
 	}
 	
 	public class ContextAddBout extends AbstractAction implements IAction {

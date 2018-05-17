@@ -6,15 +6,20 @@ import java.util.List;
 import java.util.Map;
 
 import org.cx.game.core.IPlayer;
+import org.cx.game.core.IPlayerE;
 import org.cx.game.exception.CommandValidatorException;
 import org.cx.game.exception.ValidatorException;
 import org.cx.game.observer.NotifyInfo;
 
 public class ReloadCommand extends InteriorCommand {
 
-	public ReloadCommand(IPlayer player) {
+	private IPlayerE player = null;
+	
+	public ReloadCommand(IPlayerE player) {
 		// TODO Auto-generated constructor stub
 		super(player);
+		
+		this.player = player;
 	}
 	
 	@Override
@@ -25,7 +30,7 @@ public class ReloadCommand extends InteriorCommand {
 		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
 		Map<String,Object> map = new HashMap<String,Object>();
 		
-		map.put("god", player.getContext().getGround().toList());      //ground已被屏蔽
+		//map.put("god", this.player.getContext().getGround().toList());      //ground已被屏蔽
 		list.add(map);
 		
 		NotifyInfo info = new NotifyInfo(NotifyInfo.Command_Reload,list); 

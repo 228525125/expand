@@ -8,6 +8,7 @@ import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.widget.IGround;
+import org.cx.game.widget.IGroundE;
 
 public class Death extends AbstractAction implements IAction {
 	
@@ -79,14 +80,16 @@ public class Death extends AbstractAction implements IAction {
 		NotifyInfo info = new NotifyInfo(NotifyInfo.Corps_Death,map);
 		super.notifyObservers(info);           //通知所有卡片对象，死亡事件		
 		
-		IGround ground = getOwner().getGround();     //只有在战场上才会死亡
+		IGroundE ground = getOwner().getGround();     //只有在战场上才会死亡
 		ground.inCemetery(getOwner());
 		
-		if(getOwner().getHero()){
+		setStatus(AbstractCorps.Death_Status_Death);
+		
+		/*if(getOwner().getHero()){
 			setStatus(AbstractCorps.Death_Status_Exist);
 		}else{
 			setStatus(AbstractCorps.Death_Status_Death);
-		}
+		}*/
 	}
 	
 	public class DeathAddToHpAction extends AbstractAction implements IAction {

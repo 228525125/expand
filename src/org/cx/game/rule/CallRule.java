@@ -5,6 +5,7 @@ import org.cx.game.core.IPlayer;
 import org.cx.game.corps.Hero;
 import org.cx.game.corps.Corps;
 import org.cx.game.widget.IGround;
+import org.cx.game.widget.IGroundE;
 import org.cx.game.widget.Place;
 import org.cx.game.widget.treasure.IResource;
 
@@ -35,7 +36,7 @@ public class CallRule extends AbstractRule implements IRule {
 		Call call = getOwner();
 
 		Corps owner = call.getOwner();
-		IGround ground = owner.getPlayer().getContext().getGround();
+		IGroundE ground = owner.getPlayer().getContext().getGround();
 		
 		/*
 		 * 英雄复活要先把尸体回收

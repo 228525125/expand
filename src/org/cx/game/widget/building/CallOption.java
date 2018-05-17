@@ -16,6 +16,7 @@ import org.cx.game.validator.CallRangeValidator;
 import org.cx.game.validator.CallUnitEqualValidator;
 import org.cx.game.validator.RationLimitValidator;
 import org.cx.game.widget.IGround;
+import org.cx.game.widget.IGroundE;
 import org.cx.game.widget.Place;
 import org.cx.game.widget.building.BuildOption.OptionBuildExecute;
 
@@ -46,7 +47,7 @@ public class CallOption extends AbstractOption implements IOption {
 		// TODO Auto-generated method stub
 		List<Integer> positionList = new ArrayList<Integer>();
 		positionList = ground.areaForDistance(getOwner().getPosition(), 1, IGround.Contain);
-		positionList.retainAll(ground.getEmptyList());
+		positionList.retainAll(((IGroundE)ground).getEmptyList());
 		return positionList;
 	}
 	

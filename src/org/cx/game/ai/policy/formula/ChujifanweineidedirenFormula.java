@@ -1,4 +1,4 @@
-package org.cx.game.policy.formula;
+package org.cx.game.ai.policy.formula;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ import org.cx.game.widget.IGround;
  * @author chenxian
  *
  */
-public class ChujifanweineidedirenFormula extends Validator implements IFormula {
+public class ChujifanweineidedirenFormula extends Validator {
 
 	private Corps corps = null;
 	

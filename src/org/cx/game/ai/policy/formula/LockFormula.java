@@ -1,4 +1,4 @@
-package org.cx.game.policy.formula;
+package org.cx.game.ai.policy.formula;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import org.cx.game.magic.buff.AttackLockBuff;
 import org.cx.game.tools.I18n;
 import org.cx.game.validator.Validator;
 
-public class LockFormula extends Validator implements IFormula {
+public class LockFormula extends Validator {
 	
 	private Corps corps = null;
 	private List<Corps> lockerList = null;

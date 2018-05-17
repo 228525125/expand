@@ -1,14 +1,11 @@
 package org.cx.game.action;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
-import org.cx.game.tools.PropertiesUtil;
 import org.cx.game.widget.treasure.EmpiricValue;
 
 public class CorpsUpgrade extends Upgrade implements IAction {
