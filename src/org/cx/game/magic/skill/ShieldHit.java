@@ -28,7 +28,6 @@ public class ShieldHit extends ActiveSkill {
 		// TODO Auto-generated constructor stub
 		this.atkScale = atkScale;
 		this.bout = bout;
-		setParameterTypeValidator(new Class[]{Corps.class});
 	}
 
 	@Override
@@ -44,18 +43,13 @@ public class ShieldHit extends ActiveSkill {
 		
 		Corps corps = (Corps) objects[0];
 		Integer atk = getOwner().getAtk();
-		try {
-			corps.getDeath().addToHp(-atk*atkScale/100);
-		} catch (RuleValidatorException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
+		corps.getDeath().addToHp(-atk*atkScale/100);
 		new DizzyBuff(bout, corps).effect();
 	}
 	
 	@Override
-	public void useSkill(Object... objects) throws RuleValidatorException {
+	public void useSkill(Object... objects) {
 		// TODO Auto-generated method stub
 		super.useSkill(objects);
 		

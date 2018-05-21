@@ -21,7 +21,7 @@ public class Chuck extends AbstractAction implements IAction {
 	}
 	
 	@Override
-	public void action(Object...objects) throws RuleValidatorException {
+	public void action(Object...objects) {
 		// TODO Auto-generated method stub
 		
 		Map<String,Object> map = new HashMap<String,Object>();

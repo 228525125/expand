@@ -9,6 +9,7 @@ import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.widget.AbstractPlace;
 import org.cx.game.widget.IGround;
+import org.cx.game.widget.IGroundE;
 import org.cx.game.widget.Place;
 import org.cx.game.widget.treasure.IResource;
 import org.cx.game.widget.treasure.Resource;
@@ -60,7 +61,7 @@ public class Call extends AbstractAction implements IAction {
 	}
 	
 	@Override
-	public void action(Object...objects) throws RuleValidatorException {
+	public void action(Object...objects) {
 		// TODO Auto-generated method stub
 
 		AbstractPlace place = (Place) objects[0];
@@ -79,17 +80,11 @@ public class Call extends AbstractAction implements IAction {
 		super.notifyObservers(info);           //通知所有卡片对象，召唤事件
 		
 		/*
-		 * 加入战场
+		 * 放置到战场
 		 * 因为顺序问题，没有写在Rule中
 		 */
-		IGround ground = place.getOwner();
-		ground.add(place.getPosition(), getOwner());
-		
-		/*
-		 * 刚招募的部队允许反击
-		 */
-		getOwner().getDeath().setStatus(AbstractCorps.Death_Status_Live);
-		getOwner().getAttacked().setFightBack(true);
+		IGroundE ground = getOwner().getPlayer().getContext().getGround();
+		ground.placement(place.getPosition(), getOwner());
 	}
 
 }

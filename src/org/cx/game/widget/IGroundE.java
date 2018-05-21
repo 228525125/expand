@@ -134,7 +134,7 @@ public interface IGroundE extends IGround {
 	 * @param position 指定位置
 	 * @param type 移动类型
 	 */
-	public List<Integer> move(Corps corps, Integer position, Integer type) throws RuleValidatorException;
+	public List<Integer> move(Corps corps, Integer position, Integer type);
 	
 	/**
 	 * 用于show

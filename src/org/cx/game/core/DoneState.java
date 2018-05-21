@@ -12,24 +12,19 @@ import org.cx.game.observer.NotifyInfo;
 public class DoneState extends AbstractPlayState {
 
 	@Override
-	public void deploy() throws RuleValidatorException {
+	public void deploy() {
 		// TODO Auto-generated method stub
 		context.setPlayState(context.getDeployState());
 		context.deploy();
 	}
 
 	@Override
-	public void done() throws RuleValidatorException {
+	public void done() {
 		// TODO Auto-generated method stub
 		Player curPlayer = (Player) context.getControlPlayer();
 		List<Corps> list = curPlayer.getAttendantList(true);
 		for(AbstractCorps corps : list){
-			try {
-				corps.activate(false);
-			} catch (RuleValidatorException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			corps.activate(false);
 		}
 		
 		Map<String,Object> map = new HashMap<String,Object>();

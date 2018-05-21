@@ -63,7 +63,7 @@ public class BuildingUpgradeOption extends AbstractOption implements IOption {
 	public void execute(Object... objects) throws RuleValidatorException {
 		// TODO Auto-generated method stub
 		IBuilding building = getOwner();
-		getExecute().addValidator(new UpgradeConsumeValidator(building.getUpgrade(), building.getPlayer()));
+		addValidator(new UpgradeConsumeValidator(building.getUpgrade(), building.getPlayer()));
 		
 		super.execute(objects);
 	}
@@ -80,7 +80,7 @@ public class BuildingUpgradeOption extends AbstractOption implements IOption {
 	public class OptionBuildingUpgradeExecute extends Execute implements IAction{
 
 		@Override
-		public void action(Object... objects) throws RuleValidatorException {
+		public void action(Object... objects) {
 			// TODO Auto-generated method stub
 			super.action(objects);
 			

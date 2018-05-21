@@ -69,14 +69,14 @@ public class CallOption extends AbstractOption implements IOption {
 		AbstractCorps corps = (AbstractCorps) CorpsFactory.getInstance(corpsID, getOwner().getPlayer());
 		
 		if(null!=place.getCorps())            //如果是补充兵源，就判断招募的兵源是否一致
-			getExecute().addValidator(new CallUnitEqualValidator(place.getCorps(), (Corps) corps));
+			addValidator(new CallUnitEqualValidator(place.getCorps(), (Corps) corps));
 		
-		getExecute().addValidator(new CallConsumeValidator((Corps) corps, getNumber()));
-		getExecute().addValidator(new CallRangeValidator(getOwner(), place));
-		getExecute().addValidator(new RationLimitValidator((Corps) corps, getNumber()));
+		addValidator(new CallConsumeValidator((Corps) corps, getNumber()));
+		addValidator(new CallRangeValidator(getOwner(), place));
+		addValidator(new RationLimitValidator((Corps) corps, getNumber()));
 		//验证单个队伍人口上限
 		
-		getExecute().addValidator(new CallNopValidator((Corps) corps, getNumber(), getOwner()));
+		addValidator(new CallNopValidator((Corps) corps, getNumber(), getOwner()));
 		
 		super.execute(objects);		
 	}
@@ -109,7 +109,7 @@ public class CallOption extends AbstractOption implements IOption {
 		}
 		
 		@Override
-		public void action(Object... objects) throws RuleValidatorException {
+		public void action(Object... objects) {
 			// TODO Auto-generated method stub
 			super.action(objects);
 			

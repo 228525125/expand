@@ -61,9 +61,8 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 	}
 	
 	//----------------------- Corps ----------------------
-	
 	@Override
-	public List<Integer> move(Corps corps, Integer position, Integer type) throws RuleValidatorException {
+	public List<Integer> move(Corps corps, Integer position, Integer type) {
 		// TODO Auto-generated method stub
 		List<Integer> route = new ArrayList<Integer>();
 		Corps sc = (Corps) corps;
@@ -109,6 +108,15 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 		}
 		
 		return route;
+	}
+	
+	@Override
+	public void placement(Integer position, AbstractCorps corps) {
+		// TODO Auto-generated method stub
+		super.placement(position, corps);
+		
+		Corps c = (Corps) corps;
+		c.getDeath().setStatus(AbstractCorps.Death_Status_Live);
 	}
 
 	@Override

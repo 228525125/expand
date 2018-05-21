@@ -19,7 +19,7 @@ public class Picked extends AbstractAction implements IAction {
 	}
 	
 	@Override
-	public void action(Object... objects) throws RuleValidatorException {
+	public void action(Object... objects) {
 		// TODO Auto-generated method stub
 		
 		Corps corps = (Corps) objects[0];

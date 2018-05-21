@@ -25,7 +25,7 @@ public class ZengjiagongjiActive extends ActiveSkill {
 	}
 	
 	@Override
-	public void useSkill(Object... objects) throws RuleValidatorException {
+	public void useSkill(Object... objects) {
 		// TODO Auto-generated method stub
 		super.useSkill(objects);
 		

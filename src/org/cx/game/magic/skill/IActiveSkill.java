@@ -1,10 +1,5 @@
 package org.cx.game.magic.skill;
 
-import org.cx.game.exception.RuleValidatorException;
-import org.cx.game.intercepter.IInterceptable;
-import org.cx.game.intercepter.IIntercepter;
-import org.cx.game.intercepter.IRecover;
-import org.cx.game.observer.Observable;
 import org.cx.game.validator.IValidatable;
 
 /**
@@ -12,7 +7,7 @@ import org.cx.game.validator.IValidatable;
  * @author chenxian
  *
  */
-public interface IActiveSkill extends ISkill,IValidatable {
+public interface IActiveSkill extends ISkill {
 
 	/**
 	 * 代号，用于command调用
@@ -72,5 +67,5 @@ public interface IActiveSkill extends ISkill,IValidatable {
 	 * 使用技能
 	 * @param objects
 	 */
-	public void useSkill(Object...objects) throws RuleValidatorException;
+	public void useSkill(Object...objects);
 }

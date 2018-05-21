@@ -26,7 +26,7 @@ public class DeployState extends AbstractPlayState {
 	}
 
 	@Override
-	public void done() throws RuleValidatorException {
+	public void done() {
 		// TODO Auto-generated method stub
 		//操作完毕
 		context.setPlayState(context.getDoneState());
@@ -34,7 +34,7 @@ public class DeployState extends AbstractPlayState {
 	}
 
 	@Override
-	public void finish() throws RuleValidatorException {
+	public void finish() {
 		// TODO Auto-generated method stub
 		//操作中比赛随时可能结束
 		context.setPlayState(context.getFinishState());

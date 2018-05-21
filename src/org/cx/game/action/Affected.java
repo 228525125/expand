@@ -27,7 +27,7 @@ public class Affected extends AbstractAction implements IAction {
 	}
 	
 	@Override
-	public void action(Object...objects) throws RuleValidatorException {
+	public void action(Object...objects) {
 		// TODO Auto-generated method stub
 		
 		IMagic magic = (IMagic) objects[0];

@@ -25,7 +25,7 @@ import org.cx.game.widget.treasure.EquipmentTreasure;
  */
 public class Attacked extends AbstractAction implements IAction {
 
-	private Boolean fightBack = false;
+	private Boolean fightBack = true;
 	private Integer def = 0;         //真实防御力
 	private Integer armourDef = 0;   //装备防御力
 	private Integer extraDef = 0;    //额外防御力
@@ -92,7 +92,7 @@ public class Attacked extends AbstractAction implements IAction {
 	}
 
 	@Override
-	public void action(Object...objects) throws RuleValidatorException {
+	public void action(Object...objects) {
 		// TODO Auto-generated method stub
 		Corps attackLife = (Corps) objects[0];
 		Attack attack = (Attack) objects[1];

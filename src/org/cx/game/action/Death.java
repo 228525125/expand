@@ -45,7 +45,7 @@ public class Death extends AbstractAction implements IAction {
 	 * @param hp
 	 * @throws RuleValidatorException 
 	 */
-	public void addToHp(Integer hp) throws RuleValidatorException {
+	public void addToHp(Integer hp) {
 		// TODO Auto-generated method stub
 		IAction action = new ActionProxyHelper(getAddToHpAction());
 		action.action(hp);
@@ -72,7 +72,7 @@ public class Death extends AbstractAction implements IAction {
 	}
 
 	@Override
-	public void action(Object...objects) throws RuleValidatorException {
+	public void action(Object...objects) {
 
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("card", getOwner());
@@ -97,7 +97,7 @@ public class Death extends AbstractAction implements IAction {
 		private Integer damage = 0;
 		
 		@Override
-		public void action(Object... objects) throws RuleValidatorException {
+		public void action(Object... objects) {
 			// TODO Auto-generated method stub
 			Integer hp = (Integer) objects[0];
 			
@@ -121,12 +121,7 @@ public class Death extends AbstractAction implements IAction {
 				 * 判断死亡
 				 */
 				if(Death.this.hp.equals(0)){
-					try {
-						getOwner().action();
-					} catch (RuleValidatorException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					getOwner().action();
 				}
 			}
 		}

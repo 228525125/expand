@@ -70,7 +70,7 @@ public class EquipmentTreasure extends Treasure implements ITreasure {
 	public class TreasureEquipmentPicked extends Picked implements IAction {
 
 		@Override
-		public void action(Object... objects) throws RuleValidatorException {
+		public void action(Object... objects) {
 			// TODO Auto-generated method stub
 			Hero hero = (Hero) objects[0];
 			hero.addTreasure(getOwner());

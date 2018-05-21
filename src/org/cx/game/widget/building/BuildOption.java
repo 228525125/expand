@@ -31,7 +31,7 @@ public class BuildOption extends AbstractOption {
 		// TODO Auto-generated method stub
 		super.setOwner(building);
 		
-		getExecute().addValidator(new BuildConsumeValidator(getOwner()));
+		addValidator(new BuildConsumeValidator(getOwner()));
 	}
 
 	private Execute execute = null;
@@ -95,7 +95,7 @@ public class BuildOption extends AbstractOption {
 	public class OptionBuildExecute extends Execute implements IAction {
 
 		@Override
-		public void action(Object... objects) throws RuleValidatorException {
+		public void action(Object... objects) {
 			// TODO Auto-generated method stub
 			super.action(objects);
 			

@@ -79,12 +79,7 @@ public abstract class Aureole extends PassiveSkill {
 	public abstract Class getBuffClass();
 	
 	public void into(Corps corps){
-		try {
-			corps.affected(this);
-		} catch (RuleValidatorException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		corps.affected(this);
 	}
 
 	private void refurbish(){

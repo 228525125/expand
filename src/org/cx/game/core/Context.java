@@ -57,7 +57,7 @@ public class Context extends AbstractContext implements IContextE {
 	}
 	
 	@Override
-	public void start() throws RuleValidatorException {
+	public void start() {
 		// TODO Auto-generated method stub
 		setPlayState(getStartState());
 		super.start();
@@ -121,7 +121,7 @@ public class Context extends AbstractContext implements IContextE {
 	public class ContextAddBout extends AbstractAction implements IAction {
 		
 		@Override
-		public void action(Object... objects) throws RuleValidatorException {
+		public void action(Object... objects) {
 			// TODO Auto-generated method stub
 			bout++;
 			if(1==bout%getPlayerList().size()){
@@ -150,7 +150,7 @@ public class Context extends AbstractContext implements IContextE {
 	public class ContextAddDay extends AbstractAction implements IAction {
 		
 		@Override
-		public void action(Object... objects) throws RuleValidatorException {
+		public void action(Object... objects) {
 			// TODO Auto-generated method stub
 			day++;
 			
@@ -187,7 +187,7 @@ public class Context extends AbstractContext implements IContextE {
 	public class ContextAddWeek extends AbstractAction implements IAction {
 		
 		@Override
-		public void action(Object... objects) throws RuleValidatorException {
+		public void action(Object... objects) {
 			// TODO Auto-generated method stub
 			week++;
 			

@@ -29,12 +29,7 @@ public class CorpsUpgrade extends Upgrade implements IAction {
 			
 			Integer req = getRequirement().get();
 			if(getEmpiricValue().get()>=req){
-				try {
-					action();
-				} catch (RuleValidatorException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				action();
 			}
 		}
 	}
@@ -58,7 +53,7 @@ public class CorpsUpgrade extends Upgrade implements IAction {
 	}
 	
 	@Override
-	public void action(Object... objects) throws RuleValidatorException {
+	public void action(Object... objects) {
 		// TODO Auto-generated method stub
 		super.action(objects);
 		

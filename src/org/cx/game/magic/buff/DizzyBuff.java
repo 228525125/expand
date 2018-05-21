@@ -66,13 +66,8 @@ public class DizzyBuff extends AbstractBuff {
 	public void affect(Object... objects) {
 		// TODO Auto-generated method stub
 		super.affect(objects);
-		
-		try {
-			getOwner().getActivate().action(false);
-		} catch (RuleValidatorException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+		getOwner().getActivate().action(false);
 		getOwner().getAttacked().setFightBack(false);
 	}
 }

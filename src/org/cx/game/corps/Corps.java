@@ -590,7 +590,7 @@ public class Corps extends AbstractCorps {
 	public class CorpsAddBuffAction extends AbstractAction implements IAction {
 
 		@Override
-		public void action(Object... objects) throws RuleValidatorException {
+		public void action(Object... objects) {
 			// TODO Auto-generated method stub
 			IBuff buff = (IBuff) objects[0];
 			
@@ -614,7 +614,7 @@ public class Corps extends AbstractCorps {
 	public class CorpsRemoveBuffAction extends AbstractAction implements IAction {
 
 		@Override
-		public void action(Object... objects) throws RuleValidatorException {
+		public void action(Object... objects) {
 			// TODO Auto-generated method stub
 			IBuff buff = (IBuff) objects[0];
 			
@@ -631,7 +631,7 @@ public class Corps extends AbstractCorps {
 	public class CorpsAddSkillAction extends AbstractAction implements IAction {
 
 		@Override
-		public void action(Object... objects) throws RuleValidatorException {
+		public void action(Object... objects) {
 			// TODO Auto-generated method stub
 			ISkill skill = (ISkill) objects[0];
 			skill.setOwner(getOwner());

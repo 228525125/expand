@@ -72,8 +72,8 @@ public class ReviveOption extends AbstractOption implements IOption {
 		// TODO Auto-generated method stub
 		Place place = (Place) objects[0];
 		
-		getExecute().addValidator(new CallConsumeValidator(this.hero, 1));
-		getExecute().addValidator(new CallRangeValidator(getOwner(), place));
+		addValidator(new CallConsumeValidator(this.hero, 1));
+		addValidator(new CallRangeValidator(getOwner(), place));
 		
 		super.execute(objects);
 	}
@@ -109,7 +109,7 @@ public class ReviveOption extends AbstractOption implements IOption {
 		}
 		
 		@Override
-		public void action(Object... objects) throws RuleValidatorException {
+		public void action(Object... objects) {
 			// TODO Auto-generated method stub
 			setSpacingWait(10000);              //英雄复活后，该选项被锁
 			

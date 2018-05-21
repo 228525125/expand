@@ -29,13 +29,8 @@ public class XmlConfigureHelper {
 		HoneycombGround ground = (HoneycombGround) context.getGround();
 		AbstractPlace place = (AbstractPlace) ground.getPlace(position);
 		
-		try {
-			npc.call(place, nop);
-			npc.getUpgrade().setLevel(level);
-		} catch (RuleValidatorException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		npc.call(place, nop);
+		npc.getUpgrade().setLevel(level);
 	}
 	
 	/**

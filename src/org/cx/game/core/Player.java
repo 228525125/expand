@@ -86,12 +86,7 @@ public class Player extends AbstractPlayer implements IPlayerE {
 			else
 				break;
 		}*/
-		try {
-			getContext().done();
-		} catch (RuleValidatorException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		getContext().done();
 	}
 	
 	/**
@@ -105,7 +100,7 @@ public class Player extends AbstractPlayer implements IPlayerE {
 	public class PlayerAddBout extends AbstractAction implements IAction {
 		
 		@Override
-		public void action(Object... objects) throws RuleValidatorException {
+		public void action(Object... objects) {
 			// TODO Auto-generated method stub
 			Player.this.bout++;
 			
@@ -122,12 +117,7 @@ public class Player extends AbstractPlayer implements IPlayerE {
 				Corps sc = (Corps) corps;
 				Integer speed = sc.getActivate().getSpeed();
 				sc.getActivate().addToVigour(speed);
-				try {
-					sc.activate(true);
-				} catch (RuleValidatorException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				sc.activate(true);
 			}
 		}
 		

@@ -29,12 +29,7 @@ public class ActivateRule extends AbstractRule implements IRule {
 			 * 当活力值大于一次行动消耗时，再次获得一次行动
 			 */
 			if(owner.getActivate().getVigour()>=Activate.ActivationConsume){
-				try {
-					owner.activate(true);
-				} catch (RuleValidatorException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				owner.activate(true);
 			}
 		}
 	}

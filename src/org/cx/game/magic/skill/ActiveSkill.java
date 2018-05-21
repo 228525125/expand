@@ -25,9 +25,6 @@ public abstract class ActiveSkill extends AbstractSkill implements IActiveSkill 
 	
 	private ActiveSkillCoolingProcess coolingProcess = null;      //间隔
 	private Upgrade upgrade = null;
-	private Errors errors = new Errors();
-	
-	private List<IValidator> validatorList = new ArrayList<IValidator>();
 	
 	
 	/**
@@ -65,18 +62,18 @@ public abstract class ActiveSkill extends AbstractSkill implements IActiveSkill 
 		this.allow = allow;
 	}
 	
-	public void useSkill(Object...objects) throws RuleValidatorException {
+	public void useSkill(Object...objects) {
 		// TODO Auto-generated method stub
-		
-		parameterTypeValidator(objects);
 		
 		/* 
 		 * 执行规则验证
-		 */
+		
+		parameterTypeValidator(objects);
+		
 		doValidator();
 		
 		if(hasError())
-			throw new RuleValidatorException(getErrors().getMessage());
+			throw new RuleValidatorException(getErrors().getMessage());*/
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("player", getOwner().getPlayer());
@@ -139,52 +136,8 @@ public abstract class ActiveSkill extends AbstractSkill implements IActiveSkill 
 		}
 		return upgrade;
 	}
-
-	@Override
-	public void addValidator(IValidator validator) {
-		// TODO Auto-generated method stub
-		validatorList.add(validator);
-	}
-
-	@Override
-	public void deleteValidator(IValidator validator) {
-		// TODO Auto-generated method stub
-		validatorList.remove(validator);
-	}
-
-	@Override
-	public List<IValidator> getValidators() {
-		// TODO Auto-generated method stub
-		return validatorList;
-	}
 	
-	@Override
-	public void doValidator() {
-		// TODO Auto-generated method stub
-		for(IValidator v : validatorList)
-			if(!v.validate())
-				errors.addError(v);
-	}
-	
-	@Override
-	public void doValidator(IValidator validator) {
-		// TODO Auto-generated method stub
-		if(!validator.validate())
-			errors.addError(validator);
-	}
-	
-	@Override
-	public Errors getErrors() {
-		// TODO Auto-generated method stub
-		return errors;
-	}
-	
-	@Override
-	public Boolean hasError() {
-		// TODO Auto-generated method stub
-		return errors.hasError();
-	}
-	
+	/*
 	private ParameterTypeValidator parameterTypeValidator = null;
 	private Class[] parameterType = new Class[]{};      //用于参数的验证
 	private String[] proertyName = null;
@@ -209,5 +162,5 @@ public abstract class ActiveSkill extends AbstractSkill implements IActiveSkill 
 		
 		if(hasError())
 			throw new RuleValidatorException(getErrors().getMessage());
-	}
+	}*/
 }
