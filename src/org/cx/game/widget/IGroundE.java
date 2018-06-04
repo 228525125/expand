@@ -12,6 +12,25 @@ import org.cx.game.widget.building.IBuilding;
 import org.cx.game.widget.building.IOption;
 
 public interface IGroundE extends IGround {
+	
+	/**
+	 * 阵营
+	 * @return 
+	 */
+	public List<Integer> getTroopList();
+	
+	/**
+	 * 入口，阵营 - 坐标
+	 * @return
+	 */
+	public Map<Integer, Integer> getEntranceMap();
+	
+	/**
+	 * 根据阵营查询入口
+	 * @param troop 
+	 * @return
+	 */
+	public List<Integer> getEntranceList(Integer troop);
 
 	/**
 	 * 获取建筑的坐标
@@ -49,7 +68,7 @@ public interface IGroundE extends IGround {
 	 * @param position 位置
 	 * @param player 玩家
 	 */
-	public void captureBuilding(Integer position, IPlayer player);
+	public void captureBuilding(IPlayer player, IBuilding building);
 	
 	/**
 	 * 获取建筑物
@@ -145,14 +164,8 @@ public interface IGroundE extends IGround {
 	/**
 	 * 设置地形
 	 * @param landformMap 地形数据
-	 */
-	public void setLandformMap(Map<Integer, Integer> landformMap);
-	
-	/**
-	 * 中立部队
-	 * @return
-	 */
-	public IPlayer getNeutral();
+	 
+	public void setLandformMap(Map<Integer, Integer> landformMap);*/
 	
 	/**
 	 * 空位置

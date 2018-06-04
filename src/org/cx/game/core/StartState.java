@@ -1,8 +1,10 @@
 package org.cx.game.core;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 import org.cx.game.corps.CorpsFactory;
 import org.cx.game.corps.Hero;
@@ -39,8 +41,11 @@ public class StartState extends AbstractPlayState {
 
 	@Override
 	public void start() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub		
 		provision();
+		
+		//NotifyInfo info = new NotifyInfo(NotifyInfo.Ground_LoadMap,context.getGround());
+		//notifyObservers(info);    //通知观察者
 		
 		context.switchControl();
 		
@@ -56,19 +61,22 @@ public class StartState extends AbstractPlayState {
 		HoneycombGround ground = (HoneycombGround) context.getGround();
 		Map<Integer, Integer> landformMap = ground.getLandformMap();
 		Map<String, Integer> landform = new HashMap<String, Integer>();
-		for(Integer i : landformMap.keySet())
+		for(Integer i : landformMap.keySet())       //加载地形
 			landform.put(i.toString(), landformMap.get(i));
 		
 		Map<String, ITreasure> treasureMap = new HashMap<String, ITreasure>();
-		for(Integer i : ground.getTreasureMap().keySet())
+		for(Integer i : ground.getTreasureMap().keySet())       //加载物品
 			treasureMap.put(i.toString(), ground.getTreasureMap().get(i));
 		
-		for(String data : ground.getBuildingData()){
+		for(String data : ground.getBuildingData()){            //加载建筑
 			XmlConfigureHelper.map_buildingData_building(data, cont);
 		}
 		
-		for(String data : ground.getNpcData()){
-			XmlConfigureHelper.map_npcData_npc(data, cont);
+		for(IBuilding building : ground.getBuildingIsTroop().keySet()){
+			Integer troop = ground.getBuildingIsTroop().get(building);
+			IPlayer player = cont.getPlayer(troop);
+			if(null!=player)
+				ground.captureBuilding(player, building);
 		}
 		
 		map.put("landform", landform);
@@ -77,18 +85,21 @@ public class StartState extends AbstractPlayState {
 		NotifyInfo info = new NotifyInfo(NotifyInfo.Context_Start,map);
 		super.notifyObservers(info);
 		
+		for(String data : ground.getNpcData()){     //加载NPC
+			XmlConfigureHelper.map_npcData_npc(data, cont);
+		}
+		
 		/*
-		 * 登记英雄
+		 * 英雄登场
 		 */
-		for(IPlayer player : context.getPlayerList()){
-			for(Integer heroID : player.getHeroIDList()){
-				Hero hero = (Hero) CorpsFactory.getInstance(heroID, player);
-				IBuilding town = ground.getBuilding(player.getHomePosition());
-				IOption reviveOption = new ReviveOption(hero);
-				reviveOption.setOwner(town);
-				town.getOptions().add(reviveOption);
-				
-				player.addHero(hero);
+		for(IPlayer p : cont.getPlayerList()){
+			Player player = (Player) p;
+			Integer troop = player.getTroop();
+			List<Integer> list = ground.getEntranceList(troop);
+			for(int i=0;i<player.getHeroList().size();i++){
+				Hero hero = (Hero) player.getHeroList().get(i);
+				Integer position = list.get(i);
+				hero.call(ground.getPlace(position), 1);
 			}
 		}
 	}

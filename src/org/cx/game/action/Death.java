@@ -74,6 +74,8 @@ public class Death extends AbstractAction implements IAction {
 	@Override
 	public void action(Object...objects) {
 
+		setStatus(AbstractCorps.Death_Status_Death);
+		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("card", getOwner());
 		map.put("position", getOwner().getPosition());
@@ -82,14 +84,6 @@ public class Death extends AbstractAction implements IAction {
 		
 		IGroundE ground = getOwner().getGround();     //只有在战场上才会死亡
 		ground.inCemetery(getOwner());
-		
-		setStatus(AbstractCorps.Death_Status_Death);
-		
-		/*if(getOwner().getHero()){
-			setStatus(AbstractCorps.Death_Status_Exist);
-		}else{
-			setStatus(AbstractCorps.Death_Status_Death);
-		}*/
 	}
 	
 	public class DeathAddToHpAction extends AbstractAction implements IAction {

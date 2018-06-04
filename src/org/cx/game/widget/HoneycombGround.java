@@ -19,18 +19,21 @@ import org.cx.game.tools.SpaceArithmetic;
 import org.cx.game.widget.building.BuildingFactory;
 import org.cx.game.widget.building.IBuilding;
 import org.cx.game.widget.building.IOption;
+import org.cx.game.widget.treasure.ITreasure;
 
 public class HoneycombGround extends AbstractGround implements IGroundE {
 
 	private String imagePath = "";                                     //背景图片
-	
-	private IPlayer neutral = null;
 
 	private int[] hit = new int []{-1};                                  //-1表示障碍物
 	private Map<Integer, IBuilding> buildingMap = new HashMap<Integer, IBuilding>();   //位置 - 建筑
 	private List<String> buildingData = new ArrayList<String>();
 	private List<Integer> emptyList = new ArrayList<Integer>();         //空位
 	private List<String> npcData = new ArrayList<String>();
+	private List<Integer> troopList = new ArrayList<Integer>();         //阵营
+	private Map<Integer, Integer> entranceMap = new HashMap<Integer, Integer>();  //入口  坐标 - 阵营
+	private Map<IBuilding, Integer> buildingIsTroop = new HashMap<IBuilding, Integer>();
+	private Map<Corps, Integer> corpsIsTroop = new HashMap<Corps, Integer>();
 	
 	public HoneycombGround(Integer xBorder, Integer yBorder, String imagePath) {
 		// TODO Auto-generated constructor stub
@@ -48,18 +51,38 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 				getEmptyList().add(curPos);      //初始化空位置
 			}
 		}
-		
-		/*
-		 * 创建中立部队
-		 */
-		this.neutral = new Player(9, "neutral");
-		neutral.setComputer(true);
 	}
 	
 	public String getImagePath() {
 		return this.imagePath;
 	}
 	
+	public void setTroopList(List<Integer> troopList) {
+		this.troopList = troopList;
+	}
+	
+	public List<Integer> getTroopList() {
+		return this.troopList;
+	}
+	
+	public Map<Integer, Integer> getEntranceMap() {
+		return entranceMap;
+	}
+
+	public void setEntranceMap(Map<Integer, Integer> entranceMap) {
+		this.entranceMap = entranceMap;
+	}
+	
+	public List<Integer> getEntranceList(Integer troop) {
+		List<Integer> retList = new ArrayList<Integer>();
+		for(Integer position : getEntranceMap().keySet()){
+			if(troop.equals(getEntranceMap().get(position)))
+				retList.add(position);
+		}
+		
+		return retList;				
+	}
+
 	//----------------------- Corps ----------------------
 	@Override
 	public List<Integer> move(Corps corps, Integer position, Integer type) {
@@ -111,9 +134,9 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 	}
 	
 	@Override
-	public void placement(Integer position, AbstractCorps corps) {
+	public void placementCorps(Integer position, AbstractCorps corps) {
 		// TODO Auto-generated method stub
-		super.placement(position, corps);
+		super.placementCorps(position, corps);
 		
 		Corps c = (Corps) corps;
 		c.getDeath().setStatus(AbstractCorps.Death_Status_Live);
@@ -173,10 +196,14 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 		return ls;
 	}
 	
+	public Map<Corps, Integer> getCorpsIsTroop() {
+		return corpsIsTroop;
+	}
+	
 	//------------------------ Corps End ------------------------
 	
 	//----------------------- NPC ---------------------
-	
+
 	public List<String> getNpcData() {
 		// TODO Auto-generated method stub
 		return this.npcData;
@@ -190,14 +217,18 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 	
 	//----------------------- Building ------------------------
 	
-	/**
-	 * 采用String格式来表示建筑信息
-	 * @return
-	 */
 	public List<String> getBuildingData(){
 		return this.buildingData;
 	}
 	
+	public void setBuildingData(List<String> buildings) {
+		this.buildingData = buildings;
+	}
+	
+	public Map<IBuilding, Integer> getBuildingIsTroop() {
+		return buildingIsTroop;
+	}
+
 	@Override
 	public List<IBuilding> getBuildingList(IPlayer player) {
 		// TODO Auto-generated method stub
@@ -219,21 +250,14 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 		}
 		return list;
 	}
-
-	public void setBuildingData(List<String> buildings) {
-		for(String str : buildings){
-			Integer position = Integer.valueOf(str.split(",")[0]);
-			Integer buildingType = Integer.valueOf(str.split(",")[1]);
-			
-			IBuilding building = BuildingFactory.getInstance(buildingType);
-			AbstractPlace place = getPlace(position);
-			place.setBuilding(building);
-			
-			addBuilding(building);
-			buildingMap.put(position, building);
-		}
+	
+	@Override
+	public void placementBuilding(Integer position, IBuilding building) {
+		// TODO Auto-generated method stub
+		super.placementBuilding(position, building);
 		
-		this.buildingData = buildings;
+		buildingMap.put(position, building);
+		
 	}
 	
 	@Override
@@ -278,9 +302,8 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 	}
 	
 	@Override
-	public void captureBuilding(Integer position, IPlayer player) {
+	public void captureBuilding(IPlayer player, IBuilding building) {
 		// TODO Auto-generated method stub
-		IBuilding building = getBuilding(position);
 		building.setPlayer(player);
 	}
 	
@@ -293,13 +316,23 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 		return this.emptyList;
 	}
 	
-	//----------------------- Landform End -----------------------
-	
-	@Override
-	public IPlayer getNeutral(){
-		return this.neutral;
+	public void setLandformMap(Map<Integer, Integer> landformMap) {
+		// TODO Auto-generated method stub
+		super.setLandformMap(landformMap);
 	}
 	
+	//----------------------- Landform End -----------------------
+	
+	//----------------------- TreasureMap ------------------------
+	@Override
+	public void setTreasureMap(Map<Integer, ITreasure> treasureMap) {
+		// TODO Auto-generated method stub
+		super.setTreasureMap(treasureMap);
+	}
+	
+	//----------------------- TreasureMap End ------------------------
+	
+
 	@Override
 	public List<Integer> queryRange(AbstractCorps corps, String action){
 		List<Integer> positionList = new ArrayList<Integer>();

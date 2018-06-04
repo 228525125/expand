@@ -3,17 +3,30 @@ package org.cx.game.core;
 import java.util.List;
 
 import org.cx.game.corps.AbstractCorps;
-import org.cx.game.corps.Corps;
 
 public interface IPlayerE extends IPlayer {
-
-	/**
-	 * 获取所有随从
-	 * @param status
-	 * @return
-	 */
-	public List<Corps> getAttendantList(Integer status);
 	
 	@Override
 	public IContextE getContext();
+	
+	/**
+	 * 淘汰出局
+	 */
+	public void dieOut();
+	
+	/**
+	 * 英雄编号
+	 * @return
+	 */
+	public List<Integer> getHeroIDList();
+	
+	public void addHeroID(Integer ID);
+	
+	/**
+	 * 玩家拥有的英雄
+	 * @return
+	 */
+	public List<AbstractCorps> getHeroList();
+	
+	public void addHero(AbstractCorps hero);
 }

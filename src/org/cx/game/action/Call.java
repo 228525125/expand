@@ -72,6 +72,8 @@ public class Call extends AbstractAction implements IAction {
 		 */
 		setNop(nop);
 		
+		getOwner().getDeath().setStatus(AbstractCorps.Death_Status_Live);
+		
 		/* 招募的动作应在place_in之前，因为place_in动作与移动时的place_in动作相同 */
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("card", getOwner());
@@ -84,7 +86,7 @@ public class Call extends AbstractAction implements IAction {
 		 * 因为顺序问题，没有写在Rule中
 		 */
 		IGroundE ground = getOwner().getPlayer().getContext().getGround();
-		ground.placement(place.getPosition(), getOwner());
+		ground.placementCorps(place.getPosition(), getOwner());
 	}
 
 }

@@ -7,24 +7,22 @@ import java.util.Map;
 
 import org.cx.game.action.AbstractAction;
 import org.cx.game.action.IAction;
-import org.cx.game.ai.policy.DonePolicy;
-import org.cx.game.command.Command;
-import org.cx.game.command.CommandFactory;
 import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
-import org.cx.game.exception.RuleValidatorException;
-import org.cx.game.exception.SyntaxValidatorException;
-import org.cx.game.exception.ValidatorException;
 import org.cx.game.observer.NotifyInfo;
-import org.cx.game.widget.LandformEffect;
 import org.cx.game.widget.treasure.IResource;
 
 public class Player extends AbstractPlayer implements IPlayerE {
+	
+	public static final String Neutral = "neutral";
 	
 	private Integer bout = 0;
 	
 	private IAction addBoutAction = null;
 	//private IPolicyGroup groupPolicy = null;
+	
+	private List<Integer> heroIDList = new ArrayList<Integer>();
+	private List<AbstractCorps> heroList = new ArrayList<AbstractCorps>();
 	
 	public Player(Integer id, String name) {
 		super(id, name);
@@ -46,23 +44,6 @@ public class Player extends AbstractPlayer implements IPlayerE {
 			addBoutAction.setOwner(this);
 		}
 		return this.addBoutAction;
-	}
-	
-	public List<Corps> getAttendantList(Boolean activate) {
-		// TODO Auto-generated method stub
-		List<Corps> list = new ArrayList<Corps>();
-		for(AbstractCorps corps : getAttendantList(AbstractCorps.Death_Status_Live)){
-			Corps sc = (Corps) corps;
-			if(activate.equals(sc.getActivate().getActivation()))
-				list.add(sc);
-		}
-		return list;
-	}
-	
-	@Override
-	public List<Corps> getAttendantList(Integer status) {
-		// TODO Auto-generated method stub
-		return getContext().getGround().getCorpsList(this, status);
 	}
 	
 	@Override
@@ -89,12 +70,42 @@ public class Player extends AbstractPlayer implements IPlayerE {
 		getContext().done();
 	}
 	
+	@Override
+	public void dieOut() {
+		// TODO Auto-generated method stub
+		getContext().removePlayer(this);
+	}
+	
 	/**
 	 * 用于xml配置
 	 * @param res
 	 */
 	public void setResource(IResource res){
 		super.setResource(res);
+	}
+	
+	@Override
+	public List<Integer> getHeroIDList() {
+		// TODO Auto-generated method stub
+		return this.heroIDList;
+	}
+	
+	@Override
+	public void addHeroID(Integer ID) {
+		// TODO Auto-generated method stub
+		this.heroIDList.add(ID);
+	}
+	
+	@Override
+	public void addHero(AbstractCorps hero) {
+		// TODO Auto-generated method stub
+		this.heroList.add(hero);
+	}
+	
+	@Override
+	public List<AbstractCorps> getHeroList() {
+		// TODO Auto-generated method stub
+		return this.heroList;
 	}
 	
 	public class PlayerAddBout extends AbstractAction implements IAction {
@@ -113,7 +124,7 @@ public class Player extends AbstractPlayer implements IPlayerE {
 			/*
 			 * 获得控制权的玩家单位被激活
 			 */
-			for(AbstractCorps corps : getAttendantList(AbstractCorps.Death_Status_Live)){
+			for(AbstractCorps corps : getContext().getGround().getCorpsList(getOwner(), AbstractCorps.Death_Status_Live)){
 				Corps sc = (Corps) corps;
 				Integer speed = sc.getActivate().getSpeed();
 				sc.getActivate().addToVigour(speed);

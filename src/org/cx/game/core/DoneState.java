@@ -22,9 +22,11 @@ public class DoneState extends AbstractPlayState {
 	public void done() {
 		// TODO Auto-generated method stub
 		Player curPlayer = (Player) context.getControlPlayer();
-		List<Corps> list = curPlayer.getAttendantList(true);
-		for(AbstractCorps corps : list){
-			corps.activate(false);
+		Context cont = (Context) context;
+		for(AbstractCorps corps : cont.getGround().getCorpsList(curPlayer, AbstractCorps.Death_Status_Live)){
+			Corps sc = (Corps) corps;
+			if(sc.getActivate().getActivation().equals(true))
+				sc.activate(false);
 		}
 		
 		Map<String,Object> map = new HashMap<String,Object>();

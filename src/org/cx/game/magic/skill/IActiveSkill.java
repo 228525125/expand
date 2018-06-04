@@ -12,8 +12,8 @@ public interface IActiveSkill extends ISkill {
 	/**
 	 * 代号，用于command调用
 	 * @return
-	 */
-	public String getCode();
+	
+	public String getCode(); */
 	
 	/**
 	 * 消耗法力值

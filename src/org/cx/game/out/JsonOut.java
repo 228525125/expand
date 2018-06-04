@@ -1,16 +1,17 @@
 package org.cx.game.out;
 
 import java.util.Observable;
-import java.util.Observer;
 
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonBeanProcessor;
 
 import org.cx.game.action.Activate;
+import org.cx.game.action.Affected;
 import org.cx.game.action.Attack;
 import org.cx.game.action.Attacked;
 import org.cx.game.action.Call;
+import org.cx.game.action.Conjure;
 import org.cx.game.action.Death;
 import org.cx.game.action.Move;
 import org.cx.game.action.HeroUpgrade;
@@ -20,6 +21,7 @@ import org.cx.game.core.Player;
 import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Hero;
 import org.cx.game.corps.Corps;
+import org.cx.game.magic.skill.ShieldHit;
 import org.cx.game.magic.trick.ITrick;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.widget.Cemetery;
@@ -42,6 +44,8 @@ import org.cx.game.widget.treasure.EquipmentTreasure;
 import org.cx.game.widget.treasure.ResourceTreasure;
 
 public class JsonOut extends AbstractResponse {
+	
+	private final static String Empty = "empty";
 	
 	@Override
 	public void update(Observable o, Object arg) {
@@ -110,10 +114,10 @@ public class JsonOut extends AbstractResponse {
 				public JSONObject processBean(Object arg0, JsonConfig arg1) {
 					// TODO Auto-generated method stub
 					Hero hero = (Hero) arg0;
-					return new JSONObject().element("activate", hero.getActivate())
-							.element("affected", hero.getAffected(), getConfig())
+					return new JSONObject().element("activate", hero.getActivate(), getConfig())
 							.element("attack", hero.getAttack(), getConfig())
 							.element("attacked", hero.getAttacked(), getConfig())
+							.element("affected", hero.getAffected(), getConfig())
 							.element("buffList", hero.getBuffList(), getConfig())
 							.element("call", hero.getCall(), getConfig())
 							.element("conjure", hero.getConjure(), getConfig())
@@ -174,6 +178,26 @@ public class JsonOut extends AbstractResponse {
 							.element("extraDef", obj.getExtraDef())
 							.element("fightBack", obj.getFightBack())
 							.element("landformDef", obj.getLandformDef());
+				}
+			});
+			
+			config.registerJsonBeanProcessor(Affected.class, new JsonBeanProcessor() {
+				
+				@Override
+				public JSONObject processBean(Object arg0, JsonConfig arg1) {
+					// TODO Auto-generated method stub
+					Affected obj = (Affected) arg0;
+					return new JSONObject();
+				}
+			});
+			
+			config.registerJsonBeanProcessor(Conjure.class, new JsonBeanProcessor() {
+				
+				@Override
+				public JSONObject processBean(Object arg0, JsonConfig arg1) {
+					// TODO Auto-generated method stub
+					Conjure obj = (Conjure) arg0;
+					return new JSONObject();
 				}
 			});
 			
@@ -277,7 +301,7 @@ public class JsonOut extends AbstractResponse {
 					Player obj = (Player) arg0;
 					return new JSONObject().element("bout", obj.getBout())
 							.element("computer", obj.getComputer())
-							.element("id", obj.getId())
+							.element("id", obj.getTroop())
 							.element("name", obj.getName())
 							.element("ration", obj.getRation())
 							.element("rationLimit", obj.getRationLimit())
@@ -530,6 +554,24 @@ public class JsonOut extends AbstractResponse {
 							.element("resource", obj.getResource(), getConfig());
 				}
 			});
+			
+			//---------------------- skill ------------------------//
+			
+			config.registerJsonBeanProcessor(ShieldHit.class, new JsonBeanProcessor() {
+				
+				@Override
+				public JSONObject processBean(Object arg0, JsonConfig arg1) {
+					// TODO Auto-generated method stub
+					ShieldHit obj = (ShieldHit) arg0;
+					return new JSONObject().element("allow", obj.getAllow())
+							.element("cooldown", obj.getCooldown())
+							.element("cooldownRemain", obj.getCooldownRemain())
+							.element("range", obj.getRange())
+							.element("upgrade", obj.getUpgrade(), getConfig());
+				}
+			});
+			
+			//---------------------- skill end ------------------------//
 		}
 		return config;
 	}

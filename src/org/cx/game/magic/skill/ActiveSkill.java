@@ -19,7 +19,7 @@ import org.cx.game.widget.IGround;
 
 public abstract class ActiveSkill extends AbstractSkill implements IActiveSkill {
 
-	private String code = "";
+	//private String code = "";
 	private Integer cooldown = 1;             //冷却回合
 	private Boolean allow = true;
 	
@@ -65,16 +65,6 @@ public abstract class ActiveSkill extends AbstractSkill implements IActiveSkill 
 	public void useSkill(Object...objects) {
 		// TODO Auto-generated method stub
 		
-		/* 
-		 * 执行规则验证
-		
-		parameterTypeValidator(objects);
-		
-		doValidator();
-		
-		if(hasError())
-			throw new RuleValidatorException(getErrors().getMessage());*/
-		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("player", getOwner().getPlayer());
 		map.put("container", getOwner().getGround());
@@ -101,11 +91,11 @@ public abstract class ActiveSkill extends AbstractSkill implements IActiveSkill 
 		return positionList;
 	}
 	
-	@Override
+	/*@Override
 	public String getCode() {
 		// TODO Auto-generated method stub
 		return code;
-	}
+	}*/
 	
 	public Integer getCooldown() {
 		return cooldown;

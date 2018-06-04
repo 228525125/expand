@@ -1,5 +1,6 @@
 package org.cx.game.core;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.cx.game.action.AbstractAction;
@@ -18,15 +19,19 @@ public class Context extends AbstractContext implements IContextE {
 	private Integer day = 0; //天
 	private Integer week = 0; //星期几
 	
-	public Context(IGround ground, IPlayer[] players) {
-		super(ground, players);
+	public Context(IGround ground) {
 		// TODO Auto-generated constructor stub
+		super(ground);
 	}
 	
+	
+	/**
+	 * 根据troop查找player
+	 */
 	public IPlayer getPlayer(Integer troop) {
 		// TODO Auto-generated method stub
 		for(IPlayer player : getPlayerList()){
-			if(troop.equals(player.getId()))
+			if(troop.equals(player.getTroop()))
 				return player;
 		}
 		return null;

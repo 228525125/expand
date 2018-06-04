@@ -58,11 +58,15 @@ public class Place extends AbstractPlace {
 			 */
 			corps.getMove().addMovePath(getPosition());
 			
+			/*
+			 * corps移动、招募、放置都会触发这个消息，可能引起混淆
+			 */
 			Map<String,Object> map = new HashMap<String,Object>();
 			map.put("corps", corps);
 			map.put("place", getOwner());
 			NotifyInfo info = new NotifyInfo(NotifyInfo.Place_In,map);
 			super.notifyObservers(info);
+			
 		}
 		
 		@Override
