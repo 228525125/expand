@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
+import org.cx.game.tools.CommonIdentifierE;
 
 public class DeployState extends AbstractPlayState {
 	
@@ -17,7 +18,7 @@ public class DeployState extends AbstractPlayState {
 		map.put("bout", context.getBout());
 		map.put("day", context.getDay());
 		map.put("week", context.getWeek());
-		NotifyInfo info = new NotifyInfo(NotifyInfo.Context_Deploy,map);
+		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Context_Deploy,map);
 		super.notifyObservers(info);
 		
 		//判断是否电脑玩家，如果是就启动AI

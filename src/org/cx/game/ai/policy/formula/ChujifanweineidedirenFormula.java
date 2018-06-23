@@ -29,7 +29,7 @@ public class ChujifanweineidedirenFormula extends Validator {
 	public Boolean validate() {
 		// TODO Auto-generated method stub
 		Integer range = this.corps.getMove().getEnergy();
-		IGround ground = GroundFactory.getGround();
+		IGround ground = this.corps.getGround();
 		List<Integer> list =ground.areaForDistance(this.corps.getPosition(), range, IGround.Contain, this.corps.getMove().getType(), this.corps.getPlayer());
 		for(Integer pos : list){            //移动范围内的敌人
 			Corps corps = (Corps) ground.getCorps(pos);
@@ -62,7 +62,7 @@ public class ChujifanweineidedirenFormula extends Validator {
 	 * @return 最近敌人附近的位置
 	 */
 	public Integer getPosition(){
-		IGround ground = GroundFactory.getGround();
+		IGround ground = this.corps.getGround();
 		Integer distance = this.corps.getMove().getEnergy() + this.corps.getAttackRange();
 		Corps enemy = null;
 		for(Corps corps : this.enemyList){

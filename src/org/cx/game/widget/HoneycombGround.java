@@ -14,16 +14,22 @@ import org.cx.game.magic.skill.ISkill;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CellularDistrict;
+import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.tools.Node;
 import org.cx.game.tools.SpaceArithmetic;
+import org.cx.game.tools.XmlConfigureHelper;
 import org.cx.game.widget.building.BuildingFactory;
 import org.cx.game.widget.building.IBuilding;
 import org.cx.game.widget.building.IOption;
+import org.cx.game.widget.building.SpatialBuilding;
 import org.cx.game.widget.treasure.ITreasure;
 
 public class HoneycombGround extends AbstractGround implements IGroundE {
 
+	private Integer id = null;
 	private String imagePath = "";                                     //背景图片
+	
+	private Area area = null;
 
 	private int[] hit = new int []{-1};                                  //-1表示障碍物
 	private Map<Integer, IBuilding> buildingMap = new HashMap<Integer, IBuilding>();   //位置 - 建筑
@@ -35,9 +41,9 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 	private Map<IBuilding, Integer> buildingIsTroop = new HashMap<IBuilding, Integer>();
 	private Map<Corps, Integer> corpsIsTroop = new HashMap<Corps, Integer>();
 	
-	public HoneycombGround(Integer xBorder, Integer yBorder, String imagePath) {
+	public HoneycombGround(Integer id, String name, Integer xBorder, Integer yBorder, String imagePath) {
 		// TODO Auto-generated constructor stub
-		super(xBorder, yBorder);
+		super(id, name, xBorder, yBorder);
 		
 		this.imagePath = imagePath;
 		
@@ -55,6 +61,24 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 	
 	public String getImagePath() {
 		return this.imagePath;
+	}
+	
+	@Override
+	public void afterConstruct() {
+		// TODO Auto-generated method stub
+		for(String data : getBuildingData()){            //加载建筑
+			XmlConfigureHelper.map_buildingData_building(data, this);
+		}
+	}
+	
+	@Override
+	public Area getArea() {
+		// TODO Auto-generated method stub
+		return this.area;
+	}
+	
+	public void setArea(Area area) {
+		this.area = area;
 	}
 	
 	public void setTroopList(List<Integer> troopList) {
@@ -139,7 +163,7 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 		super.placementCorps(position, corps);
 		
 		Corps c = (Corps) corps;
-		c.getDeath().setStatus(AbstractCorps.Death_Status_Live);
+		c.getDeath().setStatus(CommonIdentifierE.Death_Status_Live);
 	}
 
 	@Override
@@ -147,14 +171,14 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 		// TODO Auto-generated method stub
 		List<Corps> ret = new ArrayList<Corps>();
 		
-		if(AbstractCorps.Death_Status_Live.equals(status)){
+		if(CommonIdentifierE.Death_Status_Live.equals(status)){
 			for(AbstractCorps corps : getLivingCorpsList()){
 				if(player.equals(corps.getPlayer()))
 					ret.add((Corps)corps);
 			}
 		}
 		
-		if(AbstractCorps.Death_Status_Death.equals(status)){
+		if(CommonIdentifierE.Death_Status_Death.equals(status)){
 			for(AbstractCorps corps : getDeadCorpsList()){
 				if(player.equals(corps.getPlayer()))
 					ret.add((Corps)corps);
@@ -169,11 +193,11 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 		// TODO Auto-generated method stub
 		List<Corps> ret = new ArrayList<Corps>();
 		
-		if(AbstractCorps.Death_Status_Live.equals(status))
+		if(CommonIdentifierE.Death_Status_Live.equals(status))
 			for(AbstractCorps corps : getLivingCorpsList())
 				ret.add((Corps)corps);
 		
-		if(AbstractCorps.Death_Status_Death.equals(status))
+		if(CommonIdentifierE.Death_Status_Death.equals(status))
 			for(AbstractCorps corps : getDeadCorpsList())
 				ret.add((Corps)corps);
 		
@@ -265,7 +289,7 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 		// TODO Auto-generated method stub
 		List<Integer> list = new ArrayList<Integer>();
 		for(IBuilding building : getBuildingList(player)){
-			list.add(building.getPosition());
+			list.add(building.getPlace().getPosition());
 		}
 		
 		return list;
@@ -277,7 +301,7 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 		// TODO Auto-generated method stub
 		List<Integer> list = new ArrayList<Integer>();
 		for(IBuilding building : getBuildingList(player, buildingType)){
-			list.add(building.getPosition());
+			list.add(building.getPlace().getPosition());
 		}
 		
 		return list;
@@ -295,7 +319,7 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 		List<Integer> list = new ArrayList<Integer>();
 		for(IBuilding building : getBuildingList(player, buildingType)){
 			if(building.getUpgrade().getLevel()>=level)
-				list.add(building.getPosition());
+				list.add(building.getPlace().getPosition());
 		}
 		
 		return list;
@@ -337,13 +361,13 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 	public List<Integer> queryRange(AbstractCorps corps, String action){
 		List<Integer> positionList = new ArrayList<Integer>();
 		Corps sc = (Corps) corps;
-		if(NotifyInfo.Command_Query_Attack.equals(action)){
+		if(CommonIdentifierE.Command_Query_Attack.equals(action)){
 			Integer range = sc.getAttack().getRange();
 			/*
 			 * 这里要考虑远程单位射程切换为近战时的变化
 			 * 当远程单位在战场上时，如果附近有敌方单位，则只能近身攻击
 			 */
-			if(AbstractCorps.Attack_Mode_Far.equals(sc.getAttack().getMode())){
+			if(CommonIdentifierE.Attack_Mode_Far.equals(sc.getAttack().getMode())){
 				List<Integer> list = areaForDistance(corps.getPosition(), 1, IGround.Equal);
 				for(Integer position : list){
 					AbstractCorps c = getCorps(position);
@@ -358,18 +382,18 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 			positionList.remove(corps.getPosition());
 		}
 		
-		if(NotifyInfo.Command_Query_Move.equals(action)){
+		if(CommonIdentifierE.Command_Query_Move.equals(action)){
 			Integer step = sc.getMove().getEnergy()/sc.getMove().getConsume();
 			switch (sc.getMove().getType()) {
 			case 141:    //步行
-				positionList = areaForDistance(corps.getPosition(), step, Contain, AbstractCorps.Move_Type_Walk, corps.getPlayer());
+				positionList = areaForDistance(corps.getPosition(), step, Contain, CommonIdentifierE.Move_Type_Walk, corps.getPlayer());
 				//distance(280083, 280083, IMove.Type_Walk);
 				break;
 			case 142:    //骑行
-				positionList = areaForDistance(corps.getPosition(), step, Contain, AbstractCorps.Move_Type_Equitation, corps.getPlayer());
+				positionList = areaForDistance(corps.getPosition(), step, Contain, CommonIdentifierE.Move_Type_Equitation, corps.getPlayer());
 				break;
 			case 143:    //驾驶
-				positionList = areaForDistance(corps.getPosition(), step, Contain, AbstractCorps.Move_Type_Drive, corps.getPlayer());
+				positionList = areaForDistance(corps.getPosition(), step, Contain, CommonIdentifierE.Move_Type_Drive, corps.getPlayer());
 				break;
 			case 144:    //飞行
 				positionList = areaForDistance(corps.getPosition(), step, Contain);
@@ -386,7 +410,7 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 	@Override
 	public List<Integer> queryRange(ISkill skill, String action){
 		List<Integer> positionList = new ArrayList<Integer>();
-		if(NotifyInfo.Command_Query_Conjure.equals(action) && skill.getOwner() instanceof AbstractCorps){
+		if(CommonIdentifierE.Command_Query_Conjure.equals(action) && skill.getOwner() instanceof AbstractCorps){
 			positionList = skill.getConjureRange();
 		}
 		return positionList;
@@ -396,7 +420,7 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 	public List<Integer> queryRange(IOption option, String action) {
 		// TODO Auto-generated method stub
 		List<Integer> positionList = new ArrayList<Integer>();
-		if(NotifyInfo.Command_Query_Execute.equals(action)){
+		if(CommonIdentifierE.Command_Query_Execute.equals(action)){
 			positionList = option.getExecuteRange(this);
 		}
 		return positionList;
@@ -610,8 +634,8 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 		List<Integer> pList = new ArrayList<Integer>();         //敌方单位的站位，友方允许穿过
 		List<Integer> nList = new ArrayList<Integer>();         //敌方单位附近1个单元格
 		
-		List<Corps> cList = getCorpsList(control, AbstractCorps.Death_Status_Live);
-		List<Corps> eList = getCorpsList(AbstractCorps.Death_Status_Live);            //非友方单位
+		List<Corps> cList = getCorpsList(control, CommonIdentifierE.Death_Status_Live);
+		List<Corps> eList = getCorpsList(CommonIdentifierE.Death_Status_Live);            //非友方单位
 		eList.removeAll(cList);
 		
 		for(AbstractCorps corps : eList){
@@ -763,8 +787,8 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 		Random r = new Random();
 		System.out.println(r.nextInt(10));
 		
-		IGround ground = new HoneycombGround(21,13,null);
-		System.out.println(ground);
+		//IGround ground = new HoneycombGround(21,13,null);
+		//System.out.println(ground);
 	}
 
 }

@@ -53,7 +53,7 @@ public class ShechengneidedirenFormula extends Validator {
 	public static List<Corps> searchEnemy(Corps owner){
 		List<Corps> enemyList = new ArrayList<Corps>();
 		Integer range = owner.getAttackRange();
-		IGround ground = GroundFactory.getGround();
+		IGround ground = owner.getGround();
 		List<Integer> list =ground.areaForDistance(owner.getPosition(), range, IGround.Equal);
 		for(Integer p : list){
 			Corps enemy = (Corps) ground.getCorps(p);

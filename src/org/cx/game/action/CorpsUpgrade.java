@@ -6,6 +6,7 @@ import java.util.Map;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
+import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.widget.treasure.EmpiricValue;
 
 public class CorpsUpgrade extends Upgrade implements IAction {
@@ -66,7 +67,7 @@ public class CorpsUpgrade extends Upgrade implements IAction {
 		map.put("position", getOwner().getPosition());
 		map.put("card", getOwner());
 		map.put("level", getLevel());
-		NotifyInfo info = new NotifyInfo(NotifyInfo.Corps_Upgrade,map);
+		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Corps_Upgrade,map);
 		super.notifyObservers(info);
 	}
 

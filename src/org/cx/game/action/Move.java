@@ -9,6 +9,7 @@ import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
+import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.tools.Debug;
 import org.cx.game.widget.AbstractPlace;
 import org.cx.game.widget.IGround;
@@ -24,7 +25,7 @@ public class Move extends AbstractAction implements IAction {
 	
 	private Integer energy = 0;
 	private Integer consume = Consume;        //移动一格的消耗
-	private Integer type = AbstractCorps.Move_Type_Walk;
+	private Integer type = CommonIdentifierE.Move_Type_Walk;
 	private Boolean moveable = false;   //是否能移动，回合内只能移动一次
 	private Integer flee = 0;         //逃离成功率
 	private Boolean hide = false;           //隐形状态
@@ -139,7 +140,7 @@ public class Move extends AbstractAction implements IAction {
 		map.put("route", route);
 		map.put("start", start);
 		map.put("position", getOwner().getPosition());
-		NotifyInfo info = new NotifyInfo(NotifyInfo.Corps_Move,map);
+		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Corps_Move,map);
 		super.notifyObservers(info);
 		
 		/*

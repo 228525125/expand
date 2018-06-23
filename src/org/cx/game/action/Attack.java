@@ -11,6 +11,7 @@ import org.cx.game.magic.buff.IBuff;
 import org.cx.game.magic.skill.IPassiveSkill;
 import org.cx.game.magic.skill.ISkill;
 import org.cx.game.observer.NotifyInfo;
+import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.widget.GroundFactory;
 import org.cx.game.widget.IGround;
 import org.cx.game.widget.treasure.ITreasure;
@@ -18,7 +19,7 @@ import org.cx.game.widget.treasure.EquipmentTreasure;
 
 public class Attack extends AbstractAction implements IAction {
 	
-	private Integer mode = AbstractCorps.Attack_Mode_Far;          //模式，近战/远程
+	private Integer mode = CommonIdentifierE.Attack_Mode_Far;          //模式，近战/远程
 	private Integer range = 1;                        //距离
 	private Integer lockChance = 0;                   //锁定几率
 	private Integer atk = 0;                          //真实攻击力
@@ -174,7 +175,7 @@ public class Attack extends AbstractAction implements IAction {
 		map.put("attack", getOwner());
 		map.put("attacked", attacked);
 		map.put("position", getOwner().getPosition());
-		NotifyInfo info = new NotifyInfo(NotifyInfo.Corps_Attack,map);
+		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Corps_Attack,map);
 		super.notifyObservers(info);
 		
 		Attack clone = clone();
@@ -184,12 +185,12 @@ public class Attack extends AbstractAction implements IAction {
 		//如果是远程，这里要设置为近身攻击模式
 		Integer distance = ground.distance(attacked.getPosition(), getOwner().getPosition());
 		if(1==distance){                                           //近身
-			clone.setMode(AbstractCorps.Attack_Mode_Near);             
+			clone.setMode(CommonIdentifierE.Attack_Mode_Near);             
 		}
 		
 		//判断攻击模式，远程近战伤害减半
-		if(AbstractCorps.Attack_Mode_Far.equals(getMode()) && 1==distance){
-			clone.setMode(AbstractCorps.Attack_Mode_Near);
+		if(CommonIdentifierE.Attack_Mode_Far.equals(getMode()) && 1==distance){
+			clone.setMode(CommonIdentifierE.Attack_Mode_Near);
 			Integer [] dmg = IntegerToDamage(clone.getDmg());
 			clone.setDmg(DamageToInteger(new Integer[]{dmg[0]/2,dmg[1]/2}));
 		}

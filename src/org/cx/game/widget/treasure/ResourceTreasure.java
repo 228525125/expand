@@ -8,6 +8,7 @@ import org.cx.game.action.Picked;
 import org.cx.game.core.IPlayer;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
+import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.widget.IGround;
 
 /**
@@ -32,7 +33,7 @@ public class ResourceTreasure extends Treasure implements ITreasure {
 	public String getName() {
 		// TODO Auto-generated method stub
 		String name = super.getName();
-		name += "("+getResource().get(IResource.Gold)+"/"+getResource().get(IResource.Wood)+"/"+getResource().get(IResource.Stone)+"/"+getResource().get(IResource.Ore)+")";
+		name += "("+getResource().get(CommonIdentifierE.Gold)+"/"+getResource().get(CommonIdentifierE.Wood)+"/"+getResource().get(CommonIdentifierE.Stone)+"/"+getResource().get(CommonIdentifierE.Ore)+")";
 		return name;
 	}
 	

@@ -1,6 +1,5 @@
 package org.cx.game.core;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.cx.game.action.AbstractAction;
@@ -121,6 +120,15 @@ public class Context extends AbstractContext implements IContextE {
 	public IGroundE getGround() {
 		// TODO Auto-generated method stub
 		return (IGroundE) super.getGround();
+	}
+	
+	@Override
+	public IGroundE getGround(Integer id) {
+		// TODO Auto-generated method stub
+		if(null==getGround().getArea())
+			return getGround();
+		
+		return (IGroundE) getGround().getArea().getGround(id);
 	}
 	
 	public class ContextAddBout extends AbstractAction implements IAction {

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.cx.game.observer.NotifyInfo;
+import org.cx.game.tools.CommonIdentifierE;
 
 public class FinishState extends AbstractPlayState {
 
@@ -26,7 +27,7 @@ public class FinishState extends AbstractPlayState {
 			player.getCommandBuffer().clear();
 		}
 		Map<String,Object> map = new HashMap<String,Object>();
-		NotifyInfo info = new NotifyInfo(NotifyInfo.Context_Finish,map);
+		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Context_Finish,map);
 		super.notifyObservers(info);
 	}
 

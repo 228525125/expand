@@ -10,6 +10,7 @@ import org.cx.game.action.IAction;
 import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 import org.cx.game.observer.NotifyInfo;
+import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.widget.treasure.IResource;
 
 public class Player extends AbstractPlayer implements IPlayerE {
@@ -118,13 +119,13 @@ public class Player extends AbstractPlayer implements IPlayerE {
 			Map<String,Object> map = new HashMap<String,Object>();
 			map.put("player", Player.this);
 			map.put("bout", Player.this.bout);
-			NotifyInfo info = new NotifyInfo(NotifyInfo.Player_Bout,map);
+			NotifyInfo info = new NotifyInfo(CommonIdentifierE.Player_Bout,map);
 			notifyObservers(info);
 			
 			/*
 			 * 获得控制权的玩家单位被激活
 			 */
-			for(AbstractCorps corps : getContext().getGround().getCorpsList(getOwner(), AbstractCorps.Death_Status_Live)){
+			for(AbstractCorps corps : getContext().getGround().getCorpsList(getOwner(), CommonIdentifierE.Death_Status_Live)){
 				Corps sc = (Corps) corps;
 				Integer speed = sc.getActivate().getSpeed();
 				sc.getActivate().addToVigour(speed);

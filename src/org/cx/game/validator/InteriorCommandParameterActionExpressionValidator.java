@@ -7,16 +7,16 @@ import org.cx.game.tools.I18n;
 import org.dom4j.Element;
 
 /**
- * 验证参数类型是否正确，这里验证的对象是String
+ * 验证参数类型是否正确，这里验证参数字符串是否是合适的action
  * @author chenxian
  *
  */
-public class InteriorCommandParameterExpressionStringTypeValidator extends Validator {
+public class InteriorCommandParameterActionExpressionValidator extends Validator {
 
 	private String parameter = null;
 	private Element cmdEl = null;
 	
-	public InteriorCommandParameterExpressionStringTypeValidator(String parameter, Element cmdEl) {
+	public InteriorCommandParameterActionExpressionValidator(String parameter, Element cmdEl) {
 		// TODO Auto-generated constructor stub
 		this.parameter = parameter;
 		this.cmdEl = cmdEl;
@@ -30,7 +30,7 @@ public class InteriorCommandParameterExpressionStringTypeValidator extends Valid
 		String type = Calculator.itemToType(parameter);
 		
 		if(null==type){
-			addMessage(I18n.getMessage(InteriorCommandParameterExpressionStringTypeValidator.class.getName()));
+			addMessage(I18n.getMessage(InteriorCommandParameterActionExpressionValidator.class.getName()));
 			return false;
 		}
 		
@@ -45,7 +45,7 @@ public class InteriorCommandParameterExpressionStringTypeValidator extends Valid
 		}
 		
 		if(!ret){
-			addMessage(I18n.getMessage(InteriorCommandParameterExpressionStringTypeValidator.class.getName()));
+			addMessage(I18n.getMessage(InteriorCommandParameterActionExpressionValidator.class.getName()));
 		}
 		
 		return ret;

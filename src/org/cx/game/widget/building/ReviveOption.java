@@ -11,6 +11,7 @@ import org.cx.game.action.IAction;
 import org.cx.game.corps.Hero;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
+import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.tools.I18n;
 import org.cx.game.validator.CallConsumeValidator;
 import org.cx.game.validator.CallRangeValidator;
@@ -51,7 +52,7 @@ public class ReviveOption extends AbstractOption implements IOption {
 	public List<Integer> getExecuteRange(IGround ground) {
 		// TODO Auto-generated method stub
 		List<Integer> positionList = new ArrayList<Integer>();
-		positionList = ground.areaForDistance(getOwner().getPosition(), 1, IGround.Contain);
+		positionList = ground.areaForDistance(getOwner().getPlace().getPosition(), 1, IGround.Contain);
 		positionList.retainAll(((IGroundE)ground).getEmptyList());
 		return positionList;
 	}
@@ -87,7 +88,7 @@ public class ReviveOption extends AbstractOption implements IOption {
 			if (arg instanceof NotifyInfo) {
 				NotifyInfo info = (NotifyInfo) arg;
 				
-				if(NotifyInfo.Corps_Death.equals(info.getType())){
+				if(CommonIdentifierE.Corps_Death.equals(info.getType())){
 					Map bean = (Map) info.getInfo();
 					Hero hero = (Hero) bean.get("card");
 					

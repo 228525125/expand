@@ -31,6 +31,7 @@ import org.cx.game.widget.Place;
 import org.cx.game.widget.TrickList;
 import org.cx.game.widget.building.CallBuilding;
 import org.cx.game.widget.building.ResourceBuilding;
+import org.cx.game.widget.building.SpatialBuilding;
 import org.cx.game.widget.building.TownBuilding;
 import org.cx.game.widget.building.BuildOption;
 import org.cx.game.widget.building.BuildingUpgradeOption;
@@ -387,7 +388,7 @@ public class JsonOut extends AbstractResponse {
 							.element("needBuilding", obj.getNeedBuilding())
 							.element("options", obj.getOptions(), getConfig())
 							.element("player", obj.getPlayer(), getConfig())
-							.element("position", obj.getPosition())
+							.element("position", obj.getPlace().getPosition())
 							.element("status", obj.getStatus())
 							.element("type", obj.getType())
 							.element("upgrade", obj.getUpgrade(), getConfig())
@@ -409,7 +410,7 @@ public class JsonOut extends AbstractResponse {
 							.element("needBuilding", obj.getNeedBuilding())
 							.element("options", obj.getOptions(), getConfig())
 							.element("player", obj.getPlayer(), getConfig())
-							.element("position", obj.getPosition())
+							.element("position", obj.getPlace().getPosition())
 							.element("status", obj.getStatus())
 							.element("type", obj.getType())
 							.element("upgrade", obj.getUpgrade(), getConfig())
@@ -428,11 +429,25 @@ public class JsonOut extends AbstractResponse {
 							.element("name", obj.getName())
 							.element("options", obj.getOptions(), getConfig())
 							.element("player", obj.getPlayer(), getConfig())
-							.element("position", obj.getPosition())
+							.element("position", obj.getPlace().getPosition())
 							.element("status", obj.getStatus())
 							.element("type", obj.getType())
 							.element("upgrade", obj.getUpgrade(), getConfig())
 							.element("buildings", obj.getBuildings(), getConfig());
+				}
+			});
+			
+			config.registerJsonBeanProcessor(SpatialBuilding.class, new JsonBeanProcessor() {
+				
+				@Override
+				public JSONObject processBean(Object arg0, JsonConfig arg1) {
+					// TODO Auto-generated method stub
+					SpatialBuilding obj = (SpatialBuilding) arg0;
+					return new JSONObject().element("name", obj.getName())
+							.element("options", obj.getOptions(), getConfig())
+							.element("position", obj.getPlace().getPosition())
+							.element("status", obj.getStatus())
+							.element("type", obj.getType());
 				}
 			});
 			

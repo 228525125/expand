@@ -6,6 +6,7 @@ import java.util.Map;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
+import org.cx.game.tools.CommonIdentifierE;
 
 public class Chuck extends AbstractAction implements IAction {
 
@@ -27,7 +28,7 @@ public class Chuck extends AbstractAction implements IAction {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("card", getOwner());
 		map.put("position", getOwner().getPosition());
-		NotifyInfo info = new NotifyInfo(NotifyInfo.Corps_Chuck, map);
+		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Corps_Chuck, map);
 		super.notifyObservers(info);           //通知所有卡片对象，丢弃事件
 	}
 

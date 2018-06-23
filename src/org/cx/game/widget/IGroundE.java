@@ -14,6 +14,12 @@ import org.cx.game.widget.building.IOption;
 public interface IGroundE extends IGround {
 	
 	/**
+	 * 所属区域
+	 * @return
+	 */
+	public Area getArea();
+	
+	/**
 	 * 阵营
 	 * @return 
 	 */

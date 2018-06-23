@@ -7,6 +7,7 @@ import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
+import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.widget.AbstractPlace;
 import org.cx.game.widget.IGround;
 import org.cx.game.widget.IGroundE;
@@ -72,13 +73,13 @@ public class Call extends AbstractAction implements IAction {
 		 */
 		setNop(nop);
 		
-		getOwner().getDeath().setStatus(AbstractCorps.Death_Status_Live);
+		getOwner().getDeath().setStatus(CommonIdentifierE.Death_Status_Live);
 		
 		/* 招募的动作应在place_in之前，因为place_in动作与移动时的place_in动作相同 */
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("card", getOwner());
 		map.put("position", place.getPosition());
-		NotifyInfo info = new NotifyInfo(NotifyInfo.Corps_Call,map);
+		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Corps_Call,map);
 		super.notifyObservers(info);           //通知所有卡片对象，召唤事件
 		
 		/*

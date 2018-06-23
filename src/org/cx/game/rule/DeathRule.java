@@ -7,6 +7,7 @@ import org.cx.game.core.IPlayerE;
 import org.cx.game.core.Player;
 import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
+import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.widget.IGroundE;
 
 public class DeathRule extends AbstractRule implements IRule {
@@ -18,7 +19,7 @@ public class DeathRule extends AbstractRule implements IRule {
 		
 		IPlayerE player = getOwner().getOwner().getPlayer();
 		IGroundE ground = player.getContext().getGround();
-		List<Corps> list = ground.getCorpsList(player, AbstractCorps.Death_Status_Live);
+		List<Corps> list = ground.getCorpsList(player, CommonIdentifierE.Death_Status_Live);
 		if(Player.Neutral.equals(player.getName()) && list.isEmpty())
 			player.dieOut();
 	}

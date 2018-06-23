@@ -7,6 +7,7 @@ import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.magic.IMagic;
 import org.cx.game.observer.NotifyInfo;
+import org.cx.game.tools.CommonIdentifierE;
 
 /**
  * 受到法术影响
@@ -36,7 +37,7 @@ public class Affected extends AbstractAction implements IAction {
 		map.put("card", getOwner());
 		map.put("position", getOwner().getPosition());
 		map.put("magic", magic);
-		NotifyInfo info = new NotifyInfo(NotifyInfo.Corps_Affected,map);
+		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Corps_Affected,map);
 		super.notifyObservers(info);
 		
 		if(magic.isTrigger(objects))

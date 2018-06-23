@@ -8,6 +8,7 @@ import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
+import org.cx.game.tools.CommonIdentifierE;
 
 public class DoneState extends AbstractPlayState {
 
@@ -23,7 +24,7 @@ public class DoneState extends AbstractPlayState {
 		// TODO Auto-generated method stub
 		Player curPlayer = (Player) context.getControlPlayer();
 		Context cont = (Context) context;
-		for(AbstractCorps corps : cont.getGround().getCorpsList(curPlayer, AbstractCorps.Death_Status_Live)){
+		for(AbstractCorps corps : cont.getGround().getCorpsList(curPlayer, CommonIdentifierE.Death_Status_Live)){
 			Corps sc = (Corps) corps;
 			if(sc.getActivate().getActivation().equals(true))
 				sc.activate(false);
@@ -31,7 +32,7 @@ public class DoneState extends AbstractPlayState {
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("control", curPlayer);
-		NotifyInfo info = new NotifyInfo(NotifyInfo.Context_Done,map);
+		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Context_Done,map);
 		super.notifyObservers(info);
 
 		context.switchControl();                   //转换控制权

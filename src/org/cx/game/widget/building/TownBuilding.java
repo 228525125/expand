@@ -18,15 +18,6 @@ public class TownBuilding extends AbstractBuilding implements IBuilding {
 		setStatus(IBuilding.Building_Status_Complete);  //城镇在地图上已经形成
 	}
 	
-	@Override
-	public void setPosition(Integer position) {
-		// TODO Auto-generated method stub
-		super.setPosition(position);
-		
-		for(IBuilding building: getBuildings())
-			building.setPosition(position);
-	}
-	
 	/**
 	 * 内部建筑物的typeID，简化xml
 	 * @param list

@@ -1,12 +1,12 @@
 package org.cx.game.tools;
 
 import org.cx.game.core.Context;
-import org.cx.game.core.IContextE;
 import org.cx.game.core.IPlayer;
 import org.cx.game.core.Player;
 import org.cx.game.corps.Corps;
 import org.cx.game.corps.CorpsFactory;
 import org.cx.game.widget.HoneycombGround;
+import org.cx.game.widget.IGroundE;
 import org.cx.game.widget.building.BuildingFactory;
 import org.cx.game.widget.building.IBuilding;
 
@@ -35,10 +35,10 @@ public class XmlConfigureHelper {
 		
 		HoneycombGround ground = (HoneycombGround) context.getGround();
 		
-		//npc.getCall().setNop(nop);            //设置数量
+		npc.getCall().setNop(nop);            //设置数量
 		npc.getUpgrade().setLevel(level);     //设置等级
-		npc.call(ground.getPlace(position), nop);
-		//ground.placementCorps(position, npc); //放置到战场
+		//npc.call(ground.getPlace(position), nop);
+		ground.placementCorps(position, npc); //放置到战场
 	}
 	
 	public static final Integer NeutralTroop = 0;     //中立
@@ -48,9 +48,7 @@ public class XmlConfigureHelper {
 	 * @param data
 	 * @param context
 	 */
-	public static void map_buildingData_building(String data, Context context){
-		HoneycombGround ground = (HoneycombGround) context.getGround();
-		
+	public static void map_buildingData_building(String data, HoneycombGround ground){
 		Integer position = Integer.valueOf(data.split(",")[0]);
 		Integer buildingType = Integer.valueOf(data.split(",")[1]);
 		Integer troop = Integer.valueOf(data.split(",")[2]);

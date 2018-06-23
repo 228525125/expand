@@ -5,17 +5,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.cx.game.core.Context;
 import org.cx.game.core.IPlayer;
 import org.cx.game.core.IPlayerE;
 import org.cx.game.exception.CommandValidatorException;
 import org.cx.game.exception.ValidatorException;
 import org.cx.game.observer.NotifyInfo;
+import org.cx.game.tools.CommonIdentifierE;
+import org.cx.game.tools.JsonHelper;
+import org.cx.game.widget.HoneycombGround;
 
 public class ReloadCommand extends InteriorCommand {
 
-	private IPlayerE player = null;
+	private IPlayer player = null;
 	
-	public ReloadCommand(IPlayerE player) {
+	public ReloadCommand(IPlayer player) {
 		// TODO Auto-generated constructor stub
 		super(player);
 		
@@ -27,13 +31,16 @@ public class ReloadCommand extends InteriorCommand {
 		// TODO Auto-generated method stub
 		super.execute();
 		
-		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
 		Map<String,Object> map = new HashMap<String,Object>();
+		HoneycombGround ground = (HoneycombGround) context.getGround();
 		
-		//map.put("god", this.player.getContext().getGround().toList());      //ground已被屏蔽
-		list.add(map);
+		Map<String, Integer> landform = JsonHelper.convertForGroundLandform(ground.getLandformMap());
 		
-		NotifyInfo info = new NotifyInfo(NotifyInfo.Command_Reload,list); 
-		super.notifyObservers(info);    //通知观察者
+		map.put("landform", landform);
+		map.put("buildingList", ground.getBuildingList());
+		map.put("treasureList", ground.getTreasureList());
+		map.put("corpsList", ground.getLivingCorpsList());
+		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Ground_LoadMap,map);
+		super.notifyObservers(info);
 	}
 }

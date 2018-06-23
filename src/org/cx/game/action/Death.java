@@ -7,6 +7,7 @@ import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
+import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.widget.IGround;
 import org.cx.game.widget.IGroundE;
 
@@ -14,7 +15,7 @@ public class Death extends AbstractAction implements IAction {
 	
 	private Integer hp = 0;
 	private Integer hpLimit = 0;
-	private Integer status = AbstractCorps.Death_Status_Exist;
+	private Integer status = CommonIdentifierE.Death_Status_Exist;
 	
 	@Override
 	public Corps getOwner() {
@@ -74,12 +75,12 @@ public class Death extends AbstractAction implements IAction {
 	@Override
 	public void action(Object...objects) {
 
-		setStatus(AbstractCorps.Death_Status_Death);
+		setStatus(CommonIdentifierE.Death_Status_Death);
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("card", getOwner());
 		map.put("position", getOwner().getPosition());
-		NotifyInfo info = new NotifyInfo(NotifyInfo.Corps_Death,map);
+		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Corps_Death,map);
 		super.notifyObservers(info);           //通知所有卡片对象，死亡事件		
 		
 		IGroundE ground = getOwner().getGround();     //只有在战场上才会死亡
@@ -108,7 +109,7 @@ public class Death extends AbstractAction implements IAction {
 				map.put("card", getOwner().getOwner());
 				map.put("change", this.damage);
 				map.put("position", getOwner().getOwner().getPosition());
-				NotifyInfo info = new NotifyInfo(NotifyInfo.Corps_Hp,map);
+				NotifyInfo info = new NotifyInfo(CommonIdentifierE.Corps_Hp,map);
 				super.notifyObservers(info);
 				
 				/*

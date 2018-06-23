@@ -14,6 +14,7 @@ import org.cx.game.magic.skill.IPassiveSkill;
 import org.cx.game.magic.skill.ISkill;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.rule.IRule;
+import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.widget.treasure.EmpiricValue;
 import org.cx.game.widget.treasure.ITreasure;
 import org.cx.game.widget.treasure.EquipmentTreasure;
@@ -116,7 +117,7 @@ public class Attacked extends AbstractAction implements IAction {
 		map.put("attacked", getOwner());
 		map.put("position", getOwner().getPosition());
 		map.put("damage", damage);
-		NotifyInfo info = new NotifyInfo(NotifyInfo.Corps_Attacked,map);
+		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Corps_Attacked,map);
 		super.notifyObservers(info);
 		
 		//造成的实际伤害
@@ -131,7 +132,7 @@ public class Attacked extends AbstractAction implements IAction {
 		/*
 		 * 反击
 		 */
-		if(AbstractCorps.Death_Status_Live.equals(getOwner().getDeath().getStatus())          //没有死亡 
+		if(CommonIdentifierE.Death_Status_Live.equals(getOwner().getDeath().getStatus())          //没有死亡 
 			&& getFightBack()                                           //是否反击过 
 			&& !attack.getCounterAttack()                               //这次攻击方式是否是反击
 			&& 0<getOwner().getAttack().getAtk()){                        //是否有攻击力 

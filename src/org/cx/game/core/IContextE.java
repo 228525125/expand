@@ -4,6 +4,8 @@ import org.cx.game.widget.IGroundE;
 
 public interface IContextE extends IContext {
 
-	@Override
+	/**
+	 * 返回当前ground
+	 */
 	public IGroundE getGround();
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
+import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.widget.treasure.ITreasure;
 import org.cx.game.widget.treasure.Treasure;
 
@@ -35,7 +36,7 @@ public class Pick extends AbstractAction implements IAction {
 		map.put("card", getOwner());
 		map.put("treasure", treasure);
 		map.put("position", getOwner().getPosition());
-		NotifyInfo info = new NotifyInfo(NotifyInfo.Corps_Pick,map);
+		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Corps_Pick,map);
 		super.notifyObservers(info);
 		
 		treasure.picked(getOwner());

@@ -12,6 +12,7 @@ import org.cx.game.magic.skill.IActiveSkill;
 import org.cx.game.exception.CommandValidatorException;
 import org.cx.game.exception.ValidatorException;
 import org.cx.game.observer.NotifyInfo;
+import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.validator.QueryCommandValidator;
 import org.cx.game.validator.SelectCorpsValidator;
 import org.cx.game.validator.SelectOptionValidator;
@@ -29,14 +30,14 @@ public class QueryCommand extends InteriorCommand {
 	public QueryCommand(IPlayerE player) {
 		// TODO Auto-generated constructor stub
 		super(player);
-		map.put("attack", NotifyInfo.Command_Query_Attack);
-		map.put("call", NotifyInfo.Command_Query_Call);
-		map.put("move", NotifyInfo.Command_Query_Move);
-		map.put("conjure", NotifyInfo.Command_Query_Conjure);
-		map.put("swap", NotifyInfo.Command_Query_Swap);
-		map.put("apply", NotifyInfo.Command_Query_Apply);
-		map.put("execute", NotifyInfo.Command_Query_Execute);
-		map.put("pick", NotifyInfo.Command_Query_Pick);
+		map.put("attack", CommonIdentifierE.Command_Query_Attack);
+		map.put("call", CommonIdentifierE.Command_Query_Call);
+		map.put("move", CommonIdentifierE.Command_Query_Move);
+		map.put("conjure", CommonIdentifierE.Command_Query_Conjure);
+		map.put("swap", CommonIdentifierE.Command_Query_Swap);
+		map.put("apply", CommonIdentifierE.Command_Query_Apply);
+		map.put("execute", CommonIdentifierE.Command_Query_Execute);
+		map.put("pick", CommonIdentifierE.Command_Query_Pick);
 		
 		this.player = player;
 	}

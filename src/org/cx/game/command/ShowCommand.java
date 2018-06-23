@@ -6,6 +6,7 @@ import java.util.Map;
 import org.cx.game.core.IPlayer;
 import org.cx.game.exception.ValidatorException;
 import org.cx.game.observer.NotifyInfo;
+import org.cx.game.tools.CommonIdentifierE;
 
 public class ShowCommand extends InteriorCommand {
 
@@ -57,7 +58,7 @@ public class ShowCommand extends InteriorCommand {
 		if(null!=buffer.getTrick())
 			map.put(CommandBuffer.TRICK, buffer.getTrick());
 		
-		NotifyInfo info = new NotifyInfo(NotifyInfo.Command_Show,map); 
+		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Command_Show,map); 
 		super.notifyObservers(info);    //通知观察者
 	}
 

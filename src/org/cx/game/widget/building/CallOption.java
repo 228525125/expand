@@ -46,7 +46,7 @@ public class CallOption extends AbstractOption implements IOption {
 	public List<Integer> getExecuteRange(IGround ground) {
 		// TODO Auto-generated method stub
 		List<Integer> positionList = new ArrayList<Integer>();
-		positionList = ground.areaForDistance(getOwner().getPosition(), 1, IGround.Contain);
+		positionList = ground.areaForDistance(getOwner().getPlace().getPosition(), 1, IGround.Contain);
 		positionList.retainAll(((IGroundE)ground).getEmptyList());
 		return positionList;
 	}
@@ -66,7 +66,7 @@ public class CallOption extends AbstractOption implements IOption {
 	public void execute(Object...objects) throws RuleValidatorException {
 		// TODO Auto-generated method stub
 		Place place = (Place) objects[0];
-		AbstractCorps corps = (AbstractCorps) CorpsFactory.getInstance(corpsID, getOwner().getPlayer());
+		AbstractCorps corps = CorpsFactory.getInstance(corpsID, getOwner().getPlayer());
 		
 		if(null!=place.getCorps())            //如果是补充兵源，就判断招募的兵源是否一致
 			addValidator(new CallUnitEqualValidator(place.getCorps(), (Corps) corps));

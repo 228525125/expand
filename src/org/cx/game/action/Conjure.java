@@ -7,6 +7,7 @@ import org.cx.game.corps.Corps;
 import org.cx.game.magic.skill.IActiveSkill;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
+import org.cx.game.tools.CommonIdentifierE;
 
 /**
  * 施法一个主动技能
@@ -31,7 +32,7 @@ public class Conjure extends AbstractAction implements IAction {
 		map.put("card", getOwner());
 		map.put("position", getOwner().getPosition());
 		map.put("skill", skill);
-		NotifyInfo info = new NotifyInfo(NotifyInfo.Corps_Conjure,map);
+		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Corps_Conjure,map);
 		super.notifyObservers(info);	
 		
 		Object [] parameter = (Object[]) objects[1];

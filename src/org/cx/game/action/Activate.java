@@ -8,6 +8,7 @@ import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.magic.buff.IBuff;
 import org.cx.game.observer.NotifyInfo;
+import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.tools.Debug;
 
 public class Activate extends AbstractAction implements IAction {
@@ -50,7 +51,7 @@ public class Activate extends AbstractAction implements IAction {
 			map.put("card", getOwner());
 			map.put("change", speed);
 			map.put("position", getOwner().getPosition());
-			NotifyInfo info = new NotifyInfo(NotifyInfo.Corps_Speed,map);
+			NotifyInfo info = new NotifyInfo(CommonIdentifierE.Corps_Speed,map);
 			super.notifyObservers(info);
 		}
 	}
@@ -80,7 +81,7 @@ public class Activate extends AbstractAction implements IAction {
 		map.put("card", getOwner());
 		map.put("position", getOwner().getPosition());
 		map.put("activate", activate);
-		NotifyInfo info = new NotifyInfo(NotifyInfo.Corps_Activate,map);
+		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Corps_Activate,map);
 		notifyObservers(info);
 		
 		Corps owner = getOwner();

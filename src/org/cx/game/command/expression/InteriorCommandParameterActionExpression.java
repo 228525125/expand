@@ -3,7 +3,7 @@ package org.cx.game.command.expression;
 import org.cx.game.core.IPlayer;
 import org.cx.game.exception.SyntaxValidatorException;
 import org.cx.game.validator.InteriorCommandParameterExpressionFormatValidator;
-import org.cx.game.validator.InteriorCommandParameterExpressionStringTypeValidator;
+import org.cx.game.validator.InteriorCommandParameterActionExpressionValidator;
 import org.dom4j.Element;
 
 public class InteriorCommandParameterActionExpression extends
@@ -13,7 +13,7 @@ public class InteriorCommandParameterActionExpression extends
 			Element cmdEl) {
 		super(own, cmd, cmdEl);
 		// TODO Auto-generated constructor stub
-		addValidator(new InteriorCommandParameterExpressionStringTypeValidator(getParameter(cmd), cmdEl));
+		addValidator(new InteriorCommandParameterActionExpressionValidator(getParameter(cmd), cmdEl));
 	}
 	
 	@Override

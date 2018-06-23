@@ -49,12 +49,6 @@ public class CallBuilding extends AbstractBuilding implements IBuilding {
 	}
 	
 	@Override
-	public void setPosition(Integer position) {
-		// TODO Auto-generated method stub
-		super.setPosition(position);
-	}
-	
-	@Override
 	public void setConsume(IResource consume) {
 		// TODO Auto-generated method stub
 		super.setConsume(consume);

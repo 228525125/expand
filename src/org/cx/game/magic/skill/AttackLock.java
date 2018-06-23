@@ -11,6 +11,7 @@ import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.magic.buff.AttackLockBuff;
 import org.cx.game.magic.buff.TauntBuff;
 import org.cx.game.observer.NotifyInfo;
+import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.widget.IGround;
 
 /**
@@ -73,7 +74,7 @@ public class AttackLock extends PassiveSkill {
 		}
 		
 		Integer distance = ground.distance(attacked.getPosition(), getOwner().getPosition());
-		if(AbstractCorps.Death_Status_Live == attacked.getDeath().getStatus()
+		if(CommonIdentifierE.Death_Status_Live == attacked.getDeath().getStatus()
 		&& 1==distance                                           //近身
 		&& !exist                                                //判断是否被锁定过
 		&& taunt)                                               //判断是否受到身边具有嘲讽的敌人的影响                                
