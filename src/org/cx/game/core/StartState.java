@@ -46,6 +46,11 @@ public class StartState extends AbstractPlayState {
 		// TODO Auto-generated method stub		
 		provision();
 		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("ground", context.getGround());
+		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Context_Start,map);
+		super.notifyObservers(info);
+		
 		context.switchControl();
 		
 		deploy();

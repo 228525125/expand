@@ -1,14 +1,9 @@
 package org.cx.game.command;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.cx.game.core.Context;
 import org.cx.game.core.IPlayer;
-import org.cx.game.core.IPlayerE;
-import org.cx.game.exception.CommandValidatorException;
 import org.cx.game.exception.ValidatorException;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
@@ -33,13 +28,8 @@ public class ReloadCommand extends InteriorCommand {
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		HoneycombGround ground = (HoneycombGround) context.getGround();
-		
-		Map<String, Integer> landform = JsonHelper.convertForGroundLandform(ground.getLandformMap());
-		
-		map.put("landform", landform);
-		map.put("buildingList", ground.getBuildingList());
-		map.put("treasureList", ground.getTreasureList());
-		map.put("corpsList", ground.getLivingCorpsList());
+
+		map.put("ground", ground);
 		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Ground_LoadMap,map);
 		super.notifyObservers(info);
 	}

@@ -94,9 +94,6 @@ public class Move extends AbstractAction implements IAction {
 	public void setMoveable(Boolean moveable) {
 		if(!this.moveable.equals(moveable)){
 			this.moveable = moveable;
-			
-			if(!this.moveable)
-				setEnergy(0);
 		}
 	}
 

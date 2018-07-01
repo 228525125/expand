@@ -18,7 +18,7 @@ public class CallBuilding extends AbstractBuilding implements IBuilding {
 		this.corpsID = corpsID;
 		this.yield = yield;
 		
-		IOption optionBuild = new BuildOption();				
+		IOption optionBuild = new BuildOption();
 		addOption(optionBuild);
 		
 		IOption callOption = new CallOption(corpsID);

@@ -37,7 +37,6 @@ public class CommonIdentifierE extends CommonIdentifier {
 	public static final Integer Move_Type_Equitation = 142;    //骑行
 	public static final Integer Move_Type_Drive = 143;         //驾驶
 	public static final Integer Move_Type_Fly = 144;           //飞行
-	public static final Integer Move_Type_Flash = 145;         //传送
 	
 	//--------------- Magic ------------------//
 	
@@ -146,6 +145,7 @@ public class CommonIdentifierE extends CommonIdentifier {
 	public final static String Command_Query_Execute = "Command_Query_Execute";
 	public final static String Command_Query_Pick = "Command_Query_Pick";
 	public final static String Command_Reload = "Command_Reload";
+	public final static String Command_Switch = "Command_Switch";
 	
 	public final static String Context_Start = "Context_Start";
 	public final static String Context_Deploy = "Context_Deploy";

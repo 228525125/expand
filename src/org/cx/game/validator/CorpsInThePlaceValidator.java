@@ -8,12 +8,12 @@ import org.cx.game.widget.IGround;
  * @author chenxian
  *
  */
-public class NullPointValidator extends Validator {
+public class CorpsInThePlaceValidator extends Validator {
 
 	private IGround ground = null;
 	private Integer position = null;
 	
-	public NullPointValidator(IGround ground, Integer position) {
+	public CorpsInThePlaceValidator(IGround ground, Integer position) {
 		// TODO Auto-generated constructor stub
 		this.ground = ground;
 		this.position = position;
@@ -25,7 +25,7 @@ public class NullPointValidator extends Validator {
 		if(null!=ground.getCorps(position)){
 			return true;
 		}else{
-			addMessage(I18n.getMessage(NullPointValidator.class.getName()));
+			addMessage(I18n.getMessage(CorpsInThePlaceValidator.class.getName()));
 			return false;
 		}
 	}

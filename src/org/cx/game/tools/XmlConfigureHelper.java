@@ -5,10 +5,12 @@ import org.cx.game.core.IPlayer;
 import org.cx.game.core.Player;
 import org.cx.game.corps.Corps;
 import org.cx.game.corps.CorpsFactory;
+import org.cx.game.widget.Area;
 import org.cx.game.widget.HoneycombGround;
 import org.cx.game.widget.IGroundE;
 import org.cx.game.widget.building.BuildingFactory;
 import org.cx.game.widget.building.IBuilding;
+import org.cx.game.widget.building.SpatialBuilding;
 
 public class XmlConfigureHelper {
 	
@@ -57,5 +59,15 @@ public class XmlConfigureHelper {
 		ground.placementBuilding(position, building);
 		
 		ground.getBuildingIsTroop().put(building, troop);
+	}
+	
+	public static void area_spatialNodeData_map(String data, Area area){
+		String[] datas = data.split(",");
+		Integer nodeId = Integer.valueOf(datas[0]);
+		SpatialBuilding spatialBuilding = area.getSpatialBuilding(nodeId);
+		for(int i=1;i<datas.length;i++){
+			SpatialBuilding sb = area.getSpatialBuilding(Integer.valueOf(datas[i]));
+			spatialBuilding.addSpatialBuilding(sb);
+		}
 	}
 }

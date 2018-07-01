@@ -9,6 +9,7 @@ import org.cx.game.action.AbstractAction;
 import org.cx.game.action.ActionProxyHelper;
 import org.cx.game.action.IAction;
 import org.cx.game.corps.AbstractCorps;
+import org.cx.game.corps.Corps;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.widget.AbstractPlace;
@@ -23,8 +24,7 @@ public class SpatialBuilding extends AbstractBuilding {
 	
 	private Boolean transmissionIsUsable = false;
 	private Boolean receiveIsUsable = true;
-	
-	private List<Integer> spatialBuildingTypeList = new ArrayList<Integer>();
+
 	private List<SpatialBuilding> spatialBuildingList = new ArrayList<SpatialBuilding>();
 	
 	public SpatialBuilding(Integer buildingType) {
@@ -76,16 +76,14 @@ public class SpatialBuilding extends AbstractBuilding {
 		this.receiveIsUsable = receiveIsUsable;
 	}
 	
-	public List<Integer> getSpatialBuildingTypeList() {
-		return spatialBuildingTypeList;
-	}
-
-	public void setSpatialBuildingTypeList(List<Integer> spatialBuildingTypeList) {
-		this.spatialBuildingTypeList = spatialBuildingTypeList;
-	}
-	
 	public List<SpatialBuilding> getSpatialBuildingList() {
 		return spatialBuildingList;
+	}
+	
+	public void addSpatialBuilding(SpatialBuilding spatialBuilding) {
+		this.spatialBuildingList.add(spatialBuilding);
+		IOption option = new SpatialOption(spatialBuilding);
+		addOption(option);
 	}
 
 	private IAction transmitAction = null;
@@ -116,6 +114,9 @@ public class SpatialBuilding extends AbstractBuilding {
 			SpatialBuilding sb = (SpatialBuilding) objects[0];
 			AbstractCorps corps = (AbstractCorps) objects[1];
 			
+			IGround ground = corps.getGround();
+			ground.removeCorps(corps);
+			
 			Map<String,Object> map = new HashMap<String,Object>();
 			map.put("corps", corps);
 			map.put("position", SpatialBuilding.this.getPlace().getPosition());
@@ -132,8 +133,15 @@ public class SpatialBuilding extends AbstractBuilding {
 		public void action(Object... objects) {
 			// TODO Auto-generated method stub
 			AbstractPlace place = (AbstractPlace) objects[0];
-			AbstractCorps corps = (AbstractCorps) objects[1];
+			Corps corps = (Corps) objects[1];
 			IGround ground = place.getOwner();
+			
+			/*
+			 * 消耗精力
+			 */
+			Integer energy = corps.getMove().getEnergy();
+			energy -= 1;
+			corps.getMove().setEnergy(energy);
 			
 			Map<String,Object> map = new HashMap<String,Object>();
 			map.put("corps", corps);
@@ -141,7 +149,6 @@ public class SpatialBuilding extends AbstractBuilding {
 			map.put("position", place.getPosition());
 			NotifyInfo info = new NotifyInfo(CommonIdentifierE.Building_Receive,map);
 			super.notifyObservers(info);
-			
 			
 			ground.placementCorps(place.getPosition(), corps);
 		}

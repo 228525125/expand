@@ -92,6 +92,13 @@ public interface IGroundE extends IGround {
 	public List<IBuilding> getBuildingList(IPlayer player, Integer type);
 	
 	/**
+	 * 根据建筑物class，进行查询
+	 * @param clazz
+	 * @return
+	 */
+	public List<IBuilding> getBuildingList(Class clazz);
+	
+	/**
 	 * 查询corps操作范围
 	 * @param corps
 	 * @param action
@@ -160,6 +167,13 @@ public interface IGroundE extends IGround {
 	 * @param type 移动类型
 	 */
 	public List<Integer> move(Corps corps, Integer position, Integer type);
+	
+	/**
+	 * 位移，跟移动不是一回事
+	 * @param corps
+	 * @param position
+	 */
+	public void displace(Corps corps, Integer position);
 	
 	/**
 	 * 用于show

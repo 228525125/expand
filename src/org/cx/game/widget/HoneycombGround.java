@@ -7,18 +7,14 @@ import java.util.Map;
 import java.util.Random;
 
 import org.cx.game.core.IPlayer;
-import org.cx.game.core.Player;
 import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 import org.cx.game.magic.skill.ISkill;
-import org.cx.game.exception.RuleValidatorException;
-import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CellularDistrict;
 import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.tools.Node;
 import org.cx.game.tools.SpaceArithmetic;
 import org.cx.game.tools.XmlConfigureHelper;
-import org.cx.game.widget.building.BuildingFactory;
 import org.cx.game.widget.building.IBuilding;
 import org.cx.game.widget.building.IOption;
 import org.cx.game.widget.building.SpatialBuilding;
@@ -158,6 +154,12 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 	}
 	
 	@Override
+	public void displace(Corps corps, Integer position) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
 	public void placementCorps(Integer position, AbstractCorps corps) {
 		// TODO Auto-generated method stub
 		super.placementCorps(position, corps);
@@ -270,6 +272,17 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 		List<IBuilding> list = new ArrayList<IBuilding>();
 		for(IBuilding building : getBuildingList(player)){
 			if(type.equals(building.getType()))
+				list.add(building);
+		}
+		return list;
+	}
+	
+	@Override
+	public List<IBuilding> getBuildingList(Class clazz) {
+		// TODO Auto-generated method stub
+		List<IBuilding> list = new ArrayList<IBuilding>();
+		for(IBuilding building : getBuildingList()){
+			if(building.getClass().equals(clazz))
 				list.add(building);
 		}
 		return list;

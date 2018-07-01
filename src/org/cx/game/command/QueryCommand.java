@@ -25,9 +25,9 @@ public class QueryCommand extends InteriorCommand {
 
 	private Map<String, String> map = new HashMap<String, String>();
 	
-	private IPlayerE player = null;
+	private IPlayer player = null;
 	
-	public QueryCommand(IPlayerE player) {
+	public QueryCommand(IPlayer player) {
 		// TODO Auto-generated constructor stub
 		super(player);
 		map.put("attack", CommonIdentifierE.Command_Query_Attack);
@@ -49,7 +49,7 @@ public class QueryCommand extends InteriorCommand {
 		// TODO Auto-generated method stub
 		super.execute();
 		
-		IGroundE ground = this.player.getContext().getGround();
+		IGroundE ground = ((IPlayerE)this.player).getContext().getGround();
 		
 		if("conjure".equals(parameter)){
 			doValidator(new SelectSkillValidator(buffer));

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.cx.game.tools.XmlConfigureHelper;
 import org.cx.game.widget.building.IBuilding;
 import org.cx.game.widget.building.SpatialBuilding;
 
@@ -14,10 +15,11 @@ public class Area {
 	private String imagePath = "";
 	private Integer startingPoint = null;
 	
-	private List<SpatialBuilding> spatialNodeList = new ArrayList<SpatialBuilding>();
+	private List<SpatialBuilding> spatialBuildingList = new ArrayList<SpatialBuilding>();
 	private List<IGround> groundList = new ArrayList<IGround>();
 	private Map<Integer, IGround> idGroundMap = new HashMap<Integer, IGround>();
 	private List<Integer> troopList = new ArrayList<Integer>();         //阵营
+	private List<String> spatialNodeData = new ArrayList<String>();
 	
 	public Area(Integer id, String imagePath) {
 		// TODO Auto-generated constructor stub
@@ -32,10 +34,8 @@ public class Area {
 		/*
 		 * 建立传送站之间的关联
 		 */
-		for(SpatialBuilding spatialBuilding : getSpatialNodeList()){
-			for(Integer typeId : spatialBuilding.getSpatialBuildingTypeList()){
-				spatialBuilding.getSpatialBuildingList().add(getSpatialNode(typeId));
-			}
+		for(String data : this.spatialNodeData){
+			XmlConfigureHelper.area_spatialNodeData_map(data, this);
 		}
 	}
 	
@@ -53,20 +53,17 @@ public class Area {
 			this.groundList.add(ground);
 			this.idGroundMap.put(mapId, ground);
 			
-			((HoneycombGround) ground).setArea(this);
+			HoneycombGround hg = (HoneycombGround) ground;
+			hg.setArea(this);
+			
+			for(IBuilding building : hg.getBuildingList(SpatialBuilding.class)){
+				this.spatialBuildingList.add((SpatialBuilding) building);
+			}
 		}
 	}
 	
-	public List<SpatialBuilding> getSpatialNodeList() {
-		return this.spatialNodeList;
-	}
-	
-	public SpatialBuilding getSpatialNode(Integer typeId) {
-		for(SpatialBuilding building : getSpatialNodeList()){
-			if(typeId.equals(building.getType()))
-				return building;
-		}
-		return null;
+	public List<SpatialBuilding> getSpatialBuildingList() {
+		return this.spatialBuildingList;
 	}
 	
 	public List<Integer> getTroopList() {
@@ -83,5 +80,17 @@ public class Area {
 	
 	public IGround getStartingPoint() {
 		return getGround(this.startingPoint);
+	}
+	
+	public void setSpatialNodeData(List<String> spatialNodeData) {
+		this.spatialNodeData = spatialNodeData;
+	}
+	
+	public SpatialBuilding getSpatialBuilding(Integer typeId) {
+		for(SpatialBuilding building : getSpatialBuildingList()){
+			if(typeId.equals(building.getType()))
+				return building;
+		}
+		return null;
 	}
 }

@@ -16,6 +16,8 @@ import org.cx.game.action.Death;
 import org.cx.game.action.Move;
 import org.cx.game.action.HeroUpgrade;
 import org.cx.game.action.CorpsUpgrade;
+import org.cx.game.action.Pick;
+import org.cx.game.action.Picked;
 import org.cx.game.action.SkillUpgrade;
 import org.cx.game.core.Player;
 import org.cx.game.corps.AbstractCorps;
@@ -24,6 +26,7 @@ import org.cx.game.corps.Corps;
 import org.cx.game.magic.skill.ShieldHit;
 import org.cx.game.magic.trick.ITrick;
 import org.cx.game.observer.NotifyInfo;
+import org.cx.game.tools.JsonHelper;
 import org.cx.game.widget.Cemetery;
 import org.cx.game.widget.ControlQueue;
 import org.cx.game.widget.HoneycombGround;
@@ -32,6 +35,7 @@ import org.cx.game.widget.TrickList;
 import org.cx.game.widget.building.CallBuilding;
 import org.cx.game.widget.building.ResourceBuilding;
 import org.cx.game.widget.building.SpatialBuilding;
+import org.cx.game.widget.building.SpatialOption;
 import org.cx.game.widget.building.TownBuilding;
 import org.cx.game.widget.building.BuildOption;
 import org.cx.game.widget.building.BuildingUpgradeOption;
@@ -136,6 +140,8 @@ public class JsonOut extends AbstractResponse {
 							.element("treasures", hero.getTreasures(), getConfig());
 				}
 			});
+			
+			//---------------------- action ---------------------
 			
 			config.registerJsonBeanProcessor(Activate.class, new JsonBeanProcessor() {
 				
@@ -294,6 +300,8 @@ public class JsonOut extends AbstractResponse {
 				}
 			});
 			
+			//--------------------- action end ----------------------
+			
 			config.registerJsonBeanProcessor(Player.class, new JsonBeanProcessor() {
 				
 				@Override
@@ -333,12 +341,15 @@ public class JsonOut extends AbstractResponse {
 					// TODO Auto-generated method stub
 					HoneycombGround obj = (HoneycombGround) arg0;
 					return new JSONObject().element("buildingList", obj.getBuildingList(), getConfig())
-							//.element("disableList", obj.getDisableList())
+							.element("landform", JsonHelper.convertForGroundLandform(obj.getLandformMap()), getConfig())
+							.element("treasureList", obj.getTreasureList(), getConfig())
+							.element("corpsList", obj.getLivingCorpsList(), getConfig())
 							.element("emptyList", obj.getEmptyList())
 							.element("imagePath", obj.getImagePath())
 							.element("name", obj.getName())
 							.element("xBorder", obj.getXBorder())
-							.element("yBorder", obj.getYBorder());
+							.element("yBorder", obj.getYBorder())
+							.element("id", obj.getId());
 				}
 			});
 			
@@ -350,7 +361,6 @@ public class JsonOut extends AbstractResponse {
 					Place obj = (Place) arg0;
 					return new JSONObject().element("building", obj.getBuilding(), getConfig())
 							.element("cemetery", obj.getCemetery(), getConfig())
-							//.element("disable", obj.getDisable())
 							.element("empty", obj.getEmpty())
 							.element("landform", obj.getLandform())
 							.element("life", obj.getCorps(), getConfig())
@@ -444,10 +454,13 @@ public class JsonOut extends AbstractResponse {
 					// TODO Auto-generated method stub
 					SpatialBuilding obj = (SpatialBuilding) arg0;
 					return new JSONObject().element("name", obj.getName())
+							.element("consume", obj.getConsume(), getConfig())
 							.element("options", obj.getOptions(), getConfig())
 							.element("position", obj.getPlace().getPosition())
 							.element("status", obj.getStatus())
+							.element("upgrade", obj.getUpgrade(), getConfig())
 							.element("type", obj.getType());
+							
 				}
 			});
 			
@@ -502,6 +515,21 @@ public class JsonOut extends AbstractResponse {
 				public JSONObject processBean(Object arg0, JsonConfig arg1) {
 					// TODO Auto-generated method stub
 					ReviveOption obj = (ReviveOption) arg0;
+					return new JSONObject().element("allow", obj.getAllow())
+							.element("executeRemainBout", obj.getExecuteRemainBout())
+							.element("executeWait", obj.getExecuteWait())
+							.element("name", obj.getName())
+							.element("spacingRemainBout", obj.getSpacingRemainBout())
+							.element("spacingWait", obj.getSpacingWait());
+				}
+			});
+			
+			config.registerJsonBeanProcessor(SpatialOption.class, new JsonBeanProcessor() {
+				
+				@Override
+				public JSONObject processBean(Object arg0, JsonConfig arg1) {
+					// TODO Auto-generated method stub
+					SpatialOption obj = (SpatialOption) arg0;
 					return new JSONObject().element("allow", obj.getAllow())
 							.element("executeRemainBout", obj.getExecuteRemainBout())
 							.element("executeWait", obj.getExecuteWait())
@@ -569,6 +597,8 @@ public class JsonOut extends AbstractResponse {
 							.element("resource", obj.getResource(), getConfig());
 				}
 			});
+			
+			
 			
 			//---------------------- skill ------------------------//
 			

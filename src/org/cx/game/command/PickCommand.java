@@ -22,8 +22,8 @@ public class PickCommand extends InteriorCommand {
 		// TODO Auto-generated constructor stub
 		addValidator(new SelectGroundValidator(buffer));
 		addValidator(new SelectCorpsValidator(buffer));
+		addValidator(new MoveEnergyValidator((Corps) buffer.getCorps()));
 		addValidator(new AttackableValidator(buffer));
-		addValidator(new MoveEnergyValidator(buffer));
 		addValidator(new MoveTauntValidator(buffer));
 	}
 	
