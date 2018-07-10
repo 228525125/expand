@@ -2,7 +2,7 @@ package org.cx.game.ai.policy;
 
 import org.cx.game.ai.PlayerAgent;
 import org.cx.game.command.CommandFactory;
-import org.cx.game.core.IPlayer;
+import org.cx.game.core.AbstractPlayer;
 import org.cx.game.exception.ValidatorException;
 
 public class DonePolicy extends AbstractPolicy<PlayerAgent> {
@@ -27,7 +27,7 @@ public class DonePolicy extends AbstractPolicy<PlayerAgent> {
 		// TODO Auto-generated method stub
 		super.calculate();
 		
-		IPlayer player = getAgent().getOwner();
+		AbstractPlayer player = getAgent().getOwner();
 		this.cmdStr = "done";
 		
 		setPri(AbstractPolicy.PRI_Min);

@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.cx.game.corps.CorpsFactory;
 import org.cx.game.corps.Hero;
+import org.cx.game.widget.AbstractGround;
 import org.cx.game.widget.Area;
 import org.cx.game.widget.AreaFactory;
-import org.cx.game.widget.IGround;
 
 public class AreaHost extends AbstractHost {
 	
@@ -37,10 +37,10 @@ public class AreaHost extends AbstractHost {
 	 * 游戏准备就绪
 	 */
 	public void ready() {
-		IGround ground = this.area.getStartingPoint();
-		IContext context = new Context(ground);
+		AbstractGround ground = this.area.getStartingPoint();
+		AbstractContext context = new Context(ground);
 		
-		for(IPlayer player : getPlayerList()){
+		for(AbstractPlayer player : getPlayerList()){
 			context.addPlayer(player);
 		}
 	}

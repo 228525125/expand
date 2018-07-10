@@ -1,6 +1,6 @@
 package org.cx.game.validator;
 
-import org.cx.game.core.IPlayer;
+import org.cx.game.core.AbstractPlayer;
 import org.cx.game.corps.Corps;
 import org.cx.game.tools.I18n;
 
@@ -23,7 +23,7 @@ public class RationLimitValidator extends Validator {
 	@Override
 	public Boolean validate() {
 		// TODO Auto-generated method stub
-		IPlayer player = corps.getPlayer();
+		AbstractPlayer player = corps.getPlayer();
 		Integer ration = player.getRationLimit()-player.getRation();
 		if(ration>=corps.getRation()*this.nop)
 			return true;

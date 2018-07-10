@@ -5,7 +5,7 @@ import java.util.Map.Entry;
 
 import org.cx.game.corps.Corps;
 import org.cx.game.tools.I18n;
-import org.cx.game.widget.treasure.IResource;
+import org.cx.game.widget.treasure.Resource;
 
 public class CallConsumeValidator extends Validator {
 
@@ -23,7 +23,7 @@ public class CallConsumeValidator extends Validator {
 		// TODO Auto-generated method stub
 		Boolean ret = true;
 
-		IResource res = corps.getPlayer().getResource();
+		Resource res = corps.getPlayer().getResource();
 			
 		if(res.absoluteLessThan(corps.getCall().getConsume())){
 			ret = false;

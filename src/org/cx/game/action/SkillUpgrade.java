@@ -3,8 +3,8 @@ package org.cx.game.action;
 import java.util.HashMap;
 
 import org.cx.game.corps.Hero;
-import org.cx.game.magic.skill.ISkill;
 import org.cx.game.exception.RuleValidatorException;
+import org.cx.game.magic.skill.AbstractSkill;
 import org.cx.game.widget.treasure.SkillCount;
 
 public class SkillUpgrade extends Upgrade implements IAction {
@@ -22,9 +22,9 @@ public class SkillUpgrade extends Upgrade implements IAction {
 	}
 	
 	@Override
-	public ISkill getOwner() {
+	public AbstractSkill getOwner() {
 		// TODO Auto-generated method stub
-		return (ISkill) super.getOwner();
+		return (AbstractSkill) super.getOwner();
 	}
 	
 	@Override

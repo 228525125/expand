@@ -1,7 +1,6 @@
 package org.cx.game.command;
 
-import org.cx.game.core.IPlayer;
-import org.cx.game.corps.AbstractCorps;
+import org.cx.game.core.AbstractPlayer;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.ValidatorException;
 import org.cx.game.validator.AttackableValidator;
@@ -13,11 +12,11 @@ import org.cx.game.validator.SelectCorpsValidator;
 import org.cx.game.validator.SelectGroundValidator;
 import org.cx.game.validator.SelectPlaceExistTreasureValidator;
 import org.cx.game.widget.Place;
-import org.cx.game.widget.treasure.ITreasure;
+import org.cx.game.widget.treasure.Treasure;
 
 public class PickCommand extends InteriorCommand {
 
-	public PickCommand(IPlayer player) {
+	public PickCommand(AbstractPlayer player) {
 		super(player);
 		// TODO Auto-generated constructor stub
 		addValidator(new SelectGroundValidator(buffer));
@@ -41,9 +40,9 @@ public class PickCommand extends InteriorCommand {
 		// TODO Auto-generated method stub
 		super.execute();
 		
-		AbstractCorps corps = buffer.getCorps();
+		Corps corps = (Corps) buffer.getCorps();
 		Place place = (Place) parameter;
-		ITreasure treasure = place.getTreasure();
+		Treasure treasure = place.getTreasure();
 		corps.pick(treasure);
 	}
 }

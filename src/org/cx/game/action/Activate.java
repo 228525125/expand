@@ -1,15 +1,11 @@
 package org.cx.game.action;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.cx.game.corps.Corps;
-import org.cx.game.exception.RuleValidatorException;
-import org.cx.game.magic.buff.IBuff;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
-import org.cx.game.tools.Debug;
 
 public class Activate extends AbstractAction implements IAction {
 

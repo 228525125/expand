@@ -6,7 +6,7 @@ import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.widget.LandformEffect;
 import org.cx.game.widget.Place.PlaceInAction;
 
-public class CorpsPropertyUpdatePlaceInRule extends AbstractRule implements IRule {
+public class CorpsPropertyUpdatePlaceInRule extends AbstractRule {
 
 	@Override
 	public Class getInterceptable() {

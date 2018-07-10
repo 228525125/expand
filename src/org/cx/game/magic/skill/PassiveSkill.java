@@ -1,14 +1,7 @@
 package org.cx.game.magic.skill;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.cx.game.magic.skill.IPassiveSkill;
-import org.cx.game.widget.IGround;
-import org.cx.game.action.IAction;
 import org.cx.game.action.Upgrade;
 import org.cx.game.action.SkillUpgrade;
-import org.cx.game.corps.Corps;
 import org.cx.game.intercepter.IIntercepter;
 
 /**
@@ -17,7 +10,7 @@ import org.cx.game.intercepter.IIntercepter;
  * @author chenxian
  *
  */
-public abstract class PassiveSkill extends AbstractSkill implements IPassiveSkill {
+public abstract class PassiveSkill extends AbstractSkill implements IIntercepter {
 	
 	/**
 	 * 控制效果是否有效的标记，当invalid被调用该标记为false；另外该标记应该在调用affect之前被判断；
@@ -40,17 +33,51 @@ public abstract class PassiveSkill extends AbstractSkill implements IPassiveSkil
 		return true;
 	}
 	
-	@Override
+	/**
+	 * 被动技能增加的攻击力，在extraAtk里面体现
+	 * @return
+	 */
+	public Integer getAtk() {
+		// TODO Auto-generated method stub
+		return this.atk;
+	}
+	
+	/**
+	 * 被动技能增加的防御力，在extraAtk里面体现
+	 * @return
+	 */
+	public Integer getDef() {
+		// TODO Auto-generated method stub
+		return this.def;
+	}
+	
+	/**
+	 * 激活
+	 */
 	public void activate() {
 		// TODO Auto-generated method stub
 		this.activation = true;
 	}
 	
-	@Override
+	/**
+	 * 失效
+	 */
 	public void invalid() {
 		// TODO Auto-generated method stub
 		this.activation = false;
 	}
+	
+	@Override
+	public Upgrade getUpgrade() {		
+		if(null==upgrade){
+			Upgrade upgrade = new SkillUpgrade();
+			upgrade.setOwner(this);
+			this.upgrade = upgrade;
+		}
+		return upgrade;
+	}
+	
+	//--------------------- IIntercepter ------------------------
 	
 	@Override
 	public String getIntercepterMethod() {
@@ -82,47 +109,5 @@ public abstract class PassiveSkill extends AbstractSkill implements IPassiveSkil
 		return this.isDelete;
 	}
 	
-	@Override
-	public Integer getAtk() {
-		// TODO Auto-generated method stub
-		return this.atk;
-	}
-	
-	@Override
-	public Integer getDef() {
-		// TODO Auto-generated method stub
-		return this.def;
-	}
-	
-	@Override
-	public List<Integer> getConjureRange() {
-		// TODO Auto-generated method stub
-		List<Integer> positionList = new ArrayList<Integer>();
-		Corps corps = getOwner();
-		IGround ground = corps.getGround();
-		Integer position = corps.getPosition();
-		positionList = ground.areaForDistance(position, getRange(), IGround.Contain);
-		return positionList;
-	}
-	
-	@Override
-	public Corps getOwner() {
-		// TODO Auto-generated method stub
-		return (Corps) super.getOwner();
-	}
-	
-	@Override
-	public Integer getRange() {
-		// TODO Auto-generated method stub
-		return getOwner().getAttack().getRange();
-	}
-	
-	public Upgrade getUpgrade() {		
-		if(null==upgrade){
-			Upgrade upgrade = new SkillUpgrade();
-			upgrade.setOwner(this);
-			this.upgrade = upgrade;
-		}
-		return upgrade;
-	}
+	//--------------------- IIntercepter End ------------------------
 }

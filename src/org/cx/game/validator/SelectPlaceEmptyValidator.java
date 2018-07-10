@@ -19,7 +19,7 @@ public class SelectPlaceEmptyValidator extends Validator {
 		// TODO Auto-generated method stub
 		Boolean ret = super.validate();
 		if(ret){
-			if(place.getEmpty().equals(empty))
+			if(place.isEmpty().equals(empty))
 				ret = true;
 			else{
 				addMessage(I18n.getMessage(SelectPlaceEmptyValidator.class.getName()));

@@ -1,7 +1,7 @@
 package org.cx.game.validator;
 
 import org.cx.game.command.CommandBuffer;
-import org.cx.game.magic.skill.IActiveSkill;
+import org.cx.game.magic.skill.ActiveSkill;
 import org.cx.game.tools.I18n;
 
 /**
@@ -22,7 +22,7 @@ public class ActiveSkillCooldownValidator extends SelectActiveSkillValidator {
 		Boolean ret = super.validate();
 		
 		if(ret){
-			IActiveSkill as = (IActiveSkill) getSkill();
+			ActiveSkill as = (ActiveSkill) getSkill();
 			if(as.getAllow()){
 				ret = true;
 			}else{

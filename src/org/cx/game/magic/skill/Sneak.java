@@ -1,6 +1,7 @@
 package org.cx.game.magic.skill;
 
 import org.cx.game.corps.AbstractCorps;
+import org.cx.game.corps.Corps;
 import org.cx.game.magic.skill.PassiveSkill;
 
 /**
@@ -22,7 +23,9 @@ public class Sneak extends PassiveSkill {
 		// TODO Auto-generated method stub
 		super.setOwner(corps);
 		
-		corps.getCall().addIntercepter(this);
+		Corps cs = (Corps) corps;
+		
+		cs.getCall().addIntercepter(this);
 	}
 	
 	@Override
@@ -36,7 +39,7 @@ public class Sneak extends PassiveSkill {
 		// TODO Auto-generated method stub
 		super.affect(objects);
 		
-		getOwner().getMove().setHide(true);
+		((Corps) getOwner()).getMove().setHide(true);
 	}
 
 	@Override

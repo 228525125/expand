@@ -3,21 +3,19 @@ package org.cx.game.core;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.cx.game.corps.CorpsFactory;
-import org.cx.game.corps.Hero;
+import org.cx.game.widget.AbstractGround;
 import org.cx.game.widget.GroundFactory;
-import org.cx.game.widget.IGroundE;
 
 public class GroundHost extends AbstractHost {
 
-	private IGroundE ground = null;
+	private AbstractGround ground = null;
 	
-	private List<IPlayerE> playerList = new ArrayList<IPlayerE>();
+	private List<AbstractPlayer> playerList = new ArrayList<AbstractPlayer>();
 	private List<Integer> troopOfPlayerList = new ArrayList<Integer>();
 	
 	public GroundHost(Integer mapId, String account) {
 		// TODO Auto-generated constructor stub
-		ground = (IGroundE) GroundFactory.getInstance(mapId);
+		ground = GroundFactory.getInstance(mapId);
 		playerJoinGame(account);
 	}
 	
@@ -39,9 +37,9 @@ public class GroundHost extends AbstractHost {
 	 * 游戏准备就绪
 	 */
 	public void ready() {
-		IContext context = new Context(this.ground);
+		AbstractContext context = new Context(this.ground);
 		
-		for(IPlayer player : this.playerList){
+		for(AbstractPlayer player : this.playerList){
 			context.addPlayer(player);
 		}
 	}

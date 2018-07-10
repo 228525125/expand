@@ -5,7 +5,7 @@ import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.magic.buff.TauntBuff;
 
-public class TauntRule extends AbstractRule implements IRule {
+public class TauntRule extends AbstractRule {
 
 	private Boolean fightBack = null;
 	

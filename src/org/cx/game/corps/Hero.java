@@ -6,16 +6,18 @@ import java.util.Map;
 
 import org.cx.game.action.Upgrade;
 import org.cx.game.action.HeroUpgrade;
-import org.cx.game.magic.buff.IBuff;
-import org.cx.game.magic.skill.ISkill;
-import org.cx.game.widget.treasure.IResource;
-import org.cx.game.widget.treasure.ITreasure;
+import org.cx.game.magic.buff.AbstractBuff;
+import org.cx.game.magic.skill.AbstractSkill;
+import org.cx.game.widget.treasure.Resource;
+import org.cx.game.widget.treasure.Treasure;
 
 public class Hero extends Corps {
 	
 	private Upgrade upgrade = null;
+	
+	private List<Corps> troops = new ArrayList<Corps>();
 
-	private List<ITreasure> treasures = new ArrayList<ITreasure>();
+	private List<Treasure> treasures = new ArrayList<Treasure>();
 	
 	public Hero(Integer type) {
 		super(type);
@@ -36,9 +38,9 @@ public class Hero extends Corps {
 		
 		setHide(false);
 		
-		List<IBuff> buffs = new ArrayList<IBuff>();     //与自己相关的buff，不是自己发起的buff，例如AttackLockBuff
+		List<AbstractBuff> buffs = new ArrayList<AbstractBuff>();     //与自己相关的buff，不是自己发起的buff，例如AttackLockBuff
 		buffs.addAll(getNexusBuffList());
-		for(IBuff buff : buffs){
+		for(AbstractBuff buff : buffs){
 			buff.invalid();
 		}
 	}
@@ -53,15 +55,27 @@ public class Hero extends Corps {
 		return this.upgrade;
 	}
 	
-	public List<ITreasure> getTreasures() {
+	public List<Corps> getTroops() {
+		return troops;
+	}
+	
+	public void addTroops(Corps corps) {
+		this.troops.add(corps);
+	}
+	
+	public void removeCorpsFromTroops(Corps corps) {
+		this.troops.remove(corps);
+	}
+	
+	public List<Treasure> getTreasures() {
 		return treasures;
 	}
 	
-	public void addTreasure(ITreasure treasure) {
+	public void addTreasure(Treasure treasure) {
 		this.treasures.add(treasure);
 	}
 	
-	public void removeTreasure(ITreasure treasure) {
+	public void removeTreasure(Treasure treasure) {
 		this.treasures.remove(treasure);
 	}
 
@@ -84,7 +98,7 @@ public class Hero extends Corps {
 	}
 	
 	@Override
-	public void setConsume(IResource consume) {
+	public void setConsume(Resource consume) {
 		// TODO Auto-generated method stub
 		super.setConsume(consume);
 	}
@@ -138,7 +152,7 @@ public class Hero extends Corps {
 	}
 	
 	@Override
-	public void setSkillList(List<ISkill> skillList) {
+	public void setSkillList(List<AbstractSkill> skillList) {
 		// TODO Auto-generated method stub
 		super.setSkillList(skillList);
 	}

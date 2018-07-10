@@ -1,13 +1,13 @@
 package org.cx.game.command;
 
-import org.cx.game.core.IPlayer;
-import org.cx.game.corps.AbstractCorps;
+import org.cx.game.core.AbstractPlayer;
+import org.cx.game.corps.Corps;
 import org.cx.game.exception.ValidatorException;
 import org.cx.game.validator.CorpsActivateValidator;
 
 public class GuardCommand extends InteriorCommand {
 
-	public GuardCommand(IPlayer player) {
+	public GuardCommand(AbstractPlayer player) {
 		// TODO Auto-generated constructor stub
 		super(player);
 		
@@ -19,7 +19,7 @@ public class GuardCommand extends InteriorCommand {
 		// TODO Auto-generated method stub
 		super.execute();
 		
-		AbstractCorps corps = buffer.getCorps();
+		Corps corps = (Corps) buffer.getCorps();
 		corps.activate(false);
 	}
 }

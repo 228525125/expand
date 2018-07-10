@@ -8,8 +8,7 @@ import org.cx.game.ai.policy.DistanceComparator;
 import org.cx.game.corps.Corps;
 import org.cx.game.tools.I18n;
 import org.cx.game.validator.Validator;
-import org.cx.game.widget.GroundFactory;
-import org.cx.game.widget.IGround;
+import org.cx.game.widget.AbstractGround;
 
 /**
  * 攻击范围内有敌人
@@ -53,8 +52,8 @@ public class ShechengneidedirenFormula extends Validator {
 	public static List<Corps> searchEnemy(Corps owner){
 		List<Corps> enemyList = new ArrayList<Corps>();
 		Integer range = owner.getAttackRange();
-		IGround ground = owner.getGround();
-		List<Integer> list =ground.areaForDistance(owner.getPosition(), range, IGround.Equal);
+		AbstractGround ground = owner.getGround();
+		List<Integer> list =ground.areaForDistance(owner.getPosition(), range, AbstractGround.Equal);
 		for(Integer p : list){
 			Corps enemy = (Corps) ground.getCorps(p);
 			if(null!=enemy && !owner.getPlayer().equals(enemy.getPlayer()))

@@ -15,12 +15,11 @@ import org.cx.game.validator.CallNopValidator;
 import org.cx.game.validator.CallRangeValidator;
 import org.cx.game.validator.CallUnitEqualValidator;
 import org.cx.game.validator.RationLimitValidator;
-import org.cx.game.widget.IGround;
-import org.cx.game.widget.IGroundE;
+import org.cx.game.widget.AbstractGround;
 import org.cx.game.widget.Place;
 import org.cx.game.widget.building.BuildOption.OptionBuildExecute;
 
-public class CallOption extends AbstractOption implements IOption {
+public class CallOption extends AbstractOption {
 
 	private Integer corpsID = 0;
 	private String name = null;
@@ -43,11 +42,11 @@ public class CallOption extends AbstractOption implements IOption {
 	}
 	
 	@Override
-	public List<Integer> getExecuteRange(IGround ground) {
+	public List<Integer> getExecuteRange(AbstractGround ground) {
 		// TODO Auto-generated method stub
 		List<Integer> positionList = new ArrayList<Integer>();
-		positionList = ground.areaForDistance(getOwner().getPlace().getPosition(), 1, IGround.Contain);
-		positionList.retainAll(((IGroundE)ground).getEmptyList());
+		positionList = ground.areaForDistance(getOwner().getPlace().getPosition(), 1, AbstractGround.Contain);
+		positionList.retainAll(ground.queryEmptyList());
 		return positionList;
 	}
 	
@@ -72,7 +71,7 @@ public class CallOption extends AbstractOption implements IOption {
 			addValidator(new CallUnitEqualValidator(place.getCorps(), (Corps) corps));
 		
 		addValidator(new CallConsumeValidator((Corps) corps, getNumber()));
-		addValidator(new CallRangeValidator(getOwner(), place));
+		addValidator(new CallRangeValidator((AbstractBuilding) getOwner(), place));
 		addValidator(new RationLimitValidator((Corps) corps, getNumber()));
 		//验证单个队伍人口上限
 		
@@ -93,12 +92,6 @@ public class CallOption extends AbstractOption implements IOption {
 		super.setNumber(number);
 	}
 	
-	@Override
-	public Boolean getAllow() {
-		// TODO Auto-generated method stub
-		return super.getAllow() && IBuilding.Building_Status_Complete.equals(getOwner().getStatus());
-	}
-	
 	public class OptionCallExecute extends Execute implements IAction {
 		
 		private Integer corpsID = null;
@@ -115,7 +108,7 @@ public class CallOption extends AbstractOption implements IOption {
 			
 			Place place = (Place) objects[0];
 			
-			AbstractCorps corps = (AbstractCorps) CorpsFactory.getInstance(corpsID, getOwner().getOwner().getPlayer());
+			Corps corps = (Corps) CorpsFactory.getInstance(corpsID, getOwner().getOwner().getPlayer());
 			corps.call(place, getNumber());
 		}
 	}

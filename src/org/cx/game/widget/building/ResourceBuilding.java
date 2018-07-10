@@ -2,30 +2,26 @@ package org.cx.game.widget.building;
 
 import java.util.Map;
 
-import org.cx.game.widget.treasure.IResource;
 import org.cx.game.widget.treasure.Resource;
 
 public class ResourceBuilding extends AbstractBuilding {
 	
-	private IResource resource = null;
+	private Resource resource = null;
 	
-	public ResourceBuilding(Integer buildingType) {
-		super(buildingType);
+	public ResourceBuilding(Integer type) {
+		super(type);
 		// TODO Auto-generated constructor stub
 		this.resource = new Resource();
 		
-		IOption optionBuild = new BuildOption();				
+		BuildOption optionBuild = new BuildOption();				
 		addOption(optionBuild);
-		
-		IOption optionBuildingUpgrade = new BuildingUpgradeOption();
-		addOption(optionBuildingUpgrade);
 	}
 
-	public IResource getResource() {
+	public Resource getResource() {
 		return resource;
 	}
 
-	public void setResource(IResource resource) {
+	public void setResource(Resource resource) {
 		this.resource = resource;
 	}
 
@@ -37,7 +33,7 @@ public class ResourceBuilding extends AbstractBuilding {
 	}
 	
 	@Override
-	public void setConsume(IResource consume) {
+	public void setConsume(Resource consume) {
 		// TODO Auto-generated method stub
 		super.setConsume(consume);
 	}
@@ -58,6 +54,9 @@ public class ResourceBuilding extends AbstractBuilding {
 	public void setUpgradeRequirement(Map<Integer, String> upgradeRequirement) {
 		// TODO Auto-generated method stub
 		super.setUpgradeRequirement(upgradeRequirement);
+		
+		BuildingUpgradeOption optionBuildingUpgrade = new BuildingUpgradeOption();
+		addOption(optionBuildingUpgrade);
 	}
 
 }

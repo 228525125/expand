@@ -6,8 +6,7 @@ import org.cx.game.corps.Corps;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.tools.I18n;
-import org.cx.game.widget.IGround;
-import org.cx.game.widget.IGroundE;
+import org.cx.game.widget.AbstractGround;
 
 /**
  * 验证攻击距离
@@ -28,7 +27,7 @@ public class AttackRangeValidator extends Validator {
 	@Override
 	public Boolean validate() {
 		// TODO Auto-generated method stub
-		IGroundE ground = (IGroundE) attack.getGround();
+		AbstractGround ground = attack.getGround();
 		List<Integer> ps = ground.queryRange(attack, CommonIdentifierE.Command_Query_Attack);
 		if(ps.contains(attacked.getPosition())){
 			return true;

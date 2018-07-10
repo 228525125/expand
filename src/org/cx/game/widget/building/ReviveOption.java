@@ -15,9 +15,8 @@ import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.tools.I18n;
 import org.cx.game.validator.CallConsumeValidator;
 import org.cx.game.validator.CallRangeValidator;
+import org.cx.game.widget.AbstractGround;
 import org.cx.game.widget.AbstractPlace;
-import org.cx.game.widget.IGround;
-import org.cx.game.widget.IGroundE;
 import org.cx.game.widget.Place;
 
 /**
@@ -25,7 +24,7 @@ import org.cx.game.widget.Place;
  * @author chenxian
  *
  */
-public class ReviveOption extends AbstractOption implements IOption {
+public class ReviveOption extends AbstractOption {
 
 	private String name = null;
 	private Hero hero = null;
@@ -49,11 +48,11 @@ public class ReviveOption extends AbstractOption implements IOption {
 	}
 	
 	@Override
-	public List<Integer> getExecuteRange(IGround ground) {
+	public List<Integer> getExecuteRange(AbstractGround ground) {
 		// TODO Auto-generated method stub
 		List<Integer> positionList = new ArrayList<Integer>();
-		positionList = ground.areaForDistance(getOwner().getPlace().getPosition(), 1, IGround.Contain);
-		positionList.retainAll(((IGroundE)ground).getEmptyList());
+		positionList = ground.areaForDistance(getOwner().getPlace().getPosition(), 1, AbstractGround.Contain);
+		positionList.retainAll(ground.queryEmptyList());
 		return positionList;
 	}
 	
@@ -74,7 +73,7 @@ public class ReviveOption extends AbstractOption implements IOption {
 		Place place = (Place) objects[0];
 		
 		addValidator(new CallConsumeValidator(this.hero, 1));
-		addValidator(new CallRangeValidator(getOwner(), place));
+		addValidator(new CallRangeValidator((AbstractBuilding) getOwner(), place));
 		
 		super.execute(objects);
 	}

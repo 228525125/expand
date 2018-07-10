@@ -2,12 +2,11 @@ package org.cx.game.rule;
 
 import org.cx.game.action.CorpsUpgrade;
 import org.cx.game.corps.Corps;
-import org.cx.game.magic.buff.IBuff;
-import org.cx.game.magic.skill.IPassiveSkill;
-import org.cx.game.magic.skill.ISkill;
+import org.cx.game.magic.buff.AbstractBuff;
+import org.cx.game.magic.skill.AbstractSkill;
+import org.cx.game.magic.skill.PassiveSkill;
 
-public class CorpsPropertyUpdateUpgradeRule extends AbstractRule implements
-		IRule {
+public class CorpsPropertyUpdateUpgradeRule extends AbstractRule {
 
 	@Override
 	public Class getInterceptable() {
@@ -33,13 +32,13 @@ public class CorpsPropertyUpdateUpgradeRule extends AbstractRule implements
 		// TODO Auto-generated method stub
 		Integer levelAtk = corps.getUpgrade().getLevel();
 		Integer buffAtk = 0;
-		for(IBuff buff : corps.getBuffList()){
+		for(AbstractBuff buff : corps.getBuffList()){
 			buffAtk += buff.getAtk();
 		}
 		Integer skillAtk = 0;
-		for(ISkill skill : corps.getSkillList()){
-			if (skill instanceof IPassiveSkill) {
-				IPassiveSkill ps = (IPassiveSkill) skill;
+		for(AbstractSkill skill : corps.getSkillList()){
+			if (skill instanceof PassiveSkill) {
+				PassiveSkill ps = (PassiveSkill) skill;
 				skillAtk += ps.getAtk();
 			}
 		}
@@ -52,13 +51,13 @@ public class CorpsPropertyUpdateUpgradeRule extends AbstractRule implements
 		// TODO Auto-generated method stub
 		Integer levelDef = corps.getUpgrade().getLevel();
 		Integer buffDef = 0;
-		for(IBuff buff : corps.getBuffList()){
+		for(AbstractBuff buff : corps.getBuffList()){
 			buffDef += buff.getDef();
 		}
 		Integer skillDef = 0;
-		for(ISkill skill : corps.getSkillList()){
-			if (skill instanceof IPassiveSkill) {
-				IPassiveSkill ps = (IPassiveSkill) skill;
+		for(AbstractSkill skill : corps.getSkillList()){
+			if (skill instanceof PassiveSkill) {
+				PassiveSkill ps = (PassiveSkill) skill;
 				skillDef += ps.getDef();
 			}
 		}

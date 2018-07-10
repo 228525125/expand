@@ -1,14 +1,14 @@
 package org.cx.game.command;
 
-import org.cx.game.core.IPlayer;
-import org.cx.game.magic.skill.IActiveSkill;
+import org.cx.game.core.AbstractPlayer;
+import org.cx.game.magic.skill.ActiveSkill;
 import org.cx.game.exception.ValidatorException;
 import org.cx.game.validator.CorpsActivateValidator;
 import org.cx.game.validator.SelectActiveSkillValidator;
 
 public class UseSkillCommand extends InteriorCommand {
 
-	public UseSkillCommand(IPlayer player) {
+	public UseSkillCommand(AbstractPlayer player) {
 		super(player);
 		// TODO Auto-generated constructor stub
 		addValidator(new SelectActiveSkillValidator(buffer));    //判断
@@ -20,7 +20,7 @@ public class UseSkillCommand extends InteriorCommand {
 		// TODO Auto-generated method stub
 		super.execute();
 		
-		IActiveSkill skill = (IActiveSkill) buffer.getSkill();
+		ActiveSkill skill = (ActiveSkill) buffer.getSkill();
 		skill.useSkill(parameter);
 	}
 

@@ -1,18 +1,13 @@
 package org.cx.game.command;
 
-import org.cx.game.core.IPlayer;
+import org.cx.game.core.AbstractPlayer;
 import org.cx.game.corps.AbstractCorps;
-import org.cx.game.magic.skill.IActiveSkill;
-import org.cx.game.magic.skill.ISkill;
+import org.cx.game.corps.Corps;
 import org.cx.game.exception.ValidatorException;
-import org.cx.game.tools.Debug;
+import org.cx.game.magic.skill.ActiveSkill;
 import org.cx.game.validator.ActiveSkillCooldownValidator;
 import org.cx.game.validator.AttackableValidator;
-import org.cx.game.validator.ParameterTypeValidator;
-import org.cx.game.validator.SelectActiveSkillValidator;
 import org.cx.game.validator.SelectGroundValidator;
-import org.cx.game.validator.SelectCorpsValidator;
-import org.cx.game.validator.SelectSkillValidator;
 
 /**
  * 使用技能
@@ -21,7 +16,7 @@ import org.cx.game.validator.SelectSkillValidator;
  */
 public class ConjureCommand extends InteriorCommand {
 
-	public ConjureCommand(IPlayer player) {
+	public ConjureCommand(AbstractPlayer player) {
 		super(player);
 		// TODO Auto-generated constructor stub
 		addValidator(new SelectGroundValidator(buffer));
@@ -34,8 +29,8 @@ public class ConjureCommand extends InteriorCommand {
 		// TODO Auto-generated method stub
 		super.execute();
 		
-		AbstractCorps corps = buffer.getCorps();		
-		IActiveSkill skill = (IActiveSkill) buffer.getSkill();
+		Corps corps = (Corps) buffer.getCorps();		
+		ActiveSkill skill = (ActiveSkill) buffer.getSkill();
 		corps.conjure(skill, new Object[]{parameter});
 	}
 	

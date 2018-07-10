@@ -11,7 +11,7 @@ import org.cx.game.tools.I18n;
  * @author chenxian
  *
  */
-public class EquipmentTreasure extends Treasure implements ITreasure {
+public class EquipmentTreasure extends Treasure {
 
 	private Integer type = null;
 	private String name = null;

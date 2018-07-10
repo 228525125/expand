@@ -6,36 +6,37 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import org.cx.game.core.IPlayer;
+import org.cx.game.core.AbstractPlayer;
 import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
-import org.cx.game.magic.skill.ISkill;
+import org.cx.game.magic.skill.AbstractSkill;
+import org.cx.game.magic.skill.ActiveSkill;
 import org.cx.game.tools.CellularDistrict;
 import org.cx.game.tools.CommonIdentifierE;
+import org.cx.game.tools.IListFilter;
+import org.cx.game.tools.ListUtils;
 import org.cx.game.tools.Node;
 import org.cx.game.tools.SpaceArithmetic;
 import org.cx.game.tools.XmlConfigureHelper;
-import org.cx.game.widget.building.IBuilding;
-import org.cx.game.widget.building.IOption;
-import org.cx.game.widget.building.SpatialBuilding;
-import org.cx.game.widget.treasure.ITreasure;
+import org.cx.game.widget.building.AbstractBuilding;
+import org.cx.game.widget.building.AbstractOption;
+import org.cx.game.widget.treasure.Treasure;
 
-public class HoneycombGround extends AbstractGround implements IGroundE {
+import com.oracle.jrockit.jfr.ValueDefinition;
+
+public class HoneycombGround extends AbstractGround {
 
 	private Integer id = null;
 	private String imagePath = "";                                     //背景图片
-	
-	private Area area = null;
 
 	private int[] hit = new int []{-1};                                  //-1表示障碍物
-	private Map<Integer, IBuilding> buildingMap = new HashMap<Integer, IBuilding>();   //位置 - 建筑
+	private Map<Integer, AbstractBuilding> buildingMap = new HashMap<Integer, AbstractBuilding>();   //位置 - 建筑
 	private List<String> buildingData = new ArrayList<String>();
-	private List<Integer> emptyList = new ArrayList<Integer>();         //空位
 	private List<String> npcData = new ArrayList<String>();
-	private List<Integer> troopList = new ArrayList<Integer>();         //阵营
-	private Map<Integer, Integer> entranceMap = new HashMap<Integer, Integer>();  //入口  坐标 - 阵营
-	private Map<IBuilding, Integer> buildingIsTroop = new HashMap<IBuilding, Integer>();
+	private Map<AbstractBuilding, Integer> buildingIsTroop = new HashMap<AbstractBuilding, Integer>();
 	private Map<Corps, Integer> corpsIsTroop = new HashMap<Corps, Integer>();
+	
+	private List<Place> placeList = new ArrayList<Place>();
 	
 	public HoneycombGround(Integer id, String name, Integer xBorder, Integer yBorder, String imagePath) {
 		// TODO Auto-generated constructor stub
@@ -49,8 +50,7 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 				Place place = new Place(this, curPos);
 				place.setLandform(AbstractPlace.Landform_Sward);
 				addPlace(place);
-				
-				getEmptyList().add(curPos);      //初始化空位置
+				placeList.add(place);
 			}
 		}
 	}
@@ -66,46 +66,11 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 			XmlConfigureHelper.map_buildingData_building(data, this);
 		}
 	}
-	
-	@Override
-	public Area getArea() {
-		// TODO Auto-generated method stub
-		return this.area;
-	}
-	
-	public void setArea(Area area) {
-		this.area = area;
-	}
-	
-	public void setTroopList(List<Integer> troopList) {
-		this.troopList = troopList;
-	}
-	
-	public List<Integer> getTroopList() {
-		return this.troopList;
-	}
-	
-	public Map<Integer, Integer> getEntranceMap() {
-		return entranceMap;
-	}
-
-	public void setEntranceMap(Map<Integer, Integer> entranceMap) {
-		this.entranceMap = entranceMap;
-	}
-	
-	public List<Integer> getEntranceList(Integer troop) {
-		List<Integer> retList = new ArrayList<Integer>();
-		for(Integer position : getEntranceMap().keySet()){
-			if(troop.equals(getEntranceMap().get(position)))
-				retList.add(position);
-		}
-		
-		return retList;				
-	}
 
 	//----------------------- Corps ----------------------
+	
 	@Override
-	public List<Integer> move(Corps corps, Integer position, Integer type) {
+	public List<Integer> move(AbstractCorps corps, Integer position, Integer type) {
 		// TODO Auto-generated method stub
 		List<Integer> route = new ArrayList<Integer>();
 		Corps sc = (Corps) corps;
@@ -139,7 +104,7 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 			 * 生成朝向信息
 			 */
 			if(null!=original){
-				IGround ground = sc.getPlayer().getContext().getGround();
+				AbstractGround ground = sc.getPlayer().getContext().getGround();
 				Integer direction = ground.getDirection(original, sc.getPosition());
 				sc.getMove().setDirection(direction);
 			}
@@ -154,12 +119,6 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 	}
 	
 	@Override
-	public void displace(Corps corps, Integer position) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
 	public void placementCorps(Integer position, AbstractCorps corps) {
 		// TODO Auto-generated method stub
 		super.placementCorps(position, corps);
@@ -167,66 +126,28 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 		Corps c = (Corps) corps;
 		c.getDeath().setStatus(CommonIdentifierE.Death_Status_Live);
 	}
-
-	@Override
-	public List<Corps> getCorpsList(IPlayer player, Integer status) {
-		// TODO Auto-generated method stub
-		List<Corps> ret = new ArrayList<Corps>();
-		
-		if(CommonIdentifierE.Death_Status_Live.equals(status)){
-			for(AbstractCorps corps : getLivingCorpsList()){
-				if(player.equals(corps.getPlayer()))
-					ret.add((Corps)corps);
-			}
-		}
-		
-		if(CommonIdentifierE.Death_Status_Death.equals(status)){
-			for(AbstractCorps corps : getDeadCorpsList()){
-				if(player.equals(corps.getPlayer()))
-					ret.add((Corps)corps);
-			}
-		}
-		
-		return ret;
-	}
-	
-	@Override
-	public List<Corps> getCorpsList(Integer status) {
-		// TODO Auto-generated method stub
-		List<Corps> ret = new ArrayList<Corps>();
-		
-		if(CommonIdentifierE.Death_Status_Live.equals(status))
-			for(AbstractCorps corps : getLivingCorpsList())
-				ret.add((Corps)corps);
-		
-		if(CommonIdentifierE.Death_Status_Death.equals(status))
-			for(AbstractCorps corps : getDeadCorpsList())
-				ret.add((Corps)corps);
-		
-		return ret;
-	}
-	
-	@Override
-	public List<Corps> getCorpsList(Integer stand, Integer step, Integer type) {
-		// TODO Auto-generated method stub
-		List<Corps> ls = new ArrayList<Corps>();
-		
-		List<Integer> list = areaForDistance(stand, step, type);
-		for(Integer position : list){
-			Corps corps = (Corps) getCorps(position);
-			if(null!=corps){
-				ls.add(corps);
-			}
-		}
-		
-		return ls;
-	}
 	
 	public Map<Corps, Integer> getCorpsIsTroop() {
 		return corpsIsTroop;
 	}
 	
 	//------------------------ Corps End ------------------------
+	
+	//------------------------ Area ----------------------------
+	
+	@Override
+	public void setTroopList(List<Integer> troopList) {
+		// TODO Auto-generated method stub
+		super.setTroopList(troopList);
+	}
+	
+	@Override
+	public void setEntranceMap(Map<Integer, Integer> entranceMap) {
+		// TODO Auto-generated method stub
+		super.setEntranceMap(entranceMap);
+	}
+	
+	//----------------------- Area End --------------------------
 	
 	//----------------------- NPC ---------------------
 
@@ -251,45 +172,12 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 		this.buildingData = buildings;
 	}
 	
-	public Map<IBuilding, Integer> getBuildingIsTroop() {
+	public Map<AbstractBuilding, Integer> getBuildingIsTroop() {
 		return buildingIsTroop;
 	}
-
-	@Override
-	public List<IBuilding> getBuildingList(IPlayer player) {
-		// TODO Auto-generated method stub
-		List<IBuilding> list = new ArrayList<IBuilding>();
-		for(IBuilding building : getBuildingList()){
-			if(null!=building.getPlayer() && player.equals(building.getPlayer()))
-				list.add(building);
-		}
-		return list;
-	}
 	
 	@Override
-	public List<IBuilding> getBuildingList(IPlayer player, Integer type) {
-		// TODO Auto-generated method stub
-		List<IBuilding> list = new ArrayList<IBuilding>();
-		for(IBuilding building : getBuildingList(player)){
-			if(type.equals(building.getType()))
-				list.add(building);
-		}
-		return list;
-	}
-	
-	@Override
-	public List<IBuilding> getBuildingList(Class clazz) {
-		// TODO Auto-generated method stub
-		List<IBuilding> list = new ArrayList<IBuilding>();
-		for(IBuilding building : getBuildingList()){
-			if(building.getClass().equals(clazz))
-				list.add(building);
-		}
-		return list;
-	}
-	
-	@Override
-	public void placementBuilding(Integer position, IBuilding building) {
+	public void placementBuilding(Integer position, AbstractBuilding building) {
 		// TODO Auto-generated method stub
 		super.placementBuilding(position, building);
 		
@@ -297,40 +185,59 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 		
 	}
 	
-	@Override
-	public List<Integer> getBuildingPosition(IPlayer player) {
+	/**
+	 * 获取建筑的坐标
+	 * @param player 玩家
+	 * @return
+	 */
+	public List<Integer> getBuildingPosition(AbstractPlayer player) {
 		// TODO Auto-generated method stub
 		List<Integer> list = new ArrayList<Integer>();
-		for(IBuilding building : getBuildingList(player)){
+		for(AbstractBuilding building : getBuildingList(player)){
 			list.add(building.getPlace().getPosition());
 		}
 		
 		return list;
 	}
 	
-	@Override
-	public List<Integer> getBuildingPosition(IPlayer player,
+	/**
+	 * 获取建筑的坐标
+	 * @param player 玩家
+	 * @param buildingType 建筑类型
+	 * @return
+	 */
+	public List<Integer> getBuildingPosition(AbstractPlayer player,
 			Integer buildingType) {
 		// TODO Auto-generated method stub
 		List<Integer> list = new ArrayList<Integer>();
-		for(IBuilding building : getBuildingList(player, buildingType)){
+		for(AbstractBuilding building : getBuildingList(player, buildingType)){
 			list.add(building.getPlace().getPosition());
 		}
 		
 		return list;
 	}
 	
-	@Override
-	public IBuilding getBuilding(Integer position) {
+	/**
+	 * 根据坐标查找建筑
+	 * @param position
+	 * @return
+	 */
+	public AbstractBuilding getBuilding(Integer position) {
 		// TODO Auto-generated method stub
 		return this.buildingMap.get(position);
 	}
 	
-	@Override
-	public List<Integer> getBuildingPosition(IPlayer player, Integer buildingType, Integer level) {
+	/**
+	 * 获取建筑的坐标
+	 * @param player 玩家
+	 * @param buildingType 建筑类型
+	 * @param level 大于等于这个等级
+	 * @return
+	 */
+	public List<Integer> getBuildingPosition(AbstractPlayer player, Integer buildingType, Integer level) {
 		// TODO Auto-generated method stub
 		List<Integer> list = new ArrayList<Integer>();
-		for(IBuilding building : getBuildingList(player, buildingType)){
+		for(AbstractBuilding building : getBuildingList(player, buildingType)){
 			if(building.getUpgrade().getLevel()>=level)
 				list.add(building.getPlace().getPosition());
 		}
@@ -338,8 +245,12 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 		return list;
 	}
 	
-	@Override
-	public void captureBuilding(IPlayer player, IBuilding building) {
+	/**
+	 * 占领建筑
+	 * @param position 位置
+	 * @param player 玩家
+	 */
+	public void captureBuilding(AbstractPlayer player, AbstractBuilding building) {
 		// TODO Auto-generated method stub
 		building.setPlayer(player);
 	}
@@ -347,10 +258,23 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 	//----------------------- Building End------------------------
 	
 	//----------------------- Landform ---------------------------
-	@Override
-	public List<Integer> getEmptyList() {
-		// TODO Auto-generated method stub
-		return this.emptyList;
+	public List<Integer> queryEmptyList() {
+		List<Integer> emptyList = new ArrayList<Integer>();
+		
+		List<Place> list = ListUtils.filter(this.placeList, new IListFilter<Place>(){
+
+			@Override
+			public Boolean content(Place t) {
+				// TODO Auto-generated method stub
+				return t.isEmpty();
+			}
+			
+		});
+		
+		for(Place place : list)
+			emptyList.add(place.getPosition());
+		
+		return emptyList;
 	}
 	
 	public void setLandformMap(Map<Integer, Integer> landformMap) {
@@ -362,16 +286,15 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 	
 	//----------------------- TreasureMap ------------------------
 	@Override
-	public void setTreasureMap(Map<Integer, ITreasure> treasureMap) {
+	public void setTreasureMap(Map<Integer, Treasure> treasureMap) {
 		// TODO Auto-generated method stub
 		super.setTreasureMap(treasureMap);
 	}
 	
 	//----------------------- TreasureMap End ------------------------
 	
-
 	@Override
-	public List<Integer> queryRange(AbstractCorps corps, String action){
+	public List<Integer> queryRange(AbstractCorps corps, String action) {
 		List<Integer> positionList = new ArrayList<Integer>();
 		Corps sc = (Corps) corps;
 		if(CommonIdentifierE.Command_Query_Attack.equals(action)){
@@ -381,7 +304,7 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 			 * 当远程单位在战场上时，如果附近有敌方单位，则只能近身攻击
 			 */
 			if(CommonIdentifierE.Attack_Mode_Far.equals(sc.getAttack().getMode())){
-				List<Integer> list = areaForDistance(corps.getPosition(), 1, IGround.Equal);
+				List<Integer> list = areaForDistance(corps.getPosition(), 1, AbstractGround.Equal);
 				for(Integer position : list){
 					AbstractCorps c = getCorps(position);
 					if(null!=c && !c.getPlayer().equals(c.getPlayer())){
@@ -395,7 +318,7 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 			positionList.remove(corps.getPosition());
 		}
 		
-		if(CommonIdentifierE.Command_Query_Move.equals(action)){
+		if(CommonIdentifierE.Command_Query_Move.equals(action) || CommonIdentifierE.Command_Query_Leave.equals(action)){
 			Integer step = sc.getMove().getEnergy()/sc.getMove().getConsume();
 			switch (sc.getMove().getType()) {
 			case 141:    //步行
@@ -417,20 +340,27 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 			}
 			positionList.remove(corps.getPosition());
 		}
+		
+		if(CommonIdentifierE.Command_Query_Merge.equals(action)) {
+			Integer step = sc.getMove().getEnergy()/sc.getMove().getConsume();
+			positionList = areaForDistance(corps.getPosition(), step, Contain);
+			positionList.remove(corps.getPosition());
+		}
+		
 		return positionList;
 	}
 	
 	@Override
-	public List<Integer> queryRange(ISkill skill, String action){
+	public List<Integer> queryRange(AbstractSkill skill, String action){
 		List<Integer> positionList = new ArrayList<Integer>();
 		if(CommonIdentifierE.Command_Query_Conjure.equals(action) && skill.getOwner() instanceof AbstractCorps){
-			positionList = skill.getConjureRange();
+			positionList = ((ActiveSkill) skill).getConjureRange();
 		}
 		return positionList;
 	}
 	
 	@Override
-	public List<Integer> queryRange(IOption option, String action) {
+	public List<Integer> queryRange(AbstractOption option, String action) {
 		// TODO Auto-generated method stub
 		List<Integer> positionList = new ArrayList<Integer>();
 		if(CommonIdentifierE.Command_Query_Execute.equals(action)){
@@ -448,7 +378,7 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 	private static final Integer Distance_Max = 9999;
 	
 	@Override
-	public Integer distance(Integer start, Integer stop, Integer moveType, IPlayer control) {
+	public Integer distance(Integer start, Integer stop, Integer moveType, AbstractPlayer control) {
 		// TODO Auto-generated method stub
 		Integer ret = 0;
 		
@@ -498,7 +428,7 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 	
 	@Override
 	public List<Integer> areaForDistance(Integer position, Integer step,
-			Integer type, Integer moveType, IPlayer control) {
+			Integer type, Integer moveType, AbstractPlayer control) {
 		// TODO Auto-generated method stub
 		List<Integer> list = new ArrayList<Integer>();
 		
@@ -511,13 +441,13 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 			switch (type) {
 			case 0:
 				if(step.equals(distance(position, curPos, moveType, control)))
-					if(getPlace(curPos).getEmpty())             //友方可以穿人，因此在计算路径时，不考虑友军站位，但这里就要判断
+					if(getPlace(curPos).isEmpty())             //友方可以穿人，因此在计算路径时，不考虑友军站位，但这里就要判断
 						list.add(curPos);
 				break;
 					
 			case 1:
 				if(step>=distance(position, curPos, moveType, control))
-					if(getPlace(curPos).getEmpty())
+					if(getPlace(curPos).isEmpty())
 						list.add(curPos);
 				break;	
 					
@@ -556,7 +486,7 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 	
 	@Override
 	public Integer getPointByWay(Integer stand, Integer dest, Integer step,
-			Integer moveType, IPlayer control) {
+			Integer moveType, AbstractPlayer control) {
 		// TODO Auto-generated method stub
 		List path = route(stand, dest, moveType, control);
 		for(int i=0;i<path.size();i++){
@@ -641,20 +571,20 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 	 * @param control 阵营
 	 * @return
 	 */
-	private int[][] updateMAP_Stance(Integer moveType, IPlayer control){
+	private int[][] updateMAP_Stance(Integer moveType, AbstractPlayer control){
 		int [][] MAP = updateMAP_Landform(moveType);
 		
 		List<Integer> pList = new ArrayList<Integer>();         //敌方单位的站位，友方允许穿过
 		List<Integer> nList = new ArrayList<Integer>();         //敌方单位附近1个单元格
 		
-		List<Corps> cList = getCorpsList(control, CommonIdentifierE.Death_Status_Live);
-		List<Corps> eList = getCorpsList(CommonIdentifierE.Death_Status_Live);            //非友方单位
+		List<AbstractCorps> cList = getCorpsList(control, CommonIdentifierE.Death_Status_Live);
+		List<AbstractCorps> eList = getCorpsList(CommonIdentifierE.Death_Status_Live);            //非友方单位
 		eList.removeAll(cList);
 		
 		for(AbstractCorps corps : eList){
 			pList.add(corps.getPosition());
 			
-			List<Integer> list = areaForDistance(corps.getPosition(), 1, IGround.Contain);
+			List<Integer> list = areaForDistance(corps.getPosition(), 1, AbstractGround.Contain);
 			list.removeAll(nList);
 			nList.addAll(list);
 		}
@@ -693,7 +623,7 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 	 * @param control 当前控制者，用于计算敌人的站位
 	 * @return LinkedList<Node> 包含启动和终点，如果stop不可到达，即MAP中为-1，则返回null
 	 */
-	private List route(Integer start, Integer stop, Integer moveType, IPlayer control){
+	private List route(Integer start, Integer stop, Integer moveType, AbstractPlayer control){
 		return SpaceArithmetic.route(start, stop, updateMAP_Stance(moveType, control), hit);
 	}
 	
@@ -782,7 +712,7 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 	}*/
 
 	/*@Override
-	public List<Corps> listForID(IPlayer player, List<Integer> ids) {
+	public List<Corps> listForID(AbstractPlayer player, List<Integer> ids) {
 		// TODO Auto-generated method stub
 		List<Corps> ret = new ArrayList<Corps>();
 		for(AbstractCorps corps : getLivingCorpsList()){
@@ -800,7 +730,7 @@ public class HoneycombGround extends AbstractGround implements IGroundE {
 		Random r = new Random();
 		System.out.println(r.nextInt(10));
 		
-		//IGround ground = new HoneycombGround(21,13,null);
+		//AbstractGround ground = new HoneycombGround(21,13,null);
 		//System.out.println(ground);
 	}
 

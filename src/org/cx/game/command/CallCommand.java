@@ -1,6 +1,6 @@
 package org.cx.game.command;
 
-import org.cx.game.core.IPlayer;
+import org.cx.game.core.AbstractPlayer;
 import org.cx.game.corps.AbstractCorps;
 import org.cx.game.exception.ValidatorException;
 import org.cx.game.validator.SelectGroundValidator;
@@ -16,7 +16,7 @@ import org.cx.game.widget.Place;
 @Deprecated
 public class CallCommand extends InteriorCommand {
 
-	public CallCommand(IPlayer player) {
+	public CallCommand(AbstractPlayer player) {
 		// TODO Auto-generated constructor stub
 		super(player);
 		addValidator(new SelectCorpsValidator(buffer));

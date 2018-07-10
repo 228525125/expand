@@ -1,7 +1,7 @@
 package org.cx.game.validator;
 
 import org.cx.game.corps.Corps;
-import org.cx.game.widget.building.IBuilding;
+import org.cx.game.widget.building.AbstractBuilding;
 
 /**
  * 当招募时，验证招募人数是否超出可招募人数
@@ -12,9 +12,9 @@ public class CallNopValidator extends Validator {
 	
 	private Corps callUnit = null;
 	private Integer nop = 0;
-	private IBuilding town = null;
+	private AbstractBuilding town = null;
 
-	public CallNopValidator(Corps callUnit, Integer nop, IBuilding town) {
+	public CallNopValidator(Corps callUnit, Integer nop, AbstractBuilding town) {
 		// TODO Auto-generated constructor stub
 		this.callUnit = callUnit;
 		this.nop = nop;

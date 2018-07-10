@@ -3,8 +3,7 @@ package org.cx.game.rule;
 import org.cx.game.corps.Corps;
 import org.cx.game.corps.Corps.CorpsRemoveBuffAction;
 
-public class CorpsPropertyUpdateRemoveBuffRule extends AbstractRule implements
-		IRule {
+public class CorpsPropertyUpdateRemoveBuffRule extends AbstractRule {
 
 	@Override
 	public Class getInterceptable() {

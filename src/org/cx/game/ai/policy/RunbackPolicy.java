@@ -8,7 +8,7 @@ import org.cx.game.command.Command;
 import org.cx.game.command.CommandFactory;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.ValidatorException;
-import org.cx.game.widget.IGround;
+import org.cx.game.widget.AbstractGround;
 
 /**
  * 回到起始位置的策略
@@ -40,7 +40,7 @@ public class RunbackPolicy extends AbstractPolicy<CorpsAgent> {
 		Integer guardPosition = getAgent().getGuardPosition();
 		Corps corps = getAgent().getOwner();
 		
-		IGround ground = corps.getGround();
+		AbstractGround ground = corps.getGround();
 		Integer position = ground.getPointByWay(corps.getPosition(), guardPosition, corps.getMove().getEnergy(), corps.getMove().getType(), corps.getPlayer());
 		
 		this.cmdStr = "move ground place"+position+";";

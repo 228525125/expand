@@ -7,12 +7,12 @@ import org.cx.game.widget.Place;
 public class MoveRangeValidator extends Validator {
 
 	private Corps corps;
-	private Place place;
+	private Integer position;
 	
-	public MoveRangeValidator(Corps corps, Place place) {
+	public MoveRangeValidator(Corps corps, Integer position) {
 		// TODO Auto-generated constructor stub
 		this.corps = corps;
-		this.place = place;
+		this.position = position;
 	}
 	
 	@Override
@@ -20,7 +20,7 @@ public class MoveRangeValidator extends Validator {
 		// TODO Auto-generated method stub
 		
 		Integer curPosition = corps.getPosition();
-		Integer step = corps.getPlayer().getContext().getGround().distance(curPosition, place.getPosition());
+		Integer step = corps.getPlayer().getContext().getGround().distance(curPosition, position);
 		Integer energy = corps.getMove().getEnergy();
 		Integer consume = corps.getMove().getConsume();
 		Integer range = energy/consume;         // 145/50 = 2;整数默认情况符合游戏规则

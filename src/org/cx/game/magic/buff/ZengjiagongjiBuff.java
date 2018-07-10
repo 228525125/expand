@@ -12,4 +12,16 @@ public class ZengjiagongjiBuff extends AbstractBuff {
 		
 		setAtk(atk);
 	}
+
+	@Override
+	public void before(Object[] args) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void after(Object[] args) {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -3,8 +3,7 @@ package org.cx.game.rule;
 import org.cx.game.corps.Corps;
 import org.cx.game.corps.Corps.CorpsAddSkillAction;
 
-public class CorpsPropertyUpdateAddSkillRule extends AbstractRule implements
-		IRule {
+public class CorpsPropertyUpdateAddSkillRule extends AbstractRule {
 
 	@Override
 	public Class getInterceptable() {

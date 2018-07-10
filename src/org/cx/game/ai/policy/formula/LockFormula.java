@@ -3,7 +3,7 @@ package org.cx.game.ai.policy.formula;
 import java.util.List;
 
 import org.cx.game.corps.Corps;
-import org.cx.game.magic.buff.IBuff;
+import org.cx.game.magic.buff.AbstractBuff;
 import org.cx.game.magic.buff.AttackLockBuff;
 import org.cx.game.tools.I18n;
 import org.cx.game.validator.Validator;
@@ -25,8 +25,8 @@ public class LockFormula extends Validator {
 		
 		if(this.corps.containsBuff(AttackLockBuff.class)){
 			ret = true;
-			List<IBuff> buffList = this.corps.getBuff(AttackLockBuff.class);
-			for(IBuff buff : buffList){
+			List<AbstractBuff> buffList = this.corps.getBuff(AttackLockBuff.class);
+			for(AbstractBuff buff : buffList){
 				AttackLockBuff alb = (AttackLockBuff) buff;
 				this.lockerList.add(alb.getLocker());
 			}

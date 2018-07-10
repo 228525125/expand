@@ -16,24 +16,22 @@ import org.cx.game.action.Chuck;
 import org.cx.game.action.Conjure;
 import org.cx.game.action.Death;
 import org.cx.game.action.IAction;
+import org.cx.game.action.Leave;
+import org.cx.game.action.Merge;
 import org.cx.game.action.Move;
 import org.cx.game.action.Pick;
 import org.cx.game.action.Upgrade;
 import org.cx.game.action.CorpsUpgrade;
 import org.cx.game.ai.CorpsAgent;
-import org.cx.game.core.IPlayer;
-import org.cx.game.core.IPlayerE;
 import org.cx.game.exception.RuleValidatorException;
-import org.cx.game.magic.buff.IBuff;
-import org.cx.game.magic.skill.ISkill;
+import org.cx.game.magic.IMagic;
+import org.cx.game.magic.buff.AbstractBuff;
+import org.cx.game.magic.skill.AbstractSkill;
 import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.tools.I18n;
-import org.cx.game.widget.IGround;
-import org.cx.game.widget.IGroundE;
-import org.cx.game.widget.treasure.IResource;
+import org.cx.game.widget.AbstractPlace;
+import org.cx.game.widget.treasure.Treasure;
 import org.cx.game.widget.treasure.Resource;
-
-import com.sun.org.apache.xml.internal.dtm.ref.CoroutineManager;
 
 public class Corps extends AbstractCorps { 
 	
@@ -61,7 +59,7 @@ public class Corps extends AbstractCorps {
 	private Boolean hero = false;
 	private Boolean activation = false;            //激活状态
 	
-	private IResource consume = new Resource();
+	private Resource consume = new Resource();
 	private CorpsAddBuffAction addBuffAction = null;
 	private CorpsRemoveBuffAction removeBuffAction = null;
 	private CorpsAddSkillAction addSkillAction = null;
@@ -79,10 +77,12 @@ public class Corps extends AbstractCorps {
 	private Chuck chuck = null;
 	private Upgrade upgrade = null;
 	private Pick pick = null;
+	private Merge merge = null;
+	private Leave leave = null;
 	
-	private List<IBuff> nexusBuffList = new ArrayList<IBuff>();
-	private List<IBuff> buffList = new ArrayList<IBuff>();
-	private List<ISkill> skillList = new ArrayList<ISkill>();
+	private List<AbstractBuff> nexusBuffList = new ArrayList<AbstractBuff>();
+	private List<AbstractBuff> buffList = new ArrayList<AbstractBuff>();
+	private List<AbstractSkill> skillList = new ArrayList<AbstractSkill>();
 	private Map<Integer, String> upgradeRequirement = new HashMap<Integer, String>();
 	
 	public Corps(Integer type) {
@@ -92,18 +92,6 @@ public class Corps extends AbstractCorps {
 		upgradeRequirement.put(2, "e-100");
 		upgradeRequirement.put(3, "e-200");
 		upgradeRequirement.put(4, "e-400");
-	}
-	
-	@Override
-	public IPlayerE getPlayer() {
-		// TODO Auto-generated method stub
-		return (IPlayerE) super.getPlayer();
-	}
-	
-	@Override
-	public IGroundE getGround() {
-		// TODO Auto-generated method stub
-		return (IGroundE) super.getGround();
 	}
 	
 	public CorpsAgent getAgent() {
@@ -291,7 +279,7 @@ public class Corps extends AbstractCorps {
 	 * 是否为英雄卡
 	 * @return
 	 */
-	public Boolean getHero() {
+	public Boolean isHero() {
 		return hero;
 	}
 
@@ -310,12 +298,12 @@ public class Corps extends AbstractCorps {
 	/**
 	 * 消耗资源
 	 */
-	public IResource getConsume() {
+	public Resource getConsume() {
 		// TODO Auto-generated method stub
 		return consume;
 	}
 	
-	public void setConsume(IResource consume) {
+	public void setConsume(Resource consume) {
 		// TODO Auto-generated method stub
 		this.consume = consume;
 	}
@@ -332,35 +320,35 @@ public class Corps extends AbstractCorps {
 		this.level = level;
 	}
 	
-	public List<IBuff> getNexusBuffList(){
+	public List<AbstractBuff> getNexusBuffList(){
 		return this.nexusBuffList;
 	}
 	
 	/**
 	 * 发起方状态
 	 */
-	public void addNexusBuff(IBuff buff){
+	public void addNexusBuff(AbstractBuff buff){
 		this.nexusBuffList.add(buff);
 	}
 	
-	public void removeNexusBuff(IBuff buff){	
+	public void removeNexusBuff(AbstractBuff buff){	
 		this.nexusBuffList.remove(buff);
 	}
 	
-	public List<IBuff> getNexusBuff(Class clazz){
-		List<IBuff> ret = new ArrayList<IBuff>();
-		List<IBuff> buffs = new ArrayList<IBuff>();
+	public List<AbstractBuff> getNexusBuff(Class clazz){
+		List<AbstractBuff> ret = new ArrayList<AbstractBuff>();
+		List<AbstractBuff> buffs = new ArrayList<AbstractBuff>();
 		buffs.addAll(nexusBuffList);
-		for(IBuff buff : buffs)
+		for(AbstractBuff buff : buffs)
 			if(buff.getClass().equals(clazz))
 				ret.add(buff);
 		return ret;
 	}
 	
 	public void clearNexusBuff(){
-		List<IBuff> buffs = new ArrayList<IBuff>();
+		List<AbstractBuff> buffs = new ArrayList<AbstractBuff>();
 		buffs.addAll(nexusBuffList);
-		for(IBuff buff : buffs){
+		for(AbstractBuff buff : buffs){
 			buff.invalid();
 		}
 	}
@@ -368,7 +356,7 @@ public class Corps extends AbstractCorps {
 	/**
 	 * 自身Buff
 	 */
-	public List<IBuff> getBuffList() {
+	public List<AbstractBuff> getBuffList() {
 		return buffList;
 	}
 	
@@ -392,36 +380,36 @@ public class Corps extends AbstractCorps {
 		return this.removeBuffAction;
 	}
 	
-	public List<IBuff> getBuff(Class clazz){
-		List<IBuff> ret = new ArrayList<IBuff>();
-		List<IBuff> buffs = new ArrayList<IBuff>();
+	public List<AbstractBuff> getBuff(Class clazz){
+		List<AbstractBuff> ret = new ArrayList<AbstractBuff>();
+		List<AbstractBuff> buffs = new ArrayList<AbstractBuff>();
 		buffs.addAll(buffList);
-		for(IBuff buff : buffs)
+		for(AbstractBuff buff : buffs)
 			if(buff.getClass().equals(clazz))
 				ret.add(buff);
 		return ret;
 	}
 	
-	public List<IBuff> getBuff(String className){
-		List<IBuff> ret = new ArrayList<IBuff>();
-		List<IBuff> buffs = new ArrayList<IBuff>();
+	public List<AbstractBuff> getBuff(String className){
+		List<AbstractBuff> ret = new ArrayList<AbstractBuff>();
+		List<AbstractBuff> buffs = new ArrayList<AbstractBuff>();
 		buffs.addAll(buffList);
-		for(IBuff buff : buffs)
+		for(AbstractBuff buff : buffs)
 			if(buff.getClass().getName().equals(className))
 				ret.add(buff);
 		return ret;
 	}
 	
 	public void clearBuff(){
-		List<IBuff> buffs = new ArrayList<IBuff>();
+		List<AbstractBuff> buffs = new ArrayList<AbstractBuff>();
 		buffs.addAll(buffList);
-		for(IBuff buff : buffs){
+		for(AbstractBuff buff : buffs){
 			buff.invalid();
 		}
 	}
 	
 	public Boolean containsBuff(Class clazz){
-		for(IBuff buff : this.buffList)
+		for(AbstractBuff buff : this.buffList)
 			if(buff.getClass().equals(clazz))
 				return true;
 		return false;
@@ -437,12 +425,14 @@ public class Corps extends AbstractCorps {
 		return this.addSkillAction;
 	}
 
-	public List<ISkill> getSkillList() {
+	@Override
+	public List<AbstractSkill> getSkillList() {
 		return skillList;
 	}
 	
-	public void setSkillList(List<ISkill> skillList) {
-		for(ISkill skill : skillList)
+	@Override
+	public void setSkillList(List<AbstractSkill> skillList) {
+		for(AbstractSkill skill : skillList)
 			skill.setOwner(this);
 		this.skillList = skillList;
 	}
@@ -452,12 +442,13 @@ public class Corps extends AbstractCorps {
 	 * @param code skill的id，这里为了兼容一部分程序，增加code也作为index
 	 * @return
 	 */
-	public ISkill getSkill(Integer code){
-		ISkill skill = null;
+	@Override
+	public AbstractSkill getSkill(Integer code){
+		AbstractSkill skill = null;
 		if(code<skillList.size()){
-			skill = (ISkill) skillList.get(code);
+			skill = (AbstractSkill) skillList.get(code);
 		}else{
-			for(ISkill s : skillList){
+			for(AbstractSkill s : skillList){
 				if(code.equals(s.getType()))
 					skill = s;
 			}
@@ -466,6 +457,7 @@ public class Corps extends AbstractCorps {
 		return skill;
 	}
 	
+	@Override
 	public Boolean containsSkill(Class clazz){
 		for(Object skill : this.skillList){
 			if(skill.getClass().equals(clazz))
@@ -588,14 +580,150 @@ public class Corps extends AbstractCorps {
 		return this.pick;
 	}
 	
+	public IAction getMerge() {
+		// TODO Auto-generated method stub
+		if(null==merge){
+			merge = new Merge();
+			merge.setOwner(this);
+		}
+		return this.merge;
+	}
+	
+	public IAction getLeave() {
+		// TODO Auto-generated method stub
+		if(null==leave){
+			leave = new Leave();
+			leave.setOwner(this);
+		}
+		return this.leave;
+	}
+	
+	/**
+	 * 激活
+	 * @param activate
+	 * @throws RuleValidatorException
+	 */
+	public void activate(Boolean activate) {
+		IAction action = new ActionProxyHelper(getActivate());
+		action.action(activate);
+	}
+
+	/**
+	 * 攻击
+	 * @param attacked 被攻击的卡片
+	 */
+	public void attack(AbstractCorps attacked) {
+		IAction action = new ActionProxyHelper(getAttack());
+		action.action(attacked);
+	}
+	
+	/**
+	 * 受攻击
+	 * @param attack
+	 */
+	public void attacked(AbstractCorps corps, IAction attack) {
+		IAction action = new ActionProxyHelper(getAttacked());
+		action.action(corps,attack);
+	}
+	
+	/**
+	 * 受到法术影响
+	 * @param magic
+	 */
+	public void affected(IMagic magic) {
+		IAction action = new ActionProxyHelper(getAffected());
+		action.action(magic);
+	}
+	
+	/**
+	 * 施法
+	 * @param skill ActiveSkill
+	 * @param objects
+	 */
+	public void conjure(AbstractSkill skill, Object...objects) {
+		IAction action = new ActionProxyHelper(getConjure());
+		action.action(skill,objects);
+	}
+	
+	/**
+	 * 移动到指定位置
+	 * @param position 指定位置
+	 */
+	public void move(AbstractPlace place) {
+		IAction action = new ActionProxyHelper(getMove());
+		action.action(place);
+	}
+	
+	/**
+	 * 召唤
+	 *
+	 */
+	public void call(AbstractPlace place, Integer nop) {
+		IAction action = new ActionProxyHelper(getCall());
+		action.action(place,nop);
+	}
+
+	/**
+	 * 死亡
+	 */
+	public void death() {
+		IAction action = new ActionProxyHelper(getDeath());
+		action.action();
+	}
+	
+	/**
+	 * 丢弃
+	 */
+	public void chuck() {
+		IAction action = new ActionProxyHelper(getChuck());
+		action.action();
+	}
+	
+	/**
+	 * 升级
+	 * @throws RuleValidatorException
+	 */
+	public void upgrade() {
+		IAction action = new ActionProxyHelper(getUpgrade());
+		action.action();
+	}
+	
+	/**
+	 * 拾取
+	 * @param treasure
+	 * @throws RuleValidatorException
+	 */
+	public void pick(Treasure treasure) {
+		IAction action = new ActionProxyHelper(getPick());
+		action.action(treasure);
+	}
+	
+	/**
+	 * 合并
+	 * @param hero
+	 */
+	public void merge(Hero hero) {
+		IAction action = new ActionProxyHelper(getMerge());
+		action.action(hero);
+	}
+	
+	/**
+	 * 分离
+	 * @param place
+	 */
+	public void leave(AbstractPlace place) {
+		IAction action = new ActionProxyHelper(getLeave());
+		action.action(place);
+	}
+	
 	public class CorpsAddBuffAction extends AbstractAction implements IAction {
 
 		@Override
 		public void action(Object... objects) {
 			// TODO Auto-generated method stub
-			IBuff buff = (IBuff) objects[0];
+			AbstractBuff buff = (AbstractBuff) objects[0];
 			
-			for(IBuff b : getBuffList()) {     //当添加一个已有的buff,并且不能叠加时，要先删除之前的buff
+			for(AbstractBuff b : getBuffList()) {     //当添加一个已有的buff,并且不能叠加时，要先删除之前的buff
 				if(b.getClass().equals(buff.getClass())&&!b.isDuplication()){
 					removeBuff(b);
 					break;
@@ -617,7 +745,7 @@ public class Corps extends AbstractCorps {
 		@Override
 		public void action(Object... objects) {
 			// TODO Auto-generated method stub
-			IBuff buff = (IBuff) objects[0];
+			AbstractBuff buff = (AbstractBuff) objects[0];
 			
 			getBuffList().remove(buff);
 		}
@@ -634,7 +762,7 @@ public class Corps extends AbstractCorps {
 		@Override
 		public void action(Object... objects) {
 			// TODO Auto-generated method stub
-			ISkill skill = (ISkill) objects[0];
+			AbstractSkill skill = (AbstractSkill) objects[0];
 			skill.setOwner(getOwner());
 			getSkillList().add(skill);
 		}

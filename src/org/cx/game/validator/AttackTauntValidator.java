@@ -1,6 +1,6 @@
 package org.cx.game.validator;
 
-import org.cx.game.magic.buff.IBuff;
+import org.cx.game.magic.buff.AbstractBuff;
 import org.cx.game.command.CommandBuffer;
 import org.cx.game.corps.Corps;
 import org.cx.game.magic.buff.TauntBuff;
@@ -28,7 +28,7 @@ public class AttackTauntValidator extends SelectCorpsValidator {
 		
 		Boolean taunt = true;
 		if(getCorps().containsBuff(TauntBuff.class)){
-			for(IBuff buff : getCorps().getBuff(TauntBuff.class)){
+			for(AbstractBuff buff : getCorps().getBuff(TauntBuff.class)){
 				TauntBuff tauntBuff = (TauntBuff) buff;
 				taunt = attacked.equals(tauntBuff.getTaunter());
 				break;

@@ -3,14 +3,14 @@ package org.cx.game.command;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.cx.game.core.IPlayer;
+import org.cx.game.core.AbstractPlayer;
 import org.cx.game.exception.ValidatorException;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
 
 public class ShowCommand extends InteriorCommand {
 
-	public ShowCommand(IPlayer player) {
+	public ShowCommand(AbstractPlayer player) {
 		super(player);
 		// TODO Auto-generated constructor stub
 	}

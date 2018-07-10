@@ -1,13 +1,12 @@
 package org.cx.game.rule;
 
 import org.cx.game.action.Attack;
-import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 import org.cx.game.magic.buff.AttackLockBuff;
 import org.cx.game.tools.CommonIdentifierE;
-import org.cx.game.widget.IGround;
+import org.cx.game.widget.AbstractGround;
 
-public class AttackRule extends AbstractRule implements IRule {
+public class AttackRule extends AbstractRule {
 
 	@Override
 	public void after(Object[] args) {
@@ -15,7 +14,7 @@ public class AttackRule extends AbstractRule implements IRule {
 		Corps attacked = (Corps)((Object[]) args[0])[0];
 		Corps attack = getOwner().getOwner();
 		
-		IGround ground = getOwner().getOwner().getGround();
+		AbstractGround ground = getOwner().getOwner().getGround();
 		Integer distance = ground.distance(attacked.getPosition(), attack.getPosition());
 		if(CommonIdentifierE.Death_Status_Live.equals(attacked.getDeath().getStatus())
 		&& CommonIdentifierE.Death_Status_Live.equals(attack.getDeath().getStatus())

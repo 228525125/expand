@@ -15,7 +15,7 @@ public class DoneState extends AbstractPlayState {
 	@Override
 	public void deploy() {
 		// TODO Auto-generated method stub
-		context.setPlayState(context.getDeployState());
+		context.setPlayState(new DeployState());
 		context.deploy();
 	}
 

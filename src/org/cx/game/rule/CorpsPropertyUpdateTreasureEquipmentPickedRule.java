@@ -3,11 +3,11 @@ package org.cx.game.rule;
 import org.cx.game.action.Picked;
 import org.cx.game.corps.Corps;
 import org.cx.game.corps.Hero;
-import org.cx.game.widget.treasure.ITreasure;
+import org.cx.game.widget.treasure.Treasure;
 import org.cx.game.widget.treasure.EquipmentTreasure;
 import org.cx.game.widget.treasure.EquipmentTreasure.TreasureEquipmentPicked;
 
-public class CorpsPropertyUpdateTreasureEquipmentPickedRule extends AbstractRule implements IRule {
+public class CorpsPropertyUpdateTreasureEquipmentPickedRule extends AbstractRule {
 
 	@Override
 	public Class getInterceptable() {
@@ -31,7 +31,7 @@ public class CorpsPropertyUpdateTreasureEquipmentPickedRule extends AbstractRule
 	
 	private void updateWeaponAtk(Hero hero) {
 		Integer atk = 0;
-		for(ITreasure treasure : hero.getTreasures()){
+		for(Treasure treasure : hero.getTreasures()){
 			if (treasure instanceof EquipmentTreasure) {
 				EquipmentTreasure te = (EquipmentTreasure) treasure;
 				atk += te.getAtk();
@@ -45,7 +45,7 @@ public class CorpsPropertyUpdateTreasureEquipmentPickedRule extends AbstractRule
 	private void updateArmourDef(Hero hero) {
 		// TODO Auto-generated method stub
 		Integer def = 0;
-		for(ITreasure treasure : hero.getTreasures()){
+		for(Treasure treasure : hero.getTreasures()){
 			if (treasure instanceof EquipmentTreasure) {
 				EquipmentTreasure te = (EquipmentTreasure) treasure;
 				def += te.getDef();

@@ -5,29 +5,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.cx.game.core.IPlayer;
-import org.cx.game.core.IPlayerE;
+import org.cx.game.core.AbstractPlayer;
 import org.cx.game.corps.AbstractCorps;
-import org.cx.game.magic.skill.IActiveSkill;
 import org.cx.game.exception.CommandValidatorException;
 import org.cx.game.exception.ValidatorException;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
-import org.cx.game.validator.QueryCommandValidator;
 import org.cx.game.validator.SelectCorpsValidator;
 import org.cx.game.validator.SelectOptionValidator;
 import org.cx.game.validator.SelectSkillValidator;
-import org.cx.game.widget.IGround;
-import org.cx.game.widget.IGroundE;
-import org.cx.game.widget.building.IOption;
+import org.cx.game.widget.AbstractGround;
+import org.cx.game.widget.building.AbstractOption;
 
 public class QueryCommand extends InteriorCommand {
 
 	private Map<String, String> map = new HashMap<String, String>();
 	
-	private IPlayer player = null;
+	private AbstractPlayer player = null;
 	
-	public QueryCommand(IPlayer player) {
+	public QueryCommand(AbstractPlayer player) {
 		// TODO Auto-generated constructor stub
 		super(player);
 		map.put("attack", CommonIdentifierE.Command_Query_Attack);
@@ -35,7 +31,8 @@ public class QueryCommand extends InteriorCommand {
 		map.put("move", CommonIdentifierE.Command_Query_Move);
 		map.put("conjure", CommonIdentifierE.Command_Query_Conjure);
 		map.put("swap", CommonIdentifierE.Command_Query_Swap);
-		map.put("apply", CommonIdentifierE.Command_Query_Apply);
+		map.put("merge", CommonIdentifierE.Command_Query_Merge);
+		map.put("leave", CommonIdentifierE.Command_Query_Leave);
 		map.put("execute", CommonIdentifierE.Command_Query_Execute);
 		map.put("pick", CommonIdentifierE.Command_Query_Pick);
 		
@@ -49,7 +46,7 @@ public class QueryCommand extends InteriorCommand {
 		// TODO Auto-generated method stub
 		super.execute();
 		
-		IGroundE ground = ((IPlayerE)this.player).getContext().getGround();
+		AbstractGround ground = this.player.getContext().getGround();
 		
 		if("conjure".equals(parameter)){
 			doValidator(new SelectSkillValidator(buffer));
@@ -64,7 +61,7 @@ public class QueryCommand extends InteriorCommand {
 			
 			AbstractCorps corps = buffer.getCorps();           
 			positionList = ground.queryRange(corps, map.get(parameter));   //这里需要计算
-		}else if("move".equals(parameter)){
+		}else if("move".equals(parameter) || "merge".equals(parameter) || "leave".equals(parameter)){
 			doValidator(new SelectCorpsValidator(buffer));
 			if(hasError())
 				throw new CommandValidatorException(getErrors().getMessage());
@@ -76,7 +73,7 @@ public class QueryCommand extends InteriorCommand {
 			if(hasError())
 				throw new CommandValidatorException(getErrors().getMessage());
 			
-			IOption option = buffer.getOption();
+			AbstractOption option = buffer.getOption();
 			positionList = ground.queryRange(option, map.get(parameter));
 		}else if("pick".equals(parameter)){
 			doValidator(new SelectCorpsValidator(buffer));
@@ -84,7 +81,7 @@ public class QueryCommand extends InteriorCommand {
 				throw new CommandValidatorException(getErrors().getMessage());
 			
 			AbstractCorps corps = buffer.getCorps();
-			positionList = ground.areaForDistance(corps.getPosition(), 1, IGround.Contain);
+			positionList = ground.areaForDistance(corps.getPosition(), 1, AbstractGround.Contain);
 		}
 	
 		Map<String,Object> bean = new HashMap<String,Object>();

@@ -6,15 +6,16 @@ import java.util.List;
 import org.cx.game.action.Execute;
 import org.cx.game.action.IAction;
 import org.cx.game.action.Upgrade;
-import org.cx.game.core.IPlayer;
+import org.cx.game.core.AbstractPlayer;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.tools.I18n;
 import org.cx.game.validator.UpgradeConsumeValidator;
-import org.cx.game.widget.IGround;
+import org.cx.game.widget.AbstractGround;
 
-public class BuildingUpgradeOption extends AbstractOption implements IOption {
+public class BuildingUpgradeOption extends AbstractOption {
 
 	private String name = null;
+	private Boolean allow = false;
 	
 	@Override
 	public String getName() {
@@ -27,13 +28,21 @@ public class BuildingUpgradeOption extends AbstractOption implements IOption {
 	}
 	
 	@Override
-	public Boolean getAllow() {
+	public void setOwner(AbstractBuilding building) {
 		// TODO Auto-generated method stub
-		return IBuilding.Building_Status_Complete.equals(getOwner().getStatus()) && getOwner().isUpgrade();
+		super.setOwner(building);
+		
+		inquiryBuildingIsAllowUpdate();
 	}
 	
 	@Override
-	public List<Integer> getExecuteRange(IGround ground) {
+	public Boolean getAllow() {
+		// TODO Auto-generated method stub
+		return super.getAllow() && this.allow;
+	}
+	
+	@Override
+	public List<Integer> getExecuteRange(AbstractGround ground) {
 		// TODO Auto-generated method stub
 		List<Integer> positionList = new ArrayList<Integer>();
 		return positionList;
@@ -62,7 +71,7 @@ public class BuildingUpgradeOption extends AbstractOption implements IOption {
 	@Override
 	public void execute(Object... objects) throws RuleValidatorException {
 		// TODO Auto-generated method stub
-		IBuilding building = getOwner();
+		AbstractBuilding building = getOwner();
 		addValidator(new UpgradeConsumeValidator(building.getUpgrade(), building.getPlayer()));
 		
 		super.execute(objects);
@@ -71,10 +80,10 @@ public class BuildingUpgradeOption extends AbstractOption implements IOption {
 	@Override
 	protected void beforeExecute() {
 		// TODO Auto-generated method stub
-		IPlayer player = getOwner().getPlayer();
+		AbstractPlayer player = getOwner().getPlayer();
 		player.addToResource(getOwner().getUpgrade().getRequirement());
 		
-		getOwner().setStatus(IBuilding.Building_Status_Build);
+		getOwner().setStatus(AbstractBuilding.Building_Status_Build);
 	}
 	
 	public class OptionBuildingUpgradeExecute extends Execute implements IAction{
@@ -84,8 +93,19 @@ public class BuildingUpgradeOption extends AbstractOption implements IOption {
 			// TODO Auto-generated method stub
 			super.action(objects);
 			
-			IBuilding building = getOwner().getOwner();
+			AbstractBuilding building = getOwner().getOwner();
 			building.upgrade();
+			
+			BuildingUpgradeOption.this.inquiryBuildingIsAllowUpdate();
 		}
+	}
+	
+	/**
+	 * 查看所属建筑物是否达到升级上限
+	 */
+	private void inquiryBuildingIsAllowUpdate() {
+		Integer level = getOwner().getUpgrade().getLevel();
+		Integer levelLimit = getOwner().getUpgrade().getLevelLimit();
+		this.allow = level<levelLimit;
 	}
 }

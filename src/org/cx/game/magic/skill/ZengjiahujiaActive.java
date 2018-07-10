@@ -1,5 +1,6 @@
 package org.cx.game.magic.skill;
 
+import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
 
 public class ZengjiahujiaActive extends ActiveSkill {
@@ -25,6 +26,6 @@ public class ZengjiahujiaActive extends ActiveSkill {
 		// TODO Auto-generated method stub
 		super.useSkill(objects);
 		
-		getOwner().affected(this);
+		((Corps) getOwner()).affected(this);
 	}
 }

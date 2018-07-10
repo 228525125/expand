@@ -15,8 +15,7 @@ import org.cx.game.validator.CorpsInThePlaceValidator;
 import org.cx.game.validator.MoveEnergyValidator;
 import org.cx.game.validator.Validator;
 import org.cx.game.widget.AbstractPlace;
-import org.cx.game.widget.IGround;
-import org.cx.game.widget.IGroundE;
+import org.cx.game.widget.AbstractGround;
 import org.cx.game.widget.Place;
 import org.cx.game.widget.building.BuildOption.OptionBuildExecute;
 
@@ -25,7 +24,7 @@ import org.cx.game.widget.building.BuildOption.OptionBuildExecute;
  * @author chenxian
  *
  */
-public class SpatialOption extends AbstractOption implements IOption {
+public class SpatialOption extends AbstractOption {
 
 	private String name = null;
 	
@@ -53,7 +52,7 @@ public class SpatialOption extends AbstractOption implements IOption {
 	}
 	
 	@Override
-	public List<Integer> getExecuteRange(IGround ground) {
+	public List<Integer> getExecuteRange(AbstractGround ground) {
 		// TODO Auto-generated method stub
 		List<Integer> list = new ArrayList<Integer>();
 		return list;

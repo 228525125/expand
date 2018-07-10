@@ -1,6 +1,6 @@
 package org.cx.game.command.expression;
 
-import org.cx.game.core.IPlayer;
+import org.cx.game.core.AbstractPlayer;
 import org.cx.game.exception.SyntaxValidatorException;
 import org.cx.game.tools.Util;
 import org.cx.game.validator.InteriorCommandParameterExpressionPropertyValidator;
@@ -15,7 +15,7 @@ import org.dom4j.Element;
 public class InteriorCommandParameterPropertyExpression extends
 		InteriorCommandParameterExpression {
 
-	public InteriorCommandParameterPropertyExpression(IPlayer own, String cmd, Element cmdEl) {
+	public InteriorCommandParameterPropertyExpression(AbstractPlayer own, String cmd, Element cmdEl) {
 		super(own, cmd, cmdEl);
 		// TODO Auto-generated constructor stub
 		addValidator(new InteriorCommandParameterExpressionPropertyValidator(getParameter(cmd), cmdEl));

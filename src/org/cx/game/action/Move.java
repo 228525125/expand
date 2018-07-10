@@ -12,8 +12,7 @@ import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.tools.Debug;
 import org.cx.game.widget.AbstractPlace;
-import org.cx.game.widget.IGround;
-import org.cx.game.widget.IGroundE;
+import org.cx.game.widget.AbstractGround;
 import org.cx.game.widget.Place;
 
 public class Move extends AbstractAction implements IAction {
@@ -32,7 +31,7 @@ public class Move extends AbstractAction implements IAction {
 	
 	private List<Integer> path = new ArrayList<Integer>();
 	
-	private Integer direction = IGround.Relative_Right;
+	private Integer direction = AbstractGround.Relative_Right;
 	
 	public Integer getType() {
 		// TODO Auto-generated method stub
@@ -129,7 +128,7 @@ public class Move extends AbstractAction implements IAction {
 		
 		Integer start = getOwner().getPosition();
 		
-		IGroundE ground = getOwner().getGround();
+		AbstractGround ground = getOwner().getGround();
 		List<Integer> route = ground.move(getOwner(), place.getPosition(), type);
 		
 		Map<String,Object> map = new HashMap<String,Object>();

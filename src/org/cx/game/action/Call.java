@@ -9,15 +9,13 @@ import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.widget.AbstractPlace;
-import org.cx.game.widget.IGround;
-import org.cx.game.widget.IGroundE;
+import org.cx.game.widget.AbstractGround;
 import org.cx.game.widget.Place;
-import org.cx.game.widget.treasure.IResource;
 import org.cx.game.widget.treasure.Resource;
 
 public class Call extends AbstractAction implements IAction {
 	
-	private IResource consume = new Resource();
+	private Resource consume = new Resource();
 	private Integer ration = 1;
 	
 	private Integer nop = 1;           //人数 
@@ -28,12 +26,12 @@ public class Call extends AbstractAction implements IAction {
 		return (Corps) super.getOwner();
 	}
 
-	public IResource getConsume() {
+	public Resource getConsume() {
 		// TODO Auto-generated method stub
 		return consume;
 	}
 	
-	public void setConsume(IResource consume) {
+	public void setConsume(Resource consume) {
 		this.consume = consume;
 	}
 	
@@ -86,7 +84,7 @@ public class Call extends AbstractAction implements IAction {
 		 * 放置到战场
 		 * 因为顺序问题，没有写在Rule中
 		 */
-		IGroundE ground = getOwner().getPlayer().getContext().getGround();
+		AbstractGround ground = getOwner().getPlayer().getContext().getGround();
 		ground.placementCorps(place.getPosition(), getOwner());
 	}
 

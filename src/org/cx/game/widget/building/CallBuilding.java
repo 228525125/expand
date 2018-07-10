@@ -3,25 +3,25 @@ package org.cx.game.widget.building;
 import java.util.List;
 import java.util.Map;
 
-import org.cx.game.widget.treasure.IResource;
+import org.cx.game.widget.treasure.Resource;
 
-public class CallBuilding extends AbstractBuilding implements IBuilding {
+public class CallBuilding extends AbstractBuilding {
 
 	private Integer corpsID = null;       //可招募单位
 	private Integer nop = 0;             //当前可招募数量
 	private Integer yield = null;        //产量/天
 	
-	public CallBuilding(Integer corpsID, Integer yield, Integer buildingType) {
+	public CallBuilding(Integer type, Integer corpsID, Integer yield) {
 		// TODO Auto-generated constructor stub
-		super(buildingType);
+		super(type);
 		
 		this.corpsID = corpsID;
 		this.yield = yield;
 		
-		IOption optionBuild = new BuildOption();
+		BuildOption optionBuild = new BuildOption();
 		addOption(optionBuild);
 		
-		IOption callOption = new CallOption(corpsID);
+		CallOption callOption = new CallOption(corpsID);
 		addOption(callOption);
 	}
 
@@ -49,7 +49,7 @@ public class CallBuilding extends AbstractBuilding implements IBuilding {
 	}
 	
 	@Override
-	public void setConsume(IResource consume) {
+	public void setConsume(Resource consume) {
 		// TODO Auto-generated method stub
 		super.setConsume(consume);
 	}

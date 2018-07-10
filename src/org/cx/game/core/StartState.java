@@ -15,17 +15,16 @@ import org.cx.game.tools.JsonHelper;
 import org.cx.game.tools.XmlConfigureHelper;
 import org.cx.game.widget.AbstractPlace;
 import org.cx.game.widget.HoneycombGround;
-import org.cx.game.widget.building.IBuilding;
-import org.cx.game.widget.building.IOption;
+import org.cx.game.widget.building.AbstractBuilding;
 import org.cx.game.widget.building.ReviveOption;
-import org.cx.game.widget.treasure.ITreasure;
+import org.cx.game.widget.treasure.Treasure;
 
 public class StartState extends AbstractPlayState {
 	
 	@Override
 	public void deploy() {
 		// TODO Auto-generated method stub
-		context.setPlayState(context.getDeployState());
+		context.setPlayState(new DeployState());
 		context.deploy();
 	}
 
@@ -63,9 +62,9 @@ public class StartState extends AbstractPlayState {
 		Context cont = (Context) context;
 		HoneycombGround ground = (HoneycombGround) context.getGround();
 		
-		for(IBuilding building : ground.getBuildingIsTroop().keySet()){
+		for(AbstractBuilding building : ground.getBuildingIsTroop().keySet()){
 			Integer troop = ground.getBuildingIsTroop().get(building);
-			IPlayer player = cont.getPlayer(troop);
+			AbstractPlayer player = cont.getPlayer(troop);
 			if(null!=player)
 				ground.captureBuilding(player, building);
 		}
@@ -77,7 +76,7 @@ public class StartState extends AbstractPlayState {
 		/*
 		 * 英雄登场
 		 */
-		for(IPlayer p : cont.getPlayerList()){
+		for(AbstractPlayer p : cont.getPlayerList()){
 			Player player = (Player) p;
 			Integer troop = player.getTroop();
 			List<Integer> list = ground.getEntranceList(troop);

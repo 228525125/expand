@@ -4,15 +4,9 @@ import org.cx.game.widget.building.AbstractProcess;
 
 public class ActiveSkillCoolingProcess extends AbstractProcess {
 
-	public ActiveSkillCoolingProcess(Integer waitBout, IActiveSkill skill) {
+	public ActiveSkillCoolingProcess(Integer waitBout, ActiveSkill skill) {
 		super(waitBout, skill.getOwner().getPlayer(), skill);
 		// TODO Auto-generated constructor stub
-	}
-	
-	@Override
-	public IActiveSkill getOwner() {
-		// TODO Auto-generated method stub
-		return (IActiveSkill) super.getOwner();
 	}
 
 	@Override
@@ -20,7 +14,7 @@ public class ActiveSkillCoolingProcess extends AbstractProcess {
 		// TODO Auto-generated method stub
 		if(Integer.valueOf(0).equals(getRemainBout())){
 			invalid();
-			getOwner().setAllow(true);
+			((ActiveSkill) getOwner()).setAllow(true);
 		}
 	}
 

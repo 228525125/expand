@@ -1,20 +1,19 @@
 package org.cx.game.rule;
 
 import org.cx.game.action.Call;
-import org.cx.game.core.IPlayer;
+import org.cx.game.core.AbstractPlayer;
 import org.cx.game.corps.Hero;
 import org.cx.game.corps.Corps;
-import org.cx.game.widget.IGround;
-import org.cx.game.widget.IGroundE;
+import org.cx.game.widget.AbstractGround;
 import org.cx.game.widget.Place;
-import org.cx.game.widget.treasure.IResource;
+import org.cx.game.widget.treasure.Resource;
 
 /**
  * 处理补充兵源的情况
  * @author chenxian
  *
  */
-public class CallRule extends AbstractRule implements IRule {
+public class CallRule extends AbstractRule {
 	
 	private Boolean isInvoke = true;
 	
@@ -36,7 +35,7 @@ public class CallRule extends AbstractRule implements IRule {
 		Call call = getOwner();
 
 		Corps owner = call.getOwner();
-		IGroundE ground = owner.getPlayer().getContext().getGround();
+		AbstractGround ground = owner.getPlayer().getContext().getGround();
 		
 		/*
 		 * 英雄复活要先把尸体回收
@@ -69,8 +68,8 @@ public class CallRule extends AbstractRule implements IRule {
 		/*
 		 * 扣减资源
 		 */
-		IPlayer player = owner.getPlayer();
-		IResource consume = call.getConsume();		
+		AbstractPlayer player = owner.getPlayer();
+		Resource consume = call.getConsume();		
 		player.addToResource(consume);
 		
 		this.isInvoke = true;

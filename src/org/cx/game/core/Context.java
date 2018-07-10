@@ -5,20 +5,19 @@ import java.util.List;
 import org.cx.game.action.AbstractAction;
 import org.cx.game.action.IAction;
 import org.cx.game.exception.RuleValidatorException;
-import org.cx.game.widget.IGround;
-import org.cx.game.widget.IGroundE;
+import org.cx.game.widget.AbstractGround;
+import org.cx.game.widget.building.AbstractBuilding;
 import org.cx.game.widget.building.CallBuilding;
 import org.cx.game.widget.building.ResourceBuilding;
 import org.cx.game.widget.building.TownBuilding;
-import org.cx.game.widget.building.IBuilding;
 
-public class Context extends AbstractContext implements IContextE {
+public class Context extends AbstractContext {
 
 	private int bout = 0;  //回合	
 	private Integer day = 0; //天
 	private Integer week = 0; //星期几
 	
-	public Context(IGround ground) {
+	public Context(AbstractGround ground) {
 		// TODO Auto-generated constructor stub
 		super(ground);
 	}
@@ -27,9 +26,9 @@ public class Context extends AbstractContext implements IContextE {
 	/**
 	 * 根据troop查找player
 	 */
-	public IPlayer getPlayer(Integer troop) {
+	public AbstractPlayer getPlayer(Integer troop) {
 		// TODO Auto-generated method stub
-		for(IPlayer player : getPlayerList()){
+		for(AbstractPlayer player : getPlayerList()){
 			if(troop.equals(player.getTroop()))
 				return player;
 		}
@@ -37,43 +36,20 @@ public class Context extends AbstractContext implements IContextE {
 	}
 	
 	@Override
-	public AbstractPlayState getStartState() {
-		// TODO Auto-generated method stub
-		return new StartState();
-	}
-	
-	@Override
-	public AbstractPlayState getDeployState() {
-		// TODO Auto-generated method stub
-		return new DeployState();
-	}
-	
-	@Override
-	public AbstractPlayState getDoneState() {
-		// TODO Auto-generated method stub
-		return new DoneState();
-	}
-	
-	@Override
-	public AbstractPlayState getFinishState() {
-		// TODO Auto-generated method stub
-		return new FinishState();
-	}
-	
-	@Override
 	public void start() {
 		// TODO Auto-generated method stub
-		setPlayState(getStartState());
+		setPlayState(new StartState());
 		super.start();
 	}
 	
 	@Override
-	public int getBout() {
+	public Integer getBout() {
 		return bout;
 	}
 	
 	private IAction addBoutAction = null;
 	
+	@Override
 	public IAction getAddBoutAction(){
 		if(null==this.addBoutAction){
 			this.addBoutAction = new ContextAddBout();
@@ -90,6 +66,7 @@ public class Context extends AbstractContext implements IContextE {
 	
 	private IAction addDayAction = null;
 	
+	@Override
 	public IAction getAddDayAction(){
 		if(null==this.addDayAction){
 			IAction ad = new ContextAddDay();
@@ -107,6 +84,7 @@ public class Context extends AbstractContext implements IContextE {
 	
 	private IAction addWeekAction = null;
 	
+	@Override
 	public IAction getAddWeekAction(){
 		if(null==this.addWeekAction){
 			IAction aw = new ContextAddWeek();
@@ -117,18 +95,18 @@ public class Context extends AbstractContext implements IContextE {
 	}
 	
 	@Override
-	public IGroundE getGround() {
+	public AbstractGround getGround() {
 		// TODO Auto-generated method stub
-		return (IGroundE) super.getGround();
+		return (AbstractGround) super.getGround();
 	}
 	
 	@Override
-	public IGroundE getGround(Integer id) {
+	public AbstractGround getGround(Integer id) {
 		// TODO Auto-generated method stub
 		if(null==getGround().getArea())
 			return getGround();
 		
-		return (IGroundE) getGround().getArea().getGround(id);
+		return (AbstractGround) getGround().getArea().getGround(id);
 	}
 	
 	public class ContextAddBout extends AbstractAction implements IAction {
@@ -143,20 +121,14 @@ public class Context extends AbstractContext implements IContextE {
 					addWeek();
 			}
 			
-			IPlayer player = getControlPlayer();
-			
-			try {
-				player.addBout();
-			} catch (RuleValidatorException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			AbstractPlayer player = getControlPlayer();			
+			player.addBout();
 		}
 		
 		@Override
-		public IContext getOwner() {
+		public Context getOwner() {
 			// TODO Auto-generated method stub
-			return (IContext) super.getOwner();
+			return (Context) super.getOwner();
 		}
 	}
 	
@@ -170,12 +142,12 @@ public class Context extends AbstractContext implements IContextE {
 			/*
 			 * 产出
 			 */
-			IGround ground = getOwner().getGround();
-			List<IBuilding> list = ground.getBuildingList();
-			for(IBuilding building : list){
+			AbstractGround ground = getOwner().getGround();
+			List<AbstractBuilding> list = ground.getBuildingList();
+			for(AbstractBuilding building : list){
 				if(building instanceof TownBuilding){
 					TownBuilding town = (TownBuilding) building;
-					for(IBuilding innerBuilding :town.getBuildings()){
+					for(AbstractBuilding innerBuilding :town.getBuildings()){
 						if(innerBuilding instanceof ResourceBuilding){
 							ResourceBuilding br = (ResourceBuilding) innerBuilding;
 							br.output();           
@@ -191,9 +163,9 @@ public class Context extends AbstractContext implements IContextE {
 		}
 		
 		@Override
-		public IContext getOwner() {
+		public Context getOwner() {
 			// TODO Auto-generated method stub
-			return (IContext) super.getOwner();
+			return (Context) super.getOwner();
 		}
 	}
 	
@@ -207,12 +179,12 @@ public class Context extends AbstractContext implements IContextE {
 			/*
 			 * 产出
 			 */
-			IGround ground = getOwner().getGround();
-			List<IBuilding> list = ground.getBuildingList();
-			for(IBuilding building : list){
+			AbstractGround ground = getOwner().getGround();
+			List<AbstractBuilding> list = ground.getBuildingList();
+			for(AbstractBuilding building : list){
 				if(building instanceof TownBuilding){
 					TownBuilding town = (TownBuilding) building;
-					for(IBuilding innerBuilding :town.getBuildings()){
+					for(AbstractBuilding innerBuilding :town.getBuildings()){
 						if(innerBuilding instanceof CallBuilding){
 							CallBuilding bc = (CallBuilding) innerBuilding;
 							bc.output();           
@@ -223,9 +195,9 @@ public class Context extends AbstractContext implements IContextE {
 		}
 		
 		@Override
-		public IContext getOwner() {
+		public Context getOwner() {
 			// TODO Auto-generated method stub
-			return (IContext) super.getOwner();
+			return (Context) super.getOwner();
 		}
 	}
 

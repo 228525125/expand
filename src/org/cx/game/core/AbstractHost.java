@@ -8,7 +8,7 @@ import org.cx.game.corps.Hero;
 
 public abstract class AbstractHost {
 	
-	private List<IPlayerE> playerList = new ArrayList<IPlayerE>();
+	private List<AbstractPlayer> playerList = new ArrayList<AbstractPlayer>();
 	private List<Integer> troopOfPlayerList = new ArrayList<Integer>();
 	
 	/**
@@ -17,7 +17,7 @@ public abstract class AbstractHost {
 	 */
 	public void playerJoinGame(String account) {
 		Integer troop = getUsableTroop();
-		IPlayerE player = new Player(troop, account); 
+		AbstractPlayer player = new Player(troop, account); 
 		this.playerList.add(player);
 		this.troopOfPlayerList.add(troop);
 	}
@@ -27,7 +27,7 @@ public abstract class AbstractHost {
 	 * @param troop 游戏中的编号
 	 */
 	public void playerQuitGame(String account) {
-		IPlayer player = queryPlayerForName(account);
+		AbstractPlayer player = queryPlayerForName(account);
 		this.troopOfPlayerList.remove(player.getTroop());
 		this.playerList.remove(player);
 	}
@@ -38,7 +38,7 @@ public abstract class AbstractHost {
 	 * @param player
 	 */
 	public void setTroopOfPlayer(Integer troop, String account) {
-		IPlayer player = queryPlayerForName(account);
+		AbstractPlayer player = queryPlayerForName(account);
 		player.setTroop(troop);
 	}
 	
@@ -48,12 +48,12 @@ public abstract class AbstractHost {
 	 * @param player
 	 */
 	public void setHeroOfPlayer(Integer heroId, String account) {
-		IPlayerE player = queryPlayerForName(account);
+		Player player = (Player) queryPlayerForName(account);
 		Hero hero = (Hero) CorpsFactory.getInstance(heroId, player);
 		player.addHero(hero);
 	}
 	
-	List<IPlayerE> getPlayerList() {
+	List<AbstractPlayer> getPlayerList() {
 		return playerList;
 	}
 	
@@ -62,9 +62,9 @@ public abstract class AbstractHost {
 	}
 	
 	
-	public IPlayerE queryPlayerForName(String account) {
+	public AbstractPlayer queryPlayerForName(String account) {
 		// TODO Auto-generated method stub
-		for(IPlayerE player : this.playerList){
+		for(AbstractPlayer player : this.playerList){
 			if(account.equals(player.getName()))
 				return player;
 		}

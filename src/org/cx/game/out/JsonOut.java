@@ -100,7 +100,7 @@ public class JsonOut extends AbstractResponse {
 							.element("buffList", corps.getBuffList(),getConfig())
 							.element("call", corps.getCall(),getConfig())
 							.element("death", corps.getDeath(),getConfig())
-							.element("hero", corps.getHero())
+							.element("hero", corps.isHero())
 							.element("id", corps.getType())
 							.element("move", corps.getMove(),getConfig())
 							.element("name", corps.getName())
@@ -127,7 +127,7 @@ public class JsonOut extends AbstractResponse {
 							.element("call", hero.getCall(), getConfig())
 							.element("conjure", hero.getConjure(), getConfig())
 							.element("death", hero.getDeath(), getConfig())
-							.element("hero", hero.getHero())
+							.element("hero", hero.isHero())
 							.element("id", hero.getType())
 							.element("move", hero.getMove(), getConfig())
 							.element("name", hero.getName())
@@ -137,7 +137,8 @@ public class JsonOut extends AbstractResponse {
 							.element("skillList", hero.getSkillList(), getConfig())
 							.element("star", hero.getStar())
 							.element("upgrade", hero.getUpgrade(), getConfig())
-							.element("treasures", hero.getTreasures(), getConfig());
+							.element("treasures", hero.getTreasures(), getConfig())
+							.element("troops", hero.getTroops(), getConfig());
 				}
 			});
 			
@@ -309,7 +310,7 @@ public class JsonOut extends AbstractResponse {
 					// TODO Auto-generated method stub
 					Player obj = (Player) arg0;
 					return new JSONObject().element("bout", obj.getBout())
-							.element("computer", obj.getComputer())
+							.element("computer", obj.isComputer())
 							.element("id", obj.getTroop())
 							.element("name", obj.getName())
 							.element("ration", obj.getRation())
@@ -344,7 +345,7 @@ public class JsonOut extends AbstractResponse {
 							.element("landform", JsonHelper.convertForGroundLandform(obj.getLandformMap()), getConfig())
 							.element("treasureList", obj.getTreasureList(), getConfig())
 							.element("corpsList", obj.getLivingCorpsList(), getConfig())
-							.element("emptyList", obj.getEmptyList())
+							.element("emptyList", obj.queryEmptyList())
 							.element("imagePath", obj.getImagePath())
 							.element("name", obj.getName())
 							.element("xBorder", obj.getXBorder())
@@ -361,7 +362,7 @@ public class JsonOut extends AbstractResponse {
 					Place obj = (Place) arg0;
 					return new JSONObject().element("building", obj.getBuilding(), getConfig())
 							.element("cemetery", obj.getCemetery(), getConfig())
-							.element("empty", obj.getEmpty())
+							.element("empty", obj.isEmpty())
 							.element("landform", obj.getLandform())
 							.element("life", obj.getCorps(), getConfig())
 							.element("position", obj.getPosition())
@@ -400,6 +401,7 @@ public class JsonOut extends AbstractResponse {
 							.element("player", obj.getPlayer(), getConfig())
 							.element("position", obj.getPlace().getPosition())
 							.element("status", obj.getStatus())
+							.element("category", obj.getCategory())
 							.element("type", obj.getType())
 							.element("upgrade", obj.getUpgrade(), getConfig())
 							.element("cardID", obj.getCorpsID())
@@ -422,6 +424,7 @@ public class JsonOut extends AbstractResponse {
 							.element("player", obj.getPlayer(), getConfig())
 							.element("position", obj.getPlace().getPosition())
 							.element("status", obj.getStatus())
+							.element("category", obj.getCategory())
 							.element("type", obj.getType())
 							.element("upgrade", obj.getUpgrade(), getConfig())
 							.element("resource", obj.getResource(), getConfig());
@@ -441,6 +444,7 @@ public class JsonOut extends AbstractResponse {
 							.element("player", obj.getPlayer(), getConfig())
 							.element("position", obj.getPlace().getPosition())
 							.element("status", obj.getStatus())
+							.element("category", obj.getCategory())
 							.element("type", obj.getType())
 							.element("upgrade", obj.getUpgrade(), getConfig())
 							.element("buildings", obj.getBuildings(), getConfig());
@@ -459,6 +463,7 @@ public class JsonOut extends AbstractResponse {
 							.element("position", obj.getPlace().getPosition())
 							.element("status", obj.getStatus())
 							.element("upgrade", obj.getUpgrade(), getConfig())
+							.element("category", obj.getCategory())
 							.element("type", obj.getType());
 							
 				}
@@ -609,6 +614,7 @@ public class JsonOut extends AbstractResponse {
 					// TODO Auto-generated method stub
 					ShieldHit obj = (ShieldHit) arg0;
 					return new JSONObject().element("allow", obj.getAllow())
+							.element("name", obj.getName())
 							.element("cooldown", obj.getCooldown())
 							.element("cooldownRemain", obj.getCooldownRemain())
 							.element("range", obj.getRange())

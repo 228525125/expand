@@ -1,16 +1,16 @@
 package org.cx.game.validator;
 
 import org.cx.game.action.Upgrade;
-import org.cx.game.core.IPlayer;
+import org.cx.game.core.AbstractPlayer;
 import org.cx.game.tools.I18n;
-import org.cx.game.widget.treasure.IResource;
+import org.cx.game.widget.treasure.Resource;
 
 public class UpgradeConsumeValidator extends Validator {
 
 	private Upgrade upgrade = null;
-	private IPlayer player = null;
+	private AbstractPlayer player = null;
 	
-	public UpgradeConsumeValidator(Upgrade upgrade, IPlayer player) {
+	public UpgradeConsumeValidator(Upgrade upgrade, AbstractPlayer player) {
 		// TODO Auto-generated constructor stub
 		this.upgrade = upgrade;
 		this.player = player;
@@ -21,7 +21,7 @@ public class UpgradeConsumeValidator extends Validator {
 		// TODO Auto-generated method stub
 		Boolean ret = true;
 
-		IResource res = player.getResource();
+		Resource res = player.getResource();
 			
 		if(res.absoluteLessThan(upgrade.getRequirement())){
 			ret = false;

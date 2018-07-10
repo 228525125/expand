@@ -3,14 +3,9 @@ package org.cx.game.magic.buff;
 import java.util.List;
 
 import org.cx.game.corps.Corps;
-import org.cx.game.magic.buff.IBuff;
-import org.cx.game.magic.IMagic;
-import org.cx.game.exception.RuleValidatorException;
+import org.cx.game.magic.buff.AbstractBuff;
 import org.cx.game.intercepter.AbstractIntercepter;
 import org.cx.game.intercepter.IIntercepter;
-import org.cx.game.observer.NotifyInfo;
-import org.cx.game.tools.I18n;
-import org.cx.game.widget.IControlQueue;
 
 /**
  * 眩晕
@@ -40,8 +35,8 @@ public class DizzyBuff extends AbstractBuff {
 		/*
 		 * 被击晕后，锁定的目标全部取消
 		 */
-		List<IBuff> buffs = getOwner().getNexusBuff(AttackLockBuff.class);
-		for(IBuff buff : buffs)
+		List<AbstractBuff> buffs = getOwner().getNexusBuff(AttackLockBuff.class);
+		for(AbstractBuff buff : buffs)
 			buff.invalid();
 		
 		/*
@@ -69,5 +64,17 @@ public class DizzyBuff extends AbstractBuff {
 
 		getOwner().getActivate().action(false);
 		getOwner().getAttacked().setFightBack(false);
+	}
+
+	@Override
+	public void before(Object[] args) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void after(Object[] args) {
+		// TODO Auto-generated method stub
+		
 	}
 }

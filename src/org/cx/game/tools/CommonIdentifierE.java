@@ -29,10 +29,6 @@ public class CommonIdentifierE extends CommonIdentifier {
 	public final static Integer Attack_Mode_Near = 115;   //近战攻击
 	public final static Integer Attack_Mode_Far = 116;    //远程攻击
 	
-	public final static Integer Death_Status_Live = 0;         //战斗
-	public final static Integer Death_Status_Death = 1;        //死亡
-	public final static Integer Death_Status_Exist = 2;        //存在
-	
 	public static final Integer Move_Type_Walk = 141;          //步行
 	public static final Integer Move_Type_Equitation = 142;    //骑行
 	public static final Integer Move_Type_Drive = 143;         //驾驶
@@ -71,19 +67,23 @@ public class CommonIdentifierE extends CommonIdentifier {
 	
 	public static final Integer Building = 1010;
 	
-	public static final Integer Building_Bridge = 502001;  //桥
-	public static final Integer Building_Smithyt = 503001; //铁匠铺
-	public static final Integer Building_Hieron = 504001;  //神殿
-	public static final Integer Building_Village = 505001; //村庄
-	public static final Integer Building_Spatial = 506001; //传送站
-	public static final Integer Building_Chengshi = 601001; //城市
+	public static final Integer Building_Town = 501;  //城镇
+	
+	
+	public static final Integer Building_Bridge = 502;  //桥
+	public static final Integer Building_Smithyt = 503; //铁匠铺
+	public static final Integer Building_Hieron = 504;  //神殿
+	public static final Integer Building_Call = 505;
+	public static final Integer Building_Spatial = 506; //传送站
+	
+	/*public static final Integer Building_Chengshi = 601001; //城市
 	public static final Integer Building_Ganglou = 602001; //岗楼
 	public static final Integer Building_Jianta = 603001; //箭塔
 	public static final Integer Building_Shijiuta = 604001; //狮鹫塔
 	public static final Integer Building_Bingying = 605001; //兵营
 	public static final Integer Building_Siyuan = 606001; //寺院
 	public static final Integer Building_Mapeng = 607001; //马棚
-	public static final Integer Building_Xunlianchang = 608001; //训练场
+	public static final Integer Building_Xunlianchang = 608001; //训练场*/
 	
 	//---------------- NotifyInfo -----------------//
 	
@@ -108,6 +108,8 @@ public class CommonIdentifierE extends CommonIdentifier {
 	public final static String Corps_Chuck = "Corps_Chuck";
 	public final static String Corps_Move = "Corps_Move";
 	public final static String Corps_Pick = "Corps_Pick";
+	public final static String Corps_Merge = "Corps_Merge";
+	public final static String Corps_Leave = "Corps_Leave";
 	public final static String Treasure_Picked = "Treasure_Picked";
 	
 	public final static String Corps_Hide = "Corps_Hide";
@@ -141,9 +143,10 @@ public class CommonIdentifierE extends CommonIdentifier {
 	public final static String Command_Query_Attack = "Command_Query_Attack";
 	public final static String Command_Query_Conjure = "Command_Query_Conjure";
 	public final static String Command_Query_Swap = "Command_Query_Swap";
-	public final static String Command_Query_Apply = "Command_Query_Apply";
 	public final static String Command_Query_Execute = "Command_Query_Execute";
 	public final static String Command_Query_Pick = "Command_Query_Pick";
+	public final static String Command_Query_Merge = "Command_Query_Merge";
+	public final static String Command_Query_Leave = "Command_Query_Leave";
 	public final static String Command_Reload = "Command_Reload";
 	public final static String Command_Switch = "Command_Switch";
 	

@@ -3,19 +3,10 @@ package org.cx.game.action;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.cx.game.corps.AbstractCorps;
-import org.cx.game.corps.Hero;
 import org.cx.game.corps.Corps;
-import org.cx.game.exception.RuleValidatorException;
-import org.cx.game.magic.buff.IBuff;
-import org.cx.game.magic.skill.IPassiveSkill;
-import org.cx.game.magic.skill.ISkill;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
-import org.cx.game.widget.GroundFactory;
-import org.cx.game.widget.IGround;
-import org.cx.game.widget.treasure.ITreasure;
-import org.cx.game.widget.treasure.EquipmentTreasure;
+import org.cx.game.widget.AbstractGround;
 
 public class Attack extends AbstractAction implements IAction {
 	
@@ -180,7 +171,7 @@ public class Attack extends AbstractAction implements IAction {
 		
 		Attack clone = clone();
 		
-		IGround ground = getOwner().getGround();
+		AbstractGround ground = getOwner().getGround();
 		
 		//如果是远程，这里要设置为近身攻击模式
 		Integer distance = ground.distance(attacked.getPosition(), getOwner().getPosition());

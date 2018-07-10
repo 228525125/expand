@@ -3,17 +3,17 @@ package org.cx.game.command;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.cx.game.core.IPlayer;
+import org.cx.game.core.AbstractPlayer;
 import org.cx.game.exception.ValidatorException;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.tools.Util;
 import org.cx.game.validator.IntegerTypeValidator;
-import org.cx.game.widget.IGround;
+import org.cx.game.widget.AbstractGround;
 
 public class SwitchCommand extends InteriorCommand {
 
-	public SwitchCommand(IPlayer player) {
+	public SwitchCommand(AbstractPlayer player) {
 		super(player);
 		// TODO Auto-generated constructor stub
 	}
@@ -32,7 +32,7 @@ public class SwitchCommand extends InteriorCommand {
 		super.execute();
 		
 		Integer mapId = Integer.valueOf(Util.filterNumber(parameter.toString())); 
-		IGround ground = context.getGround(mapId);
+		AbstractGround ground = context.getGround(mapId);
 		context.setGround(ground);
 		
 		Map<String,Object> map = new HashMap<String,Object>();

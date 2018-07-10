@@ -1,18 +1,14 @@
 package org.cx.game.ai.policy;
 
-import java.util.Collections;
-import java.util.List;
-
 import org.cx.game.ai.CorpsAgent;
 import org.cx.game.ai.policy.formula.Chaochushecheng;
 import org.cx.game.ai.policy.formula.MoveableFormula;
 import org.cx.game.ai.policy.formula.NotLockFormula;
-import org.cx.game.ai.policy.formula.NotShechengneidedirenFormula;
 import org.cx.game.command.Command;
 import org.cx.game.command.CommandFactory;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.ValidatorException;
-import org.cx.game.widget.IGround;
+import org.cx.game.widget.AbstractGround;
 
 public class NearTargetForAttackPolicy extends AbstractPolicy<CorpsAgent> {
 
@@ -62,7 +58,7 @@ public class NearTargetForAttackPolicy extends AbstractPolicy<CorpsAgent> {
 			System.out.println(getErrors().getMessage());
 		}else{
 			
-			IGround ground = corps.getGround();
+			AbstractGround ground = corps.getGround();
 			Integer position = ground.getPointByWay(corps.getPosition(), target.getPosition(), corps.getMove().getEnergy(), corps.getMove().getType(), corps.getPlayer());
 			
 			this.cmdStr = "move ground place"+position+";";

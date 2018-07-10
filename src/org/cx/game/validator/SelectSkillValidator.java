@@ -1,7 +1,7 @@
 package org.cx.game.validator;
 
 import org.cx.game.command.CommandBuffer;
-import org.cx.game.magic.skill.ISkill;
+import org.cx.game.magic.skill.AbstractSkill;
 import org.cx.game.tools.I18n;
 
 /**
@@ -12,7 +12,7 @@ import org.cx.game.tools.I18n;
 public class SelectSkillValidator extends Validator {
 
 	private CommandBuffer buffer = null;
-	private ISkill skill = null;
+	private AbstractSkill skill = null;
 	
 	public SelectSkillValidator(CommandBuffer buffer) {
 		// TODO Auto-generated constructor stub
@@ -35,7 +35,7 @@ public class SelectSkillValidator extends Validator {
 		return buffer;
 	}
 
-	protected ISkill getSkill() {
+	protected AbstractSkill getSkill() {
 		return skill;
 	}
 	

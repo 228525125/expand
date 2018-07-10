@@ -29,6 +29,14 @@ public class AttackLockBuff extends AbstractBuff {
 		return (Corps) super.getOwner();
 	}
 	
+	/**
+	 * 发起锁定的一方
+	 * @return
+	 */
+	public Corps getLocker() {
+		return attack;
+	}
+	
 	@Override
 	public void invalid() {
 		// TODO Auto-generated method stub
@@ -40,8 +48,8 @@ public class AttackLockBuff extends AbstractBuff {
 	@Override
 	public void effect() {
 		// TODO Auto-generated method stub
-		List<IBuff> buffs = getOwner().getBuff(AttackLockBuff.class);
-		for(IBuff buff : buffs){
+		List<AbstractBuff> buffs = getOwner().getBuff(AttackLockBuff.class);
+		for(AbstractBuff buff : buffs){
 			AttackLockBuff alb = (AttackLockBuff) buff;				
 			if(alb.getLocker().equals(attack)){
 				alb.invalid();
@@ -63,8 +71,8 @@ public class AttackLockBuff extends AbstractBuff {
 				Corps attacked = (Corps) ((Object[]) args[0])[0];
 				
 				Boolean locked = false;
-				List<IBuff> buffs = getOwner().getBuff(AttackLockBuff.class);
-				for(IBuff buff : buffs){
+				List<AbstractBuff> buffs = getOwner().getBuff(AttackLockBuff.class);
+				for(AbstractBuff buff : buffs){
 					AttackLockBuff alb = (AttackLockBuff) buff;
 					if(attacked.equals(alb.getLocker())                //被攻击者是锁定对象
 					|| attacked.containsSkill(TauntActive.class)){           //或者被攻击者具有嘲讽技能          
@@ -110,12 +118,16 @@ public class AttackLockBuff extends AbstractBuff {
 		recordIntercepter(getOwner().getMove(), moveIn);
 	}
 
-	/**
-	 * 发起锁定的一方
-	 * @return
-	 */
-	public Corps getLocker() {
-		return attack;
+	@Override
+	public void before(Object[] args) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void after(Object[] args) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

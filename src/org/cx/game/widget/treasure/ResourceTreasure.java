@@ -1,31 +1,25 @@
 package org.cx.game.widget.treasure;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.cx.game.action.IAction;
 import org.cx.game.action.Picked;
-import org.cx.game.core.IPlayer;
 import org.cx.game.corps.Corps;
-import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.tools.CommonIdentifierE;
-import org.cx.game.widget.IGround;
 
 /**
  * 资料类物品
  * @author chenxian
  *
  */
-public class ResourceTreasure extends Treasure implements ITreasure {
+public class ResourceTreasure extends Treasure {
 
-	private IResource resource = null;
+	private Resource resource = null;
 	
 	public ResourceTreasure(Integer gold, Integer wood, Integer stone, Integer ore) {
 		// TODO Auto-generated constructor stub
 		this.resource = new Resource(gold, wood, stone, ore);
 	}
 	
-	public IResource getResource() {
+	public Resource getResource() {
 		return resource;
 	}
 	

@@ -2,11 +2,8 @@ package org.cx.game.rule;
 
 import org.cx.game.corps.Corps;
 import org.cx.game.corps.Corps.CorpsAddBuffAction;
-import org.cx.game.magic.buff.IBuff;
-import org.cx.game.magic.skill.IPassiveSkill;
-import org.cx.game.magic.skill.ISkill;
 
-public class CorpsPropertyUpdateAddBuffRule extends AbstractRule implements IRule {
+public class CorpsPropertyUpdateAddBuffRule extends AbstractRule {
 
 	@Override
 	public Class getInterceptable() {

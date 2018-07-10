@@ -1,13 +1,10 @@
 package org.cx.game.validator;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.tools.I18n;
-import org.cx.game.widget.IGround;
+import org.cx.game.widget.AbstractGround;
 import org.cx.game.widget.Place;
-import org.cx.game.widget.building.IBuilding;
+import org.cx.game.widget.building.AbstractBuilding;
 
 /**
  * 判断call位置是否超出范围
@@ -17,18 +14,11 @@ import org.cx.game.widget.building.IBuilding;
 public class CallRangeValidator extends SelectBuildingTypeValidator {
 
 	private Place place;
-	private IBuilding buildingCall = null;
+	private AbstractBuilding buildingCall = null;
 	
-	public CallRangeValidator(IBuilding buildingCall, Place place) {
+	public CallRangeValidator(AbstractBuilding buildingCall, Place place) {
 		// TODO Auto-generated constructor stub
-		super(buildingCall, new Integer[]{
-				CommonIdentifierE.Building_Chengshi
-				, CommonIdentifierE.Building_Ganglou
-				, CommonIdentifierE.Building_Jianta
-				, CommonIdentifierE.Building_Bingying
-				, CommonIdentifierE.Building_Shijiuta
-				, CommonIdentifierE.Building_Siyuan
-				, CommonIdentifierE.Building_Xunlianchang});
+		super(buildingCall, CommonIdentifierE.Building_Call);
 		this.buildingCall = buildingCall;
 		this.place = place;
 	}
@@ -39,7 +29,7 @@ public class CallRangeValidator extends SelectBuildingTypeValidator {
 		Boolean ret = super.validate();
 		
 		if(ret){
-			IGround ground = buildingCall.getPlayer().getContext().getGround();
+			AbstractGround ground = buildingCall.getPlayer().getContext().getGround();
 			if(Integer.valueOf(1).equals(ground.distance(buildingCall.getPlace().getPosition(), place.getPosition())))
 				ret = true;
 			else{

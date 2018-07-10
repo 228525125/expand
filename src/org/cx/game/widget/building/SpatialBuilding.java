@@ -12,8 +12,8 @@ import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
+import org.cx.game.widget.AbstractGround;
 import org.cx.game.widget.AbstractPlace;
-import org.cx.game.widget.IGround;
 
 /**
  * 传送站，用于链接不同地图空间的节点，但区别于时空门；
@@ -27,10 +27,10 @@ public class SpatialBuilding extends AbstractBuilding {
 
 	private List<SpatialBuilding> spatialBuildingList = new ArrayList<SpatialBuilding>();
 	
-	public SpatialBuilding(Integer buildingType) {
-		super(buildingType);
+	public SpatialBuilding(Integer type) {
+		super(type);
 		// TODO Auto-generated constructor stub
-		setStatus(IBuilding.Building_Status_Complete);
+		setStatus(AbstractBuilding.Building_Status_Complete);
 	}
 	
 	/**
@@ -82,7 +82,7 @@ public class SpatialBuilding extends AbstractBuilding {
 	
 	public void addSpatialBuilding(SpatialBuilding spatialBuilding) {
 		this.spatialBuildingList.add(spatialBuilding);
-		IOption option = new SpatialOption(spatialBuilding);
+		SpatialOption option = new SpatialOption(spatialBuilding);
 		addOption(option);
 	}
 
@@ -114,7 +114,7 @@ public class SpatialBuilding extends AbstractBuilding {
 			SpatialBuilding sb = (SpatialBuilding) objects[0];
 			AbstractCorps corps = (AbstractCorps) objects[1];
 			
-			IGround ground = corps.getGround();
+			AbstractGround ground = corps.getGround();
 			ground.removeCorps(corps);
 			
 			Map<String,Object> map = new HashMap<String,Object>();
@@ -134,7 +134,7 @@ public class SpatialBuilding extends AbstractBuilding {
 			// TODO Auto-generated method stub
 			AbstractPlace place = (AbstractPlace) objects[0];
 			Corps corps = (Corps) objects[1];
-			IGround ground = place.getOwner();
+			AbstractGround ground = place.getOwner();
 			
 			/*
 			 * 消耗精力

@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.cx.game.corps.Corps;
-import org.cx.game.magic.skill.IActiveSkill;
 import org.cx.game.exception.RuleValidatorException;
+import org.cx.game.magic.skill.ActiveSkill;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
 
@@ -26,7 +26,7 @@ public class Conjure extends AbstractAction implements IAction {
 	public void action(Object...objects) {
 		// TODO Auto-generated method stub
 		
-		IActiveSkill skill = (IActiveSkill) objects[0];
+		ActiveSkill skill = (ActiveSkill) objects[0];
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("card", getOwner());

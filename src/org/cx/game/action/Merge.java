@@ -4,14 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.cx.game.corps.Corps;
-import org.cx.game.exception.RuleValidatorException;
+import org.cx.game.corps.Hero;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
-import org.cx.game.widget.treasure.Treasure;
+import org.cx.game.widget.AbstractGround;
 
-public class Pick extends AbstractAction implements IAction {
+public class Merge extends AbstractAction implements IAction {
 
-	public final static Integer Pick_Range_Defautl = 1;
+	private Hero hero = null;
 	
 	@Override
 	public Corps getOwner() {
@@ -19,25 +19,25 @@ public class Pick extends AbstractAction implements IAction {
 		return (Corps) super.getOwner();
 	}
 	
+	public Hero getHero() {
+		return this.hero;
+	}
+	
 	@Override
 	public void action(Object... objects) {
 		// TODO Auto-generated method stub
-		
-		Treasure treasure = (Treasure) objects[0];
-		
-		/*
-		 * 消耗精力
-		 */
-		Integer energy = getOwner().getMove().getEnergy();
-		getOwner().getMove().setEnergy(--energy);
+		Hero hero = (Hero) objects[0];
 		
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("card", getOwner());
-		map.put("treasure", treasure);
+		map.put("corps", getOwner());
 		map.put("position", getOwner().getPosition());
-		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Corps_Pick,map);
+		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Corps_Merge,map);
 		super.notifyObservers(info);
 		
-		treasure.picked(getOwner());
+		hero.addTroops(getOwner());
+		AbstractGround ground = getOwner().getGround();
+		ground.removeCorps(getOwner());
+		this.hero = hero;
 	}
+
 }

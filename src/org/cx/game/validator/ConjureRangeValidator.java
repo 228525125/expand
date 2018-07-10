@@ -1,6 +1,7 @@
 package org.cx.game.validator;
 
-import org.cx.game.magic.skill.ISkill;
+import org.cx.game.magic.skill.AbstractSkill;
+import org.cx.game.magic.skill.ActiveSkill;
 import org.cx.game.tools.I18n;
 
 /**
@@ -10,10 +11,10 @@ import org.cx.game.tools.I18n;
  */
 public class ConjureRangeValidator extends Validator {
 
-	private ISkill skill = null;
+	private AbstractSkill skill = null;
 	private Integer position = null;
 	
-	public ConjureRangeValidator(ISkill skill, Integer position) {
+	public ConjureRangeValidator(AbstractSkill skill, Integer position) {
 		// TODO Auto-generated constructor stub
 		this.skill = skill;
 		this.position = position;
@@ -24,7 +25,7 @@ public class ConjureRangeValidator extends Validator {
 		// TODO Auto-generated method stub
 		Integer curPosition = skill.getOwner().getPosition();
 		Integer step = skill.getOwner().getPlayer().getContext().getGround().distance(curPosition, position);
-		Integer range = skill.getRange();
+		Integer range = ((ActiveSkill) skill).getRange();
 		
 		if(range>=step)
 			return true;

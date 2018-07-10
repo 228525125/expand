@@ -3,8 +3,6 @@ package org.cx.game.tools;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.cx.game.widget.treasure.ITreasure;
-
 public class JsonHelper {
 
 	public static Map<String, Integer> convertForGroundLandform(Map<Integer, Integer> landformMap) {

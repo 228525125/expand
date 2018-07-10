@@ -1,15 +1,14 @@
 package org.cx.game.tools;
 
 import org.cx.game.core.Context;
-import org.cx.game.core.IPlayer;
+import org.cx.game.core.AbstractPlayer;
 import org.cx.game.core.Player;
 import org.cx.game.corps.Corps;
 import org.cx.game.corps.CorpsFactory;
 import org.cx.game.widget.Area;
 import org.cx.game.widget.HoneycombGround;
-import org.cx.game.widget.IGroundE;
+import org.cx.game.widget.building.AbstractBuilding;
 import org.cx.game.widget.building.BuildingFactory;
-import org.cx.game.widget.building.IBuilding;
 import org.cx.game.widget.building.SpatialBuilding;
 
 public class XmlConfigureHelper {
@@ -27,10 +26,10 @@ public class XmlConfigureHelper {
 		Integer nop = Integer.valueOf(datas[3]);
 		Integer troop = Integer.valueOf(datas[4]);
 		
-		IPlayer player = context.getPlayer(troop);
+		AbstractPlayer player = context.getPlayer(troop);
 		if(null==player){                                   //如果非阵营玩家（中立部队），则自动生成一个player
 			player = new Player(troop, Player.Neutral);
-			player.setComputer(true);
+			player.setIsComputer(true);
 			context.addPlayer(player);
 		}
 		Corps npc = (Corps) CorpsFactory.getInstance(corpsID, player);
@@ -52,10 +51,10 @@ public class XmlConfigureHelper {
 	 */
 	public static void map_buildingData_building(String data, HoneycombGround ground){
 		Integer position = Integer.valueOf(data.split(",")[0]);
-		Integer buildingType = Integer.valueOf(data.split(",")[1]);
+		Integer buildingId = Integer.valueOf(data.split(",")[1]);
 		Integer troop = Integer.valueOf(data.split(",")[2]);
 			
-		IBuilding building = BuildingFactory.getInstance(buildingType);
+		AbstractBuilding building = BuildingFactory.getInstance(buildingId);
 		ground.placementBuilding(position, building);
 		
 		ground.getBuildingIsTroop().put(building, troop);
@@ -64,9 +63,9 @@ public class XmlConfigureHelper {
 	public static void area_spatialNodeData_map(String data, Area area){
 		String[] datas = data.split(",");
 		Integer nodeId = Integer.valueOf(datas[0]);
-		SpatialBuilding spatialBuilding = area.getSpatialBuilding(nodeId);
+		SpatialBuilding spatialBuilding = (SpatialBuilding) area.getSpatialBuilding(nodeId);
 		for(int i=1;i<datas.length;i++){
-			SpatialBuilding sb = area.getSpatialBuilding(Integer.valueOf(datas[i]));
+			SpatialBuilding sb = (SpatialBuilding) area.getSpatialBuilding(Integer.valueOf(datas[i]));
 			spatialBuilding.addSpatialBuilding(sb);
 		}
 	}

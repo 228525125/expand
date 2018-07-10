@@ -3,18 +3,17 @@ package org.cx.game.command;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.cx.game.core.IPlayer;
+import org.cx.game.core.AbstractPlayer;
 import org.cx.game.exception.ValidatorException;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
-import org.cx.game.tools.JsonHelper;
 import org.cx.game.widget.HoneycombGround;
 
 public class ReloadCommand extends InteriorCommand {
 
-	private IPlayer player = null;
+	private AbstractPlayer player = null;
 	
-	public ReloadCommand(IPlayer player) {
+	public ReloadCommand(AbstractPlayer player) {
 		// TODO Auto-generated constructor stub
 		super(player);
 		

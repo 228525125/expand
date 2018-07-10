@@ -6,13 +6,13 @@ import java.util.List;
 import org.cx.game.action.IAction;
 import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
-import org.cx.game.magic.buff.IBuff;
+import org.cx.game.magic.buff.AbstractBuff;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.magic.buff.AttackLockBuff;
 import org.cx.game.magic.buff.TauntBuff;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
-import org.cx.game.widget.IGround;
+import org.cx.game.widget.AbstractGround;
 
 /**
  * 锁定攻击目标，该动作发生在attack时，不管是否击中目标
@@ -44,8 +44,8 @@ public class AttackLock extends PassiveSkill {
 		// TODO Auto-generated method stub
 		super.affect(objects);
 		
-		List<IBuff> buffs = getOwner().getNexusBuff(AttackLockBuff.class);
-		for(IBuff buff : buffs)
+		List<AbstractBuff> buffs = getOwner().getNexusBuff(AttackLockBuff.class);
+		for(AbstractBuff buff : buffs)
 			buff.invalid();
 		
 		new AttackLockBuff(getOwner(),attacked).effect();
@@ -56,9 +56,9 @@ public class AttackLock extends PassiveSkill {
 		// TODO Auto-generated method stub
 		attacked = (Corps) ((Object[]) args[0])[0];
 		
-		List<IBuff> buffs = attacked.getBuff(AttackLockBuff.class);
+		List<AbstractBuff> buffs = attacked.getBuff(AttackLockBuff.class);
 		Boolean exist = false;
-		for(IBuff buff : buffs){
+		for(AbstractBuff buff : buffs){
 			if(getOwner().equals(buff.getOwner())){
 				exist = true;
 				break;
@@ -66,7 +66,7 @@ public class AttackLock extends PassiveSkill {
 		}
 		
 		Boolean taunt = true;
-		IGround ground = getOwner().getPlayer().getContext().getGround();
+		AbstractGround ground = getOwner().getPlayer().getContext().getGround();
 		
 		if(getOwner().containsBuff(TauntBuff.class)){
 			TauntBuff buff = (TauntBuff) getOwner().getBuff(TauntBuff.class);

@@ -2,12 +2,12 @@ package org.cx.game.validator;
 
 import org.cx.game.command.CommandBuffer;
 import org.cx.game.tools.I18n;
-import org.cx.game.widget.building.IOption;
+import org.cx.game.widget.building.AbstractOption;
 
 public class SelectOptionValidator extends Validator {
 
 	protected CommandBuffer buffer = null;
-	private IOption option = null;
+	private AbstractOption option = null;
 	
 	public SelectOptionValidator(CommandBuffer buffer) {
 		// TODO Auto-generated constructor stub
@@ -26,7 +26,7 @@ public class SelectOptionValidator extends Validator {
 		}
 	}
 	
-	protected IOption getOption(){
+	protected AbstractOption getOption(){
 		return this.option;
 	}
 }

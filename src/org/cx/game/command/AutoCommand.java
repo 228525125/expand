@@ -1,11 +1,11 @@
 package org.cx.game.command;
 
-import org.cx.game.core.IPlayer;
+import org.cx.game.core.AbstractPlayer;
 import org.cx.game.exception.ValidatorException;
 
 public class AutoCommand extends InteriorCommand {
 
-	public AutoCommand(IPlayer player) {
+	public AutoCommand(AbstractPlayer player) {
 		super(player);
 		// TODO Auto-generated constructor stub
 	}

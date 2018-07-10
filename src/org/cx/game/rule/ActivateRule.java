@@ -7,9 +7,9 @@ import org.cx.game.action.Call;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.magic.buff.AttackLockBuff;
-import org.cx.game.magic.buff.IBuff;
+import org.cx.game.magic.buff.AbstractBuff;
 
-public class ActivateRule extends AbstractRule implements IRule {
+public class ActivateRule extends AbstractRule {
 	
 	@Override
 	public void after(Object[] args) {
@@ -20,8 +20,8 @@ public class ActivateRule extends AbstractRule implements IRule {
 		Corps owner = activate.getOwner();
 		
 		if(activation){
-			List<IBuff> buffs = owner.getNexusBuff(AttackLockBuff.class);  //清除锁定对象
-			for(IBuff buff : buffs){
+			List<AbstractBuff> buffs = owner.getNexusBuff(AttackLockBuff.class);  //清除锁定对象
+			for(AbstractBuff buff : buffs){
 				buff.invalid();
 			}
 		}else{

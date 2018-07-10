@@ -4,7 +4,6 @@ import org.cx.game.corps.Corps;
 import org.cx.game.magic.skill.ActiveSkill;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.magic.buff.DizzyBuff;
-import org.cx.game.widget.IControlQueue;
 
 /**
  * 盾击
@@ -33,7 +32,7 @@ public class ShieldHit extends ActiveSkill {
 	@Override
 	public Integer getRange() {
 		// TODO Auto-generated method stub
-		return getOwner().getAttack().getRange();
+		return 1;
 	}
 	
 	@Override

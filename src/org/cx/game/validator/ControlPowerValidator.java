@@ -1,8 +1,8 @@
 package org.cx.game.validator;
 
 import org.cx.game.command.Command;
-import org.cx.game.core.IContext;
-import org.cx.game.core.IPlayer;
+import org.cx.game.core.AbstractContext;
+import org.cx.game.core.AbstractPlayer;
 import org.cx.game.tools.I18n;
 
 /**
@@ -12,10 +12,10 @@ import org.cx.game.tools.I18n;
  */
 public class ControlPowerValidator extends Validator {
 
-	private IPlayer player = null;
+	private AbstractPlayer player = null;
 	private Command command = null;
 	
-	public ControlPowerValidator(IPlayer player, Command command) {
+	public ControlPowerValidator(AbstractPlayer player, Command command) {
 		// TODO Auto-generated constructor stub
 		this.player = player;
 		this.command = command;
@@ -24,7 +24,7 @@ public class ControlPowerValidator extends Validator {
 	@Override
 	public Boolean validate() {
 		// TODO Auto-generated method stub
-		IContext context = player.getContext();
+		AbstractContext context = player.getContext();
 		if(player.equals(context.getControlPlayer()))
 			return true;
 		else{

@@ -13,7 +13,7 @@ import org.cx.game.observer.NotifyInfo;
 public class Place extends AbstractPlace {
 
 	
-	public Place(IGround ground, Integer position) {
+	public Place(AbstractGround ground, Integer position) {
 		super(ground, position);
 		// TODO Auto-generated constructor stub
 	}
@@ -22,12 +22,6 @@ public class Place extends AbstractPlace {
 	public Corps getCorps() {
 		// TODO Auto-generated method stub
 		return (Corps) super.getCorps();
-	}
-	
-	@Override
-	public IGroundE getOwner() {
-		// TODO Auto-generated method stub
-		return (IGroundE) super.getOwner();
 	}
 	
 	private IAction placeInAction = null;
@@ -50,8 +44,7 @@ public class Place extends AbstractPlace {
 			corps.setPosition(getPosition());
 			setCorps(corps);
 			
-			setEmpty(false);
-			getOwner().getOwner().getEmptyList().remove(getPosition());
+			setIsEmpty(false);
 			
 			/*
 			 * 添加路径

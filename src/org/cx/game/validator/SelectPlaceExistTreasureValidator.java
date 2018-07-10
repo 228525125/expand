@@ -2,7 +2,7 @@ package org.cx.game.validator;
 
 import org.cx.game.tools.I18n;
 import org.cx.game.widget.Place;
-import org.cx.game.widget.treasure.ITreasure;
+import org.cx.game.widget.treasure.Treasure;
 
 /**
  * 验证某个位置上是否有物品
@@ -12,7 +12,7 @@ import org.cx.game.widget.treasure.ITreasure;
 public class SelectPlaceExistTreasureValidator extends Validator {
 	
 	private Place place = null;
-	private ITreasure treasure = null;
+	private Treasure treasure = null;
 
 	public SelectPlaceExistTreasureValidator(Place place) {
 		// TODO Auto-generated constructor stub
@@ -32,7 +32,7 @@ public class SelectPlaceExistTreasureValidator extends Validator {
 		return ret;
 	}
 	
-	protected ITreasure getTreasure(){
+	protected Treasure getTreasure(){
 		return this.treasure;
 	}
 }

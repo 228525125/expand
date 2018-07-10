@@ -3,11 +3,10 @@ package org.cx.game.command;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import org.cx.game.core.IPlayer;
+import org.cx.game.core.AbstractPlayer;
 import org.cx.game.exception.ValidatorException;
 import org.cx.game.tools.Util;
 import org.cx.game.validator.SelectOptionValidator;
-import org.cx.game.widget.building.IOption;
 
 /**
  * 设置选项参数
@@ -16,7 +15,7 @@ import org.cx.game.widget.building.IOption;
  */
 public class SetCommand extends InteriorCommand {
 
-	public SetCommand(IPlayer player) {
+	public SetCommand(AbstractPlayer player) {
 		super(player);
 		// TODO Auto-generated constructor stub
 		addValidator(new SelectOptionValidator(buffer));

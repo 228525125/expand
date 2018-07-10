@@ -11,9 +11,9 @@ import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
-import org.cx.game.widget.treasure.IResource;
+import org.cx.game.widget.treasure.Resource;
 
-public class Player extends AbstractPlayer implements IPlayerE {
+public class Player extends AbstractPlayer {
 	
 	public static final String Neutral = "neutral";
 	
@@ -39,18 +39,13 @@ public class Player extends AbstractPlayer implements IPlayerE {
 		return this.bout;
 	}
 	
+	@Override
 	public IAction getAddBoutAction(){
 		if(null==this.addBoutAction){
 			this.addBoutAction = new PlayerAddBout();
 			addBoutAction.setOwner(this);
 		}
 		return this.addBoutAction;
-	}
-	
-	@Override
-	public IContextE getContext() {
-		// TODO Auto-generated method stub
-		return (IContextE) super.getContext();
 	}
 	
 	/**
@@ -72,38 +67,25 @@ public class Player extends AbstractPlayer implements IPlayerE {
 	}
 	
 	@Override
-	public void dieOut() {
-		// TODO Auto-generated method stub
-		getContext().removePlayer(this);
-	}
-	
-	/**
-	 * 用于xml配置
-	 * @param res
-	 */
-	public void setResource(IResource res){
+	public void setResource(Resource res){
 		super.setResource(res);
 	}
 	
-	@Override
 	public List<Integer> getHeroIDList() {
 		// TODO Auto-generated method stub
 		return this.heroIDList;
 	}
 	
-	@Override
 	public void addHeroID(Integer ID) {
 		// TODO Auto-generated method stub
 		this.heroIDList.add(ID);
 	}
 	
-	@Override
 	public void addHero(AbstractCorps hero) {
 		// TODO Auto-generated method stub
 		this.heroList.add(hero);
 	}
 	
-	@Override
 	public List<AbstractCorps> getHeroList() {
 		// TODO Auto-generated method stub
 		return this.heroList;
@@ -134,9 +116,9 @@ public class Player extends AbstractPlayer implements IPlayerE {
 		}
 		
 		@Override
-		public IPlayer getOwner() {
+		public Player getOwner() {
 			// TODO Auto-generated method stub
-			return (IPlayer) super.getOwner();
+			return (Player) super.getOwner();
 		}
 	}
 }

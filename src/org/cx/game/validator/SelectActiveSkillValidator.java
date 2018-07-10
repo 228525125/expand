@@ -1,7 +1,7 @@
 package org.cx.game.validator;
 
 import org.cx.game.command.CommandBuffer;
-import org.cx.game.magic.skill.IActiveSkill;
+import org.cx.game.magic.skill.ActiveSkill;
 import org.cx.game.tools.I18n;
 
 /**
@@ -21,7 +21,7 @@ public class SelectActiveSkillValidator extends SelectSkillValidator {
 		// TODO Auto-generated method stub
 		Boolean ret =  super.validate();
 		if(ret){
-			if (getSkill() instanceof IActiveSkill) {
+			if (getSkill() instanceof ActiveSkill) {
 				ret = true;
 			}else{
 				addMessage(I18n.getMessage(SelectActiveSkillValidator.class.getName()));

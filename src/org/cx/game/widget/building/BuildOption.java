@@ -7,14 +7,14 @@ import org.cx.game.action.Execute;
 import org.cx.game.action.IAction;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.validator.BuildConsumeValidator;
-import org.cx.game.widget.IGround;
+import org.cx.game.widget.AbstractGround;
 
 public class BuildOption extends AbstractOption {
 
 	private String name = null;
 	
 	@Override
-	public List<Integer> getExecuteRange(IGround ground) {
+	public List<Integer> getExecuteRange(AbstractGround ground) {
 		// TODO Auto-generated method stub
 		List<Integer> list = new ArrayList<Integer>();
 		return list;
@@ -27,7 +27,7 @@ public class BuildOption extends AbstractOption {
 	}
 	
 	@Override
-	public void setOwner(IBuilding building) {
+	public void setOwner(AbstractBuilding building) {
 		// TODO Auto-generated method stub
 		super.setOwner(building);
 		
@@ -66,10 +66,10 @@ public class BuildOption extends AbstractOption {
 		 */
 		if(getOwner().getOwner() instanceof TownBuilding && !getOwner().getNeedBuilding().isEmpty()){
 			TownBuilding town = (TownBuilding) getOwner().getOwner();
-			List<IBuilding> buildings = town.getBuildings();
+			List<AbstractBuilding> buildings = town.getBuildings();
 			List<Integer> list = new ArrayList<Integer>();
-			for(IBuilding building : buildings){
-				if(IBuilding.Building_Status_Complete.equals(building.getStatus()))
+			for(AbstractBuilding building : buildings){
+				if(AbstractBuilding.Building_Status_Complete.equals(building.getStatus()))
 					list.add(building.getType());
 			}
 			
@@ -81,15 +81,15 @@ public class BuildOption extends AbstractOption {
 			}
 		}
 			
-		return ret && IBuilding.Building_Status_Nothingness.equals(getOwner().getStatus());
+		return ret && AbstractBuilding.Building_Status_Nothingness.equals(getOwner().getStatus());
 	}
 	
 	@Override
 	public void beforeExecute() {
 		// TODO Auto-generated method stub
-		IBuilding building = getOwner();
+		AbstractBuilding building = getOwner();
 		building.getPlayer().addToResource(building.getConsume());
-		building.setStatus(IBuilding.Building_Status_Build);
+		building.setStatus(AbstractBuilding.Building_Status_Build);
 	}
 	
 	public class OptionBuildExecute extends Execute implements IAction {

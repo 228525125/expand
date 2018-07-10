@@ -3,11 +3,11 @@ package org.cx.game.magic.skill;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.cx.game.core.IPlayer;
+import org.cx.game.core.AbstractPlayer;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.magic.buff.TauntBuff;
-import org.cx.game.widget.IGround;
+import org.cx.game.widget.AbstractGround;
 
 /**
  * 嘲讽，这个类只是一个标记，嘲讽的逻辑写在AttackLock、AttackLockBuff、AttackTauntValidator、MoveTauntValidator、AttackCommand、MoveCommand中
@@ -29,10 +29,10 @@ public class TauntActive extends ActiveSkill {
 	
 	private List<Corps> getAffectedList() {
 		List<Corps> ls = new ArrayList<Corps>();
-		IPlayer player = getOwner().getPlayer();
-		IGround ground = player.getContext().getGround();
+		AbstractPlayer player = getOwner().getPlayer();
+		AbstractGround ground = player.getContext().getGround();
 		Integer position = getOwner().getPosition();
-		List<Integer> list = ground.areaForDistance(position, getRange(), IGround.Contain);
+		List<Integer> list = ground.areaForDistance(position, getRange(), AbstractGround.Contain);
 		list.remove(position);
 		
 		for(Integer p : list){
@@ -71,7 +71,7 @@ public class TauntActive extends ActiveSkill {
 		super.affect(objects);
 		
 		Corps corps = (Corps) objects[0];
-		new TauntBuff(getOwner(),corps).effect();
+		new TauntBuff((Corps) getOwner(),corps).effect();
 	}
 
 }

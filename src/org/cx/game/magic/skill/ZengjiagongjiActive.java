@@ -1,6 +1,7 @@
 package org.cx.game.magic.skill;
 
-import org.cx.game.magic.buff.IBuff;
+import org.cx.game.magic.buff.AbstractBuff;
+import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.magic.buff.ZengjiagongjiBuff;
 
@@ -29,7 +30,7 @@ public class ZengjiagongjiActive extends ActiveSkill {
 		// TODO Auto-generated method stub
 		super.useSkill(objects);
 		
-		getOwner().affected(this);
+		((Corps) getOwner()).affected(this);
 	}
 	
 	@Override
@@ -37,7 +38,7 @@ public class ZengjiagongjiActive extends ActiveSkill {
 		// TODO Auto-generated method stub
 		super.affect(objects);
 		
-		IBuff buff = new ZengjiagongjiBuff(this.bout, this.atk, getOwner());
+		AbstractBuff buff = new ZengjiagongjiBuff(this.bout, this.atk, (Corps) getOwner());
 		buff.effect();
 	}
 }

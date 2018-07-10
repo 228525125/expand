@@ -2,7 +2,6 @@ package org.cx.game.validator;
 
 import org.cx.game.command.CommandBuffer;
 import org.cx.game.tools.I18n;
-import org.cx.game.widget.building.IOption;
 
 /**
  * 验证选项是否能被执行

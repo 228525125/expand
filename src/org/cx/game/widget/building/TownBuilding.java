@@ -3,19 +3,19 @@ package org.cx.game.widget.building;
 import java.util.List;
 import java.util.Map;
 
-import org.cx.game.core.IPlayer;
+import org.cx.game.core.AbstractPlayer;
 
 /**
  * 有内部建筑物的建筑物
  * @author chenxian
  *
  */
-public class TownBuilding extends AbstractBuilding implements IBuilding {
+public class TownBuilding extends AbstractBuilding {
 	
-	public TownBuilding(Integer buildingType) {
-		super(buildingType);
+	public TownBuilding(Integer type) {
+		super(type);
 		// TODO Auto-generated constructor stub
-		setStatus(IBuilding.Building_Status_Complete);  //城镇在地图上已经形成
+		setStatus(AbstractBuilding.Building_Status_Complete);  //城镇在地图上已经形成
 	}
 	
 	/**
@@ -25,18 +25,18 @@ public class TownBuilding extends AbstractBuilding implements IBuilding {
 	public void setBuildings(List<Integer> buildings) {
 		// TODO Auto-generated method stub
 		for(Integer typeID : buildings){
-			IBuilding building = BuildingFactory.getInstance(typeID);
+			AbstractBuilding building = BuildingFactory.getInstance(typeID);
 			building.setOwner(this);
 			getBuildings().add(building);
 		}
 	}
 
 	@Override
-	public void setPlayer(IPlayer player) {
+	public void setPlayer(AbstractPlayer player) {
 		// TODO Auto-generated method stub
 		super.setPlayer(player);
 		
-		for(IBuilding building : getBuildings()){
+		for(AbstractBuilding building : getBuildings()){
 			building.setPlayer(player);
 		}
 	}

@@ -3,21 +3,18 @@ package org.cx.game.action;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.cx.game.corps.Corps;
 import org.cx.game.corps.Hero;
-import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
-import org.cx.game.widget.IGround;
-import org.cx.game.widget.IGroundE;
-import org.cx.game.widget.treasure.ITreasure;
+import org.cx.game.widget.AbstractGround;
+import org.cx.game.widget.treasure.Treasure;
 
 public class Picked extends AbstractAction implements IAction {
 
 	@Override
-	public ITreasure getOwner() {
+	public Treasure getOwner() {
 		// TODO Auto-generated method stub
-		return (ITreasure) super.getOwner();
+		return (Treasure) super.getOwner();
 	}
 	
 	@Override
@@ -34,7 +31,7 @@ public class Picked extends AbstractAction implements IAction {
 		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Treasure_Picked,map);
 		super.notifyObservers(info);
 		
-		IGroundE ground = hero.getGround();
+		AbstractGround ground = hero.getGround();
 		ground.removeTreasure(getOwner());
 	}
 }
