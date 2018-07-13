@@ -8,6 +8,7 @@ import org.cx.game.action.Upgrade;
 import org.cx.game.action.HeroUpgrade;
 import org.cx.game.magic.buff.AbstractBuff;
 import org.cx.game.magic.skill.AbstractSkill;
+import org.cx.game.widget.treasure.Mineral;
 import org.cx.game.widget.treasure.Resource;
 import org.cx.game.widget.treasure.Treasure;
 
@@ -98,7 +99,7 @@ public class Hero extends Corps {
 	}
 	
 	@Override
-	public void setConsume(Resource consume) {
+	public void setConsume(Mineral consume) {
 		// TODO Auto-generated method stub
 		super.setConsume(consume);
 	}

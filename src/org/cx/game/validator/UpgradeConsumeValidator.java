@@ -3,6 +3,8 @@ package org.cx.game.validator;
 import org.cx.game.action.Upgrade;
 import org.cx.game.core.AbstractPlayer;
 import org.cx.game.tools.I18n;
+import org.cx.game.tools.Util;
+import org.cx.game.widget.treasure.Mineral;
 import org.cx.game.widget.treasure.Resource;
 
 public class UpgradeConsumeValidator extends Validator {
@@ -21,9 +23,9 @@ public class UpgradeConsumeValidator extends Validator {
 		// TODO Auto-generated method stub
 		Boolean ret = true;
 
-		Resource res = player.getResource();
+		Mineral res = player.getMineral();
 			
-		if(res.absoluteLessThan(upgrade.getRequirement())){
+		if(Util.absoluteLessThan(res, upgrade.getRequirement())){
 			ret = false;
 			addMessage(I18n.getMessage(UpgradeConsumeValidator.class.getName()));
 		}

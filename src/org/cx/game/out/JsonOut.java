@@ -28,12 +28,11 @@ import org.cx.game.magic.trick.ITrick;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.JsonHelper;
 import org.cx.game.widget.Cemetery;
-import org.cx.game.widget.ControlQueue;
 import org.cx.game.widget.HoneycombGround;
 import org.cx.game.widget.Place;
 import org.cx.game.widget.TrickList;
 import org.cx.game.widget.building.CallBuilding;
-import org.cx.game.widget.building.ResourceBuilding;
+import org.cx.game.widget.building.MineralBuilding;
 import org.cx.game.widget.building.SpatialBuilding;
 import org.cx.game.widget.building.SpatialOption;
 import org.cx.game.widget.building.TownBuilding;
@@ -43,10 +42,10 @@ import org.cx.game.widget.building.CallOption;
 import org.cx.game.widget.building.ReviveOption;
 import org.cx.game.widget.building.UpgradeBuilding;
 import org.cx.game.widget.treasure.EmpiricValue;
-import org.cx.game.widget.treasure.Resource;
+import org.cx.game.widget.treasure.Mineral;
 import org.cx.game.widget.treasure.SkillCount;
 import org.cx.game.widget.treasure.EquipmentTreasure;
-import org.cx.game.widget.treasure.ResourceTreasure;
+import org.cx.game.widget.treasure.MineralTreasure;
 
 public class JsonOut extends AbstractResponse {
 	
@@ -315,7 +314,7 @@ public class JsonOut extends AbstractResponse {
 							.element("name", obj.getName())
 							.element("ration", obj.getRation())
 							.element("rationLimit", obj.getRationLimit())
-							.element("resource", obj.getResource(), getConfig());
+							.element("mineral", obj.getMineral(), getConfig());
 				}
 			});
 			
@@ -410,12 +409,12 @@ public class JsonOut extends AbstractResponse {
 				}
 			});
 			
-			config.registerJsonBeanProcessor(ResourceBuilding.class, new JsonBeanProcessor() {
+			config.registerJsonBeanProcessor(MineralBuilding.class, new JsonBeanProcessor() {
 				
 				@Override
 				public JSONObject processBean(Object arg0, JsonConfig arg1) {
 					// TODO Auto-generated method stub
-					ResourceBuilding obj = (ResourceBuilding) arg0;
+					MineralBuilding obj = (MineralBuilding) arg0;
 					return new JSONObject().element("buildWait", obj.getBuildWait())
 							.element("consume", obj.getConsume(), getConfig())
 							.element("name", obj.getName())
@@ -427,7 +426,7 @@ public class JsonOut extends AbstractResponse {
 							.element("category", obj.getCategory())
 							.element("type", obj.getType())
 							.element("upgrade", obj.getUpgrade(), getConfig())
-							.element("resource", obj.getResource(), getConfig());
+							.element("mineral", obj.getMineral(), getConfig());
 				}
 			});
 			
@@ -544,12 +543,12 @@ public class JsonOut extends AbstractResponse {
 				}
 			});
 			
-			config.registerJsonBeanProcessor(Resource.class, new JsonBeanProcessor() {
+			config.registerJsonBeanProcessor(Mineral.class, new JsonBeanProcessor() {
 				
 				@Override
 				public JSONObject processBean(Object arg0, JsonConfig arg1) {
 					// TODO Auto-generated method stub
-					Resource obj = (Resource) arg0;
+					Mineral obj = (Mineral) arg0;
 					return new JSONObject().element("gold", obj.getGold())
 							.element("wood", obj.getWood())
 							.element("stone", obj.getStone())
@@ -564,6 +563,19 @@ public class JsonOut extends AbstractResponse {
 					// TODO Auto-generated method stub
 					EmpiricValue obj = (EmpiricValue) arg0;
 					return new JSONObject().element("value", obj.getValue());
+				}
+			});
+			
+			config.registerJsonBeanProcessor(Mineral.class, new JsonBeanProcessor() {
+				
+				@Override
+				public JSONObject processBean(Object arg0, JsonConfig arg1) {
+					// TODO Auto-generated method stub
+					Mineral obj = (Mineral) arg0;
+					return new JSONObject().element("gold", obj.getGold())
+							.element("wood", obj.getWood())
+							.element("stone", obj.getStone())
+							.element("ore", obj.getOre());
 				}
 			});
 			
@@ -591,15 +603,15 @@ public class JsonOut extends AbstractResponse {
 				}
 			});
 
-			config.registerJsonBeanProcessor(ResourceTreasure.class, new JsonBeanProcessor() {
+			config.registerJsonBeanProcessor(MineralTreasure.class, new JsonBeanProcessor() {
 				
 				@Override
 				public JSONObject processBean(Object arg0, JsonConfig arg1) {
 					// TODO Auto-generated method stub
-					ResourceTreasure obj = (ResourceTreasure) arg0;
+					MineralTreasure obj = (MineralTreasure) arg0;
 					return new JSONObject().element("name", obj.getName())
 							.element("position", obj.getPosition())
-							.element("resource", obj.getResource(), getConfig());
+							.element("mineral", obj.getMineral(), getConfig());
 				}
 			});
 			
@@ -629,9 +641,10 @@ public class JsonOut extends AbstractResponse {
 	
 	public static void main(String[] args) {
 		
-		Resource r = new Resource("1,2,3,4");
+		Mineral r = new Mineral("1,2,3,4");
+		Player player = new Player(1,"cx");
+		player.setMineral(r);
 		
-		ResourceTreasure tr = new ResourceTreasure(1, 2, 2, 2);
-		System.out.println(JSONObject.fromObject(r,getConfig()));
+		System.out.println(JSONObject.fromObject(player,getConfig()));
 	}
 }

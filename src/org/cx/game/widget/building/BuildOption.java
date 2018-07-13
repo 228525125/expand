@@ -6,6 +6,7 @@ import java.util.List;
 import org.cx.game.action.Execute;
 import org.cx.game.action.IAction;
 import org.cx.game.exception.RuleValidatorException;
+import org.cx.game.tools.Util;
 import org.cx.game.validator.BuildConsumeValidator;
 import org.cx.game.widget.AbstractGround;
 
@@ -88,7 +89,7 @@ public class BuildOption extends AbstractOption {
 	public void beforeExecute() {
 		// TODO Auto-generated method stub
 		AbstractBuilding building = getOwner();
-		building.getPlayer().addToResource(building.getConsume());
+		building.getPlayer().setMineral(Util.Sub, building.getConsume());
 		building.setStatus(AbstractBuilding.Building_Status_Build);
 	}
 	

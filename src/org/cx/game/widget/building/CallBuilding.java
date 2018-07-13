@@ -3,6 +3,7 @@ package org.cx.game.widget.building;
 import java.util.List;
 import java.util.Map;
 
+import org.cx.game.widget.treasure.Mineral;
 import org.cx.game.widget.treasure.Resource;
 
 public class CallBuilding extends AbstractBuilding {
@@ -49,7 +50,7 @@ public class CallBuilding extends AbstractBuilding {
 	}
 	
 	@Override
-	public void setConsume(Resource consume) {
+	public void setConsume(Mineral consume) {
 		// TODO Auto-generated method stub
 		super.setConsume(consume);
 	}

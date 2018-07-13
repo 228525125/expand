@@ -3,10 +3,10 @@ package org.cx.game.action;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.cx.game.action.Death.DeathAddToHpAction;
 import org.cx.game.corps.Corps;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
+import org.cx.game.tools.Util;
 
 /**
  * 受到攻击
@@ -99,7 +99,6 @@ public class Attacked extends AbstractAction implements IAction {
 		Integer result = Random.nextInt(dmg[1]-dmg[0]);
 		Integer damage =  dmg[0]+result;
 		damage = damage*ratio/1000;
-		damage = -damage;
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("attack", attack.getOwner());
@@ -111,12 +110,11 @@ public class Attacked extends AbstractAction implements IAction {
 		
 		//造成的实际伤害
 		Death death = getOwner().getDeath();
-		death.addToHp(damage);
-		damage = ((DeathAddToHpAction) death.getAddToHpAction()).getDamage();
+		damage = death.setHp(Util.Sub, damage);
 		
 		//增加经验值
 		CorpsUpgrade uc = (CorpsUpgrade) attack.getOwner().getUpgrade();
-		uc.addToEmpiricValue(Math.abs(damage));
+		uc.setEmpiricValue(Util.Sum, damage);
 		
 		/*
 		 * 反击

@@ -4,30 +4,31 @@ import org.cx.game.action.IAction;
 import org.cx.game.action.Picked;
 import org.cx.game.corps.Corps;
 import org.cx.game.tools.CommonIdentifierE;
+import org.cx.game.tools.Util;
 
 /**
  * 资料类物品
  * @author chenxian
  *
  */
-public class ResourceTreasure extends Treasure {
+public class MineralTreasure extends Treasure {
 
-	private Resource resource = null;
+	private Mineral mineral = null;
 	
-	public ResourceTreasure(Integer gold, Integer wood, Integer stone, Integer ore) {
+	public MineralTreasure(Integer gold, Integer wood, Integer stone, Integer ore) {
 		// TODO Auto-generated constructor stub
-		this.resource = new Resource(gold, wood, stone, ore);
+		this.mineral = new Mineral(gold, wood, stone, ore);
 	}
 	
-	public Resource getResource() {
-		return resource;
+	public Mineral getMineral() {
+		return this.mineral;
 	}
 	
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
 		String name = super.getName();
-		name += "("+getResource().get(CommonIdentifierE.Gold)+"/"+getResource().get(CommonIdentifierE.Wood)+"/"+getResource().get(CommonIdentifierE.Stone)+"/"+getResource().get(CommonIdentifierE.Ore)+")";
+		name += "("+getMineral().get(CommonIdentifierE.Gold)+"/"+getMineral().get(CommonIdentifierE.Wood)+"/"+getMineral().get(CommonIdentifierE.Stone)+"/"+getMineral().get(CommonIdentifierE.Ore)+")";
 		return name;
 	}
 	
@@ -52,7 +53,7 @@ public class ResourceTreasure extends Treasure {
 			super.action(objects);
 			
 			Corps corps = (Corps) objects[0];
-			corps.getPlayer().addToResource(getResource());
+			corps.getPlayer().setMineral(Util.Sum, getMineral());
 		}
 	}
 }

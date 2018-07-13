@@ -9,8 +9,10 @@ import org.cx.game.action.Upgrade;
 import org.cx.game.core.AbstractPlayer;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.tools.I18n;
+import org.cx.game.tools.Util;
 import org.cx.game.validator.UpgradeConsumeValidator;
 import org.cx.game.widget.AbstractGround;
+import org.cx.game.widget.treasure.Mineral;
 
 public class BuildingUpgradeOption extends AbstractOption {
 
@@ -81,7 +83,7 @@ public class BuildingUpgradeOption extends AbstractOption {
 	protected void beforeExecute() {
 		// TODO Auto-generated method stub
 		AbstractPlayer player = getOwner().getPlayer();
-		player.addToResource(getOwner().getUpgrade().getRequirement());
+		player.setMineral(Util.Sub, (Mineral) getOwner().getUpgrade().getRequirement());
 		
 		getOwner().setStatus(AbstractBuilding.Building_Status_Build);
 	}

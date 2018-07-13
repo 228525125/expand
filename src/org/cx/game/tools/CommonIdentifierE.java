@@ -117,7 +117,7 @@ public class CommonIdentifierE extends CommonIdentifier {
 	public final static String Corps_Armour = "Corps_Armour";
 	public final static String Corps_Atk = "Corps_Atk";
 	public final static String Corps_Def = "Corps_Def";
-	public final static String Corps_Speed = "Corps_Speed";
+	//public final static String Corps_Speed = "Corps_Speed";
 	public final static String Corps_Lock = "Corps_Lock";
 	public final static String Corps_Range = "Corps_Range";
 	public final static String Corps_Energy = "Corps_Energy";

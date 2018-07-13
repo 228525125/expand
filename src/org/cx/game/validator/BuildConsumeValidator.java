@@ -5,7 +5,9 @@ import java.util.Map.Entry;
 
 import org.cx.game.core.AbstractPlayer;
 import org.cx.game.tools.I18n;
+import org.cx.game.tools.Util;
 import org.cx.game.widget.building.AbstractBuilding;
+import org.cx.game.widget.treasure.Mineral;
 import org.cx.game.widget.treasure.Resource;
 
 /**
@@ -29,9 +31,9 @@ public class BuildConsumeValidator extends Validator {
 		
 		AbstractPlayer player = building.getPlayer();
 		Resource consume = building.getConsume();
-		Resource res = player.getResource();
+		Mineral res = player.getMineral();
 		
-		if(res.absoluteLessThan(consume)){
+		if(Util.absoluteLessThan(res, consume)){
 			ret = false;
 			addMessage(I18n.getMessage(BuildConsumeValidator.class.getName()));
 		}

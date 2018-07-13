@@ -33,6 +33,12 @@ public class Move extends AbstractAction implements IAction {
 	
 	private Integer direction = AbstractGround.Relative_Right;
 	
+	@Override
+	public Corps getOwner() {
+		// TODO Auto-generated method stub
+		return (Corps) super.getOwner();
+	}
+	
 	public Integer getType() {
 		// TODO Auto-generated method stub
 		return this.type;
@@ -40,8 +46,7 @@ public class Move extends AbstractAction implements IAction {
 	
 	public void setType(Integer type) {
 		// TODO Auto-generated method stub
-		if(!this.type.equals(type))
-			this.type = type;
+		this.type = type;
 	}
 	
 	public Integer getConsume() {
@@ -53,13 +58,11 @@ public class Move extends AbstractAction implements IAction {
 	}
 
 	public void setEnergy(Integer energy) {
-		if(!this.energy.equals(energy)){
-			energy = 0>energy ? 0 : energy;
-			this.energy = energy;
-			
-			if(Integer.valueOf(0).equals(this.energy))
-				setMoveable(false);
-		}
+		this.energy = energy;
+		this.energy = this.energy<0 ? 0 : this.energy;
+
+		if(Integer.valueOf(0).equals(this.energy))
+			setMoveable(false);
 	}
 	
 	public Integer getFlee() {
@@ -69,8 +72,7 @@ public class Move extends AbstractAction implements IAction {
 	
 	public void setFlee(Integer flee) {
 		// TODO Auto-generated method stub
-		if(!this.flee.equals(flee))
-			this.flee = flee;
+		this.flee = flee;
 	}
 	
 	public Boolean getHide() {
@@ -82,8 +84,7 @@ public class Move extends AbstractAction implements IAction {
 	 * @param hide
 	 */
 	public void setHide(Boolean hide) {
-		if(!this.hide.equals(hide))
-			this.hide = hide;
+		this.hide = hide;
 	}
 
 	public Boolean getMoveable() {
@@ -91,9 +92,7 @@ public class Move extends AbstractAction implements IAction {
 	}
 	
 	public void setMoveable(Boolean moveable) {
-		if(!this.moveable.equals(moveable)){
-			this.moveable = moveable;
-		}
+		this.moveable = moveable;
 	}
 
 	public Integer getDirection() {
@@ -101,8 +100,7 @@ public class Move extends AbstractAction implements IAction {
 	}
 
 	public void setDirection(Integer direction) {
-		if(!direction.equals(this.direction))
-			this.direction = direction;
+		this.direction = direction;
 	}
 
 	public List<Integer> getMovePath() {
@@ -112,12 +110,6 @@ public class Move extends AbstractAction implements IAction {
 	public void addMovePath(Integer position) {
 		// TODO Auto-generated method stub
 		this.path.add(position);
-	}
-
-	@Override
-	public Corps getOwner() {
-		// TODO Auto-generated method stub
-		return (Corps) super.getOwner();
 	}
 
 	@Override

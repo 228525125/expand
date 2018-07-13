@@ -11,6 +11,8 @@ import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
+import org.cx.game.tools.Util;
+import org.cx.game.widget.treasure.Mineral;
 import org.cx.game.widget.treasure.Resource;
 
 public class Player extends AbstractPlayer {
@@ -48,27 +50,10 @@ public class Player extends AbstractPlayer {
 		return this.addBoutAction;
 	}
 	
-	/**
-	 * 使用AI自动操作
-	 */
-	public void automation(){
-		/*while (this.equals(getContext().getControlPlayer())) {
-			IPolicy policy = this.groupPolicy.getPolicy();
-			if(null!=policy){
-				policy.execute();
-				
-				if(policy instanceof DonePolicy)
-					break;
-			}
-			else
-				break;
-		}*/
-		getContext().done();
-	}
-	
 	@Override
-	public void setResource(Resource res){
-		super.setResource(res);
+	public void setMineral(Mineral mineral) {
+		// TODO Auto-generated method stub
+		super.setMineral(mineral);
 	}
 	
 	public List<Integer> getHeroIDList() {
@@ -91,6 +76,24 @@ public class Player extends AbstractPlayer {
 		return this.heroList;
 	}
 	
+	/**
+	 * 使用AI自动操作
+	 */
+	public void automation(){
+		/*while (this.equals(getContext().getControlPlayer())) {
+			IPolicy policy = this.groupPolicy.getPolicy();
+			if(null!=policy){
+				policy.execute();
+				
+				if(policy instanceof DonePolicy)
+					break;
+			}
+			else
+				break;
+		}*/
+		getContext().done();
+	}
+	
 	public class PlayerAddBout extends AbstractAction implements IAction {
 		
 		@Override
@@ -110,7 +113,7 @@ public class Player extends AbstractPlayer {
 			for(AbstractCorps corps : getContext().getGround().getCorpsList(getOwner(), CommonIdentifierE.Death_Status_Live)){
 				Corps sc = (Corps) corps;
 				Integer speed = sc.getActivate().getSpeed();
-				sc.getActivate().addToVigour(speed);
+				sc.getActivate().setVigour(Util.Sum, speed);
 				sc.activate(true);
 			}
 		}

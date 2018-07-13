@@ -6,7 +6,7 @@ public class Random {
 	 * 是否触发事件
 	 * @param probability 概率，以百为单位例如：15.55%
 	 * @return
-	 */
+	 
 	public static Boolean isTrigger(Double chance){
 		Integer precision = 100;
 		Integer p = Integer.parseInt(new java.text.DecimalFormat("0").format(chance*precision));
@@ -16,7 +16,7 @@ public class Random {
 			return true;
 		else
 			return false;
-	}
+	}*/
 	
 	/**
 	 * 

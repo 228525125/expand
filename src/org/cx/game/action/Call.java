@@ -11,11 +11,12 @@ import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.widget.AbstractPlace;
 import org.cx.game.widget.AbstractGround;
 import org.cx.game.widget.Place;
+import org.cx.game.widget.treasure.Mineral;
 import org.cx.game.widget.treasure.Resource;
 
 public class Call extends AbstractAction implements IAction {
 	
-	private Resource consume = new Resource();
+	private Mineral consume = new Mineral();
 	private Integer ration = 1;
 	
 	private Integer nop = 1;           //人数 
@@ -26,12 +27,12 @@ public class Call extends AbstractAction implements IAction {
 		return (Corps) super.getOwner();
 	}
 
-	public Resource getConsume() {
+	public Mineral getConsume() {
 		// TODO Auto-generated method stub
 		return consume;
 	}
 	
-	public void setConsume(Resource consume) {
+	public void setConsume(Mineral consume) {
 		this.consume = consume;
 	}
 	
@@ -42,9 +43,7 @@ public class Call extends AbstractAction implements IAction {
 	
 	public void setRation(Integer ration) {
 		// TODO Auto-generated method stub
-		if(!ration.equals(this.ration)){
-			this.ration = ration;
-		}
+		this.ration = ration;
 	}
 	
 	public Integer getNop() {
@@ -52,11 +51,8 @@ public class Call extends AbstractAction implements IAction {
 	}
 
 	public void setNop(Integer nop) {
-		if(!nop.equals(this.nop)){
-			this.nop = nop;
-			
-			getOwner().getAttack().updateDmg();
-		}
+		this.nop = nop;
+		getOwner().getAttack().updateDmg();
 	}
 	
 	@Override

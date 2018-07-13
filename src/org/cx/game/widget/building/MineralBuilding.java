@@ -2,38 +2,40 @@ package org.cx.game.widget.building;
 
 import java.util.Map;
 
+import org.cx.game.tools.Util;
+import org.cx.game.widget.treasure.Mineral;
 import org.cx.game.widget.treasure.Resource;
 
-public class ResourceBuilding extends AbstractBuilding {
+public class MineralBuilding extends AbstractBuilding {
 	
-	private Resource resource = null;
+	private Mineral mineral = null;
 	
-	public ResourceBuilding(Integer type) {
+	public MineralBuilding(Integer type) {
 		super(type);
 		// TODO Auto-generated constructor stub
-		this.resource = new Resource();
+		this.mineral = new Mineral();
 		
 		BuildOption optionBuild = new BuildOption();				
 		addOption(optionBuild);
 	}
 
-	public Resource getResource() {
-		return resource;
+	public Mineral getMineral() {
+		return mineral;
 	}
 
-	public void setResource(Resource resource) {
-		this.resource = resource;
+	public void setMineral(Mineral mineral) {
+		this.mineral = mineral;
 	}
 
 	/**
 	 * 产出
 	 */
 	public void output() {
-		getPlayer().addToResource(this.resource);
+		getPlayer().setMineral(Util.Sum, this.mineral);
 	}
 	
 	@Override
-	public void setConsume(Resource consume) {
+	public void setConsume(Mineral consume) {
 		// TODO Auto-generated method stub
 		super.setConsume(consume);
 	}

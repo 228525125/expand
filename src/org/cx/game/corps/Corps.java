@@ -30,6 +30,7 @@ import org.cx.game.magic.skill.AbstractSkill;
 import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.tools.I18n;
 import org.cx.game.widget.AbstractPlace;
+import org.cx.game.widget.treasure.Mineral;
 import org.cx.game.widget.treasure.Treasure;
 import org.cx.game.widget.treasure.Resource;
 
@@ -59,7 +60,7 @@ public class Corps extends AbstractCorps {
 	private Boolean hero = false;
 	private Boolean activation = false;            //激活状态
 	
-	private Resource consume = new Resource();
+	private Mineral consume = new Mineral();
 	private CorpsAddBuffAction addBuffAction = null;
 	private CorpsRemoveBuffAction removeBuffAction = null;
 	private CorpsAddSkillAction addSkillAction = null;
@@ -298,12 +299,12 @@ public class Corps extends AbstractCorps {
 	/**
 	 * 消耗资源
 	 */
-	public Resource getConsume() {
+	public Mineral getConsume() {
 		// TODO Auto-generated method stub
 		return consume;
 	}
 	
-	public void setConsume(Resource consume) {
+	public void setConsume(Mineral consume) {
 		// TODO Auto-generated method stub
 		this.consume = consume;
 	}

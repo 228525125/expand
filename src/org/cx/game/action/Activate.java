@@ -6,6 +6,7 @@ import java.util.Map;
 import org.cx.game.corps.Corps;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
+import org.cx.game.tools.Util;
 
 public class Activate extends AbstractAction implements IAction {
 
@@ -14,6 +15,12 @@ public class Activate extends AbstractAction implements IAction {
 	private Boolean activation = false;
 	private Integer speed = 100;
 	private Integer vigour = 0;       //活力，活力为100时，可以行动一次，活力值越多，行动次数越多
+	
+	@Override
+	public Corps getOwner() {
+		// TODO Auto-generated method stub
+		return (Corps) super.getOwner();
+	}
 	
 	public Boolean getActivation() {
 		// TODO Auto-generated method stub
@@ -32,24 +39,11 @@ public class Activate extends AbstractAction implements IAction {
 	
 	public void setSpeed(Integer speed) {
 		// TODO Auto-generated method stub
-		if(this.speed!=speed){
-			this.speed = speed;
-		}
+		this.speed = speed;
 	}
 	
-	public void addToSpeed(Integer speed) {
-		// TODO Auto-generated method stub
-		if(!Integer.valueOf(0).equals(speed)){
-			this.speed += speed;
-			this.speed = this.speed < 0 ? 0 : this.speed;		
-			
-			Map<String,Object> map = new HashMap<String,Object>();
-			map.put("card", getOwner());
-			map.put("change", speed);
-			map.put("position", getOwner().getPosition());
-			NotifyInfo info = new NotifyInfo(CommonIdentifierE.Corps_Speed,map);
-			super.notifyObservers(info);
-		}
+	public void setSpeed(Integer funType, Integer speed) {
+		this.speed = Util.operating(funType, this.speed, speed);
 	}
 	
 	public Integer getVigour() {
@@ -57,12 +51,9 @@ public class Activate extends AbstractAction implements IAction {
 		return this.vigour;
 	}
 	
-	public void addToVigour(Integer vigour) {
-		// TODO Auto-generated method stub
-		if(!Integer.valueOf(0).equals(vigour)){
-			this.vigour += vigour;
-			this.vigour = this.vigour > 200 ? 200 : this.vigour;         //最多一个回合只能行动两次
-		}
+	public void setVigour(Integer funType, Integer vigour) {
+		this.vigour = Util.operating(funType, this.vigour, vigour);
+		this.vigour = this.vigour > 200 ? 200 : this.vigour;         //最多一个回合只能行动两次
 	}
 	
 	@Override
@@ -73,14 +64,14 @@ public class Activate extends AbstractAction implements IAction {
 		
 		setActivation(activate);
 		
+		Corps owner = getOwner();
+		
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("card", getOwner());
-		map.put("position", getOwner().getPosition());
+		map.put("card", owner);
+		map.put("position", owner.getPosition());
 		map.put("activate", activate);
 		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Corps_Activate,map);
 		notifyObservers(info);
-		
-		Corps owner = getOwner();
 		
 		if(activation){
 			owner.getAttack().setAttackable(true);
@@ -88,17 +79,10 @@ public class Activate extends AbstractAction implements IAction {
 			owner.getMove().setEnergy(owner.getEnergy());
 			owner.getAttacked().setFightBack(true);
 			
-			addToVigour(ActivationConsume);
+			setVigour(Util.Sum, ActivationConsume);
 		}else{
 			owner.getAttack().setAttackable(false);
 			owner.getMove().setMoveable(false);
 		}
 	}
-	
-	@Override
-	public Corps getOwner() {
-		// TODO Auto-generated method stub
-		return (Corps) super.getOwner();
-	}
-
 }

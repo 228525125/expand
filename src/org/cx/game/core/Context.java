@@ -8,7 +8,7 @@ import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.widget.AbstractGround;
 import org.cx.game.widget.building.AbstractBuilding;
 import org.cx.game.widget.building.CallBuilding;
-import org.cx.game.widget.building.ResourceBuilding;
+import org.cx.game.widget.building.MineralBuilding;
 import org.cx.game.widget.building.TownBuilding;
 
 public class Context extends AbstractContext {
@@ -148,15 +148,15 @@ public class Context extends AbstractContext {
 				if(building instanceof TownBuilding){
 					TownBuilding town = (TownBuilding) building;
 					for(AbstractBuilding innerBuilding :town.getBuildings()){
-						if(innerBuilding instanceof ResourceBuilding){
-							ResourceBuilding br = (ResourceBuilding) innerBuilding;
+						if(innerBuilding instanceof MineralBuilding){
+							MineralBuilding br = (MineralBuilding) innerBuilding;
 							br.output();           
 						}
 					}
 				}
 				
-				if(building instanceof ResourceBuilding){
-					ResourceBuilding br = (ResourceBuilding) building;
+				if(building instanceof MineralBuilding){
+					MineralBuilding br = (MineralBuilding) building;
 					br.output();
 				}
 			}

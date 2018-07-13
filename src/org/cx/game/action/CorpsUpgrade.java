@@ -7,6 +7,7 @@ import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
+import org.cx.game.tools.Util;
 import org.cx.game.widget.treasure.EmpiricValue;
 
 public class CorpsUpgrade extends Upgrade implements IAction {
@@ -23,22 +24,18 @@ public class CorpsUpgrade extends Upgrade implements IAction {
 		return this.empiricValue;
 	}
 	
-	public void addToEmpiricValue(EmpiricValue empiricValue) {
-		// TODO Auto-generated method stub
-		if(!empiricValue.isEmpty()){
-			this.empiricValue.add(empiricValue);
-			
-			Integer req = getRequirement().get();
-			if(getEmpiricValue().get()>=req){
-				action();
-			}
+	public void setEmpiricValue(Integer funType, EmpiricValue empiricValue) {
+		this.empiricValue = (EmpiricValue) Util.operating(funType, this.empiricValue, empiricValue);
+		
+		Integer req = getRequirement().getValue();
+		if(getEmpiricValue().getValue()>=req){
+			action();
 		}
 	}
 	
-	public void addToEmpiricValue(Integer empiricValue) {
-		// TODO Auto-generated method stub
+	public void setEmpiricValue(Integer funType, Integer empiricValue) {
 		EmpiricValue ev = new EmpiricValue(empiricValue);
-		addToEmpiricValue(ev);
+		setEmpiricValue(funType, ev);
 	}
 	
 	@Override
@@ -61,7 +58,7 @@ public class CorpsUpgrade extends Upgrade implements IAction {
 		/*
 		 * 扣减升级所需经验值
 		 */
-		addToEmpiricValue(getRequirement());
+		setEmpiricValue(Util.Sub, getRequirement());
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("position", getOwner().getPosition());

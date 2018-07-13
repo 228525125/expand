@@ -4,8 +4,10 @@ import org.cx.game.action.Call;
 import org.cx.game.core.AbstractPlayer;
 import org.cx.game.corps.Hero;
 import org.cx.game.corps.Corps;
+import org.cx.game.tools.Util;
 import org.cx.game.widget.AbstractGround;
 import org.cx.game.widget.Place;
+import org.cx.game.widget.treasure.Mineral;
 import org.cx.game.widget.treasure.Resource;
 
 /**
@@ -69,8 +71,8 @@ public class CallRule extends AbstractRule {
 		 * 扣减资源
 		 */
 		AbstractPlayer player = owner.getPlayer();
-		Resource consume = call.getConsume();		
-		player.addToResource(consume);
+		Mineral consume = call.getConsume();		
+		player.setMineral(Util.Sub, consume);
 		
 		this.isInvoke = true;
 	}

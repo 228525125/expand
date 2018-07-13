@@ -4,6 +4,7 @@ import org.cx.game.corps.Corps;
 import org.cx.game.magic.skill.ActiveSkill;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.magic.buff.DizzyBuff;
+import org.cx.game.tools.Util;
 
 /**
  * 盾击
@@ -43,7 +44,7 @@ public class ShieldHit extends ActiveSkill {
 		Corps corps = (Corps) objects[0];
 		Integer atk = getOwner().getAtk();
 		
-		corps.getDeath().addToHp(-atk*atkScale/100);
+		corps.getDeath().setHp(Util.Sub, atk*atkScale/100);
 		new DizzyBuff(bout, corps).effect();
 	}
 	

@@ -3,6 +3,7 @@ package org.cx.game.action;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.magic.IMagic;
@@ -24,7 +25,7 @@ public class Affected extends AbstractAction implements IAction {
 	
 	public void magicHarm(Integer harm) {
 		// TODO Auto-generated method stub
-		//getOwner().getDeath().addToHp(harm);
+
 	}
 	
 	@Override
