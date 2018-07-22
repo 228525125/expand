@@ -10,12 +10,12 @@ import org.cx.game.tools.I18n;
  * @author chenxian
  *
  */
-public class SelectCorpsValidator extends Validator {
+public class SelectCorpsBufferValidator extends Validator {
 	
 	protected CommandBuffer buffer = null;
 	private Corps corps = null;
 	
-	public SelectCorpsValidator(CommandBuffer buffer) {
+	public SelectCorpsBufferValidator(CommandBuffer buffer) {
 		// TODO Auto-generated constructor stub
 		this.buffer = buffer;
 	}
@@ -30,7 +30,7 @@ public class SelectCorpsValidator extends Validator {
 			this.corps = (Corps) corps;
 			ret = true;
 		}else{
-			addMessage(I18n.getMessage(SelectCorpsValidator.class.getName()));
+			addMessage(I18n.getMessage(SelectCorpsBufferValidator.class.getName()));
 			ret = false;
 		}
 		

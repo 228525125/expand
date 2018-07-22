@@ -8,9 +8,9 @@ import org.cx.game.tools.I18n;
  * @author chenxian
  *
  */
-public class AttackableValidator extends SelectCorpsValidator {
+public class CorpsAttackableBufferValidator extends SelectCorpsBufferValidator {
 
-	public AttackableValidator(CommandBuffer buffer) {
+	public CorpsAttackableBufferValidator(CommandBuffer buffer) {
 		super(buffer);
 		// TODO Auto-generated constructor stub
 	}
@@ -23,7 +23,7 @@ public class AttackableValidator extends SelectCorpsValidator {
 			if(getCorps().getAttack().getAttackable()){
 				ret = true;
 			}else{
-				addMessage(I18n.getMessage(AttackableValidator.class.getName()));
+				addMessage(I18n.getMessage(CorpsAttackableBufferValidator.class.getName()));
 				ret = false;
 			}
 		}

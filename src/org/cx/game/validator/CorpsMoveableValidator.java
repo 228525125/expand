@@ -1,18 +1,16 @@
 package org.cx.game.validator;
 
-import org.cx.game.command.CommandBuffer;
+import org.cx.game.corps.Corps;
 import org.cx.game.tools.I18n;
 
-/**
- * 判断是否可移动
- * @author chenxian
- *
- */
 public class CorpsMoveableValidator extends CorpsActivateValidator {
 
-	public CorpsMoveableValidator(CommandBuffer buffer) {
-		super(buffer);
+	private Corps corps = null;
+	
+	public CorpsMoveableValidator(Corps corps) {
 		// TODO Auto-generated constructor stub
+		super(corps);
+		this.corps = corps;
 	}
 	
 	@Override
@@ -20,7 +18,7 @@ public class CorpsMoveableValidator extends CorpsActivateValidator {
 		// TODO Auto-generated method stub
 		Boolean ret = super.validate();
 		if(ret){
-			if(getCorps().getMove().getMoveable()){
+			if(this.corps.getMove().getMoveable()){
 				ret = true;
 			}else{
 				addMessage(I18n.getMessage(CorpsMoveableValidator.class.getName()));
@@ -29,5 +27,4 @@ public class CorpsMoveableValidator extends CorpsActivateValidator {
 		}
 		return ret;
 	}
-
 }

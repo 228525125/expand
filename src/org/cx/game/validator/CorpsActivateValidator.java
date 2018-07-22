@@ -1,18 +1,15 @@
 package org.cx.game.validator;
 
-import org.cx.game.command.CommandBuffer;
+import org.cx.game.corps.Corps;
 import org.cx.game.tools.I18n;
 
-/**
- * 判断随从是否为激活状态
- * @author chenxian
- *
- */
-public class CorpsActivateValidator extends SelectCorpsValidator {
+public class CorpsActivateValidator extends Validator {
+
+	private Corps corps = null;
 	
-	public CorpsActivateValidator(CommandBuffer buffer) {
+	public CorpsActivateValidator(Corps corps) {
 		// TODO Auto-generated constructor stub
-		super(buffer);
+		this.corps = corps;
 	}
 	
 	@Override
@@ -20,7 +17,7 @@ public class CorpsActivateValidator extends SelectCorpsValidator {
 		// TODO Auto-generated method stub
 		Boolean ret = super.validate();
 		if(ret){
-			if(getCorps().getActivate().getActivation()){
+			if(this.corps.getActivate().getActivation()){
 				ret = true;
 			}else{
 				addMessage(I18n.getMessage(CorpsActivateValidator.class.getName()));

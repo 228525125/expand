@@ -8,14 +8,16 @@ import java.util.Observer;
 
 import org.cx.game.action.Execute;
 import org.cx.game.action.IAction;
+import org.cx.game.core.AbstractPlayer;
 import org.cx.game.corps.Hero;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.tools.I18n;
-import org.cx.game.validator.CallConsumeValidator;
-import org.cx.game.validator.CallRangeValidator;
+import org.cx.game.validator.CorpsCallConsumeValidator;
+import org.cx.game.validator.CorpsCallRangeValidator;
 import org.cx.game.widget.AbstractGround;
+import org.cx.game.widget.AbstractOption;
 import org.cx.game.widget.AbstractPlace;
 import org.cx.game.widget.Place;
 
@@ -48,6 +50,18 @@ public class ReviveOption extends AbstractOption {
 	}
 	
 	@Override
+	public AbstractBuilding getOwner() {
+		// TODO Auto-generated method stub
+		return (AbstractBuilding) super.getOwner();
+	}
+	
+	@Override
+	protected AbstractPlayer getOwnerPlayer() {
+		// TODO Auto-generated method stub
+		return getOwner().getPlayer();
+	}
+	
+	@Override
 	public List<Integer> getExecuteRange(AbstractGround ground) {
 		// TODO Auto-generated method stub
 		List<Integer> positionList = new ArrayList<Integer>();
@@ -72,8 +86,8 @@ public class ReviveOption extends AbstractOption {
 		// TODO Auto-generated method stub
 		Place place = (Place) objects[0];
 		
-		addValidator(new CallConsumeValidator(this.hero, 1));
-		addValidator(new CallRangeValidator((AbstractBuilding) getOwner(), place));
+		addValidator(new CorpsCallConsumeValidator(this.hero, 1));
+		addValidator(new CorpsCallRangeValidator((AbstractBuilding) getOwner(), place));
 		
 		super.execute(objects);
 	}

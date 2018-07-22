@@ -9,9 +9,9 @@ import org.cx.game.tools.I18n;
  * @author chenxian
  *
  */
-public class ActiveSkillCooldownValidator extends SelectActiveSkillValidator {
+public class ActiveSkillCooldownBufferValidator extends SelectActiveSkillBufferValidator {
 
-	public ActiveSkillCooldownValidator(CommandBuffer buffer) {
+	public ActiveSkillCooldownBufferValidator(CommandBuffer buffer) {
 		// TODO Auto-generated constructor stub
 		super(buffer);
 	}
@@ -26,7 +26,7 @@ public class ActiveSkillCooldownValidator extends SelectActiveSkillValidator {
 			if(as.getAllow()){
 				ret = true;
 			}else{
-				addMessage(I18n.getMessage(ActiveSkillCooldownValidator.class.getName()));
+				addMessage(I18n.getMessage(ActiveSkillCooldownBufferValidator.class.getName()));
 				ret = false;
 			}
 		}

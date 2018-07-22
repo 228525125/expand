@@ -1,35 +1,33 @@
 package org.cx.game.validator;
 
 import org.cx.game.command.CommandBuffer;
-import org.cx.game.magic.skill.ActiveSkill;
 import org.cx.game.tools.I18n;
 
 /**
- * 验证缓存的是否为ActiveSkill
+ * 随从攻击力必须大于0才能发起攻击
  * @author chenxian
  *
  */
-public class SelectActiveSkillValidator extends SelectSkillValidator {
+public class CorpsAttackAtkBufferValidator extends SelectCorpsBufferValidator {
 
-	public SelectActiveSkillValidator(CommandBuffer buffer) {
+	public CorpsAttackAtkBufferValidator(CommandBuffer buffer) {
 		super(buffer);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	@Override
 	public Boolean validate() {
 		// TODO Auto-generated method stub
-		Boolean ret =  super.validate();
+		Boolean ret = super.validate();
 		if(ret){
-			if (getSkill() instanceof ActiveSkill) {
+			if(0<getCorps().getAttack().getAtk()){
 				ret = true;
 			}else{
-				addMessage(I18n.getMessage(SelectActiveSkillValidator.class.getName()));
+				addMessage(I18n.getMessage(CorpsAttackAtkBufferValidator.class.getName()));
 				ret = false;
 			}
 		}
 		
 		return ret;
 	}
-
 }

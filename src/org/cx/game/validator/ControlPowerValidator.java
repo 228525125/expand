@@ -13,12 +13,10 @@ import org.cx.game.tools.I18n;
 public class ControlPowerValidator extends Validator {
 
 	private AbstractPlayer player = null;
-	private Command command = null;
 	
-	public ControlPowerValidator(AbstractPlayer player, Command command) {
+	public ControlPowerValidator(AbstractPlayer player) {
 		// TODO Auto-generated constructor stub
 		this.player = player;
-		this.command = command;
 	}
 	
 	@Override

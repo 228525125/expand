@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.cx.game.action.Execute;
 import org.cx.game.action.IAction;
+import org.cx.game.core.AbstractPlayer;
 import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 import org.cx.game.corps.CorpsFactory;
@@ -12,8 +13,9 @@ import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.tools.I18n;
 import org.cx.game.validator.CallUnitEqualValidator;
 import org.cx.game.validator.CorpsInThePlaceValidator;
-import org.cx.game.validator.MoveEnergyValidator;
+import org.cx.game.validator.CorpsMoveEnergyValidator;
 import org.cx.game.validator.Validator;
+import org.cx.game.widget.AbstractOption;
 import org.cx.game.widget.AbstractPlace;
 import org.cx.game.widget.AbstractGround;
 import org.cx.game.widget.Place;
@@ -52,6 +54,12 @@ public class SpatialOption extends AbstractOption {
 	}
 	
 	@Override
+	protected AbstractPlayer getOwnerPlayer() {
+		// TODO Auto-generated method stub
+		return getOwner().getPlayer();
+	}
+	
+	@Override
 	public List<Integer> getExecuteRange(AbstractGround ground) {
 		// TODO Auto-generated method stub
 		List<Integer> list = new ArrayList<Integer>();
@@ -78,7 +86,7 @@ public class SpatialOption extends AbstractOption {
 		addValidator(new CorpsInThePlaceValidator(place.getOwner(), place.getPosition()));
 		
 		if(null!=place.getCorps())
-			addValidator(new MoveEnergyValidator((Corps) place.getCorps()));
+			addValidator(new CorpsMoveEnergyValidator((Corps) place.getCorps()));
 		
 		super.execute(objects);
 	}

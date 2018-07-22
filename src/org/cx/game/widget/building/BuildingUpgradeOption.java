@@ -5,13 +5,13 @@ import java.util.List;
 
 import org.cx.game.action.Execute;
 import org.cx.game.action.IAction;
-import org.cx.game.action.Upgrade;
 import org.cx.game.core.AbstractPlayer;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.tools.I18n;
 import org.cx.game.tools.Util;
-import org.cx.game.validator.UpgradeConsumeValidator;
+import org.cx.game.validator.BuildingUpgradeConsumeValidator;
 import org.cx.game.widget.AbstractGround;
+import org.cx.game.widget.AbstractOption;
 import org.cx.game.widget.treasure.Mineral;
 
 public class BuildingUpgradeOption extends AbstractOption {
@@ -30,7 +30,19 @@ public class BuildingUpgradeOption extends AbstractOption {
 	}
 	
 	@Override
-	public void setOwner(AbstractBuilding building) {
+	public AbstractBuilding getOwner() {
+		// TODO Auto-generated method stub
+		return (AbstractBuilding) super.getOwner();
+	}
+	
+	@Override
+	protected AbstractPlayer getOwnerPlayer() {
+		// TODO Auto-generated method stub
+		return getOwner().getPlayer();
+	}
+	
+	@Override
+	public void setOwner(Object building) {
 		// TODO Auto-generated method stub
 		super.setOwner(building);
 		
@@ -74,7 +86,7 @@ public class BuildingUpgradeOption extends AbstractOption {
 	public void execute(Object... objects) throws RuleValidatorException {
 		// TODO Auto-generated method stub
 		AbstractBuilding building = getOwner();
-		addValidator(new UpgradeConsumeValidator(building.getUpgrade(), building.getPlayer()));
+		addValidator(new BuildingUpgradeConsumeValidator(building.getUpgrade(), building.getPlayer()));
 		
 		super.execute(objects);
 	}
@@ -95,7 +107,7 @@ public class BuildingUpgradeOption extends AbstractOption {
 			// TODO Auto-generated method stub
 			super.action(objects);
 			
-			AbstractBuilding building = getOwner().getOwner();
+			AbstractBuilding building = (AbstractBuilding) getOwner().getOwner();
 			building.upgrade();
 			
 			BuildingUpgradeOption.this.inquiryBuildingIsAllowUpdate();

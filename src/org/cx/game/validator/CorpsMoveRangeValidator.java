@@ -4,12 +4,12 @@ import org.cx.game.corps.Corps;
 import org.cx.game.tools.I18n;
 import org.cx.game.widget.Place;
 
-public class MoveRangeValidator extends Validator {
+public class CorpsMoveRangeValidator extends Validator {
 
 	private Corps corps;
 	private Integer position;
 	
-	public MoveRangeValidator(Corps corps, Integer position) {
+	public CorpsMoveRangeValidator(Corps corps, Integer position) {
 		// TODO Auto-generated constructor stub
 		this.corps = corps;
 		this.position = position;
@@ -28,7 +28,7 @@ public class MoveRangeValidator extends Validator {
 		if(range>=step)
 			return true;
 		else{
-			addMessage(I18n.getMessage(MoveRangeValidator.class.getName()));
+			addMessage(I18n.getMessage(CorpsMoveRangeValidator.class.getName()));
 			return false;
 		}
 	}

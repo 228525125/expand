@@ -38,7 +38,6 @@ public class XmlConfigureHelper {
 		
 		npc.getCall().setNop(nop);            //设置数量
 		npc.getUpgrade().setLevel(level);     //设置等级
-		//npc.call(ground.getPlace(position), nop);
 		ground.placementCorps(position, npc); //放置到战场
 	}
 	

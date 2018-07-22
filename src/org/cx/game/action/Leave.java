@@ -29,12 +29,13 @@ public class Leave extends AbstractAction implements IAction {
 		AbstractGround ground = getOwner().getGround();
 		ground.placementCorps(place.getPosition(), getOwner());
 		
-		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("corps", getOwner());
 		map.put("position", getOwner().getPosition());
 		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Corps_Leave,map);
 		super.notifyObservers(info);
+		
+		getOwner().activate(false);
 	}
 
 }

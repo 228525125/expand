@@ -2,6 +2,7 @@ package org.cx.game.rule;
 
 import org.cx.game.action.Call;
 import org.cx.game.core.AbstractPlayer;
+import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Hero;
 import org.cx.game.corps.Corps;
 import org.cx.game.tools.Util;
@@ -57,6 +58,14 @@ public class CallRule extends AbstractRule {
 			
 			this.isInvoke = false;
 		}
+	}
+	
+	@Override
+	public void after(Object[] args) {
+		// TODO Auto-generated method stub
+		AbstractCorps corps = getOwner().getOwner();
+		AbstractPlayer player = corps.getPlayer();
+		player.getCorpsList().add(corps);
 	}
 	
 	/**

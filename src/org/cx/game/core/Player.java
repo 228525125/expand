@@ -26,6 +26,7 @@ public class Player extends AbstractPlayer {
 	
 	private List<Integer> heroIDList = new ArrayList<Integer>();
 	private List<AbstractCorps> heroList = new ArrayList<AbstractCorps>();
+	private List<AbstractCorps> corpsList = new ArrayList<AbstractCorps>();
 	
 	public Player(Integer id, String name) {
 		super(id, name);
@@ -76,6 +77,10 @@ public class Player extends AbstractPlayer {
 		return this.heroList;
 	}
 	
+	public List<AbstractCorps> getCorpsList() {
+		return corpsList;
+	}
+	
 	/**
 	 * 使用AI自动操作
 	 */
@@ -110,7 +115,7 @@ public class Player extends AbstractPlayer {
 			/*
 			 * 获得控制权的玩家单位被激活
 			 */
-			for(AbstractCorps corps : getContext().getGround().getCorpsList(getOwner(), CommonIdentifierE.Death_Status_Live)){
+			for(AbstractCorps corps : getOwner().getCorpsList()){
 				Corps sc = (Corps) corps;
 				Integer speed = sc.getActivate().getSpeed();
 				sc.getActivate().setVigour(Util.Sum, speed);

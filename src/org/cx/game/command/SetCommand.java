@@ -6,7 +6,7 @@ import java.lang.reflect.Method;
 import org.cx.game.core.AbstractPlayer;
 import org.cx.game.exception.ValidatorException;
 import org.cx.game.tools.Util;
-import org.cx.game.validator.SelectOptionValidator;
+import org.cx.game.validator.SelectOptionBufferValidator;
 
 /**
  * 设置选项参数
@@ -18,7 +18,7 @@ public class SetCommand extends InteriorCommand {
 	public SetCommand(AbstractPlayer player) {
 		super(player);
 		// TODO Auto-generated constructor stub
-		addValidator(new SelectOptionValidator(buffer));
+		addValidator(new SelectOptionBufferValidator(buffer));
 	}
 	
 	@Override

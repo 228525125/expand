@@ -11,18 +11,18 @@ import org.cx.game.tools.I18n;
 public class CallUnitEqualValidator extends Validator {
 
 	private Corps unit = null;
-	private Corps call = null;
+	private Integer callCorpsType = null;
 	
-	public CallUnitEqualValidator(Corps unit, Corps call) {
+	public CallUnitEqualValidator(Corps unit, Integer callCorpsType) {
 		// TODO Auto-generated constructor stub
 		this.unit = unit;
-		this.call = call;
+		this.callCorpsType = callCorpsType;
 	}
 	
 	@Override
 	public Boolean validate() {
 		// TODO Auto-generated method stub
-		if(unit.getType().equals(call.getType()))
+		if(unit.getType().equals(this.callCorpsType))
 			return true;
 		else{
 			addMessage(I18n.getMessage(CallUnitEqualValidator.class.getName()));

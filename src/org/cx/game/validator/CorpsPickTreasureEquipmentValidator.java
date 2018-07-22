@@ -11,11 +11,11 @@ import org.cx.game.widget.treasure.EquipmentTreasure;
  * @author chenxian
  *
  */
-public class PickTreasureEquipmentValidator extends SelectPlaceExistTreasureValidator {
+public class CorpsPickTreasureEquipmentValidator extends SelectPlaceExistTreasureValidator {
 
 	private Corps corps = null;
 	
-	public PickTreasureEquipmentValidator(Corps corps, Place place) {
+	public CorpsPickTreasureEquipmentValidator(Corps corps, Place place) {
 		super(place);
 		// TODO Auto-generated constructor stub
 		this.corps = corps;
@@ -30,7 +30,7 @@ public class PickTreasureEquipmentValidator extends SelectPlaceExistTreasureVali
 			if (getTreasure() instanceof EquipmentTreasure) {
 				if (!(this.corps instanceof Hero)) {
 					ret = false;
-					addMessage(I18n.getMessage(PickTreasureEquipmentValidator.class.getName()));
+					addMessage(I18n.getMessage(CorpsPickTreasureEquipmentValidator.class.getName()));
 				}
 			}
 		}

@@ -11,12 +11,12 @@ import org.cx.game.widget.building.AbstractBuilding;
  * @author chenxian
  *
  */
-public class CallRangeValidator extends SelectBuildingTypeValidator {
+public class CorpsCallRangeValidator extends SelectBuildingTypeValidator {
 
 	private Place place;
 	private AbstractBuilding buildingCall = null;
 	
-	public CallRangeValidator(AbstractBuilding buildingCall, Place place) {
+	public CorpsCallRangeValidator(AbstractBuilding buildingCall, Place place) {
 		// TODO Auto-generated constructor stub
 		super(buildingCall, CommonIdentifierE.Building_Call);
 		this.buildingCall = buildingCall;
@@ -33,7 +33,7 @@ public class CallRangeValidator extends SelectBuildingTypeValidator {
 			if(Integer.valueOf(1).equals(ground.distance(buildingCall.getPlace().getPosition(), place.getPosition())))
 				ret = true;
 			else{
-				addMessage(I18n.getMessage(CallRangeValidator.class.getName()));
+				addMessage(I18n.getMessage(CorpsCallRangeValidator.class.getName()));
 				ret = false;
 			}
 		}

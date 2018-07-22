@@ -34,9 +34,12 @@ public class Merge extends AbstractAction implements IAction {
 		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Corps_Merge,map);
 		super.notifyObservers(info);
 		
-		hero.addTroops(getOwner());
 		AbstractGround ground = getOwner().getGround();
 		ground.removeCorps(getOwner());
+		
+		hero.addCorpsToTroops(getOwner());
+		
+		getOwner().activate(false);
 		this.hero = hero;
 	}
 

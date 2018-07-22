@@ -3,13 +3,13 @@ package org.cx.game.command;
 import org.cx.game.core.AbstractPlayer;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.ValidatorException;
-import org.cx.game.validator.AttackableValidator;
-import org.cx.game.validator.MoveEnergyValidator;
-import org.cx.game.validator.MoveTauntValidator;
-import org.cx.game.validator.PickRangeValidator;
-import org.cx.game.validator.PickTreasureEquipmentValidator;
-import org.cx.game.validator.SelectCorpsValidator;
-import org.cx.game.validator.SelectGroundValidator;
+import org.cx.game.validator.CorpsAttackableBufferValidator;
+import org.cx.game.validator.CorpsMoveEnergyValidator;
+import org.cx.game.validator.TauntAtTheTimeOfMoveBufferValidator;
+import org.cx.game.validator.CorpsPickRangeValidator;
+import org.cx.game.validator.CorpsPickTreasureEquipmentValidator;
+import org.cx.game.validator.SelectCorpsBufferValidator;
+import org.cx.game.validator.SelectGroundBufferValidator;
 import org.cx.game.validator.SelectPlaceExistTreasureValidator;
 import org.cx.game.widget.Place;
 import org.cx.game.widget.treasure.Treasure;
@@ -19,11 +19,11 @@ public class PickCommand extends InteriorCommand {
 	public PickCommand(AbstractPlayer player) {
 		super(player);
 		// TODO Auto-generated constructor stub
-		addValidator(new SelectGroundValidator(buffer));
-		addValidator(new SelectCorpsValidator(buffer));
-		addValidator(new MoveEnergyValidator((Corps) buffer.getCorps()));
-		addValidator(new AttackableValidator(buffer));
-		addValidator(new MoveTauntValidator(buffer));
+		addValidator(new SelectGroundBufferValidator(buffer));
+		addValidator(new SelectCorpsBufferValidator(buffer));
+		addValidator(new CorpsMoveEnergyValidator((Corps) buffer.getCorps()));
+		addValidator(new CorpsAttackableBufferValidator(buffer));
+		addValidator(new TauntAtTheTimeOfMoveBufferValidator(buffer));
 	}
 	
 	@Override
@@ -31,8 +31,8 @@ public class PickCommand extends InteriorCommand {
 		// TODO Auto-generated method stub
 		super.setParameter(parameter);
 		addValidator(new SelectPlaceExistTreasureValidator((Place) parameter));
-		addValidator(new PickTreasureEquipmentValidator((Corps) buffer.getCorps(), (Place) parameter));
-		addValidator(new PickRangeValidator((Corps) buffer.getCorps(), (Place) parameter));
+		addValidator(new CorpsPickTreasureEquipmentValidator((Corps) buffer.getCorps(), (Place) parameter));
+		addValidator(new CorpsPickRangeValidator((Corps) buffer.getCorps(), (Place) parameter));
 	}
 	
 	@Override

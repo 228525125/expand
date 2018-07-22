@@ -4,14 +4,14 @@ import org.cx.game.core.AbstractPlayer;
 import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.ValidatorException;
-import org.cx.game.validator.SelectCorpsValidator;
+import org.cx.game.validator.SelectCorpsBufferValidator;
 
 public class ChuckCommand extends InteriorCommand {
 
 	public ChuckCommand(AbstractPlayer player) {
 		// TODO Auto-generated constructor stub
 		super(player);
-		addValidator(new SelectCorpsValidator(buffer));
+		addValidator(new SelectCorpsBufferValidator(buffer));
 	}
 	
 	@Override

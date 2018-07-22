@@ -9,12 +9,12 @@ import org.cx.game.tools.I18n;
  * @author chenxian
  *
  */
-public class ConjureRangeValidator extends Validator {
+public class CorpsConjureRangeValidator extends Validator {
 
 	private AbstractSkill skill = null;
 	private Integer position = null;
 	
-	public ConjureRangeValidator(AbstractSkill skill, Integer position) {
+	public CorpsConjureRangeValidator(AbstractSkill skill, Integer position) {
 		// TODO Auto-generated constructor stub
 		this.skill = skill;
 		this.position = position;
@@ -30,7 +30,7 @@ public class ConjureRangeValidator extends Validator {
 		if(range>=step)
 			return true;
 		else{
-			addMessage(I18n.getMessage(ConjureRangeValidator.class.getName()));
+			addMessage(I18n.getMessage(CorpsConjureRangeValidator.class.getName()));
 			return false;
 		}
 	}

@@ -8,6 +8,7 @@ import org.cx.game.action.Upgrade;
 import org.cx.game.action.HeroUpgrade;
 import org.cx.game.magic.buff.AbstractBuff;
 import org.cx.game.magic.skill.AbstractSkill;
+import org.cx.game.widget.AbstractOption;
 import org.cx.game.widget.treasure.Mineral;
 import org.cx.game.widget.treasure.Resource;
 import org.cx.game.widget.treasure.Treasure;
@@ -60,12 +61,16 @@ public class Hero extends Corps {
 		return troops;
 	}
 	
-	public void addTroops(Corps corps) {
+	public void addCorpsToTroops(Corps corps) {
 		this.troops.add(corps);
+		addOption(new TroopOption(corps));
+		corps.setPosition(getPosition());
 	}
 	
 	public void removeCorpsFromTroops(Corps corps) {
 		this.troops.remove(corps);
+		AbstractOption option = getOption(corps);
+		removeOption(option);
 	}
 	
 	public List<Treasure> getTreasures() {
@@ -78,6 +83,16 @@ public class Hero extends Corps {
 	
 	public void removeTreasure(Treasure treasure) {
 		this.treasures.remove(treasure);
+	}
+	
+	@Override
+	public void setPosition(Integer position) {
+		// TODO Auto-generated method stub
+		super.setPosition(position);
+		
+		for(Corps corps : getTroops()){
+			corps.setPosition(position);
+		}
 	}
 
 	@Override

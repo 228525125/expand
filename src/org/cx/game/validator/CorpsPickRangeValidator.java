@@ -11,12 +11,12 @@ import org.cx.game.widget.Place;
  * @author chenxian
  *
  */
-public class PickRangeValidator extends Validator {
+public class CorpsPickRangeValidator extends Validator {
 
 	private Place place = null;
 	private Corps corps = null;
 	
-	public PickRangeValidator(Corps corps, Place place) {
+	public CorpsPickRangeValidator(Corps corps, Place place) {
 		// TODO Auto-generated constructor stub
 		this.place = place;
 		this.corps = corps;
@@ -30,7 +30,7 @@ public class PickRangeValidator extends Validator {
 		Integer distance = ground.distance(this.corps.getPosition(), this.place.getPosition());
 		if(Pick.Pick_Range_Defautl<distance){
 			ret = false;
-			addMessage(I18n.getMessage(PickRangeValidator.class.getName()));
+			addMessage(I18n.getMessage(CorpsPickRangeValidator.class.getName()));
 		}
 	
 		return ret;

@@ -8,9 +8,9 @@ import org.cx.game.tools.I18n;
  * @author chenxian
  *
  */
-public class OptionAllowValidator extends SelectOptionValidator {
+public class OptionAllowBufferValidator extends SelectOptionBufferValidator {
 
-	public OptionAllowValidator(CommandBuffer buffer) {
+	public OptionAllowBufferValidator(CommandBuffer buffer) {
 		// TODO Auto-generated constructor stub
 		super(buffer);
 	}
@@ -23,10 +23,10 @@ public class OptionAllowValidator extends SelectOptionValidator {
 		if(ret){
 			ret = getOption().getAllow();
 			if(!ret){
-				addMessage(I18n.getMessage(OptionAllowValidator.class.getName()));
+				addMessage(I18n.getMessage(OptionAllowBufferValidator.class.getName()));
 			}
 		}else{
-			addMessage(I18n.getMessage(OptionAllowValidator.class.getName()));
+			addMessage(I18n.getMessage(OptionAllowBufferValidator.class.getName()));
 		}
 		
 		return ret;

@@ -5,11 +5,11 @@ import org.cx.game.corps.Corps;
 import org.cx.game.exception.CommandValidatorException;
 import org.cx.game.exception.ValidatorException;
 import org.cx.game.tools.Debug;
-import org.cx.game.validator.AttackAtkValidator;
-import org.cx.game.validator.AttackRangeValidator;
-import org.cx.game.validator.AttackTauntValidator;
-import org.cx.game.validator.AttackableValidator;
-import org.cx.game.validator.SelectGroundValidator;
+import org.cx.game.validator.CorpsAttackAtkBufferValidator;
+import org.cx.game.validator.CorpsAttackRangeValidator;
+import org.cx.game.validator.TauntAtTheTimeOfAttackBufferValidator;
+import org.cx.game.validator.CorpsAttackableBufferValidator;
+import org.cx.game.validator.SelectGroundBufferValidator;
 import org.cx.game.validator.SelectCorpsNotHideValidator;
 
 public class AttackCommand extends InteriorCommand {
@@ -17,17 +17,17 @@ public class AttackCommand extends InteriorCommand {
 	public AttackCommand(AbstractPlayer player) {
 		// TODO Auto-generated constructor stub
 		super(player);
-		addValidator(new SelectGroundValidator(buffer));
-		addValidator(new AttackableValidator(buffer));
-		addValidator(new AttackAtkValidator(buffer));
+		addValidator(new SelectGroundBufferValidator(buffer));
+		addValidator(new CorpsAttackableBufferValidator(buffer));
+		addValidator(new CorpsAttackAtkBufferValidator(buffer));
 	}
 	
 	@Override
 	public void setParameter(Object parameter) {
 		// TODO Auto-generated method stub
 		super.setParameter(parameter);
-		addValidator(new AttackTauntValidator(buffer, (Corps) parameter));
-		addValidator(new AttackRangeValidator((Corps) buffer.getCorps(),(Corps) parameter));
+		addValidator(new TauntAtTheTimeOfAttackBufferValidator(buffer, (Corps) parameter));
+		addValidator(new CorpsAttackRangeValidator((Corps) buffer.getCorps(),(Corps) parameter));
 	}
 	
 	@Override

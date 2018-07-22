@@ -3,10 +3,10 @@ package org.cx.game.command;
 import org.cx.game.core.AbstractPlayer;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.ValidatorException;
-import org.cx.game.validator.CorpsMoveableValidator;
-import org.cx.game.validator.MoveRangeValidator;
-import org.cx.game.validator.MoveTauntValidator;
-import org.cx.game.validator.SelectGroundValidator;
+import org.cx.game.validator.CorpsMoveableBufferValidator;
+import org.cx.game.validator.CorpsMoveRangeValidator;
+import org.cx.game.validator.TauntAtTheTimeOfMoveBufferValidator;
+import org.cx.game.validator.SelectGroundBufferValidator;
 import org.cx.game.validator.SelectPlaceEmptyValidator;
 import org.cx.game.widget.Place;
 
@@ -15,9 +15,9 @@ public class MoveCommand extends InteriorCommand {
 	public MoveCommand(AbstractPlayer player) {
 		super(player);
 		// TODO Auto-generated constructor stub
-		addValidator(new SelectGroundValidator(buffer));
-		addValidator(new CorpsMoveableValidator(buffer));
-		addValidator(new MoveTauntValidator(buffer));
+		addValidator(new SelectGroundBufferValidator(buffer));
+		addValidator(new CorpsMoveableBufferValidator(buffer));
+		addValidator(new TauntAtTheTimeOfMoveBufferValidator(buffer));
 	}
 	
 	@Override
@@ -25,7 +25,7 @@ public class MoveCommand extends InteriorCommand {
 		// TODO Auto-generated method stub
 		super.setParameter(parameter);
 		addValidator(new SelectPlaceEmptyValidator((Place) parameter, true));
-		addValidator(new MoveRangeValidator((Corps) buffer.getCorps(), ((Place) parameter).getPosition()));
+		addValidator(new CorpsMoveRangeValidator((Corps) buffer.getCorps(), ((Place) parameter).getPosition()));
 	}
 	
 	@Override

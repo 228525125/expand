@@ -5,9 +5,9 @@ import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.ValidatorException;
 import org.cx.game.magic.skill.ActiveSkill;
-import org.cx.game.validator.ActiveSkillCooldownValidator;
-import org.cx.game.validator.AttackableValidator;
-import org.cx.game.validator.SelectGroundValidator;
+import org.cx.game.validator.ActiveSkillCooldownBufferValidator;
+import org.cx.game.validator.CorpsAttackableBufferValidator;
+import org.cx.game.validator.SelectGroundBufferValidator;
 
 /**
  * 使用技能
@@ -19,9 +19,9 @@ public class ConjureCommand extends InteriorCommand {
 	public ConjureCommand(AbstractPlayer player) {
 		super(player);
 		// TODO Auto-generated constructor stub
-		addValidator(new SelectGroundValidator(buffer));
-		addValidator(new ActiveSkillCooldownValidator(buffer));
-		addValidator(new AttackableValidator(buffer));
+		addValidator(new SelectGroundBufferValidator(buffer));
+		addValidator(new ActiveSkillCooldownBufferValidator(buffer));
+		addValidator(new CorpsAttackableBufferValidator(buffer));
 	}
 
 	@Override

@@ -11,11 +11,11 @@ import com.sun.corba.se.spi.copyobject.CopierManager;
  * @author chenxian
  *
  */
-public class MoveEnergyValidator extends Validator {
+public class CorpsMoveEnergyValidator extends Validator {
 	
 	private Corps corps = null;
 
-	public MoveEnergyValidator(Corps corps) {
+	public CorpsMoveEnergyValidator(Corps corps) {
 		// TODO Auto-generated constructor stub
 		this.corps = corps;
 	}
@@ -27,7 +27,7 @@ public class MoveEnergyValidator extends Validator {
 		if(ret){
 			if(this.corps.getMove().getEnergy()<1){
 				ret = false;
-				addMessage(I18n.getMessage(MoveEnergyValidator.class.getName()));
+				addMessage(I18n.getMessage(CorpsMoveEnergyValidator.class.getName()));
 			}
 		}
 		

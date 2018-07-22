@@ -84,6 +84,8 @@ public class StartState extends AbstractPlayState {
 				Hero hero = (Hero) player.getHeroList().get(i);
 				Integer position = list.get(i);
 				ground.placementCorps(position, hero);
+				
+				player.getCorpsList().add(hero);
 			}
 		}
 	}

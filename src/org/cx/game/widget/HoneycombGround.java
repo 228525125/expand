@@ -19,7 +19,7 @@ import org.cx.game.tools.Node;
 import org.cx.game.tools.SpaceArithmetic;
 import org.cx.game.tools.XmlConfigureHelper;
 import org.cx.game.widget.building.AbstractBuilding;
-import org.cx.game.widget.building.AbstractOption;
+import org.cx.game.widget.AbstractOption;
 import org.cx.game.widget.treasure.Treasure;
 
 import com.oracle.jrockit.jfr.ValueDefinition;

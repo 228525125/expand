@@ -3,8 +3,8 @@ package org.cx.game.command;
 import org.cx.game.core.AbstractPlayer;
 import org.cx.game.corps.AbstractCorps;
 import org.cx.game.exception.ValidatorException;
-import org.cx.game.validator.SelectGroundValidator;
-import org.cx.game.validator.SelectCorpsValidator;
+import org.cx.game.validator.SelectGroundBufferValidator;
+import org.cx.game.validator.SelectCorpsBufferValidator;
 import org.cx.game.validator.SelectPlaceEmptyValidator;
 import org.cx.game.widget.Place;
 
@@ -19,7 +19,7 @@ public class CallCommand extends InteriorCommand {
 	public CallCommand(AbstractPlayer player) {
 		// TODO Auto-generated constructor stub
 		super(player);
-		addValidator(new SelectCorpsValidator(buffer));
+		addValidator(new SelectCorpsBufferValidator(buffer));
 	}
 	
 	@Override

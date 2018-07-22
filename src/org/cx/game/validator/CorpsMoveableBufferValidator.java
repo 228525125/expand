@@ -4,30 +4,30 @@ import org.cx.game.command.CommandBuffer;
 import org.cx.game.tools.I18n;
 
 /**
- * 随从攻击力必须大于0才能发起攻击
+ * 判断是否可移动
  * @author chenxian
  *
  */
-public class AttackAtkValidator extends SelectCorpsValidator {
+public class CorpsMoveableBufferValidator extends CorpsActivateBufferValidator {
 
-	public AttackAtkValidator(CommandBuffer buffer) {
+	public CorpsMoveableBufferValidator(CommandBuffer buffer) {
 		super(buffer);
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	@Override
 	public Boolean validate() {
 		// TODO Auto-generated method stub
 		Boolean ret = super.validate();
 		if(ret){
-			if(0<getCorps().getAttack().getAtk()){
+			if(getCorps().getMove().getMoveable()){
 				ret = true;
 			}else{
-				addMessage(I18n.getMessage(AttackAtkValidator.class.getName()));
+				addMessage(I18n.getMessage(CorpsMoveableBufferValidator.class.getName()));
 				ret = false;
 			}
 		}
-		
 		return ret;
 	}
+
 }

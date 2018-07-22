@@ -3,11 +3,11 @@ package org.cx.game.validator;
 import org.cx.game.command.CommandBuffer;
 import org.cx.game.tools.I18n;
 
-public class UpgradeObjectValidator extends Validator {
+public class SelectGroundBufferValidator extends Validator {
 
-	protected CommandBuffer buffer = null;
+	private CommandBuffer buffer;
 	
-	public UpgradeObjectValidator(CommandBuffer buffer) {
+	public SelectGroundBufferValidator(CommandBuffer buffer) {
 		// TODO Auto-generated constructor stub
 		this.buffer = buffer;
 	}
@@ -15,10 +15,10 @@ public class UpgradeObjectValidator extends Validator {
 	@Override
 	public Boolean validate() {
 		// TODO Auto-generated method stub
-		if(null!=buffer.getSkill()){
+		if(null!=buffer.getGround())
 			return true;
-		}else{
-			addMessage(I18n.getMessage(UpgradeObjectValidator.class.getName()));
+		else{
+			addMessage(I18n.getMessage(SelectGroundBufferValidator.class.getName()));
 			return false;
 		}
 	}

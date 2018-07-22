@@ -7,12 +7,12 @@ import org.cx.game.tools.Util;
 import org.cx.game.widget.treasure.Mineral;
 import org.cx.game.widget.treasure.Resource;
 
-public class UpgradeConsumeValidator extends Validator {
+public class BuildingUpgradeConsumeValidator extends Validator {
 
 	private Upgrade upgrade = null;
 	private AbstractPlayer player = null;
 	
-	public UpgradeConsumeValidator(Upgrade upgrade, AbstractPlayer player) {
+	public BuildingUpgradeConsumeValidator(Upgrade upgrade, AbstractPlayer player) {
 		// TODO Auto-generated constructor stub
 		this.upgrade = upgrade;
 		this.player = player;
@@ -27,7 +27,7 @@ public class UpgradeConsumeValidator extends Validator {
 			
 		if(Util.absoluteLessThan(res, upgrade.getRequirement())){
 			ret = false;
-			addMessage(I18n.getMessage(UpgradeConsumeValidator.class.getName()));
+			addMessage(I18n.getMessage(BuildingUpgradeConsumeValidator.class.getName()));
 		}
 		
 		return ret;

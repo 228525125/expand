@@ -1,8 +1,5 @@
 package org.cx.game.validator;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.cx.game.tools.I18n;
 import org.cx.game.widget.building.AbstractBuilding;
 

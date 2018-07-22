@@ -9,12 +9,12 @@ import org.cx.game.tools.I18n;
  * @author chenxian
  *
  */
-public class SelectSkillValidator extends Validator {
+public class SelectSkillBufferValidator extends Validator {
 
 	private CommandBuffer buffer = null;
 	private AbstractSkill skill = null;
 	
-	public SelectSkillValidator(CommandBuffer buffer) {
+	public SelectSkillBufferValidator(CommandBuffer buffer) {
 		// TODO Auto-generated constructor stub
 		this.buffer = buffer;
 	}
@@ -24,7 +24,7 @@ public class SelectSkillValidator extends Validator {
 		// TODO Auto-generated method stub
 		skill = buffer.getSkill(); 
 		if(null==skill){
-			addMessage(I18n.getMessage(SelectSkillValidator.class.getName()));
+			addMessage(I18n.getMessage(SelectSkillBufferValidator.class.getName()));
 			return false;
 		}else{
 			return true;

@@ -16,13 +16,12 @@ import org.cx.game.action.Death;
 import org.cx.game.action.Move;
 import org.cx.game.action.HeroUpgrade;
 import org.cx.game.action.CorpsUpgrade;
-import org.cx.game.action.Pick;
-import org.cx.game.action.Picked;
 import org.cx.game.action.SkillUpgrade;
 import org.cx.game.core.Player;
 import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Hero;
 import org.cx.game.corps.Corps;
+import org.cx.game.corps.TroopOption;
 import org.cx.game.magic.skill.ShieldHit;
 import org.cx.game.magic.trick.ITrick;
 import org.cx.game.observer.NotifyInfo;
@@ -108,7 +107,8 @@ public class JsonOut extends AbstractResponse {
 							.element("position", corps.getPosition())
 							.element("skillList", corps.getSkillList(),getConfig())
 							.element("star", corps.getStar())
-							.element("upgrade", corps.getUpgrade(),getConfig());
+							.element("upgrade", corps.getUpgrade(),getConfig())
+							.element("optionList", corps.getOptionList(),getConfig());
 				}
 			});
 			
@@ -137,7 +137,8 @@ public class JsonOut extends AbstractResponse {
 							.element("star", hero.getStar())
 							.element("upgrade", hero.getUpgrade(), getConfig())
 							.element("treasures", hero.getTreasures(), getConfig())
-							.element("troops", hero.getTroops(), getConfig());
+							.element("troops", hero.getTroops(), getConfig())
+							.element("optionList", hero.getOptionList(),getConfig());
 				}
 			});
 			
@@ -540,6 +541,17 @@ public class JsonOut extends AbstractResponse {
 							.element("name", obj.getName())
 							.element("spacingRemainBout", obj.getSpacingRemainBout())
 							.element("spacingWait", obj.getSpacingWait());
+				}
+			});
+			
+			config.registerJsonBeanProcessor(TroopOption.class, new JsonBeanProcessor() {
+				
+				@Override
+				public JSONObject processBean(Object arg0, JsonConfig arg1) {
+					// TODO Auto-generated method stub
+					TroopOption obj = (TroopOption) arg0;
+					return new JSONObject().element("allow", obj.getAllow())
+							.element("name", obj.getName());
 				}
 			});
 			

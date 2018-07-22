@@ -5,10 +5,12 @@ import java.util.List;
 
 import org.cx.game.action.Execute;
 import org.cx.game.action.IAction;
+import org.cx.game.core.AbstractPlayer;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.tools.Util;
 import org.cx.game.validator.BuildConsumeValidator;
 import org.cx.game.widget.AbstractGround;
+import org.cx.game.widget.AbstractOption;
 
 public class BuildOption extends AbstractOption {
 
@@ -28,7 +30,19 @@ public class BuildOption extends AbstractOption {
 	}
 	
 	@Override
-	public void setOwner(AbstractBuilding building) {
+	public AbstractBuilding getOwner() {
+		// TODO Auto-generated method stub
+		return (AbstractBuilding) super.getOwner();
+	}
+	
+	@Override
+	protected AbstractPlayer getOwnerPlayer() {
+		// TODO Auto-generated method stub
+		return getOwner().getPlayer();
+	}
+	
+	@Override
+	public void setOwner(Object building) {
 		// TODO Auto-generated method stub
 		super.setOwner(building);
 		
@@ -100,7 +114,7 @@ public class BuildOption extends AbstractOption {
 			// TODO Auto-generated method stub
 			super.action(objects);
 			
-			getOwner().getOwner().build();
+			((AbstractBuilding) getOwner().getOwner()).build();
 		}
 	}
 }

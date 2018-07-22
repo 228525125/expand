@@ -13,12 +13,12 @@ import org.cx.game.widget.AbstractGround;
  * @author chenxian
  *
  */
-public class AttackRangeValidator extends Validator {
+public class CorpsAttackRangeValidator extends Validator {
 
 	private Corps attack = null;
 	private Corps attacked = null;
 	
-	public AttackRangeValidator(Corps attack, Corps attacked) {
+	public CorpsAttackRangeValidator(Corps attack, Corps attacked) {
 		// TODO Auto-generated constructor stub
 		this.attack = attack;
 		this.attacked = attacked;
@@ -32,7 +32,7 @@ public class AttackRangeValidator extends Validator {
 		if(ps.contains(attacked.getPosition())){
 			return true;
 		}else{
-			addMessage(I18n.getMessage(AttackRangeValidator.class.getName()));
+			addMessage(I18n.getMessage(CorpsAttackRangeValidator.class.getName()));
 			return false;
 		}
 	}

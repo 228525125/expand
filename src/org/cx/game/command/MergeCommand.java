@@ -5,7 +5,8 @@ import org.cx.game.corps.Corps;
 import org.cx.game.corps.Hero;
 import org.cx.game.exception.ValidatorException;
 import org.cx.game.validator.CorpsIsHeroValidator;
-import org.cx.game.validator.MoveRangeValidator;
+import org.cx.game.validator.CorpsMoveableBufferValidator;
+import org.cx.game.validator.CorpsMoveRangeValidator;
 
 public class MergeCommand extends InteriorCommand {
 
@@ -20,7 +21,8 @@ public class MergeCommand extends InteriorCommand {
 		super.setParameter(parameter);
 		
 		addValidator(new CorpsIsHeroValidator((Corps) parameter));
-		addValidator(new MoveRangeValidator((Corps) buffer.getCorps(), ((Corps) parameter).getPosition()));
+		addValidator(new CorpsMoveableBufferValidator(buffer));
+		addValidator(new CorpsMoveRangeValidator((Corps) buffer.getCorps(), ((Corps) parameter).getPosition()));
 	}
 	
 	@Override

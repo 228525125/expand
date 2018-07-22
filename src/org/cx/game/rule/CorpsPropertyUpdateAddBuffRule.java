@@ -1,7 +1,8 @@
 package org.cx.game.rule;
 
+import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
-import org.cx.game.corps.Corps.CorpsAddBuffAction;
+import org.cx.game.corps.AbstractCorps.CorpsAddBuffAction;
 
 public class CorpsPropertyUpdateAddBuffRule extends AbstractRule {
 
@@ -20,7 +21,7 @@ public class CorpsPropertyUpdateAddBuffRule extends AbstractRule {
 	@Override
 	public void after(Object[] args) {
 		// TODO Auto-generated method stub
-		Corps corps = getOwner().getOwner();
+		Corps corps = (Corps) getOwner().getOwner();
 		CorpsPropertyUpdateUpgradeRule.updateExtraAtk(corps);
 		CorpsPropertyUpdateUpgradeRule.updateExtraDef(corps);
 	}

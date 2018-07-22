@@ -1,20 +1,16 @@
 package org.cx.game.validator;
 
-import java.util.Map;
-import java.util.Map.Entry;
-
 import org.cx.game.corps.Corps;
 import org.cx.game.tools.I18n;
 import org.cx.game.tools.Util;
 import org.cx.game.widget.treasure.Mineral;
-import org.cx.game.widget.treasure.Resource;
 
-public class CallConsumeValidator extends Validator {
+public class CorpsCallConsumeValidator extends Validator {
 
 	private Corps corps;
 	private Integer number;
 	
-	public CallConsumeValidator(Corps corps, Integer number) {
+	public CorpsCallConsumeValidator(Corps corps, Integer number) {
 		// TODO Auto-generated constructor stub
 		this.corps = corps;
 		this.number = number;
@@ -27,9 +23,9 @@ public class CallConsumeValidator extends Validator {
 
 		Mineral res = corps.getPlayer().getMineral();
 			
-		if(Util.absoluteLessThan(res, corps.getCall().getConsume())){
+		if(Util.absoluteLessThan(res, Util.operating(Util.Mul, corps.getCall().getConsume(), number))){
 			ret = false;
-			addMessage(I18n.getMessage(CallConsumeValidator.class.getName()));
+			addMessage(I18n.getMessage(CorpsCallConsumeValidator.class.getName()));
 		}	
 	
 		return ret;

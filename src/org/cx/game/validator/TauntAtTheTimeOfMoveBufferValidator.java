@@ -9,9 +9,9 @@ import org.cx.game.tools.I18n;
  * @author chenxian
  *
  */
-public class MoveTauntValidator extends SelectCorpsValidator {
+public class TauntAtTheTimeOfMoveBufferValidator extends SelectCorpsBufferValidator {
 
-	public MoveTauntValidator(CommandBuffer buffer) {
+	public TauntAtTheTimeOfMoveBufferValidator(CommandBuffer buffer) {
 		super(buffer);
 		// TODO Auto-generated constructor stub
 	}

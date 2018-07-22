@@ -11,11 +11,11 @@ import org.cx.game.tools.I18n;
  * @author chenxian
  *
  */
-public class AttackTauntValidator extends SelectCorpsValidator {
+public class TauntAtTheTimeOfAttackBufferValidator extends SelectCorpsBufferValidator {
 
 	private Corps attacked = null;
 	
-	public AttackTauntValidator(CommandBuffer buffer, Corps attacked) {
+	public TauntAtTheTimeOfAttackBufferValidator(CommandBuffer buffer, Corps attacked) {
 		super(buffer);
 		// TODO Auto-generated constructor stub
 		this.attacked = attacked;

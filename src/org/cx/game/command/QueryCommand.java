@@ -11,11 +11,11 @@ import org.cx.game.exception.CommandValidatorException;
 import org.cx.game.exception.ValidatorException;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
-import org.cx.game.validator.SelectCorpsValidator;
-import org.cx.game.validator.SelectOptionValidator;
-import org.cx.game.validator.SelectSkillValidator;
+import org.cx.game.validator.SelectCorpsBufferValidator;
+import org.cx.game.validator.SelectOptionBufferValidator;
+import org.cx.game.validator.SelectSkillBufferValidator;
 import org.cx.game.widget.AbstractGround;
-import org.cx.game.widget.building.AbstractOption;
+import org.cx.game.widget.AbstractOption;
 
 public class QueryCommand extends InteriorCommand {
 
@@ -49,34 +49,34 @@ public class QueryCommand extends InteriorCommand {
 		AbstractGround ground = this.player.getContext().getGround();
 		
 		if("conjure".equals(parameter)){
-			doValidator(new SelectSkillValidator(buffer));
+			doValidator(new SelectSkillBufferValidator(buffer));
 			if(hasError())
 				throw new CommandValidatorException(getErrors().getMessage());
 			
 			positionList = ground.queryRange(buffer.getSkill(), map.get(parameter));
 		}else if("attack".equals(parameter)){
-			doValidator(new SelectCorpsValidator(buffer));
+			doValidator(new SelectCorpsBufferValidator(buffer));
 			if(hasError())
 				throw new CommandValidatorException(getErrors().getMessage());
 			
 			AbstractCorps corps = buffer.getCorps();           
 			positionList = ground.queryRange(corps, map.get(parameter));   //这里需要计算
 		}else if("move".equals(parameter) || "merge".equals(parameter) || "leave".equals(parameter)){
-			doValidator(new SelectCorpsValidator(buffer));
+			doValidator(new SelectCorpsBufferValidator(buffer));
 			if(hasError())
 				throw new CommandValidatorException(getErrors().getMessage());
 			
 			AbstractCorps corps = buffer.getCorps();           
 			positionList = ground.queryRange(corps, map.get(parameter));
 		}else if("execute".equals(parameter)){
-			doValidator(new SelectOptionValidator(buffer));
+			doValidator(new SelectOptionBufferValidator(buffer));
 			if(hasError())
 				throw new CommandValidatorException(getErrors().getMessage());
 			
 			AbstractOption option = buffer.getOption();
 			positionList = ground.queryRange(option, map.get(parameter));
 		}else if("pick".equals(parameter)){
-			doValidator(new SelectCorpsValidator(buffer));
+			doValidator(new SelectCorpsBufferValidator(buffer));
 			if(hasError())
 				throw new CommandValidatorException(getErrors().getMessage());
 			
