@@ -6,20 +6,13 @@ import java.util.List;
 import org.cx.game.action.Execute;
 import org.cx.game.action.IAction;
 import org.cx.game.core.AbstractPlayer;
-import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
-import org.cx.game.corps.CorpsFactory;
 import org.cx.game.exception.RuleValidatorException;
-import org.cx.game.tools.I18n;
-import org.cx.game.validator.CallUnitEqualValidator;
 import org.cx.game.validator.CorpsInThePlaceValidator;
 import org.cx.game.validator.CorpsMoveEnergyValidator;
-import org.cx.game.validator.Validator;
 import org.cx.game.widget.AbstractOption;
 import org.cx.game.widget.AbstractPlace;
 import org.cx.game.widget.AbstractGround;
-import org.cx.game.widget.Place;
-import org.cx.game.widget.building.BuildOption.OptionBuildExecute;
 
 /**
  * 传送选项
@@ -32,9 +25,10 @@ public class SpatialOption extends AbstractOption {
 	
 	private SpatialBuilding spatialBuilding = null;
 	
-	public SpatialOption(SpatialBuilding spatialBuilding) {
+	public SpatialOption(SpatialBuilding dest, SpatialBuilding owner) {
 		// TODO Auto-generated constructor stub
-		this.spatialBuilding = spatialBuilding;
+		this.spatialBuilding = dest;
+		setOwner(owner);
 	}
 	
 	@Override

@@ -39,24 +39,13 @@ public class ShowCommand extends InteriorCommand {
 			map.put(CommandBuffer.OPTION, buffer.getOption());
 		}
 		
-		if(null!=buffer.getCemetery()){
-			map.put(CommandBuffer.CEMETERY, buffer.getCemetery());
-		}
-		
-		if(null!=buffer.getTrickList()){
-			map.put(CommandBuffer.TRICKLIST, buffer.getTrickList());
-		}
-		
 		if(null!=buffer.getCorps()){
-			map.put("card", buffer.getCorps());
+			map.put("corps", buffer.getCorps());
 			map.put("position", buffer.getCorps().getPosition());
 		}
 		
 		if(null!=buffer.getSkill())
 			map.put(CommandBuffer.SKILL, buffer.getSkill());
-		
-		if(null!=buffer.getTrick())
-			map.put(CommandBuffer.TRICK, buffer.getTrick());
 		
 		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Command_Show,map); 
 		super.notifyObservers(info);    //通知观察者

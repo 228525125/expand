@@ -18,6 +18,12 @@ public class TownBuilding extends AbstractBuilding {
 		setStatus(AbstractBuilding.Building_Status_Complete);  //城镇在地图上已经形成
 	}
 	
+	@Override
+	public void afterConstruct() {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	/**
 	 * 内部建筑物的typeID，简化xml
 	 * @param list

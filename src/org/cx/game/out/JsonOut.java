@@ -22,6 +22,8 @@ import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Hero;
 import org.cx.game.corps.Corps;
 import org.cx.game.corps.TroopOption;
+import org.cx.game.magic.skill.ConjureOption;
+import org.cx.game.magic.skill.ConjureToCorpsOption;
 import org.cx.game.magic.skill.ShieldHit;
 import org.cx.game.magic.trick.ITrick;
 import org.cx.game.observer.NotifyInfo;
@@ -397,14 +399,14 @@ public class JsonOut extends AbstractResponse {
 							.element("consume", obj.getConsume(), getConfig())
 							.element("name", obj.getName())
 							.element("needBuilding", obj.getNeedBuilding())
-							.element("options", obj.getOptions(), getConfig())
+							.element("optionList", obj.getOptionList(), getConfig())
 							.element("player", obj.getPlayer(), getConfig())
 							.element("position", obj.getPlace().getPosition())
 							.element("status", obj.getStatus())
 							.element("category", obj.getCategory())
 							.element("type", obj.getType())
 							.element("upgrade", obj.getUpgrade(), getConfig())
-							.element("cardID", obj.getCorpsID())
+							.element("cardID", obj.getCorpsType())
 							.element("nop", obj.getNop())
 							.element("yield", obj.getYield());
 				}
@@ -420,7 +422,7 @@ public class JsonOut extends AbstractResponse {
 							.element("consume", obj.getConsume(), getConfig())
 							.element("name", obj.getName())
 							.element("needBuilding", obj.getNeedBuilding())
-							.element("options", obj.getOptions(), getConfig())
+							.element("optionList", obj.getOptionList(), getConfig())
 							.element("player", obj.getPlayer(), getConfig())
 							.element("position", obj.getPlace().getPosition())
 							.element("status", obj.getStatus())
@@ -440,7 +442,7 @@ public class JsonOut extends AbstractResponse {
 					return new JSONObject().element("buildWait", obj.getBuildWait())
 							.element("consume", obj.getConsume(), getConfig())
 							.element("name", obj.getName())
-							.element("options", obj.getOptions(), getConfig())
+							.element("optionList", obj.getOptionList(), getConfig())
 							.element("player", obj.getPlayer(), getConfig())
 							.element("position", obj.getPlace().getPosition())
 							.element("status", obj.getStatus())
@@ -459,7 +461,7 @@ public class JsonOut extends AbstractResponse {
 					SpatialBuilding obj = (SpatialBuilding) arg0;
 					return new JSONObject().element("name", obj.getName())
 							.element("consume", obj.getConsume(), getConfig())
-							.element("options", obj.getOptions(), getConfig())
+							.element("optionList", obj.getOptionList(), getConfig())
 							.element("position", obj.getPlace().getPosition())
 							.element("status", obj.getStatus())
 							.element("upgrade", obj.getUpgrade(), getConfig())
@@ -555,6 +557,36 @@ public class JsonOut extends AbstractResponse {
 				}
 			});
 			
+			config.registerJsonBeanProcessor(ConjureOption.class, new JsonBeanProcessor() {
+				
+				@Override
+				public JSONObject processBean(Object arg0, JsonConfig arg1) {
+					// TODO Auto-generated method stub
+					ConjureOption obj = (ConjureOption) arg0;
+					return new JSONObject().element("allow", obj.getAllow())
+							.element("executeRemainBout", obj.getExecuteRemainBout())
+							.element("executeWait", obj.getExecuteWait())
+							.element("name", obj.getName())
+							.element("spacingRemainBout", obj.getSpacingRemainBout())
+							.element("spacingWait", obj.getSpacingWait());
+				}
+			});
+			
+			config.registerJsonBeanProcessor(ConjureToCorpsOption.class, new JsonBeanProcessor() {
+				
+				@Override
+				public JSONObject processBean(Object arg0, JsonConfig arg1) {
+					// TODO Auto-generated method stub
+					ConjureToCorpsOption obj = (ConjureToCorpsOption) arg0;
+					return new JSONObject().element("allow", obj.getAllow())
+							.element("executeRemainBout", obj.getExecuteRemainBout())
+							.element("executeWait", obj.getExecuteWait())
+							.element("name", obj.getName())
+							.element("spacingRemainBout", obj.getSpacingRemainBout())
+							.element("spacingWait", obj.getSpacingWait());
+				}
+			});
+			
 			config.registerJsonBeanProcessor(Mineral.class, new JsonBeanProcessor() {
 				
 				@Override
@@ -637,12 +669,11 @@ public class JsonOut extends AbstractResponse {
 				public JSONObject processBean(Object arg0, JsonConfig arg1) {
 					// TODO Auto-generated method stub
 					ShieldHit obj = (ShieldHit) arg0;
-					return new JSONObject().element("allow", obj.getAllow())
-							.element("name", obj.getName())
+					return new JSONObject().element("name", obj.getName())
 							.element("cooldown", obj.getCooldown())
-							.element("cooldownRemain", obj.getCooldownRemain())
 							.element("range", obj.getRange())
-							.element("upgrade", obj.getUpgrade(), getConfig());
+							.element("upgrade", obj.getUpgrade(), getConfig())
+							.element("optionList", obj.getOptionList(), getConfig());
 				}
 			});
 			
@@ -653,10 +684,8 @@ public class JsonOut extends AbstractResponse {
 	
 	public static void main(String[] args) {
 		
-		Mineral r = new Mineral("1,2,3,4");
-		Player player = new Player(1,"cx");
-		player.setMineral(r);
+		Hero hero = new Hero(1);
 		
-		System.out.println(JSONObject.fromObject(player,getConfig()));
+		System.out.println(JSONObject.fromObject(hero,getConfig()));
 	}
 }

@@ -8,26 +8,30 @@ import org.cx.game.widget.treasure.Resource;
 
 public class CallBuilding extends AbstractBuilding {
 
-	private Integer corpsID = null;       //可招募单位
+	private Integer corpsType = null;       //可招募单位
 	private Integer nop = 0;             //当前可招募数量
 	private Integer yield = null;        //产量/天
 	
-	public CallBuilding(Integer type, Integer corpsID, Integer yield) {
+	public CallBuilding(Integer type, Integer corpsType, Integer yield) {
 		// TODO Auto-generated constructor stub
 		super(type);
 		
-		this.corpsID = corpsID;
+		this.corpsType = corpsType;
 		this.yield = yield;
-		
-		BuildOption optionBuild = new BuildOption();
+	}
+	
+	@Override
+	public void afterConstruct() {
+		// TODO Auto-generated method stub
+		BuildOption optionBuild = new BuildOption(this);
 		addOption(optionBuild);
 		
-		CallOption callOption = new CallOption(corpsID);
+		CallOption callOption = new CallOption(this);
 		addOption(callOption);
 	}
 
-	public Integer getCorpsID() {
-		return corpsID;
+	public Integer getCorpsType() {
+		return corpsType;
 	}
 
 	public Integer getNop() {

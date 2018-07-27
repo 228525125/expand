@@ -33,6 +33,12 @@ public class SpatialBuilding extends AbstractBuilding {
 		setStatus(AbstractBuilding.Building_Status_Complete);
 	}
 	
+	@Override
+	public void afterConstruct() {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	/**
 	 * 传送到目标节点
 	 * @param destNode 节点
@@ -82,7 +88,7 @@ public class SpatialBuilding extends AbstractBuilding {
 	
 	public void addSpatialBuilding(SpatialBuilding spatialBuilding) {
 		this.spatialBuildingList.add(spatialBuilding);
-		SpatialOption option = new SpatialOption(spatialBuilding);
+		SpatialOption option = new SpatialOption(spatialBuilding, this);
 		addOption(option);
 	}
 

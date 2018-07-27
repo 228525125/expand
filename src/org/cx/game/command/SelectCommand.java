@@ -41,16 +41,6 @@ public class SelectCommand extends InteriorCommand {
 			map.put(CommandBuffer.OPTION, buffer.getOption());
 		}
 		
-		if(null!=buffer.getCemetery()){
-			map.put(CommandBuffer.CEMETERY, buffer.getCemetery());
-			map.put("position", buffer.getCemetery().getOwner().getPosition());
-		}
-		
-		if(null!=buffer.getTrickList()){
-			map.put(CommandBuffer.TRICKLIST, buffer.getTrickList());
-			map.put("position", buffer.getTrickList().getOwner().getPosition());
-		}
-		
 		if(null!=buffer.getCorps()){
 			map.put("card", buffer.getCorps());
 			map.put("position", buffer.getCorps().getPosition());
@@ -58,9 +48,6 @@ public class SelectCommand extends InteriorCommand {
 		
 		if(null!=buffer.getSkill())
 			map.put(CommandBuffer.SKILL, buffer.getSkill());
-		
-		if(null!=buffer.getTrick())
-			map.put(CommandBuffer.TRICK, buffer.getTrick());
 		
 		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Command_Select,map); 
 		super.notifyObservers(info);    

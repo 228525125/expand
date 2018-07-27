@@ -25,9 +25,10 @@ public class CallOption extends AbstractOption {
 	private Integer corpsType = 0;
 	private String name = null;
 	
-	public CallOption(Integer corpsType) {
+	public CallOption(CallBuilding building) {
 		// TODO Auto-generated constructor stub
-		this.corpsType = corpsType;
+		setOwner(building);
+		this.corpsType = building.getCorpsType();
 		
 		//setParameterTypeValidator(new Class[]{IPlace.class}, new String[]{"empty"}, new Object[]{true});
 	}

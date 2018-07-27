@@ -28,6 +28,12 @@ public abstract class PassiveSkill extends AbstractSkill implements IIntercepter
 	}
 	
 	@Override
+	public void afterConstruct() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
 	public Boolean isInvoke() {
 		// TODO Auto-generated method stub
 		return true;

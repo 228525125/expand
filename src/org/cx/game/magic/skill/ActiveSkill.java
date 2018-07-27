@@ -16,14 +16,14 @@ import org.cx.game.validator.Errors;
 import org.cx.game.validator.IValidator;
 import org.cx.game.validator.ParameterTypeValidator;
 import org.cx.game.widget.AbstractGround;
+import org.cx.game.widget.AbstractOption;
 
 public abstract class ActiveSkill extends AbstractSkill {
 
 	private Integer cooldown = 1;             //冷却回合
-	private Boolean allow = true;
 	private Integer range = 0;
+	private String target = null;
 	
-	private ActiveSkillCoolingProcess coolingProcess = null;      //间隔
 	private Upgrade upgrade = null;
 	
 	/**
@@ -31,24 +31,21 @@ public abstract class ActiveSkill extends AbstractSkill {
 	 * @param id 
 	 * @param cooldown 冷却回合 
 	 */
-	public ActiveSkill(Integer id, Integer cooldown) {
+	public ActiveSkill(Integer type, Integer cooldown) {
 		// TODO Auto-generated constructor stub
-		super(id);
+		super(type);
 		this.cooldown = cooldown;
 	}
 	
-	/**
-	 * 是否可以执行
-	 * @return
-	 */
-	public Boolean getAllow() {
+	@Override
+	public void afterConstruct() {
 		// TODO Auto-generated method stub
-		return this.allow;
+		AbstractOption option = new ConjureOption(this);
+		addOption(option);
 	}
 	
-	public void setAllow(Boolean allow) {
-		// TODO Auto-generated method stub
-		this.allow = allow;
+	public String getTarget() {
+		return this.target;
 	}
 	
 	/**
@@ -61,20 +58,6 @@ public abstract class ActiveSkill extends AbstractSkill {
 	
 	public void setRange(Integer range) {
 		this.range = range;
-	}
-	
-	/**
-	 * 技能有效范围
-	 * @param ground
-	 * @return
-	 */
-	public List<Integer> getConjureRange(){
-		List<Integer> positionList = new ArrayList<Integer>();
-		Corps corps = (Corps) getOwner();
-		AbstractGround ground = corps.getGround();
-		Integer position = corps.getPosition();
-		positionList = ground.areaForDistance(position, getRange(), AbstractGround.Contain);
-		return positionList;
 	}
 	
 	@Override
@@ -97,14 +80,6 @@ public abstract class ActiveSkill extends AbstractSkill {
 		this.cooldown = cooldown;
 	}
 	
-	/**
-	 * 剩余冷却回合
-	 * @return
-	 */
-	public Integer getCooldownRemain() {
-		return null!=this.coolingProcess ? this.coolingProcess.getRemainBout() : 0;
-	}
-	
 	public Upgrade getUpgrade() {		
 		if(null==upgrade){
 			Upgrade upgrade = new SkillUpgrade();
@@ -118,7 +93,7 @@ public abstract class ActiveSkill extends AbstractSkill {
 	 * 使用技能
 	 * @param objects
 	 */
-	public void useSkill(Object...objects) {
+	public abstract void useSkill(Object...objects); /*{
 		// TODO Auto-generated method stub
 		
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -129,16 +104,5 @@ public abstract class ActiveSkill extends AbstractSkill {
 		map.put("position", getOwner().getPosition());
 		NotifyInfo info = new NotifyInfo(getAction()+UseSkill,map);
 		notifyObservers(info);           //通知所有卡片对象，被动技能发动		
-		
-		cooling();
-	}
-	
-	private void cooling() {
-		// TODO Auto-generated method stub		
-		if(!Integer.valueOf(0).equals(this.cooldown)){
-			setAllow(false);
-			this.coolingProcess = new ActiveSkillCoolingProcess(this.cooldown, this);
-		}else
-			setAllow(true);
-	}
+	}*/
 }

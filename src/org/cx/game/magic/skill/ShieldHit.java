@@ -2,9 +2,10 @@ package org.cx.game.magic.skill;
 
 import org.cx.game.corps.Corps;
 import org.cx.game.magic.skill.ActiveSkill;
-import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.magic.buff.DizzyBuff;
 import org.cx.game.tools.Util;
+import org.cx.game.widget.AbstractOption;
+import org.cx.game.widget.Place;
 
 /**
  * 盾击
@@ -23,11 +24,18 @@ public class ShieldHit extends ActiveSkill {
 	 * @param atkScale 攻击比例
 	 * @param bout 眩晕回合
 	 */
-	public ShieldHit(Integer cooldown, Integer atkScale, Integer bout) {
-		super(ShieldHit_ID, cooldown);
+	public ShieldHit(Integer id, Integer cooldown, Integer atkScale, Integer bout) {
+		super(id, cooldown);
 		// TODO Auto-generated constructor stub
 		this.atkScale = atkScale;
 		this.bout = bout;
+	}
+	
+	@Override
+	public void afterConstruct() {
+		// TODO Auto-generated method stub
+		AbstractOption option = new ConjureToCorpsOption(this);
+		addOption(option);
 	}
 
 	@Override
@@ -51,11 +59,9 @@ public class ShieldHit extends ActiveSkill {
 	@Override
 	public void useSkill(Object... objects) {
 		// TODO Auto-generated method stub
-		super.useSkill(objects);
 		
-		Corps corps = (Corps) objects[0];
+		Place place = (Place) objects[0];
+		Corps corps = place.getCorps();
 		corps.affected(this);
 	}
-	
-
 }

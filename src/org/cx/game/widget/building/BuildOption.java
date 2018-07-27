@@ -16,6 +16,11 @@ public class BuildOption extends AbstractOption {
 
 	private String name = null;
 	
+	public BuildOption(AbstractBuilding building) {
+		// TODO Auto-generated constructor stub
+		setOwner(building);
+	}
+	
 	@Override
 	public List<Integer> getExecuteRange(AbstractGround ground) {
 		// TODO Auto-generated method stub

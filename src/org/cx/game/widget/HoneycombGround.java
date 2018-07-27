@@ -351,15 +351,6 @@ public class HoneycombGround extends AbstractGround {
 	}
 	
 	@Override
-	public List<Integer> queryRange(AbstractSkill skill, String action){
-		List<Integer> positionList = new ArrayList<Integer>();
-		if(CommonIdentifierE.Command_Query_Conjure.equals(action) && skill.getOwner() instanceof AbstractCorps){
-			positionList = ((ActiveSkill) skill).getConjureRange();
-		}
-		return positionList;
-	}
-	
-	@Override
 	public List<Integer> queryRange(AbstractOption option, String action) {
 		// TODO Auto-generated method stub
 		List<Integer> positionList = new ArrayList<Integer>();

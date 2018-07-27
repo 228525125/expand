@@ -14,8 +14,12 @@ public class MineralBuilding extends AbstractBuilding {
 		super(type);
 		// TODO Auto-generated constructor stub
 		this.mineral = new Mineral();
-		
-		BuildOption optionBuild = new BuildOption();				
+	}
+	
+	@Override
+	public void afterConstruct() {
+		// TODO Auto-generated method stub
+		BuildOption optionBuild = new BuildOption(this);				
 		addOption(optionBuild);
 	}
 

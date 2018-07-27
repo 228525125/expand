@@ -48,13 +48,7 @@ public class QueryCommand extends InteriorCommand {
 		
 		AbstractGround ground = this.player.getContext().getGround();
 		
-		if("conjure".equals(parameter)){
-			doValidator(new SelectSkillBufferValidator(buffer));
-			if(hasError())
-				throw new CommandValidatorException(getErrors().getMessage());
-			
-			positionList = ground.queryRange(buffer.getSkill(), map.get(parameter));
-		}else if("attack".equals(parameter)){
+		if("attack".equals(parameter)){
 			doValidator(new SelectCorpsBufferValidator(buffer));
 			if(hasError())
 				throw new CommandValidatorException(getErrors().getMessage());
