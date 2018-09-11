@@ -42,7 +42,7 @@ public abstract class Aureole extends PassiveSkill {
 			public void after(Object[] args) {
 				// TODO Auto-generated method stub
 				refurbish();
-				getOwner().getPlayer().getAddBoutAction().addIntercepter(this);
+				getOwner().getGround().getQueue().getAddBoutAction().addIntercepter(this);
 			}
 		});
 		
@@ -50,7 +50,7 @@ public abstract class Aureole extends PassiveSkill {
 			@Override
 			public void after(Object[] args) {
 				// TODO Auto-generated method stub
-				getOwner().getPlayer().getAddBoutAction().deleteIntercepter(this);
+				getOwner().getGround().getQueue().getAddBoutAction().deleteIntercepter(this);
 				for(AbstractCorps corps : affectedList){
 					List<AbstractBuff> buffs = corps.getBuff(getBuffClass());
 					if(buffs.isEmpty())

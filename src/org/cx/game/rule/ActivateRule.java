@@ -24,14 +24,14 @@ public class ActivateRule extends AbstractRule {
 			for(AbstractBuff buff : buffs){
 				buff.invalid();
 			}
-		}else{
-			/*
+		}/*else{
+			
 			 * 当活力值大于一次行动消耗时，再次获得一次行动
-			 */
+			 
 			if(owner.getActivate().getVigour()>=Activate.ActivationConsume){
 				owner.activate(true);
 			}
-		}
+		}*/
 	}
 	
 	@Override

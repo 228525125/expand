@@ -11,7 +11,7 @@ import org.cx.game.widget.AbstractGround;
 
 public class Merge extends AbstractAction implements IAction {
 
-	private Hero hero = null;
+	private Corps leader = null;
 	
 	@Override
 	public Corps getOwner() {
@@ -19,14 +19,18 @@ public class Merge extends AbstractAction implements IAction {
 		return (Corps) super.getOwner();
 	}
 	
-	public Hero getHero() {
-		return this.hero;
+	public Corps getLeader() {
+		return this.leader;
+	}
+	
+	public void setLeader(Corps leader) {
+		this.leader = leader;
 	}
 	
 	@Override
 	public void action(Object... objects) {
 		// TODO Auto-generated method stub
-		Hero hero = (Hero) objects[0];
+		Corps corps = (Corps) objects[0];
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("corps", getOwner());
@@ -35,12 +39,14 @@ public class Merge extends AbstractAction implements IAction {
 		super.notifyObservers(info);
 		
 		AbstractGround ground = getOwner().getGround();
-		ground.removeCorps(getOwner());
 		
-		hero.addCorpsToTroops(getOwner());
+		ground.removeCorps(getOwner());
+		leader.addCorpsToTeammateList(getOwner());
 		
 		getOwner().activate(false);
-		this.hero = hero;
+		this.leader = corps;
 	}
+	
+	
 
 }

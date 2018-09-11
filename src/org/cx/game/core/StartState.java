@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.cx.game.action.Death;
 import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 import org.cx.game.corps.CorpsFactory;
@@ -14,7 +15,9 @@ import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.tools.JsonHelper;
 import org.cx.game.tools.XmlConfigureHelper;
 import org.cx.game.widget.AbstractPlace;
+import org.cx.game.widget.Ground;
 import org.cx.game.widget.HoneycombGround;
+import org.cx.game.widget.SceneFactory;
 import org.cx.game.widget.building.AbstractBuilding;
 import org.cx.game.widget.building.ReviveOption;
 import org.cx.game.widget.treasure.Treasure;
@@ -42,8 +45,7 @@ public class StartState extends AbstractPlayState {
 
 	@Override
 	public void start() {
-		// TODO Auto-generated method stub		
-		provision();
+		// TODO Auto-generated method stub
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("ground", context.getGround());
@@ -57,7 +59,7 @@ public class StartState extends AbstractPlayState {
 	
 	/**
 	 * 游戏开始前的准备工作
-	 */
+	 
 	private void provision(){
 		Context cont = (Context) context;
 		HoneycombGround ground = (HoneycombGround) context.getGround();
@@ -69,13 +71,22 @@ public class StartState extends AbstractPlayState {
 				ground.captureBuilding(player, building);
 		}
 		
-		for(String data : ground.getNpcData()){     //加载NPC
-			XmlConfigureHelper.map_npcData_npc(data, cont);
+		for(AbstractCorps corps : ground.getLivingCorpsList()){
+			Integer troop = corps.getTroop();
+			AbstractPlayer player = cont.getPlayer(troop);
+			if(null!=player){                  //阵营
+				corps.setPlayer(player);
+			}else{                             //中立
+				player = new Player(troop, Player.Neutral);
+				player.setIsComputer(true);
+				corps.setPlayer(player);
+				context.addPlayer(player);
+			}
 		}
 		
 		/*
 		 * 英雄登场
-		 */
+		 
 		for(AbstractPlayer p : cont.getPlayerList()){
 			Player player = (Player) p;
 			Integer troop = player.getTroop();
@@ -88,5 +99,5 @@ public class StartState extends AbstractPlayState {
 				player.getCorpsList().add(hero);
 			}
 		}
-	}
+	}*/
 }

@@ -79,7 +79,8 @@ public class CallOption extends AbstractOption {
 	public void execute(Object...objects) throws RuleValidatorException {
 		// TODO Auto-generated method stub
 		Place place = (Place) objects[0];
-		AbstractCorps corps = CorpsFactory.getInstance(corpsType, getOwner().getPlayer());
+		AbstractCorps corps = CorpsFactory.getInstance(corpsType);
+		corps.setPlayer(getOwner().getPlayer());
 		
 		if(null!=place.getCorps())            //如果是补充兵源，就判断招募的兵源是否一致
 			addValidator(new CallUnitEqualValidator(place.getCorps(), corpsType));

@@ -21,11 +21,10 @@ public class Player extends AbstractPlayer {
 	
 	private Integer bout = 0;
 	
-	private IAction addBoutAction = null;
+	private AbstractHost host = null;
+	//private IAction addBoutAction = null;
 	//private IPolicyGroup groupPolicy = null;
-	
-	private List<Integer> heroIDList = new ArrayList<Integer>();
-	private List<AbstractCorps> heroList = new ArrayList<AbstractCorps>();
+
 	private List<AbstractCorps> corpsList = new ArrayList<AbstractCorps>();
 	
 	public Player(Integer id, String name) {
@@ -36,45 +35,33 @@ public class Player extends AbstractPlayer {
 		//this.groupPolicy.setOwner(this);
 	}
 	
-	@Override
+	/*@Override
 	public Integer getBout() {
 		// TODO Auto-generated method stub
 		return this.bout;
+	}*/
+	
+	public void setHost(AbstractHost host) {
+		this.host = host;
 	}
 	
-	@Override
+	public AbstractHost getHost() {
+		return host;
+	}
+	
+	/*@Override
 	public IAction getAddBoutAction(){
 		if(null==this.addBoutAction){
 			this.addBoutAction = new PlayerAddBout();
 			addBoutAction.setOwner(this);
 		}
 		return this.addBoutAction;
-	}
+	}*/
 	
 	@Override
 	public void setMineral(Mineral mineral) {
 		// TODO Auto-generated method stub
 		super.setMineral(mineral);
-	}
-	
-	public List<Integer> getHeroIDList() {
-		// TODO Auto-generated method stub
-		return this.heroIDList;
-	}
-	
-	public void addHeroID(Integer ID) {
-		// TODO Auto-generated method stub
-		this.heroIDList.add(ID);
-	}
-	
-	public void addHero(AbstractCorps hero) {
-		// TODO Auto-generated method stub
-		this.heroList.add(hero);
-	}
-	
-	public List<AbstractCorps> getHeroList() {
-		// TODO Auto-generated method stub
-		return this.heroList;
 	}
 	
 	public List<AbstractCorps> getCorpsList() {
@@ -99,7 +86,7 @@ public class Player extends AbstractPlayer {
 		getContext().done();
 	}
 	
-	public class PlayerAddBout extends AbstractAction implements IAction {
+	/*public class PlayerAddBout extends AbstractAction implements IAction {
 		
 		@Override
 		public void action(Object... objects) {
@@ -114,11 +101,11 @@ public class Player extends AbstractPlayer {
 			
 			/*
 			 * 获得控制权的玩家单位被激活
-			 */
+			 
 			for(AbstractCorps corps : getOwner().getCorpsList()){
 				Corps sc = (Corps) corps;
-				Integer speed = sc.getActivate().getSpeed();
-				sc.getActivate().setVigour(Util.Sum, speed);
+				//Integer speed = sc.getActivate().getSpeed();
+				//sc.getActivate().setVigour(Util.Sum, speed);
 				sc.activate(true);
 			}
 		}
@@ -128,5 +115,5 @@ public class Player extends AbstractPlayer {
 			// TODO Auto-generated method stub
 			return (Player) super.getOwner();
 		}
-	}
+	}*/
 }

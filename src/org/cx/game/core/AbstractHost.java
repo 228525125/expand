@@ -3,10 +3,21 @@ package org.cx.game.core;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.CorpsFactory;
 import org.cx.game.corps.Hero;
+import org.cx.game.tools.XmlConfigureHelper;
+import org.cx.game.widget.AbstractGround;
+import org.cx.game.widget.Ground;
+import org.cx.game.widget.GroundFactory;
+import org.cx.game.widget.Scene;
+import org.cx.game.widget.building.AbstractBuilding;
 
 public abstract class AbstractHost {
+	
+	private Boolean isReady = false;
+	
+	private AbstractContext context = null;
 	
 	private List<AbstractPlayer> playerList = new ArrayList<AbstractPlayer>();
 	private List<Integer> troopOfPlayerList = new ArrayList<Integer>();
@@ -15,11 +26,11 @@ public abstract class AbstractHost {
 	 * 加入游戏主机
 	 * @param account 玩家帐号
 	 */
-	public void playerJoinGame(String account) {
-		Integer troop = getUsableTroop();
-		AbstractPlayer player = new Player(troop, account); 
+	public void playerJoinGame(String account, Integer troop) {
+		Player player = new Player(troop, account); 
 		this.playerList.add(player);
 		this.troopOfPlayerList.add(troop);
+		player.setHost(this);
 	}
 	
 	/**
@@ -42,17 +53,6 @@ public abstract class AbstractHost {
 		player.setTroop(troop);
 	}
 	
-	/**
-	 * 玩家选择英雄 (目前只支持一位英雄)
-	 * @param heroId 英雄编号
-	 * @param player
-	 */
-	public void setHeroOfPlayer(Integer heroId, String account) {
-		Player player = (Player) queryPlayerForName(account);
-		Hero hero = (Hero) CorpsFactory.getInstance(heroId, player);
-		player.addHero(hero);
-	}
-	
 	List<AbstractPlayer> getPlayerList() {
 		return playerList;
 	}
@@ -71,6 +71,48 @@ public abstract class AbstractHost {
 		return null;
 	}
 	
+	public Boolean isReady() {
+		return isReady;
+	}
+	
+	/**
+	 * 建议放在子类方法的最后
+	 */
+	public void ready() {
+		this.isReady = true;
+		
+		this.context = new Context(getGround());
+		
+		for(AbstractPlayer player : getPlayerList()){
+			context.addPlayer(player);
+		}
+		
+		for(AbstractBuilding building : getGround().getBuildingIsTroop().keySet()){
+			Integer troop = getGround().getBuildingIsTroop().get(building);
+			AbstractPlayer player = getContext().getPlayer(troop);
+			if(null!=player)
+				getGround().captureBuilding(player, building);
+		}
+		
+		for(AbstractCorps corps : getGround().getLivingCorpsList()){
+			Integer troop = corps.getTroop();
+			AbstractPlayer player = getContext().getPlayer(troop);
+			if(null!=player){                  //阵营
+				corps.setPlayer(player);
+			}else{                             //中立
+				player = new Player(troop, Player.Neutral);
+				player.setIsComputer(true);
+				corps.setPlayer(player);
+				getContext().addPlayer(player);
+			}
+		}
+	}
+	
+	public AbstractContext getContext() {
+		return context;
+	}
+	
+	
+	abstract public Ground getGround();
 	abstract public Integer getUsableTroop();
-	abstract public void ready();
 }

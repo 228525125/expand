@@ -17,8 +17,6 @@ public class Hero extends Corps {
 	
 	private Upgrade upgrade = null;
 	
-	private List<Corps> troops = new ArrayList<Corps>();
-
 	private List<Treasure> treasures = new ArrayList<Treasure>();
 	
 	public Hero(Integer type) {
@@ -57,22 +55,6 @@ public class Hero extends Corps {
 		return this.upgrade;
 	}
 	
-	public List<Corps> getTroops() {
-		return troops;
-	}
-	
-	public void addCorpsToTroops(Corps corps) {
-		this.troops.add(corps);
-		addOption(new TroopOption(corps));
-		corps.setPosition(getPosition());
-	}
-	
-	public void removeCorpsFromTroops(Corps corps) {
-		this.troops.remove(corps);
-		AbstractOption option = getOption(corps);
-		removeOption(option);
-	}
-	
 	public List<Treasure> getTreasures() {
 		return treasures;
 	}
@@ -83,16 +65,6 @@ public class Hero extends Corps {
 	
 	public void removeTreasure(Treasure treasure) {
 		this.treasures.remove(treasure);
-	}
-	
-	@Override
-	public void setPosition(Integer position) {
-		// TODO Auto-generated method stub
-		super.setPosition(position);
-		
-		for(Corps corps : getTroops()){
-			corps.setPosition(position);
-		}
 	}
 
 	@Override

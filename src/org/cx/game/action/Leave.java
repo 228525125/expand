@@ -23,10 +23,10 @@ public class Leave extends AbstractAction implements IAction {
 		// TODO Auto-generated method stub
 		Place place = (Place) objects[0];
 
-		Hero hero = ((Merge) getOwner().getMerge()).getHero();
-		hero.removeCorpsFromTroops(getOwner());
+		Corps leader = ((Merge) getOwner().getMerge()).getLeader();
+		leader.removeCorpsFromTeammateList(getOwner());
 		
-		AbstractGround ground = getOwner().getGround();
+		AbstractGround ground = leader.getGround();
 		ground.placementCorps(place.getPosition(), getOwner());
 		
 		Map<String,Object> map = new HashMap<String,Object>();

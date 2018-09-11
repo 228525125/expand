@@ -1,38 +1,16 @@
 package org.cx.game.core;
 
-import java.util.List;
-
-import org.cx.game.action.AbstractAction;
-import org.cx.game.action.IAction;
-import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.widget.AbstractGround;
-import org.cx.game.widget.building.AbstractBuilding;
-import org.cx.game.widget.building.CallBuilding;
-import org.cx.game.widget.building.MineralBuilding;
-import org.cx.game.widget.building.TownBuilding;
 
 public class Context extends AbstractContext {
 
-	private int bout = 0;  //回合	
-	private Integer day = 0; //天
-	private Integer week = 0; //星期几
+	//private int bout = 0;  //回合	
+	//private Integer day = 0; //天
+	//private Integer week = 0; //星期几
 	
 	public Context(AbstractGround ground) {
 		// TODO Auto-generated constructor stub
 		super(ground);
-	}
-	
-	
-	/**
-	 * 根据troop查找player
-	 */
-	public AbstractPlayer getPlayer(Integer troop) {
-		// TODO Auto-generated method stub
-		for(AbstractPlayer player : getPlayerList()){
-			if(troop.equals(player.getTroop()))
-				return player;
-		}
-		return null;
 	}
 	
 	@Override
@@ -42,7 +20,24 @@ public class Context extends AbstractContext {
 		super.start();
 	}
 	
+	
+	
 	@Override
+	public AbstractGround getGround() {
+		// TODO Auto-generated method stub
+		return (AbstractGround) super.getGround();
+	}
+	
+	@Override
+	public AbstractGround getGround(Integer id) {
+		// TODO Auto-generated method stub
+		if(null==getGround().getArea())
+			return getGround();
+		
+		return (AbstractGround) getGround().getArea().getGround(id);
+	}
+	
+	/*@Override
 	public Integer getBout() {
 		return bout;
 	}
@@ -92,30 +87,15 @@ public class Context extends AbstractContext {
 			this.addWeekAction = aw;
 		}
 		return this.addWeekAction;
-	}
+	}*/
 	
-	@Override
-	public AbstractGround getGround() {
-		// TODO Auto-generated method stub
-		return (AbstractGround) super.getGround();
-	}
-	
-	@Override
-	public AbstractGround getGround(Integer id) {
-		// TODO Auto-generated method stub
-		if(null==getGround().getArea())
-			return getGround();
-		
-		return (AbstractGround) getGround().getArea().getGround(id);
-	}
-	
-	public class ContextAddBout extends AbstractAction implements IAction {
+	/*public class ContextAddBout extends AbstractAction implements IAction {
 		
 		@Override
 		public void action(Object... objects) {
 			// TODO Auto-generated method stub
 			bout++;
-			if(1==bout%getPlayerList().size()){
+			/*if(1==bout%getPlayerList().size()){
 				addDay();
 				if(1==day%7)
 					addWeek();
@@ -141,7 +121,7 @@ public class Context extends AbstractContext {
 			
 			/*
 			 * 产出
-			 */
+			 
 			AbstractGround ground = getOwner().getGround();
 			List<AbstractBuilding> list = ground.getBuildingList();
 			for(AbstractBuilding building : list){
@@ -178,7 +158,7 @@ public class Context extends AbstractContext {
 			
 			/*
 			 * 产出
-			 */
+			
 			AbstractGround ground = getOwner().getGround();
 			List<AbstractBuilding> list = ground.getBuildingList();
 			for(AbstractBuilding building : list){
@@ -199,6 +179,6 @@ public class Context extends AbstractContext {
 			// TODO Auto-generated method stub
 			return (Context) super.getOwner();
 		}
-	}
+	}*/
 
 }

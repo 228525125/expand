@@ -3,7 +3,7 @@ package org.cx.game.core;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.cx.game.exception.RuleValidatorException;
+import org.cx.game.corps.AbstractCorps;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
 
@@ -12,18 +12,18 @@ public class DeployState extends AbstractPlayState {
 	@Override
 	public void deploy() {
 		// TODO Auto-generated method stub
-		AbstractPlayer curPlayer = context.getControlPlayer();
+		AbstractPlayer conPlayer = context.getControlPlayer();
+		AbstractCorps conCorps = context.getControlCorps();
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("control", curPlayer);
-		map.put("bout", context.getBout());
-		map.put("day", context.getDay());
-		map.put("week", context.getWeek());
+		map.put("player", conPlayer);
+		map.put("corps", conCorps);
+		map.put("bout", context.getGround().getQueue().getBout());
 		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Context_Deploy,map);
 		super.notifyObservers(info);
 		
 		//判断是否电脑玩家，如果是就启动AI
-		if(curPlayer.isComputer())
-			curPlayer.automation();
+		if(conPlayer.isComputer())
+			conPlayer.automation();
 	}
 
 	@Override

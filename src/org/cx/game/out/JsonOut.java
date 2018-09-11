@@ -31,6 +31,7 @@ import org.cx.game.tools.JsonHelper;
 import org.cx.game.widget.Cemetery;
 import org.cx.game.widget.HoneycombGround;
 import org.cx.game.widget.Place;
+import org.cx.game.widget.Scene;
 import org.cx.game.widget.TrickList;
 import org.cx.game.widget.building.CallBuilding;
 import org.cx.game.widget.building.MineralBuilding;
@@ -108,6 +109,7 @@ public class JsonOut extends AbstractResponse {
 							.element("playId", corps.getId())
 							.element("position", corps.getPosition())
 							.element("skillList", corps.getSkillList(),getConfig())
+							.element("teammateList", corps.getTeammateList(), getConfig())
 							.element("star", corps.getStar())
 							.element("upgrade", corps.getUpgrade(),getConfig())
 							.element("optionList", corps.getOptionList(),getConfig());
@@ -139,7 +141,7 @@ public class JsonOut extends AbstractResponse {
 							.element("star", hero.getStar())
 							.element("upgrade", hero.getUpgrade(), getConfig())
 							.element("treasures", hero.getTreasures(), getConfig())
-							.element("troops", hero.getTroops(), getConfig())
+							.element("teammateList", hero.getTeammateList(), getConfig())
 							.element("optionList", hero.getOptionList(),getConfig());
 				}
 			});
@@ -153,8 +155,7 @@ public class JsonOut extends AbstractResponse {
 					// TODO Auto-generated method stub
 					Activate obj = (Activate) arg0;
 					return new JSONObject().element("activation", obj.getActivation())
-							.element("speed", obj.getSpeed())
-							.element("vigour", obj.getVigour());
+							.element("speed", obj.getSpeed());
 				}
 			});
 			
@@ -311,8 +312,7 @@ public class JsonOut extends AbstractResponse {
 				public JSONObject processBean(Object arg0, JsonConfig arg1) {
 					// TODO Auto-generated method stub
 					Player obj = (Player) arg0;
-					return new JSONObject().element("bout", obj.getBout())
-							.element("computer", obj.isComputer())
+					return new JSONObject().element("computer", obj.isComputer())
 							.element("id", obj.getTroop())
 							.element("name", obj.getName())
 							.element("ration", obj.getRation())
@@ -343,6 +343,25 @@ public class JsonOut extends AbstractResponse {
 				public JSONObject processBean(Object arg0, JsonConfig arg1) {
 					// TODO Auto-generated method stub
 					HoneycombGround obj = (HoneycombGround) arg0;
+					return new JSONObject().element("buildingList", obj.getBuildingList(), getConfig())
+							.element("landform", JsonHelper.convertForGroundLandform(obj.getLandformMap()), getConfig())
+							.element("treasureList", obj.getTreasureList(), getConfig())
+							.element("corpsList", obj.getLivingCorpsList(), getConfig())
+							.element("emptyList", obj.queryEmptyList())
+							.element("imagePath", obj.getImagePath())
+							.element("name", obj.getName())
+							.element("xBorder", obj.getXBorder())
+							.element("yBorder", obj.getYBorder())
+							.element("id", obj.getId());
+				}
+			});
+			
+			config.registerJsonBeanProcessor(Scene.class, new JsonBeanProcessor() {
+				
+				@Override
+				public JSONObject processBean(Object arg0, JsonConfig arg1) {
+					// TODO Auto-generated method stub
+					Scene obj = (Scene) arg0;
 					return new JSONObject().element("buildingList", obj.getBuildingList(), getConfig())
 							.element("landform", JsonHelper.convertForGroundLandform(obj.getLandformMap()), getConfig())
 							.element("treasureList", obj.getTreasureList(), getConfig())

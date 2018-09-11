@@ -10,11 +10,11 @@ import org.cx.game.tools.Util;
 
 public class Activate extends AbstractAction implements IAction {
 
-	public static final Integer ActivationConsume = 100;
+	//public static final Integer ActivationConsume = 100;
 	
 	private Boolean activation = false;
 	private Integer speed = 100;
-	private Integer vigour = 0;       //活力，活力为100时，可以行动一次，活力值越多，行动次数越多
+	//private Integer vigour = 0;       //活力，活力为100时，可以行动一次，活力值越多，行动次数越多
 	
 	@Override
 	public Corps getOwner() {
@@ -46,15 +46,15 @@ public class Activate extends AbstractAction implements IAction {
 		this.speed = Util.operating(funType, this.speed, speed);
 	}
 	
-	public Integer getVigour() {
+	/*public Integer getVigour() {
 		// TODO Auto-generated method stub
 		return this.vigour;
-	}
+	}*/
 	
-	public void setVigour(Integer funType, Integer vigour) {
+	/*public void setVigour(Integer funType, Integer vigour) {
 		this.vigour = Util.operating(funType, this.vigour, vigour);
 		this.vigour = this.vigour > 200 ? 200 : this.vigour;         //最多一个回合只能行动两次
-	}
+	}*/
 	
 	@Override
 	public void action(Object... objects) {
@@ -79,7 +79,7 @@ public class Activate extends AbstractAction implements IAction {
 			owner.getMove().setEnergy(owner.getEnergy());
 			owner.getAttacked().setFightBack(true);
 			
-			setVigour(Util.Sub, ActivationConsume);
+			//setVigour(Util.Sub, ActivationConsume);
 		}else{
 			owner.getAttack().setAttackable(false);
 			owner.getMove().setMoveable(false);

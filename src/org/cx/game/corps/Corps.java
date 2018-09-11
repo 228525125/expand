@@ -1,11 +1,8 @@
 package org.cx.game.corps;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.cx.game.action.AbstractAction;
 import org.cx.game.action.ActionProxyHelper;
 import org.cx.game.action.Activate;
 import org.cx.game.action.Affected;
@@ -25,14 +22,10 @@ import org.cx.game.action.CorpsUpgrade;
 import org.cx.game.ai.CorpsAgent;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.magic.IMagic;
-import org.cx.game.magic.buff.AbstractBuff;
 import org.cx.game.magic.skill.AbstractSkill;
-import org.cx.game.tools.CommonIdentifierE;
-import org.cx.game.tools.I18n;
 import org.cx.game.widget.AbstractPlace;
 import org.cx.game.widget.treasure.Mineral;
 import org.cx.game.widget.treasure.Treasure;
-import org.cx.game.widget.treasure.Resource;
 
 public class Corps extends AbstractCorps {
 
@@ -156,6 +149,24 @@ public class Corps extends AbstractCorps {
 	
 	public void setLevel(Integer level){
 		super.setLevel(level);
+	}
+	
+	@Override
+	public void addCorpsToTeammateList(AbstractCorps corps) {
+		// TODO Auto-generated method stub
+		super.addCorpsToTeammateList(corps);
+		
+		addOption(new TroopOption(corps));
+	}
+	
+	@Override
+	public void setPosition(Integer position) {
+		// TODO Auto-generated method stub
+		super.setPosition(position);
+		
+		for(AbstractCorps corps : getTeammateList()){
+			corps.setPosition(position);
+		}
 	}
 
 	public Activate getActivate() {
@@ -390,12 +401,12 @@ public class Corps extends AbstractCorps {
 	}
 	
 	/**
-	 * 合并
-	 * @param hero
+	 * 合并到corps
+	 * @param corps 
 	 */
-	public void merge(AbstractCorps hero) {
+	public void merge(AbstractCorps corps) {
 		IAction action = new ActionProxyHelper(getMerge());
-		action.action(hero);
+		action.action(corps);
 	}
 	
 	/**
