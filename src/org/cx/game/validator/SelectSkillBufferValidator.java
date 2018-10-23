@@ -7,7 +7,7 @@ import org.cx.game.tools.I18n;
 /**
  * 验证是否已缓存了skill
  * @author chenxian
- *
+ * 
  */
 public class SelectSkillBufferValidator extends Validator {
 

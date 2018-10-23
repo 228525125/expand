@@ -11,7 +11,6 @@ import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
 
 public class Place extends AbstractPlace {
-
 	
 	public Place(AbstractGround ground, Integer position) {
 		super(ground, position);

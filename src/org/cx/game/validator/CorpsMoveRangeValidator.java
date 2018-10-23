@@ -20,7 +20,7 @@ public class CorpsMoveRangeValidator extends Validator {
 		// TODO Auto-generated method stub
 		
 		Integer curPosition = corps.getPosition();
-		Integer step = corps.getPlayer().getContext().getGround().distance(curPosition, position);
+		Integer step = corps.getPlayer().getContext().getGround().distance(curPosition, position, corps.getMove().getType());
 		Integer energy = corps.getMove().getEnergy();
 		Integer consume = corps.getMove().getConsume();
 		Integer range = energy/consume;         // 145/50 = 2;整数默认情况符合游戏规则

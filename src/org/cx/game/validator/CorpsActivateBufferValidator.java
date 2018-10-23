@@ -6,7 +6,7 @@ import org.cx.game.tools.I18n;
 /**
  * 判断随从是否为激活状态
  * @author chenxian
- *
+ * 
  */
 public class CorpsActivateBufferValidator extends SelectCorpsBufferValidator {
 	

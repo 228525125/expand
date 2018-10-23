@@ -10,7 +10,7 @@ import org.dom4j.Element;
 /**
  * 验证命令中action部分是否正确
  * @author chenxian
- *
+ * 
  */
 public class CommandExpressionActionNameValidator extends Validator {
 

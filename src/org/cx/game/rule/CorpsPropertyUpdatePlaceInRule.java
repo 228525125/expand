@@ -38,7 +38,7 @@ public class CorpsPropertyUpdatePlaceInRule extends AbstractRule {
 	
 	private void updateLandformDef(Corps corps, Integer landform) {
 		Integer profession = corps.queryTagForCategory(CommonIdentifierE.Profession).get(0);
-		corps.getAttacked().setLandformDef(corps.getDef()*LandformEffect.getDefendAdvantage(profession, landform)/100);
+		corps.getDefend().setLandformDef(corps.getDef()*LandformEffect.getDefendAdvantage(profession, landform)/100);
 		
 		corps.updateDef();
 	}

@@ -16,6 +16,7 @@ import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.tools.I18n;
 import org.cx.game.validator.CorpsCallConsumeValidator;
 import org.cx.game.validator.CorpsCallRangeValidator;
+import org.cx.game.widget.AbstractControlQueue;
 import org.cx.game.widget.AbstractGround;
 import org.cx.game.widget.AbstractOption;
 import org.cx.game.widget.AbstractPlace;
@@ -56,9 +57,9 @@ public class ReviveOption extends AbstractOption {
 	}
 	
 	@Override
-	protected AbstractPlayer getOwnerPlayer() {
+	protected AbstractControlQueue getControlQueue() {
 		// TODO Auto-generated method stub
-		return getOwner().getPlayer();
+		return getOwner().getPlace().getOwner().getQueue();
 	}
 	
 	@Override

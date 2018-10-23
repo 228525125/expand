@@ -17,8 +17,8 @@ public class DeathRule extends AbstractRule {
 		
 		player.getCorpsList().remove(corps);
 		
-		if(Player.Neutral.equals(player.getName()) && player.getCorpsList().isEmpty())
-			player.getContext().removePlayer(player);
+		corps.clearBuff();
+		corps.clearNexusBuff();
 	}
 	
 	@Override

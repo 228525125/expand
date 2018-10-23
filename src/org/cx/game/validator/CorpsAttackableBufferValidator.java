@@ -6,7 +6,7 @@ import org.cx.game.tools.I18n;
 /**
  * 验证是否可以行动
  * @author chenxian
- *
+ * 
  */
 public class CorpsAttackableBufferValidator extends SelectCorpsBufferValidator {
 

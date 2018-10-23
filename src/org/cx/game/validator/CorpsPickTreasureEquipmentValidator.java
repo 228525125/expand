@@ -9,7 +9,7 @@ import org.cx.game.widget.treasure.EquipmentTreasure;
 /**
  * 只有英雄才能拾取装备
  * @author chenxian
- *
+ * 
  */
 public class CorpsPickTreasureEquipmentValidator extends SelectPlaceExistTreasureValidator {
 

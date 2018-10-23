@@ -10,7 +10,7 @@ import com.sun.corba.se.spi.copyobject.CopierManager;
  * 验证精力还有剩余
  * @author chenxian
  *
- */
+ */ 
 public class CorpsMoveEnergyValidator extends Validator {
 	
 	private Corps corps = null;

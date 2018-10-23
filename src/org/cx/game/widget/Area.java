@@ -8,7 +8,7 @@ import java.util.Map;
 import org.cx.game.tools.XmlConfigureHelper;
 import org.cx.game.widget.building.AbstractBuilding;
 import org.cx.game.widget.building.SpatialBuilding;
-
+ 
 public class Area extends AbstractArea {
 	
 	private List<String> spatialNodeData = new ArrayList<String>();

@@ -8,7 +8,7 @@ import org.cx.game.tools.I18n;
  * 验证单个格子人口上限
  * @author chenxian
  *
- */
+ */ 
 public class RationLimitOfPlaceValidator extends Validator {
 	
 	public static final Integer Ration = 100;

@@ -6,7 +6,7 @@ import org.cx.game.tools.I18n;
 /**
  * 当补充兵源时，验证兵源与军队兵种的一致性；
  * @author chenxian
- *
+ * 
  */
 public class CallUnitEqualValidator extends Validator {
 

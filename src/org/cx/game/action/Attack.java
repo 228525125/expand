@@ -17,7 +17,7 @@ public class Attack extends AbstractAction implements IAction {
 	private Integer extraAtk = 0;                     //额外攻击力
 	private Integer landformAtk = 0;                  //地形攻击力
 	private Integer weaponAtk = 0;                    //武器攻击力
-	private Boolean counterAttack = false;            //是否是反击
+	private Boolean fightBack = false;            //是否是反击
 	private Boolean attackable = false;
 	private Boolean mobile = false;                   //是否可移动攻击
 	
@@ -129,13 +129,13 @@ public class Attack extends AbstractAction implements IAction {
 		}
 	}
 	
-	public Boolean getCounterAttack() {
-		return counterAttack;
+	public Boolean isFightBack() {
+		return fightBack;
 	}
 
-	public void setCounterAttack(Boolean counterAttack) {
-		if(!counterAttack.equals(this.counterAttack)){
-			this.counterAttack = counterAttack;
+	public void setFightBack(Boolean fightBack) {
+		if(!fightBack.equals(this.fightBack)){
+			this.fightBack = fightBack;
 		}
 	}
 	
@@ -159,6 +159,7 @@ public class Attack extends AbstractAction implements IAction {
 	@Override
 	public void action(Object...objects) {
 		// TODO Auto-generated method stub
+		super.action(objects);
 		
 		Corps attacked = (Corps) objects[0];
 		
@@ -169,26 +170,24 @@ public class Attack extends AbstractAction implements IAction {
 		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Corps_Attack,map);
 		super.notifyObservers(info);
 		
-		Attack clone = clone();
-		
 		AbstractGround ground = getOwner().getGround();
 		
 		//如果是远程，这里要设置为近身攻击模式
 		Integer distance = ground.distance(attacked.getPosition(), getOwner().getPosition());
 		if(1==distance){                                           //近身
-			clone.setMode(CommonIdentifierE.Attack_Mode_Near);             
+			addActionResult("attackMode", CommonIdentifierE.Attack_Mode_Near);
+		}else{
+			addActionResult("attackMode", CommonIdentifierE.Attack_Mode_Far);
 		}
+		
+		addActionResult("atk", getAtk());
 		
 		//判断攻击模式，远程近战伤害减半
 		if(CommonIdentifierE.Attack_Mode_Far.equals(getMode()) && 1==distance){
-			clone.setMode(CommonIdentifierE.Attack_Mode_Near);
-			Integer [] dmg = IntegerToDamage(clone.getDmg());
-			clone.setDmg(DamageToInteger(new Integer[]{dmg[0]/2,dmg[1]/2}));
-		}
-		
-		//判断潜行状态
-		if(getOwner().getMove().getHide()){
-			getOwner().getMove().setHide(false);
+			Integer [] dmg = IntegerToDamage(getDmg());
+			addActionResult("dmg", DamageToInteger(new Integer[]{dmg[0]/2,dmg[1]/2}));
+		}else{
+			addActionResult("dmg", getDmg());
 		}
 		
 		/*
@@ -196,21 +195,11 @@ public class Attack extends AbstractAction implements IAction {
 		 */
 		Integer direction = ground.getDirection(getOwner().getPosition(), attacked.getPosition());
 		getOwner().getMove().setDirection(direction);
+		addActionResult("direction", direction);
 		
-		attacked.attacked(getOwner(), clone);
+		addActionResult("isFightBack", isFightBack());
 		
-		setAttackable(false);                   //反击同样适用
-	}
-	
-	public Attack clone() {
-		// TODO Auto-generated method stub
-		try {
-			return (Attack) super.clone();
-		} catch (CloneNotSupportedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
+		setAttackable(false);
 	}
 	
 	public static Integer[] IntegerToDamage(Integer dmg){

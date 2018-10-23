@@ -8,9 +8,9 @@ public class Context extends AbstractContext {
 	//private Integer day = 0; //天
 	//private Integer week = 0; //星期几
 	
-	public Context(AbstractGround ground) {
+	public Context(String playNo, AbstractGround ground) {
 		// TODO Auto-generated constructor stub
-		super(ground);
+		super(playNo, ground);
 	}
 	
 	@Override

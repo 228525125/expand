@@ -13,9 +13,9 @@ import org.cx.game.tools.Util;
  * @author chenxian
  *
  */
-public class Attacked extends AbstractAction implements IAction {
+public class Defend extends AbstractAction implements IAction {
 
-	private Boolean fightBack = true;
+	private Boolean canFightBack = true;
 	private Integer def = 0;         //真实防御力
 	private Integer armourDef = 0;   //装备防御力
 	private Integer extraDef = 0;    //额外防御力
@@ -69,65 +69,48 @@ public class Attacked extends AbstractAction implements IAction {
 		}
 	}
 
-	public Boolean getFightBack() {
+	public Boolean isCanFightBack() {
 		// TODO Auto-generated method stub
-		return this.fightBack;
+		return this.canFightBack;
 	}
 	
-	public void setFightBack(Boolean fightBack) {
+	public void setCanFightBack(Boolean canFightBack) {
 		// TODO Auto-generated method stub
-		if(!fightBack.equals(this.fightBack)){
-			this.fightBack = fightBack;
+		if(!canFightBack.equals(this.canFightBack)){
+			this.canFightBack = canFightBack;
 		}
 	}
 
 	@Override
 	public void action(Object...objects) {
 		// TODO Auto-generated method stub
-		Corps attackLife = (Corps) objects[0];
-		Attack attack = (Attack) objects[1];
+		super.action(objects);
+		
+		Corps attack = (Corps) objects[0];
+		Integer atk = (Integer) objects[1];
+		Integer dmg = (Integer) objects[2];
 		
 		/*
 		 * 伤害 使用H3计算规则
 		 */
-		Integer atk = attack.getAtk();
 		Integer def = getDef();
 		Integer temp = atk - def;
-		Integer ratio = temp<0 ? temp*25 : temp*50;
+		Integer ratio = temp==0 ? 0 : temp<0 ? temp*25 : temp*50;
 		ratio += 1000;
-		Integer[] dmg = Attack.IntegerToDamage(attack.getDmg());
-		Integer result = Random.nextInt(dmg[1]-dmg[0]);
-		Integer damage =  dmg[0]+result;
+		Integer[] dmgs = Attack.IntegerToDamage(dmg);
+		Integer d = Util.nextInt((dmgs[1]-dmgs[0])+1);
+		Integer damage =  dmgs[0]+d;
 		damage = damage*ratio/1000;
 		
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("attack", attack.getOwner());
+		map.put("attack", attack);
 		map.put("attacked", getOwner());
 		map.put("position", getOwner().getPosition());
 		map.put("damage", damage);
 		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Corps_Attacked,map);
 		super.notifyObservers(info);
 		
-		//造成的实际伤害
-		Death death = getOwner().getDeath();
-		damage = death.setHp(Util.Sub, damage);
-		
-		//增加经验值
-		CorpsUpgrade uc = (CorpsUpgrade) attack.getOwner().getUpgrade();
-		uc.setEmpiricValue(Util.Sum, damage);
-		
-		/*
-		 * 反击
-		 */
-		if(CommonIdentifierE.Death_Status_Live.equals(getOwner().getDeath().getStatus())          //没有死亡 
-			&& getFightBack()                                           //是否反击过 
-			&& !attack.getCounterAttack()                               //这次攻击方式是否是反击
-			&& 0<getOwner().getAttack().getAtk()){                        //是否有攻击力 
-			
-			getOwner().getAttack().setCounterAttack(true);      //设置为反击
-			getOwner().attack(attackLife);
-			getOwner().getAttack().setCounterAttack(false);     //反击结束
-			getOwner().getAttacked().setFightBack(false);
-		} 
+		addActionResult("damageValue", damage);
+		addActionResult("isCanFightBack", isCanFightBack());
 	}
 }

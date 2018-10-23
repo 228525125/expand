@@ -7,7 +7,7 @@ import org.cx.game.tools.I18n;
 /**
  * 施法范围检验
  * @author chenxian
- *
+ * 
  */
 public class CorpsConjureRangeValidator extends Validator {
 

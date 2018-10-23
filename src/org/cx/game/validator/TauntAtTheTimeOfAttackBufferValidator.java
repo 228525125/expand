@@ -9,7 +9,7 @@ import org.cx.game.tools.I18n;
 /**
  * 执行攻击命令之前，验证是否受到嘲讽
  * @author chenxian
- *
+ * 
  */
 public class TauntAtTheTimeOfAttackBufferValidator extends SelectCorpsBufferValidator {
 

@@ -10,7 +10,7 @@ import org.cx.game.magic.buff.AttackLockBuff;
 import org.cx.game.magic.buff.AbstractBuff;
 
 public class ActivateRule extends AbstractRule {
-	
+	 
 	@Override
 	public void after(Object[] args) {
 		// TODO Auto-generated method stub

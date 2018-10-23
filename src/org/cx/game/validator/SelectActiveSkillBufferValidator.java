@@ -7,7 +7,7 @@ import org.cx.game.tools.I18n;
 /**
  * 验证缓存的是否为ActiveSkill
  * @author chenxian
- *
+ * 
  */
 public class SelectActiveSkillBufferValidator extends SelectSkillBufferValidator {
 

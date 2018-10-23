@@ -2,12 +2,12 @@ package org.cx.game.magic.buff;
 
 import java.util.List;
 
-import org.cx.game.action.Random;
 import org.cx.game.corps.Corps;
 import org.cx.game.intercepter.AbstractIntercepter;
 import org.cx.game.intercepter.IIntercepter;
 import org.cx.game.magic.skill.TauntActive;
 import org.cx.game.tools.Debug;
+import org.cx.game.tools.Util;
 
 public class AttackLockBuff extends AbstractBuff {
 
@@ -82,7 +82,7 @@ public class AttackLockBuff extends AbstractBuff {
 				}
 				
 				Integer chance = attack.getAttack().getLockChance() - getOwner().getMove().getFlee();
-				if(!locked && Random.isTrigger(chance)){
+				if(!locked && Util.isTrigger(chance)){
 					invoke = false;
 					affect();
 				}
@@ -103,7 +103,7 @@ public class AttackLockBuff extends AbstractBuff {
 			@Override
 			public void before(Object[] args) {
 				// TODO Auto-generated method stub
-				if(!Random.isTrigger(getOwner().getMove().getFlee())){
+				if(!Util.isTrigger(getOwner().getMove().getFlee())){
 					invoke = false;
 					affect();
 				}
@@ -116,6 +116,16 @@ public class AttackLockBuff extends AbstractBuff {
 			}
 		};
 		recordIntercepter(getOwner().getMove(), moveIn);
+		
+		/*IIntercepter deathIn = new AbstractIntercepter(){
+			
+			@Override
+			public void after(Object[] args) {
+				// TODO Auto-generated method stub
+				invalid();
+			}
+		};
+		recordIntercepter(attack.getDeath(), deathIn);*/
 	}
 
 	@Override

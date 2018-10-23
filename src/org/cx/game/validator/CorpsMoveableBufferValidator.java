@@ -6,7 +6,7 @@ import org.cx.game.tools.I18n;
 /**
  * 判断是否可移动
  * @author chenxian
- *
+ * 
  */
 public class CorpsMoveableBufferValidator extends CorpsActivateBufferValidator {
 

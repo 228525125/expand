@@ -24,8 +24,6 @@ public class Player extends AbstractPlayer {
 	private AbstractHost host = null;
 	//private IAction addBoutAction = null;
 	//private IPolicyGroup groupPolicy = null;
-
-	private List<AbstractCorps> corpsList = new ArrayList<AbstractCorps>();
 	
 	public Player(Integer id, String name) {
 		super(id, name);
@@ -62,10 +60,6 @@ public class Player extends AbstractPlayer {
 	public void setMineral(Mineral mineral) {
 		// TODO Auto-generated method stub
 		super.setMineral(mineral);
-	}
-	
-	public List<AbstractCorps> getCorpsList() {
-		return corpsList;
 	}
 	
 	/**

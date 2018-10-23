@@ -10,12 +10,13 @@ import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.tools.I18n;
 import org.cx.game.tools.Util;
 import org.cx.game.validator.BuildingUpgradeConsumeValidator;
+import org.cx.game.widget.AbstractControlQueue;
 import org.cx.game.widget.AbstractGround;
 import org.cx.game.widget.AbstractOption;
 import org.cx.game.widget.treasure.Mineral;
 
 public class BuildingUpgradeOption extends AbstractOption {
-
+ 
 	private String name = null;
 	private Boolean allow = false;
 	
@@ -36,9 +37,9 @@ public class BuildingUpgradeOption extends AbstractOption {
 	}
 	
 	@Override
-	protected AbstractPlayer getOwnerPlayer() {
+	protected AbstractControlQueue getControlQueue() {
 		// TODO Auto-generated method stub
-		return getOwner().getPlayer();
+		return getOwner().getPlace().getOwner().getQueue();
 	}
 	
 	@Override

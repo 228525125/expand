@@ -16,7 +16,7 @@ import org.cx.game.widget.HoneycombGround;
 import org.cx.game.widget.building.AbstractBuilding;
 import org.cx.game.widget.building.BuildingFactory;
 import org.cx.game.widget.building.SpatialBuilding;
-
+ 
 public class XmlConfigureHelper {
 	
 	/**
@@ -130,7 +130,7 @@ public class XmlConfigureHelper {
 	 * @param data 样式："兵种，等级，数量，阵营"，还允许"[兵种，等级，数量，阵营],[...]"
 	 * @return
 	 */
-	private static List<String> convertList(String data) {
+	public static List<String> convertList(String data) {
 		List<String> list = new ArrayList<String>();
 		if(-1 != data.indexOf(";")) {
 			String [] array = data.split(";");

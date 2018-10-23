@@ -6,7 +6,7 @@ import org.cx.game.tools.I18n;
 /**
  * 验证选择的Corps是否处于潜行状态
  * @author chenxian
- *
+ * 
  */
 public class SelectCorpsNotHideValidator extends Validator {
 	

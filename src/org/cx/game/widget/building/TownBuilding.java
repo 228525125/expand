@@ -7,7 +7,7 @@ import org.cx.game.core.AbstractPlayer;
 
 /**
  * 有内部建筑物的建筑物
- * @author chenxian
+ * @author chenxian 
  *
  */
 public class TownBuilding extends AbstractBuilding {

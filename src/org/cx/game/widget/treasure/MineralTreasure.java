@@ -10,7 +10,7 @@ import org.cx.game.tools.Util;
  * 资料类物品
  * @author chenxian
  *
- */
+ */ 
 public class MineralTreasure extends Treasure {
 
 	private Mineral mineral = null;

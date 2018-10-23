@@ -42,7 +42,7 @@ public class DizzyBuff extends AbstractBuff {
 		/*
 		 * 晕迷中的单位无法反击
 		 */
-		getOwner().getAttacked().setFightBack(false);
+		getOwner().getDefend().setCanFightBack(false);
 		
 		IIntercepter activateIn = new AbstractIntercepter() {    //当activate状态为true时，将激活状态改为false
 
@@ -63,7 +63,7 @@ public class DizzyBuff extends AbstractBuff {
 		super.affect(objects);
 
 		getOwner().getActivate().action(false);
-		getOwner().getAttacked().setFightBack(false);
+		getOwner().getDefend().setCanFightBack(false);
 	}
 
 	@Override

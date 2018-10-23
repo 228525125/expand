@@ -1,7 +1,9 @@
 package org.cx.game.core;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.CorpsFactory;
@@ -15,12 +17,24 @@ import org.cx.game.widget.building.AbstractBuilding;
 
 public abstract class AbstractHost {
 	
-	private Boolean isReady = false;
+	public final static Integer Status_WaitJoin = 1;           
+	public final static Integer Status_WaitReady = 2;
+	public final static Integer Status_WaitDeploy = 3;
+	//public final static Integer Status_CompleteDeploy = 5;
+	protected final static Integer Status_WaitStart = 4;
+
+	private String playNo = null;
+	private Integer status = Status_WaitJoin;
 	
 	private AbstractContext context = null;
 	
 	private List<AbstractPlayer> playerList = new ArrayList<AbstractPlayer>();
-	private List<Integer> troopOfPlayerList = new ArrayList<Integer>();
+	private Map<Integer, AbstractPlayer> troopPlayerMap = new HashMap<Integer, AbstractPlayer>();
+	
+	public AbstractHost(String playNo) {
+		// TODO Auto-generated constructor stub
+		this.playNo = playNo;
+	}
 	
 	/**
 	 * 加入游戏主机
@@ -29,7 +43,7 @@ public abstract class AbstractHost {
 	public void playerJoinGame(String account, Integer troop) {
 		Player player = new Player(troop, account); 
 		this.playerList.add(player);
-		this.troopOfPlayerList.add(troop);
+		this.troopPlayerMap.put(troop, player);
 		player.setHost(this);
 	}
 	
@@ -39,8 +53,48 @@ public abstract class AbstractHost {
 	 */
 	public void playerQuitGame(String account) {
 		AbstractPlayer player = queryPlayerForName(account);
-		this.troopOfPlayerList.remove(player.getTroop());
+		this.troopPlayerMap.remove(player.getTroop());
 		this.playerList.remove(player);
+	}
+	
+	/**
+	 * 返回一个还没有被占用的阵营
+	 * @return
+	 */
+	public Integer getUsableTroop() {
+		// TODO Auto-generated method stub
+		List<Integer> list = new ArrayList<Integer>();
+		list.addAll(getGround().getTroopList());
+		list.removeAll(this.troopPlayerMap.keySet());
+		if(list.isEmpty())
+			return null;
+		else
+			return list.get(0);
+	}
+	
+	public AbstractPlayer queryPlayerForName(String account) {
+		// TODO Auto-generated method stub
+		for(AbstractPlayer player : this.playerList){
+			if(account.equals(player.getName()))
+				return player;
+		}
+		return null;
+	}
+	
+	public Integer getStatus() {
+		return status;
+	}
+	
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	
+	public String getPlayNo() {
+		return playNo;
+	}
+	
+	public AbstractContext getContext() {
+		return context;
 	}
 	
 	/**
@@ -57,44 +111,31 @@ public abstract class AbstractHost {
 		return playerList;
 	}
 	
-	List<Integer> getTroopOfPlayerList() {
-		return troopOfPlayerList;
-	}
-	
-	
-	public AbstractPlayer queryPlayerForName(String account) {
-		// TODO Auto-generated method stub
-		for(AbstractPlayer player : this.playerList){
-			if(account.equals(player.getName()))
-				return player;
-		}
-		return null;
-	}
-	
-	public Boolean isReady() {
-		return isReady;
+	public AbstractPlayer getPlayer(Integer troop) {
+		return this.troopPlayerMap.get(troop);
 	}
 	
 	/**
 	 * 建议放在子类方法的最后
 	 */
 	public void ready() {
-		this.isReady = true;
 		
-		this.context = new Context(getGround());
+		setStatus(Status_WaitDeploy);
+		
+		this.context = new Context(this.playNo, getGround());
 		
 		for(AbstractPlayer player : getPlayerList()){
 			context.addPlayer(player);
 		}
 		
-		for(AbstractBuilding building : getGround().getBuildingIsTroop().keySet()){
+		/*for(AbstractBuilding building : getGround().getBuildingIsTroop().keySet()){
 			Integer troop = getGround().getBuildingIsTroop().get(building);
 			AbstractPlayer player = getContext().getPlayer(troop);
 			if(null!=player)
 				getGround().captureBuilding(player, building);
-		}
+		}*/
 		
-		for(AbstractCorps corps : getGround().getLivingCorpsList()){
+		/*for(AbstractCorps corps : getGround().getLivingCorpsList()){
 			Integer troop = corps.getTroop();
 			AbstractPlayer player = getContext().getPlayer(troop);
 			if(null!=player){                  //阵营
@@ -105,14 +146,11 @@ public abstract class AbstractHost {
 				corps.setPlayer(player);
 				getContext().addPlayer(player);
 			}
-		}
+		}*/
 	}
 	
-	public AbstractContext getContext() {
-		return context;
-	}
-	
+	abstract public void start(AbstractPlayer player);
 	
 	abstract public Ground getGround();
-	abstract public Integer getUsableTroop();
+	
 }

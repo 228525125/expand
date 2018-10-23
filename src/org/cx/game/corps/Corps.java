@@ -7,7 +7,7 @@ import org.cx.game.action.ActionProxyHelper;
 import org.cx.game.action.Activate;
 import org.cx.game.action.Affected;
 import org.cx.game.action.Attack;
-import org.cx.game.action.Attacked;
+import org.cx.game.action.Defend;
 import org.cx.game.action.Call;
 import org.cx.game.action.Chuck;
 import org.cx.game.action.Conjure;
@@ -33,7 +33,7 @@ public class Corps extends AbstractCorps {
 	
 	private Activate activate = null;
 	private Attack attack = null;
-	private Attacked attacked = null;
+	private Defend defend = null;
 	private CorpsAgent agent = null;
 	private Conjure conjure = null;
 	private Affected affected = null;
@@ -52,9 +52,9 @@ public class Corps extends AbstractCorps {
 		// TODO Auto-generated constructor stub
 		super(type);
 		
-		upgradeRequirement.put(2, "e-100");
-		upgradeRequirement.put(3, "e-200");
-		upgradeRequirement.put(4, "e-400");
+		upgradeRequirement.put(2, "e100");
+		upgradeRequirement.put(3, "e200");
+		upgradeRequirement.put(4, "e400");
 	}
 	
 	public CorpsAgent getAgent() {
@@ -116,10 +116,10 @@ public class Corps extends AbstractCorps {
 	
 	public void updateDef(){
 		Integer def = this.getDef();
-		Integer armourDef = this.getAttacked().getArmourDef();
-		Integer landformDef = this.getAttacked().getLandformDef();
-		Integer extraDef = this.getAttacked().getExtraDef();
-		this.getAttacked().setDef(def + armourDef + landformDef + extraDef);
+		Integer armourDef = this.getDefend().getArmourDef();
+		Integer landformDef = this.getDefend().getLandformDef();
+		Integer extraDef = this.getDefend().getExtraDef();
+		this.getDefend().setDef(def + armourDef + landformDef + extraDef);
 	}
 	
 	public void setSpeed(Integer speed) {
@@ -156,7 +156,7 @@ public class Corps extends AbstractCorps {
 		// TODO Auto-generated method stub
 		super.addCorpsToTeammateList(corps);
 		
-		addOption(new TroopOption(corps));
+		addOption(new TeammateOption(corps));
 	}
 	
 	@Override
@@ -193,13 +193,13 @@ public class Corps extends AbstractCorps {
 		return attack;
 	}
 	
-	public Attacked getAttacked() {
-		if(null==attacked){
-			attacked = new Attacked();
-			attacked.setDef(getDef());
-			attacked.setOwner(this);
+	public Defend getDefend() {
+		if(null==defend){
+			defend = new Defend();
+			defend.setDef(getDef());
+			defend.setOwner(this);
 		}
-		return attacked;
+		return defend;
 	}
 	
 	public Conjure getConjure() {
@@ -245,6 +245,7 @@ public class Corps extends AbstractCorps {
 		if(null==death){
 			death = new Death();
 			death.setHp(getHp());
+			death.setHpLimit(getHp());
 			death.setOwner(this);
 		}
 		return death;
@@ -323,9 +324,9 @@ public class Corps extends AbstractCorps {
 	 * 受攻击
 	 * @param attack
 	 */
-	public void attacked(AbstractCorps corps, IAction attack) {
-		IAction action = new ActionProxyHelper(getAttacked());
-		action.action(corps,attack);
+	public void defend(Object...objects) {
+		IAction action = new ActionProxyHelper(getDefend());
+		action.action(objects);
 	}
 	
 	/**

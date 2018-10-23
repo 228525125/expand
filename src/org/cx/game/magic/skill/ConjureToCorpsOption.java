@@ -10,7 +10,7 @@ import org.cx.game.widget.Place;
  *
  */
 public class ConjureToCorpsOption extends ConjureOption {
-
+	
 	public ConjureToCorpsOption(ActiveSkill skill) {
 		super(skill);
 		// TODO Auto-generated constructor stub
@@ -19,7 +19,7 @@ public class ConjureToCorpsOption extends ConjureOption {
 	@Override
 	public void execute(Object... objects) throws RuleValidatorException {
 		// TODO Auto-generated method stub
-		AbstractGround ground = getOwnerPlayer().getContext().getGround();
+		AbstractGround ground = getOwner().getOwner().getPlayer().getContext().getGround();
 		setParameterTypeValidator(new Class[]{Place.class}, new String[]{"corps"}, ground.getLivingCorpsList().toArray());
 		
 		super.execute(objects);

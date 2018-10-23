@@ -10,7 +10,7 @@ import org.cx.game.widget.Place;
 /**
  * 盾击
  * @author chenxian
- *
+ * 
  */
 public class ShieldHit extends ActiveSkill {
 

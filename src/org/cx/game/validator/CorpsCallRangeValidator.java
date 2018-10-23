@@ -9,7 +9,7 @@ import org.cx.game.widget.building.AbstractBuilding;
 /**
  * 判断call位置是否超出范围
  * @author chenxian
- *
+ * 
  */
 public class CorpsCallRangeValidator extends SelectBuildingTypeValidator {
 

@@ -7,7 +7,7 @@ import org.cx.game.magic.skill.PassiveSkill;
 /**
  * 潜行
  * @author chenxian
- *
+ * 
  */
 public class Sneak extends PassiveSkill {
 	

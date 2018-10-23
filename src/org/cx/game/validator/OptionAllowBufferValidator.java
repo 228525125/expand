@@ -6,7 +6,7 @@ import org.cx.game.tools.I18n;
 /**
  * 验证选项是否能被执行
  * @author chenxian
- *
+ * 
  */
 public class OptionAllowBufferValidator extends SelectOptionBufferValidator {
 

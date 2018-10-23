@@ -25,7 +25,7 @@ import org.cx.game.widget.treasure.Treasure;
 import com.oracle.jrockit.jfr.ValueDefinition;
 
 public abstract class HoneycombGround extends Ground {
-	
+	 
 	private int[] hit = new int []{-1};                                  //-1表示障碍物
 	
 	public HoneycombGround(Integer id, String name, Integer xBorder, Integer yBorder, String imagePath) {
@@ -34,12 +34,6 @@ public abstract class HoneycombGround extends Ground {
 	}
 	
 	//----------------------- Calculate ------------------------
-	
-	@Override
-	public Integer distance(Integer start, Integer stop) {
-		// TODO Auto-generated method stub
-		return CellularDistrict.getShortPathLength(start.longValue(), stop.longValue());
-	}
 		
 	@Override
 	public Integer getDirection(Integer stand, Integer target) {
@@ -153,7 +147,7 @@ public abstract class HoneycombGround extends Ground {
 	 * @param control 阵营
 	 * @return
 	 */
-	private int[][] updateMAP_Stance(Integer moveType, AbstractPlayer control){
+	private int[][] updateMAP_LandformAndStance(Integer moveType, AbstractPlayer control){
 		int [][] MAP = updateMAP_Landform(moveType);
 		
 		List<Integer> pList = new ArrayList<Integer>();         //敌方单位的站位，友方允许穿过
@@ -185,28 +179,16 @@ public abstract class HoneycombGround extends Ground {
 		return MAP;
 	}
 	
-	/**
-	 * 获得两点之间的最短路线，考虑障碍物，并且start<>stop
-	 * 注意，在调用该方法之前，必须调用updateMAP，之所以将两个方法分开，也是为了提高
-	 * 计算效率，例如在一次route方法调用，只更新一次MAP
-	 * @param start
-	 * @param stop
-	 * @return LinkedList<Node> 包含启动和终点，如果stop不可到达则返回null
-	 */
-	protected List route(Integer start, Integer stop){		
+	protected List route(Integer start, Integer stop){
 		return SpaceArithmetic.route(start, stop, updateMAP(), hit);
 	}
 	
-	/**
-	 * 
-	 * @param start
-	 * @param stop 
-	 * @param moveType 移动类型
-	 * @param control 当前控制者，用于计算敌人的站位
-	 * @return LinkedList<Node> 包含启动和终点，如果stop不可到达，即MAP中为-1，则返回null
-	 */
+	protected List route(Integer start, Integer stop, Integer moveType) {
+		return SpaceArithmetic.route(start, stop, updateMAP_Landform(moveType), hit);
+	}
+	
 	protected List route(Integer start, Integer stop, Integer moveType, AbstractPlayer control) {
-		return SpaceArithmetic.route(start, stop, updateMAP_Stance(moveType, control), hit);
+		return SpaceArithmetic.route(start, stop, updateMAP_LandformAndStance(moveType, control), hit);
 	}
 	
 	/**

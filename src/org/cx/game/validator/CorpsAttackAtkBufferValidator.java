@@ -6,7 +6,7 @@ import org.cx.game.tools.I18n;
 /**
  * 随从攻击力必须大于0才能发起攻击
  * @author chenxian
- *
+ * 
  */
 public class CorpsAttackAtkBufferValidator extends SelectCorpsBufferValidator {
 

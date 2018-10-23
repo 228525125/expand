@@ -2,6 +2,7 @@ package org.cx.game.command;
 
 import org.cx.game.core.AbstractPlayer;
 import org.cx.game.exception.ValidatorException;
+import org.cx.game.validator.OperatePowerValidator;
 import org.cx.game.validator.OptionAllowBufferValidator;
 import org.cx.game.widget.AbstractOption;
 

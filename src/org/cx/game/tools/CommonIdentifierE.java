@@ -79,7 +79,7 @@ public class CommonIdentifierE extends CommonIdentifier {
 	
 	//---------------- NotifyInfo -----------------//
 	
-	public final static String Player_Bout = "Player_Bout";
+	//public final static String Player_Bout = "Player_Bout";
 
 	public final static String Ground_LoadMap = "Ground_LoadMap";
 	
@@ -141,6 +141,8 @@ public class CommonIdentifierE extends CommonIdentifier {
 	public final static String Command_Query_Leave = "Command_Query_Leave";
 	public final static String Command_Reload = "Command_Reload";
 	public final static String Command_Switch = "Command_Switch";
+	public final static String Command_Deploy = "Command_Deploy";
+	public final static String Command_Ready = "Command_Ready";
 	
 	public final static String Context_Start = "Context_Start";
 	public final static String Context_Deploy = "Context_Deploy";

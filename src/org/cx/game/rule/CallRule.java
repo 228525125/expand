@@ -17,7 +17,7 @@ import org.cx.game.widget.treasure.Resource;
  *
  */
 public class CallRule extends AbstractRule {
-	
+
 	private Boolean isInvoke = true;
 	
 	@Override

@@ -7,7 +7,7 @@ import org.cx.game.widget.treasure.Mineral;
 import org.cx.game.widget.treasure.Resource;
 
 public class CallBuilding extends AbstractBuilding {
-
+ 
 	private Integer corpsType = null;       //可招募单位
 	private Integer nop = 0;             //当前可招募数量
 	private Integer yield = null;        //产量/天

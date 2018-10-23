@@ -8,7 +8,7 @@ import org.cx.game.widget.building.CallBuilding;
 /**
  * 当招募时，验证招募人数是否超出可招募人数
  * @author chenxian
- *
+ * 
  */
 public class CorpsCallNopLimitValidator extends Validator {
 	

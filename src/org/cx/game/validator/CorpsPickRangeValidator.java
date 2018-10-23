@@ -8,7 +8,7 @@ import org.cx.game.widget.Place;
 
 /**
  * 验证拾取距离
- * @author chenxian
+ * @author chenxian 
  *
  */
 public class CorpsPickRangeValidator extends Validator {

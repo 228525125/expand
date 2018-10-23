@@ -13,7 +13,7 @@ public class Death extends AbstractAction implements IAction {
 	
 	private Integer hp = 0;
 	private Integer hpLimit = 0;
-	private Integer status = CommonIdentifierE.Death_Status_Exist;
+	private Integer status = CommonIdentifierE.Death_Status_Live;
 
 	@Override
 	public Corps getOwner() {
@@ -35,25 +35,10 @@ public class Death extends AbstractAction implements IAction {
 	 * @param hp
 	 * @return 如果是造成伤害，则返回伤害值，否则返回0；
 	 */
-	public Integer setHp(Integer funType, Integer hp) {
-		Integer beforeHp = this.hp;
-		
+	public void setHp(Integer funType, Integer hp) {
 		this.hp = Util.operating(funType, this.hp, hp);
 		this.hp = Death.this.hp>0 ? Death.this.hp : 0;       //判断下限
 		this.hp = Death.this.hp<getHpLimit() ? Death.this.hp : getHpLimit(); //判断上限
-		
-		Integer damage = 0;
-		//判断一下是否造成伤害
-		damage = beforeHp - this.hp;
-		
-		/*
-		 * 判断死亡
-		 */
-		if(this.hp.equals(0)){
-			action();
-		}
-		
-		return damage;
 	}
 	
 	public Integer getHpLimit() {

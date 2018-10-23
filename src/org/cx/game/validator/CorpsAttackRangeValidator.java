@@ -11,7 +11,7 @@ import org.cx.game.widget.AbstractGround;
 /**
  * 验证攻击距离
  * @author chenxian
- *
+ * 
  */
 public class CorpsAttackRangeValidator extends Validator {
 

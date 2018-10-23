@@ -9,11 +9,13 @@ import org.cx.game.core.AbstractPlayer;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.tools.Util;
 import org.cx.game.validator.BuildConsumeValidator;
+import org.cx.game.validator.OperatePowerValidator;
+import org.cx.game.widget.AbstractControlQueue;
 import org.cx.game.widget.AbstractGround;
 import org.cx.game.widget.AbstractOption;
 
 public class BuildOption extends AbstractOption {
-
+ 
 	private String name = null;
 	
 	public BuildOption(AbstractBuilding building) {
@@ -41,9 +43,9 @@ public class BuildOption extends AbstractOption {
 	}
 	
 	@Override
-	protected AbstractPlayer getOwnerPlayer() {
+	protected AbstractControlQueue getControlQueue() {
 		// TODO Auto-generated method stub
-		return getOwner().getPlayer();
+		return getOwner().getPlace().getOwner().getQueue();
 	}
 	
 	@Override

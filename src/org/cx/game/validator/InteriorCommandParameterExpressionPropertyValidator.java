@@ -11,7 +11,7 @@ import org.dom4j.Element;
 /**
  * 验证SetCommand的参数，格式为：set 属性名+整数
  * @author chenxian
- *
+ * 
  */
 public class InteriorCommandParameterExpressionPropertyValidator extends
 		Validator {

@@ -6,7 +6,7 @@ import org.cx.game.widget.AbstractGround;
 /**
  * 验证指定的位置是否存在对象
  * @author chenxian
- *
+ * 
  */
 public class CorpsInThePlaceValidator extends Validator {
 

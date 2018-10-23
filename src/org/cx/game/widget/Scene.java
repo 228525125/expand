@@ -12,7 +12,7 @@ import org.cx.game.widget.treasure.Treasure;
 /**
  * 战斗场景
  * @author chenxian
- *
+ * 
  */
 public class Scene extends HoneycombGround {
 
@@ -47,14 +47,6 @@ public class Scene extends HoneycombGround {
 			AbstractCorps corps = corpsList2.get(i);
 			placementCorps(entranceList2.get(i), corps);
 		}
-	}
-	
-	@Override
-	public void placementCorps(Integer position, AbstractCorps corps) {
-		// TODO Auto-generated method stub
-		super.placementCorps(position, corps);
-		
-		getQueue().add((Corps) corps);
 	}
 	
 	@Override

@@ -10,13 +10,15 @@ import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.validator.CorpsActivateValidator;
 import org.cx.game.validator.CorpsMoveableBufferValidator;
 import org.cx.game.validator.CorpsMoveableValidator;
+import org.cx.game.validator.OperatePowerValidator;
+import org.cx.game.widget.AbstractControlQueue;
 import org.cx.game.widget.AbstractGround;
 import org.cx.game.widget.AbstractOption;
 import org.cx.game.widget.Place;
 
-public class TroopOption extends AbstractOption {
+public class TeammateOption extends AbstractOption {
 	
-	public TroopOption(AbstractCorps corps) {
+	public TeammateOption(AbstractCorps corps) {
 		// TODO Auto-generated constructor stub
 		setOwner(corps);
 	}
@@ -40,9 +42,9 @@ public class TroopOption extends AbstractOption {
 	}
 
 	@Override
-	protected AbstractPlayer getOwnerPlayer() {
+	protected AbstractControlQueue getControlQueue() {
 		// TODO Auto-generated method stub
-		return getOwner().getPlayer();
+		return getOwner().getGround().getQueue();
 	}
 	
 	private Execute execute = null;
@@ -62,6 +64,7 @@ public class TroopOption extends AbstractOption {
 	public void execute(Object... objects) throws RuleValidatorException {
 		// TODO Auto-generated method stub
 		addValidator(new CorpsMoveableValidator(getOwner()));
+		addValidator(new OperatePowerValidator(getOwner().getPlayer()));
 		
 		super.execute(objects);
 	}
@@ -78,9 +81,9 @@ public class TroopOption extends AbstractOption {
 		}
 		
 		@Override
-		public TroopOption getOwner() {
+		public TeammateOption getOwner() {
 			// TODO Auto-generated method stub
-			return (TroopOption) super.getOwner();
+			return (TeammateOption) super.getOwner();
 		}
 	}
 

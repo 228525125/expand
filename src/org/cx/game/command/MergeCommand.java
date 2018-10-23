@@ -7,6 +7,7 @@ import org.cx.game.exception.ValidatorException;
 import org.cx.game.validator.CorpsIsHeroValidator;
 import org.cx.game.validator.CorpsMoveableBufferValidator;
 import org.cx.game.validator.CorpsMoveRangeValidator;
+import org.cx.game.validator.OperatePowerValidator;
 
 public class MergeCommand extends InteriorCommand {
 

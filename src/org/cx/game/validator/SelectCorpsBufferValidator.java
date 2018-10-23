@@ -8,7 +8,7 @@ import org.cx.game.tools.I18n;
 /**
  * 验证缓存中是否存在Corps
  * @author chenxian
- *
+ * 
  */
 public class SelectCorpsBufferValidator extends Validator {
 	

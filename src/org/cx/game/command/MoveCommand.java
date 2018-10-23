@@ -2,9 +2,12 @@ package org.cx.game.command;
 
 import org.cx.game.core.AbstractPlayer;
 import org.cx.game.corps.Corps;
+import org.cx.game.exception.CommandValidatorException;
 import org.cx.game.exception.ValidatorException;
 import org.cx.game.validator.CorpsMoveableBufferValidator;
 import org.cx.game.validator.CorpsMoveRangeValidator;
+import org.cx.game.validator.OperatePowerValidator;
+import org.cx.game.validator.SelectCorpsNotHideValidator;
 import org.cx.game.validator.TauntAtTheTimeOfMoveBufferValidator;
 import org.cx.game.validator.SelectGroundBufferValidator;
 import org.cx.game.validator.SelectPlaceEmptyValidator;
@@ -34,6 +37,11 @@ public class MoveCommand extends InteriorCommand {
 		super.execute();
 		
 		Corps corps = (Corps) buffer.getCorps();
+		
+		doValidator(new OperatePowerValidator(corps.getPlayer()));
+		if(hasError())
+			throw new CommandValidatorException(getErrors().getMessage());
+		
 		Place place = (Place) parameter;
 		corps.move(place);
 	}

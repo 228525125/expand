@@ -10,6 +10,7 @@ import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.validator.CorpsAttackableValidator;
+import org.cx.game.widget.AbstractControlQueue;
 import org.cx.game.widget.AbstractGround;
 import org.cx.game.widget.AbstractOption;
 import org.cx.game.widget.Place;
@@ -52,9 +53,9 @@ public class ConjureOption extends AbstractOption {
 	}
 
 	@Override
-	protected AbstractPlayer getOwnerPlayer() {
+	protected AbstractControlQueue getControlQueue() {
 		// TODO Auto-generated method stub
-		return getOwner().getOwner().getPlayer();
+		return getOwner().getOwner().getGround().getQueue();
 	}
 	
 	private Execute execute = null;

@@ -10,7 +10,7 @@ import org.cx.game.tools.I18n;
  * 装备物品
  * @author chenxian
  *
- */
+ */ 
 public class EquipmentTreasure extends Treasure {
 
 	private Integer type = null;

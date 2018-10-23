@@ -6,7 +6,7 @@ import org.cx.game.tools.Util;
 /**
  * 验证参数类型是否正确，这里验证的对象是不是简单类型
  * @author chenxian
- *
+ * 
  */
 public class IntegerTypeValidator extends
 		Validator {

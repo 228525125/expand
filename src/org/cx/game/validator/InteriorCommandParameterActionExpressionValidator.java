@@ -8,7 +8,7 @@ import org.dom4j.Element;
 
 /**
  * 验证参数类型是否正确，这里验证参数字符串是否是合适的action
- * @author chenxian
+ * @author chenxian 
  *
  */
 public class InteriorCommandParameterActionExpressionValidator extends Validator {

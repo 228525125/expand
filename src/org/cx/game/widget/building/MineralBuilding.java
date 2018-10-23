@@ -9,7 +9,7 @@ import org.cx.game.widget.treasure.Resource;
 public class MineralBuilding extends AbstractBuilding {
 	
 	private Mineral mineral = null;
-	
+
 	public MineralBuilding(Integer type) {
 		super(type);
 		// TODO Auto-generated constructor stub

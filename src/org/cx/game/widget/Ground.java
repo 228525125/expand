@@ -8,6 +8,7 @@ import java.util.Map;
 import org.cx.game.core.AbstractPlayer;
 import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
+import org.cx.game.tools.CellularDistrict;
 import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.tools.IListFilter;
 import org.cx.game.tools.ListUtils;
@@ -15,7 +16,7 @@ import org.cx.game.tools.Node;
 import org.cx.game.tools.SpaceArithmetic;
 import org.cx.game.tools.XmlConfigureHelper;
 import org.cx.game.widget.building.AbstractBuilding;
-
+ 
 public abstract class Ground extends AbstractGround {
 	
 	private String imagePath = "";                                     //背景图片
@@ -164,7 +165,7 @@ public abstract class Ground extends AbstractGround {
 		// TODO Auto-generated method stub
 		List<Integer> route = new ArrayList<Integer>();
 		Corps sc = (Corps) corps;
-		List path = route(getPosition(sc), position, type, sc.getPlayer());
+		List path = route(getPosition(sc), position, type);
 		path.remove(0);                         //路径包含起点
 		
 		for(int i=0;i<path.size();i++){
@@ -187,7 +188,9 @@ public abstract class Ground extends AbstractGround {
 			 * 减少精力
 			 */
 			Integer energy = sc.getMove().getEnergy();
+			System.out.println(sc.getName()+":"+energy);
 			energy -= node.consume;
+			System.out.println("("+node._Pos.x+","+node._Pos.y+")"+node.consume);
 			sc.getMove().setEnergy(energy);
 			
 			/*
@@ -206,15 +209,6 @@ public abstract class Ground extends AbstractGround {
 		}
 		
 		return route;
-	}
-	
-	@Override
-	public void placementCorps(Integer position, AbstractCorps corps) {
-		// TODO Auto-generated method stub
-		super.placementCorps(position, corps);
-		
-		Corps c = (Corps) corps;
-		c.getDeath().setStatus(CommonIdentifierE.Death_Status_Live);
 	}
 	
 	//----------------------- Landform ---------------------------
@@ -269,14 +263,14 @@ public abstract class Ground extends AbstractGround {
 			Integer step = sc.getMove().getEnergy()/sc.getMove().getConsume();
 			switch (sc.getMove().getType()) {
 			case 141:    //步行
-				positionList = areaForDistance(corps.getPosition(), step, Contain, CommonIdentifierE.Move_Type_Walk, corps.getPlayer());
+				positionList = areaForDistance(corps.getPosition(), step, Contain, CommonIdentifierE.Move_Type_Walk);
 				//distance(280083, 280083, IMove.Type_Walk);
 				break;
 			case 142:    //骑行
-				positionList = areaForDistance(corps.getPosition(), step, Contain, CommonIdentifierE.Move_Type_Equitation, corps.getPlayer());
+				positionList = areaForDistance(corps.getPosition(), step, Contain, CommonIdentifierE.Move_Type_Equitation);
 				break;
 			case 143:    //驾驶
-				positionList = areaForDistance(corps.getPosition(), step, Contain, CommonIdentifierE.Move_Type_Drive, corps.getPlayer());
+				positionList = areaForDistance(corps.getPosition(), step, Contain, CommonIdentifierE.Move_Type_Drive);
 				break;
 			case 144:    //飞行
 				positionList = areaForDistance(corps.getPosition(), step, Contain);
@@ -310,6 +304,34 @@ public abstract class Ground extends AbstractGround {
 	private static final Integer Distance_Max = 9999;
 	
 	@Override
+	public Integer distance(Integer start, Integer stop) {
+		// TODO Auto-generated method stub
+		return CellularDistrict.getShortPathLength(start.longValue(), stop.longValue());
+	}
+	
+	@Override
+	public Integer distance(Integer start, Integer stop, Integer moveType) {
+		// TODO Auto-generated method stub
+		Integer ret = 0;
+		
+		if(!start.equals(stop)){
+			List path = route(start, stop, moveType);
+			if(null!=path){                        //如果stop不可到达，即MAP为-1，则path为null
+				path.remove(0);                     //因为path包含起始位置，因此这里要删除
+				
+				for(int i=0;i<path.size();i++){
+					Node node = (Node) path.get(i);
+					ret += node.consume;
+				}
+			}else{
+				ret = Distance_Max;             //地图MAP中为-1的，这里返回9999
+			}
+		}
+		
+		return ret;
+	}
+	
+	@Override
 	public Integer distance(Integer start, Integer stop, Integer moveType, AbstractPlayer control) {
 		// TODO Auto-generated method stub
 		Integer ret = 0;
@@ -331,6 +353,7 @@ public abstract class Ground extends AbstractGround {
 		return ret;
 	}
 
+	@Override
 	public List<Integer> areaForDistance(Integer position, Integer step, Integer type) {
 		// TODO Auto-generated method stub
 		List<Integer> list = new ArrayList<Integer>();
@@ -355,6 +378,39 @@ public abstract class Ground extends AbstractGround {
 				
 			}
 		}
+		return list;
+	}
+	
+	@Override
+	public List<Integer> areaForDistance(Integer position, Integer step,
+			Integer type, Integer moveType) {
+		// TODO Auto-generated method stub
+		List<Integer> list = new ArrayList<Integer>();
+		
+		/*
+		 * 缩小计算范围
+		 */
+		List<Integer> posList = areaForDistance(position, step, type);
+		
+		for(Integer curPos : posList){
+			switch (type) {
+			case 0:
+				if(step.equals(distance(position, curPos, moveType)))
+					if(getPlace(curPos).isEmpty())             //友方可以穿人，因此在计算路径时，不考虑友军站位，但这里就要判断
+						list.add(curPos);
+				break;
+					
+			case 1:
+				if(step>=distance(position, curPos, moveType))
+					if(getPlace(curPos).isEmpty())
+						list.add(curPos);
+				break;	
+					
+			default:
+				break;
+			}
+		}
+
 		return list;
 	}
 	
@@ -391,8 +447,31 @@ public abstract class Ground extends AbstractGround {
 		return list;		
 	}
 	
+	/**
+	 * 获得两点之间的最短路线，不加载地形，并且start<>stop
+	 * @param start 起点
+	 * @param stop 终点
+	 * @return LinkedList<Node> 包含启动和终点，如果stop不可到达则返回null
+	 */
 	protected abstract List route(Integer start, Integer stop);
 	
+	/**
+	 * 获得两点之间的最短路线，加载地形，并且start<>stop
+	 * @param start
+	 * @param stop 
+	 * @param moveType 移动类型
+	 * @return LinkedList<Node> 包含启动和终点，如果stop不可到达，即MAP中为-1，则返回null
+	 */
+	protected abstract List route(Integer start, Integer stop, Integer moveType);
+	
+	/**
+	 * 获得两点之间的最短路线，加载地形和敌军位置，并且start<>stop
+	 * @param start
+	 * @param stop 
+	 * @param moveType 移动类型
+	 * @param control 当前玩家
+	 * @return LinkedList<Node> 包含启动和终点，如果stop不可到达，即MAP中为-1，则返回null
+	 */
 	protected abstract List route(Integer start, Integer stop, Integer moveType, AbstractPlayer control);
 
 }

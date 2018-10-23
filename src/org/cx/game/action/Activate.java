@@ -77,7 +77,7 @@ public class Activate extends AbstractAction implements IAction {
 			owner.getAttack().setAttackable(true);
 			owner.getMove().setMoveable(true);
 			owner.getMove().setEnergy(owner.getEnergy());
-			owner.getAttacked().setFightBack(true);
+			owner.getDefend().setCanFightBack(true);
 			
 			//setVigour(Util.Sub, ActivationConsume);
 		}else{

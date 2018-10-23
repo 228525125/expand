@@ -15,7 +15,9 @@ import org.cx.game.validator.CorpsCallConsumeValidator;
 import org.cx.game.validator.CorpsCallNopLimitValidator;
 import org.cx.game.validator.CorpsCallRangeValidator;
 import org.cx.game.validator.CallUnitEqualValidator;
+import org.cx.game.validator.OperatePowerValidator;
 import org.cx.game.validator.RationLimitOfPlaceValidator;
+import org.cx.game.widget.AbstractControlQueue;
 import org.cx.game.widget.AbstractGround;
 import org.cx.game.widget.AbstractOption;
 import org.cx.game.widget.Place;
@@ -50,9 +52,9 @@ public class CallOption extends AbstractOption {
 	}
 	
 	@Override
-	protected AbstractPlayer getOwnerPlayer() {
+	protected AbstractControlQueue getControlQueue() {
 		// TODO Auto-generated method stub
-		return getOwner().getPlayer();
+		return getOwner().getPlace().getOwner().getQueue();
 	}
 	
 	@Override

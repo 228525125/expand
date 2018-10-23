@@ -8,7 +8,7 @@ import org.cx.game.intercepter.IIntercepter;
  * 被动技能
  * 除Dodge、AttackBack、Parry等系统级被动外，通常都要覆盖setOwer方法，并指定action；
  * @author chenxian
- *
+ * 
  */
 public abstract class PassiveSkill extends AbstractSkill implements IIntercepter {
 	
@@ -16,7 +16,6 @@ public abstract class PassiveSkill extends AbstractSkill implements IIntercepter
 	 * 控制效果是否有效的标记，当invalid被调用该标记为false；另外该标记应该在调用affect之前被判断；
 	 */
 	protected Boolean activation = true;
-	private Boolean isDelete = false;
 	private Integer atk = 0;
 	private Integer def = 0;
 	
@@ -101,18 +100,6 @@ public abstract class PassiveSkill extends AbstractSkill implements IIntercepter
 	public Integer getLevel() {
 		// TODO Auto-generated method stub
 		return IIntercepter.Level_Current;
-	}
-	
-	@Override
-	public void delete() {
-		// TODO Auto-generated method stub
-		this.isDelete = true;
-	}
-	
-	@Override
-	public Boolean isDelete() {
-		// TODO Auto-generated method stub
-		return this.isDelete;
 	}
 	
 	//--------------------- IIntercepter End ------------------------

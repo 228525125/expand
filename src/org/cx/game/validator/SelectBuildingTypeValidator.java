@@ -7,7 +7,7 @@ import org.cx.game.widget.building.AbstractBuilding;
  * 验证建筑类型
  * @author chenxian
  *
- */
+ */ 
 public class SelectBuildingTypeValidator extends Validator {
 	
 	private Integer type = null;

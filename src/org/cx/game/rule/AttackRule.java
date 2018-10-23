@@ -1,13 +1,16 @@
 package org.cx.game.rule;
 
+import java.util.Map;
+
 import org.cx.game.action.Attack;
 import org.cx.game.corps.Corps;
 import org.cx.game.magic.buff.AttackLockBuff;
 import org.cx.game.tools.CommonIdentifierE;
+import org.cx.game.tools.Util;
 import org.cx.game.widget.AbstractGround;
 
 public class AttackRule extends AbstractRule {
-
+ 
 	@Override
 	public void after(Object[] args) {
 		// TODO Auto-generated method stub
@@ -21,6 +24,12 @@ public class AttackRule extends AbstractRule {
 		&& 1==distance){                                           //近身
 			new AttackLockBuff(attack,attacked).effect();
 		}
+		
+		Integer atk = (Integer) getOwner().getActionResult("atk");
+		Integer dmg = (Integer) getOwner().getActionResult("dmg");
+		Boolean isFightBack = (Boolean) getOwner().getActionResult("isFightBack");
+		
+		attacked.defend(attack, atk, dmg, isFightBack);
 	}
 	
 	@Override

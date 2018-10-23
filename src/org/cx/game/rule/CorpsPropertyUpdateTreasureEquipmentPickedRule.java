@@ -51,7 +51,7 @@ public class CorpsPropertyUpdateTreasureEquipmentPickedRule extends AbstractRule
 				def += te.getDef();
 			}
 		}
-		hero.getAttacked().setArmourDef(def);
+		hero.getDefend().setArmourDef(def);
 		
 		hero.updateDef();
 	}

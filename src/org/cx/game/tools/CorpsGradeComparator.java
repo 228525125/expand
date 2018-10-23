@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 import org.cx.game.corps.Corps;
 import org.cx.game.corps.Hero;
-
+ 
 public class CorpsGradeComparator implements Comparator<Corps> {
 
 	@Override

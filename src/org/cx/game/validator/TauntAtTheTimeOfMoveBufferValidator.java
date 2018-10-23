@@ -7,7 +7,7 @@ import org.cx.game.tools.I18n;
 /**
  * 执行移动命令之前，验证是否受到嘲讽
  * @author chenxian
- *
+ * 
  */
 public class TauntAtTheTimeOfMoveBufferValidator extends SelectCorpsBufferValidator {
 

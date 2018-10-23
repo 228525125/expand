@@ -30,7 +30,7 @@ public class CorpsPropertyUpdateUpgradeRule extends AbstractRule {
 	
 	static void updateExtraAtk(Corps corps) {
 		// TODO Auto-generated method stub
-		Integer levelAtk = corps.getUpgrade().getLevel();
+		Integer levelAtk = corps.getUpgrade().getLevel()-1;
 		Integer buffAtk = 0;
 		for(AbstractBuff buff : corps.getBuffList()){
 			buffAtk += buff.getAtk();
@@ -61,7 +61,7 @@ public class CorpsPropertyUpdateUpgradeRule extends AbstractRule {
 				skillDef += ps.getDef();
 			}
 		}
-		corps.getAttacked().setExtraDef(levelDef + buffDef + skillDef);
+		corps.getDefend().setExtraDef(levelDef + buffDef + skillDef);
 		
 		corps.updateDef();
 	}

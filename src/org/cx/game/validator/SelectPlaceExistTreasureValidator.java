@@ -7,7 +7,7 @@ import org.cx.game.widget.treasure.Treasure;
 /**
  * 验证某个位置上是否有物品
  * @author chenxian
- *
+ * 
  */
 public class SelectPlaceExistTreasureValidator extends Validator {
 	

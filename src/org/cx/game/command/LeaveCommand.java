@@ -5,6 +5,7 @@ import org.cx.game.corps.Corps;
 import org.cx.game.exception.ValidatorException;
 import org.cx.game.validator.CorpsMoveableBufferValidator;
 import org.cx.game.validator.CorpsMoveRangeValidator;
+import org.cx.game.validator.OperatePowerValidator;
 import org.cx.game.validator.SelectPlaceEmptyValidator;
 import org.cx.game.widget.Place;
 

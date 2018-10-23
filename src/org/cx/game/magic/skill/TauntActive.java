@@ -17,7 +17,7 @@ import org.cx.game.widget.AbstractGround;
  * 4、嘲讽效果只能在近身时有效；
  * @author chenxian
  *
- */
+ */ 
 public class TauntActive extends ActiveSkill {
 
 	private final static Integer Taunt_ID = 10200006;

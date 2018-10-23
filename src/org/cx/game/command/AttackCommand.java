@@ -7,6 +7,7 @@ import org.cx.game.exception.ValidatorException;
 import org.cx.game.tools.Debug;
 import org.cx.game.validator.CorpsAttackAtkBufferValidator;
 import org.cx.game.validator.CorpsAttackRangeValidator;
+import org.cx.game.validator.OperatePowerValidator;
 import org.cx.game.validator.TauntAtTheTimeOfAttackBufferValidator;
 import org.cx.game.validator.CorpsAttackableBufferValidator;
 import org.cx.game.validator.SelectGroundBufferValidator;
@@ -20,6 +21,8 @@ public class AttackCommand extends InteriorCommand {
 		addValidator(new SelectGroundBufferValidator(buffer));
 		addValidator(new CorpsAttackableBufferValidator(buffer));
 		addValidator(new CorpsAttackAtkBufferValidator(buffer));
+		
+		
 	}
 	
 	@Override
@@ -38,6 +41,7 @@ public class AttackCommand extends InteriorCommand {
 		Corps attack = (Corps) buffer.getCorps();
 		Corps attacked = (Corps) parameter;
 		
+		doValidator(new OperatePowerValidator(attack.getPlayer()));
 		doValidator(new SelectCorpsNotHideValidator(attacked));
 		if(hasError())
 			throw new CommandValidatorException(getErrors().getMessage());
