@@ -48,14 +48,6 @@ public class Scene extends HoneycombGround {
 			placementCorps(entranceList2.get(i), corps);
 		}
 	}
-	
-	@Override
-	public Boolean removeCorps(AbstractCorps corps) {
-		// TODO Auto-generated method stub
-		getQueue().remove((Corps) corps);
-		
-		return super.removeCorps(corps);
-	}
 
 	@Override
 	public void setTroopList(List<Integer> troopList) {

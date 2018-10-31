@@ -41,7 +41,7 @@ public class RunbackPolicy extends AbstractPolicy<CorpsAgent> {
 		Corps corps = getAgent().getOwner();
 		
 		AbstractGround ground = corps.getGround();
-		Integer position = ground.getPointByWay(corps.getPosition(), guardPosition, corps.getMove().getEnergy(), corps.getMove().getType(), corps.getPlayer());
+		Integer position = ground.getPointByWay(corps.getPosition(), guardPosition, corps.getMove().getEnergy(), corps.getMove().getType());
 		
 		this.cmdStr = "move ground place"+position+";";
 		

@@ -59,7 +59,7 @@ public class NearTargetForAttackPolicy extends AbstractPolicy<CorpsAgent> {
 		}else{
 			
 			AbstractGround ground = corps.getGround();
-			Integer position = ground.getPointByWay(corps.getPosition(), target.getPosition(), corps.getMove().getEnergy(), corps.getMove().getType(), corps.getPlayer());
+			Integer position = ground.getPointByWay(corps.getPosition(), target.getPosition(), corps.getMove().getEnergy(), corps.getMove().getType());
 			
 			this.cmdStr = "move ground place"+position+";";
 			

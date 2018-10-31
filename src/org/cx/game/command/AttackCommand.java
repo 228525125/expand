@@ -7,6 +7,7 @@ import org.cx.game.exception.ValidatorException;
 import org.cx.game.tools.Debug;
 import org.cx.game.validator.CorpsAttackAtkBufferValidator;
 import org.cx.game.validator.CorpsAttackRangeValidator;
+import org.cx.game.validator.FriendOrEnemyValidator;
 import org.cx.game.validator.OperatePowerValidator;
 import org.cx.game.validator.TauntAtTheTimeOfAttackBufferValidator;
 import org.cx.game.validator.CorpsAttackableBufferValidator;
@@ -31,6 +32,7 @@ public class AttackCommand extends InteriorCommand {
 		super.setParameter(parameter);
 		addValidator(new TauntAtTheTimeOfAttackBufferValidator(buffer, (Corps) parameter));
 		addValidator(new CorpsAttackRangeValidator((Corps) buffer.getCorps(),(Corps) parameter));
+		addValidator(new FriendOrEnemyValidator(player, ((Corps) parameter).getPlayer(), false));
 	}
 	
 	@Override

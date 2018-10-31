@@ -82,6 +82,8 @@ public class Call extends AbstractAction implements IAction {
 		 */
 		AbstractGround ground = getOwner().getPlayer().getContext().getGround();
 		ground.placementCorps(place.getPosition(), getOwner());
+		
+		getOwner().setPosition(place.getPosition());
 	}
 
 }

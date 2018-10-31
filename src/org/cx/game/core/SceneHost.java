@@ -105,17 +105,18 @@ public class SceneHost extends AbstractHost {
 			Integer position = entranceList.get(indexList.get(i));
 			Corps corps = corpsList.get(i);
 			corps.setPlayer(player);
+			corps.setGround(getGround());
+			corps.setPosition(position);
 			player.getCorpsList().add(corps);
 			
 			getGround().placementCorps(position, corps);
-			getGround().getQueue().add(corps);
 			
 			AbstractOption option = new PlacementOption(corps);
 			corps.addOption(option);
 		}
 	}
 	
-	public void start(AbstractPlayer player) {
+	public void go(AbstractPlayer player) {
 		this.troopStatusMap.put(player.getTroop(), Status_WaitStart);
 		
 		List<AbstractCorps> corpsList = player.getCorpsList();
@@ -125,8 +126,9 @@ public class SceneHost extends AbstractHost {
 			}
 		}
 		
-		if(isStatus(Status_WaitStart))
-			getContext().start();
+		if(isStatus(Status_WaitStart)){
+			getContext().setStatus(AbstractContext.Status_Ready);
+		}
 	}
 	
 	private Boolean isStatus(Integer status) {

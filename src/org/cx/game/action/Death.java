@@ -6,6 +6,7 @@ import java.util.Map;
 import org.cx.game.corps.Corps;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
+import org.cx.game.tools.Logger;
 import org.cx.game.tools.Util;
 import org.cx.game.widget.AbstractGround;
 
@@ -36,9 +37,12 @@ public class Death extends AbstractAction implements IAction {
 	 * @return 如果是造成伤害，则返回伤害值，否则返回0；
 	 */
 	public void setHp(Integer funType, Integer hp) {
+		Integer beforeHp = this.hp;
 		this.hp = Util.operating(funType, this.hp, hp);
 		this.hp = Death.this.hp>0 ? Death.this.hp : 0;       //判断下限
 		this.hp = Death.this.hp<getHpLimit() ? Death.this.hp : getHpLimit(); //判断上限
+		
+		Logger.debug(this, getOwner().getName()+"HP("+beforeHp+") [改变]("+(this.hp-beforeHp)+"); 当前HP="+this.hp);
 	}
 	
 	public Integer getHpLimit() {
@@ -68,7 +72,7 @@ public class Death extends AbstractAction implements IAction {
 		map.put("card", getOwner());
 		map.put("position", owner.getPosition());
 		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Corps_Death,map);
-		super.notifyObservers(info);           //通知所有卡片对象，死亡事件		
+		super.notifyObservers(info);           //通知所有卡片对象，死亡事件
 		
 		AbstractGround ground = owner.getGround();     //只有在战场上才会死亡
 		ground.inCemetery(owner);

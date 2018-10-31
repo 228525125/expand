@@ -4,6 +4,7 @@ import org.cx.game.action.Defend;
 import org.cx.game.action.Death;
 import org.cx.game.corps.Corps;
 import org.cx.game.tools.CommonIdentifierE;
+import org.cx.game.tools.Logger;
 import org.cx.game.tools.Util;
 
 public class DefendRule extends AbstractRule {
@@ -18,6 +19,8 @@ public class DefendRule extends AbstractRule {
 		
 		Integer damageValue = (Integer) getOwner().getActionResult("damageValue");
 		Boolean isCanFightBack = (Boolean) getOwner().getActionResult("isCanFightBack");
+		
+		Logger.debug(this, defend.getName()+" [受伤]; 伤害："+damageValue+"/ 允许反击："+isCanFightBack);
 		
 		//造成的实际伤害
 		Death death = defend.getDeath();

@@ -1,14 +1,8 @@
 package org.cx.game.widget;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.cx.game.action.AbstractAction;
 import org.cx.game.action.IAction;
-import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
-import org.cx.game.exception.RuleValidatorException;
-import org.cx.game.observer.NotifyInfo;
 
 public class Place extends AbstractPlace {
 	
@@ -39,16 +33,8 @@ public class Place extends AbstractPlace {
 		public void action(Object... objects) {
 			// TODO Auto-generated method stub
 			Corps corps = (Corps) objects[0];
-			
-			corps.setPosition(getPosition());
 			setCorps(corps);
-			
 			setIsEmpty(false);
-			
-			/*
-			 * 添加路径
-			 */
-			corps.getMove().addMovePath(getPosition());
 			
 			/*
 			 * corps移动、招募、放置都会触发这个消息，可能引起混淆

@@ -40,7 +40,7 @@ public class PlacementOption extends AbstractOption {
 		// TODO Auto-generated method stub
 		List<Integer> positionList = new ArrayList<Integer>();
 		positionList = ground.getEntranceList(getOwner().getTroop());
-		positionList.retainAll(ground.queryEmptyList());
+		positionList.retainAll(ground.queryPositionList(true));
 		return positionList;
 	}
 
@@ -80,7 +80,9 @@ public class PlacementOption extends AbstractOption {
 			Integer position = (Integer) objects[0];
 			Corps corps = (Corps) objects[1];
 			
-			getOwner().getOwner().getGround().placementCorps(position, corps);
+			corps.getGround().removeCorps(corps);
+			corps.getGround().placementCorps(position, corps);
+			corps.setPosition(position);
 			
 			Map<String,Object> map = new HashMap<String,Object>();
 			Ground ground = (HoneycombGround) getOwner().getOwner().getGround();

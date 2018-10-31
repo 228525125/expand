@@ -65,7 +65,7 @@ public class JsonOut extends AbstractResponse {
 			setInfo(info.getInfo());
 			Object result = convert(this);
 			super.process.get().append(result.toString()+";");
-			System.out.println(result);
+			//System.out.println(result);
 		}
 	}
 	
@@ -251,7 +251,6 @@ public class JsonOut extends AbstractResponse {
 							.element("flee", obj.getFlee())
 							.element("hide", obj.getHide())
 							.element("moveable", obj.getMoveable())
-							.element("movePath", obj.getMovePath())
 							.element("type", obj.getType());
 				}
 			});
@@ -350,7 +349,7 @@ public class JsonOut extends AbstractResponse {
 							.element("landform", JsonHelper.convertForGroundLandform(obj.getLandformMap()), getConfig())
 							.element("treasureList", obj.getTreasureList(), getConfig())
 							.element("corpsList", obj.getLivingCorpsList(), getConfig())
-							.element("emptyList", obj.queryEmptyList())
+							//.element("emptyList", obj.queryPositionList(true))
 							.element("imagePath", obj.getImagePath())
 							.element("name", obj.getName())
 							.element("xBorder", obj.getXBorder())
@@ -369,7 +368,7 @@ public class JsonOut extends AbstractResponse {
 							.element("landform", JsonHelper.convertForGroundLandform(obj.getLandformMap()), getConfig())
 							.element("treasureList", obj.getTreasureList(), getConfig())
 							.element("corpsList", obj.getLivingCorpsList(), getConfig())
-							.element("emptyList", obj.queryEmptyList())
+							//.element("emptyList", obj.queryPositionList(true))
 							.element("imagePath", obj.getImagePath())
 							.element("name", obj.getName())
 							.element("xBorder", obj.getXBorder())

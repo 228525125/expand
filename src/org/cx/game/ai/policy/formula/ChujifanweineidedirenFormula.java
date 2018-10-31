@@ -29,7 +29,7 @@ public class ChujifanweineidedirenFormula extends Validator {
 		// TODO Auto-generated method stub
 		Integer range = this.corps.getMove().getEnergy();
 		AbstractGround ground = this.corps.getGround();
-		List<Integer> list =ground.areaForDistance(this.corps.getPosition(), range, AbstractGround.Contain, this.corps.getMove().getType(), this.corps.getPlayer());
+		List<Integer> list =ground.areaForDistance(this.corps.getPosition(), range, AbstractGround.Contain, this.corps.getMove().getType());
 		for(Integer pos : list){            //移动范围内的敌人
 			Corps corps = (Corps) ground.getCorps(pos);
 			if(null!=corps && !this.corps.getPlayer().equals(corps.getPlayer()))
@@ -72,7 +72,7 @@ public class ChujifanweineidedirenFormula extends Validator {
 			}
 		}
 		List<Integer> l1 = ground.areaForDistance(enemy.getPosition(), 1, AbstractGround.Contain);
-		List<Integer> l2 = ground.areaForDistance(this.corps.getPosition(), this.corps.getMove().getEnergy(), AbstractGround.Contain, this.corps.getMove().getType(), this.corps.getPlayer());
+		List<Integer> l2 = ground.areaForDistance(this.corps.getPosition(), this.corps.getMove().getEnergy(), AbstractGround.Contain, this.corps.getMove().getType());
 		l1.retainAll(l2);
 		return l1.get(0);
 	}

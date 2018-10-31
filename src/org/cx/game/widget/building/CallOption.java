@@ -62,7 +62,7 @@ public class CallOption extends AbstractOption {
 		// TODO Auto-generated method stub
 		List<Integer> positionList = new ArrayList<Integer>();
 		positionList = ground.areaForDistance(getOwner().getPlace().getPosition(), 1, AbstractGround.Contain);
-		positionList.retainAll(ground.queryEmptyList());
+		positionList.retainAll(ground.queryPositionList(true));
 		return positionList;
 	}
 	

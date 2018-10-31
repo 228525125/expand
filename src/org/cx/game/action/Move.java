@@ -103,15 +103,6 @@ public class Move extends AbstractAction implements IAction {
 		this.direction = direction;
 	}
 
-	public List<Integer> getMovePath() {
-		return path;
-	}
-	
-	public void addMovePath(Integer position) {
-		// TODO Auto-generated method stub
-		this.path.add(position);
-	}
-
 	@Override
 	public void action(Object...objects) {
 		// TODO Auto-generated method stub
@@ -122,6 +113,8 @@ public class Move extends AbstractAction implements IAction {
 		
 		AbstractGround ground = getOwner().getGround();
 		List<Integer> route = ground.move(getOwner(), place.getPosition(), type);
+		
+		getOwner().setPosition(place.getPosition());
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("card", getOwner());
@@ -135,6 +128,6 @@ public class Move extends AbstractAction implements IAction {
 		 * 一个回合只能移动一次，移动攻击类型除外，例如骑兵
 		 */
 		if(!getOwner().getMobile())
-			setMoveable(false);     
+			setMoveable(false);
 	}
 }

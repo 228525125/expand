@@ -25,8 +25,9 @@ import org.cx.game.widget.treasure.Treasure;
 import com.oracle.jrockit.jfr.ValueDefinition;
 
 public abstract class HoneycombGround extends Ground {
-	 
-	private int[] hit = new int []{-1};                                  //-1表示障碍物
+	
+	private static int balk = -1;
+	private int[] hit = new int []{balk};                                  //-1表示障碍物
 	
 	public HoneycombGround(Integer id, String name, Integer xBorder, Integer yBorder, String imagePath) {
 		// TODO Auto-generated constructor stub
@@ -62,9 +63,9 @@ public abstract class HoneycombGround extends Ground {
 	
 	@Override
 	public Integer getPointByWay(Integer stand, Integer dest, Integer step,
-			Integer moveType, AbstractPlayer control) {
+			Integer moveType) {
 		// TODO Auto-generated method stub
-		List path = route(stand, dest, moveType, control);
+		List path = route(stand, dest, moveType);
 		for(int i=0;i<path.size();i++){
 			Node node = (Node) path.get(i);
 			Integer pos = SpaceArithmetic.pointToInteger(node._Pos.x, node._Pos.y);
@@ -119,12 +120,73 @@ public abstract class HoneycombGround extends Ground {
 		return MAP;
 	}
 	
+	private int[][] updateMAP(Boolean landform, Boolean stance, Boolean foe, Integer moveType) {
+		int[][] MAP = updateMAP();
+		
+		/*
+		 * 加载地形
+		 */
+		if(landform){
+			List<Integer> m = SpaceArithmetic.rectangle(Integer.valueOf(1+SpaceArithmetic.space+1), Integer.valueOf(getXBorder()+SpaceArithmetic.space+getYBorder()));
+			for(Integer i : m){
+				String [] is = i.toString().split(SpaceArithmetic.space);
+				Integer ix = Integer.valueOf(is[0]);
+				Integer iy = Integer.valueOf(is[1]);
+				AbstractPlace p = getPlace(i);
+				MAP[ix][iy] = LandformEffect.getConsume(moveType, p.getLandform());
+			}
+		}
+		
+		/*
+		 * 站位
+		 */
+		if(stance){
+			List<Integer> notEmptyList = queryPositionList(false);
+			
+			for(Integer position : notEmptyList){
+				Integer x = SpaceArithmetic.integerToPoint(position)[0];
+				Integer y = SpaceArithmetic.integerToPoint(position)[1];
+				MAP[x][y] = balk;
+			}
+		}
+		
+		if(foe){
+			List<Integer> pList = new ArrayList<Integer>();         //敌方单位的站位，友方允许穿过
+			List<Integer> nList = new ArrayList<Integer>();         //敌方单位附近1个单元格
+			
+			AbstractPlayer control = getLivingCorpsList().get(0).getPlayer().getContext().getControlPlayer();
+			List<AbstractCorps> cList = getCorpsList(control, CommonIdentifierE.Death_Status_Live);
+			List<AbstractCorps> eList = getCorpsList(CommonIdentifierE.Death_Status_Live);            //非友方单位
+			eList.removeAll(cList);
+			
+			for(AbstractCorps corps : eList){
+				pList.add(corps.getPosition());
+				
+				List<Integer> list = areaForDistance(corps.getPosition(), 1, AbstractGround.Contain);
+				list.removeAll(nList);
+				nList.addAll(list);
+			}
+			
+			for(Integer p : nList){
+				Integer [] point = SpaceArithmetic.integerToPoint(p);
+				if(-1!=MAP[point[0]][point[1]])
+					MAP[point[0]][point[1]] += 1;
+			}
+			
+			for(Integer p : pList){
+				Integer [] point = SpaceArithmetic.integerToPoint(p);
+				MAP[point[0]][point[1]] = balk;
+			}
+		}
+		
+		return MAP;
+	}
+	
 	/**
-	 * 更新MAP加载地形；
-	 * 为什么是独立为一个方法，主要考虑hide状态下系统只需加载地形
+	 * 更新MAP加载地形和站位；
 	 * @param moveType 移动类型
 	 * @return
-	 */
+	 
 	private int[][] updateMAP_Landform(Integer moveType){
 		int[][] MAP = createMAP();
 		
@@ -135,61 +197,49 @@ public abstract class HoneycombGround extends Ground {
 			Integer ix = Integer.valueOf(is[0]);
 			Integer iy = Integer.valueOf(is[1]);
 			AbstractPlace p = getPlace(i);
-			MAP[ix][iy] = LandformEffect.getConsume(moveType, p.getLandform());
+			if(p.isEmpty())
+				MAP[ix][iy] = LandformEffect.getConsume(moveType, p.getLandform());
+			else
+				MAP[ix][iy] = balk;
 		}
 		
 		return MAP;
-	}
-	
-	/**
-	 * 加载地形和战场单位的站位情况；
-	 * @param moveType 移动类型
-	 * @param control 阵营
-	 * @return
-	 */
-	private int[][] updateMAP_LandformAndStance(Integer moveType, AbstractPlayer control){
-		int [][] MAP = updateMAP_Landform(moveType);
-		
-		List<Integer> pList = new ArrayList<Integer>();         //敌方单位的站位，友方允许穿过
-		List<Integer> nList = new ArrayList<Integer>();         //敌方单位附近1个单元格
-		
-		List<AbstractCorps> cList = getCorpsList(control, CommonIdentifierE.Death_Status_Live);
-		List<AbstractCorps> eList = getCorpsList(CommonIdentifierE.Death_Status_Live);            //非友方单位
-		eList.removeAll(cList);
-		
-		for(AbstractCorps corps : eList){
-			pList.add(corps.getPosition());
-			
-			List<Integer> list = areaForDistance(corps.getPosition(), 1, AbstractGround.Contain);
-			list.removeAll(nList);
-			nList.addAll(list);
-		}
-		
-		for(Integer p : nList){
-			Integer [] point = SpaceArithmetic.integerToPoint(p);
-			if(-1!=MAP[point[0]][point[1]])
-				MAP[point[0]][point[1]] += 1;
-		}
-		
-		for(Integer p : pList){
-			Integer [] point = SpaceArithmetic.integerToPoint(p);
-			MAP[point[0]][point[1]] = -1;
-		}
-		
-		return MAP;
-	}
+	}*/
 	
 	protected List route(Integer start, Integer stop){
 		return SpaceArithmetic.route(start, stop, updateMAP(), hit);
 	}
 	
 	protected List route(Integer start, Integer stop, Integer moveType) {
-		return SpaceArithmetic.route(start, stop, updateMAP_Landform(moveType), hit);
+		List list = null;
+		switch (moveType) {
+		case 141:    //步行
+			list = SpaceArithmetic.route(start, stop, updateMAP(true,true,false,moveType), hit);
+			break;
+		case 142:    //骑行
+			list = SpaceArithmetic.route(start, stop, updateMAP(true,true,false,moveType), hit);
+			break;
+		case 143:    //驾驶
+			list = SpaceArithmetic.route(start, stop, updateMAP(true,true,false,moveType), hit);
+			break;
+		case 144:    //飞行
+			list = SpaceArithmetic.route(start, stop, updateMAP(false,false,false,moveType), hit);
+			break;
+		case 145:    //传送
+			list = SpaceArithmetic.route(start, stop, updateMAP(false,false,false,moveType), hit);
+			break;
+			
+		default:
+			break;
+		}
+		
+		return list;
 	}
 	
+	/*
 	protected List route(Integer start, Integer stop, Integer moveType, AbstractPlayer control) {
 		return SpaceArithmetic.route(start, stop, updateMAP_LandformAndStance(moveType, control), hit);
-	}
+	}*/
 	
 	/**
      * 根据坐标查找序号

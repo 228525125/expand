@@ -6,6 +6,7 @@ import org.cx.game.action.Attack;
 import org.cx.game.corps.Corps;
 import org.cx.game.magic.buff.AttackLockBuff;
 import org.cx.game.tools.CommonIdentifierE;
+import org.cx.game.tools.Logger;
 import org.cx.game.tools.Util;
 import org.cx.game.widget.AbstractGround;
 
@@ -28,6 +29,9 @@ public class AttackRule extends AbstractRule {
 		Integer atk = (Integer) getOwner().getActionResult("atk");
 		Integer dmg = (Integer) getOwner().getActionResult("dmg");
 		Boolean isFightBack = (Boolean) getOwner().getActionResult("isFightBack");
+		Integer attackMode = (Integer) getOwner().getActionResult("attackMode");
+		
+		Logger.debug(this, attack.getName()+" "+(isFightBack ? "[反击]" : "[攻击]")+attacked.getName()+"; atk:"+atk+"/dmg:"+Attack.IntegerToDamage(dmg)[0]+"-"+Attack.IntegerToDamage(dmg)[1]+"/mode:"+(attackMode.equals(115) ? "近战" : "远程"));
 		
 		attacked.defend(attack, atk, dmg, isFightBack);
 	}

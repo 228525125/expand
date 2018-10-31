@@ -41,20 +41,13 @@ public class CallRule extends AbstractRule {
 		AbstractGround ground = owner.getPlayer().getContext().getGround();
 		
 		/*
-		 * 英雄复活要先把尸体回收
-		 */
-		if (owner instanceof Hero && null!= owner.getGround()) {
-			ground.outCemetery(owner);
-		}
-		
-		/*
 		 * 招募分为创建一支部队和补充兵源，这里处理补充兵源的情况；
 		 */
 		Corps corps = place.getCorps();
 		if(null!=corps){
 			Integer n = corps.getCall().getNop();
 			n += this.nop;
-			corps.getCall().setNop(n);
+			corps.getCall().setNop(n); 
 			
 			this.isInvoke = false;
 		}

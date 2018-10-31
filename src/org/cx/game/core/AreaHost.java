@@ -42,7 +42,7 @@ public class AreaHost extends AbstractHost {
 	}
 	
 	@Override
-	public void start(AbstractPlayer player) {
+	public void go(AbstractPlayer player) {
 		// TODO Auto-generated method stub
 		
 	}

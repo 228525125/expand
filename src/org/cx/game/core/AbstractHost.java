@@ -149,7 +149,7 @@ public abstract class AbstractHost {
 		}*/
 	}
 	
-	abstract public void start(AbstractPlayer player);
+	abstract public void go(AbstractPlayer player);
 	
 	abstract public Ground getGround();
 	
