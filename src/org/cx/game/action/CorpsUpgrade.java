@@ -26,11 +26,6 @@ public class CorpsUpgrade extends Upgrade implements IAction {
 	
 	public void setEmpiricValue(Integer funType, EmpiricValue empiricValue) {
 		this.empiricValue = (EmpiricValue) Util.operating(funType, this.empiricValue, empiricValue);
-		
-		EmpiricValue req = getRequirement();
-		if(getEmpiricValue().getValue()>=req.getValue()){
-			action(req);
-		}
 	}
 	
 	public void setEmpiricValue(Integer funType, Integer empiricValue) {
@@ -44,6 +39,10 @@ public class CorpsUpgrade extends Upgrade implements IAction {
 		return (EmpiricValue) super.getRequirement();
 	}
 	
+	public Boolean isUpgrade() {
+		return this.empiricValue.getValue()>=getRequirement().getValue();
+	}
+	
 	@Override
 	public Corps getOwner() {
 		// TODO Auto-generated method stub
@@ -54,13 +53,6 @@ public class CorpsUpgrade extends Upgrade implements IAction {
 	public void action(Object... objects) {
 		// TODO Auto-generated method stub
 		super.action(objects);
-		
-		EmpiricValue emp =  (EmpiricValue) objects[0];
-		
-		/*
-		 * 扣减升级所需经验值
-		 */
-		setEmpiricValue(Util.Sub, emp);
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("position", getOwner().getPosition());

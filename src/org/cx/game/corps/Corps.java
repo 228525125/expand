@@ -53,8 +53,8 @@ public class Corps extends AbstractCorps {
 		super(type);
 		
 		upgradeRequirement.put(2, "e100");
-		upgradeRequirement.put(3, "e200");
-		upgradeRequirement.put(4, "e400");
+		upgradeRequirement.put(3, "e300");
+		upgradeRequirement.put(4, "e700");
 	}
 	
 	public CorpsAgent getAgent() {
@@ -140,6 +140,11 @@ public class Corps extends AbstractCorps {
 	
 	public void setStar(Integer star) {
 		super.setStar(star);
+	}
+	
+	public void setRank(Integer rank) {
+		// TODO Auto-generated method stub
+		super.setRank(rank);
 	}
 	
 	public void setConsume(Mineral consume) {

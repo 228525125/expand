@@ -76,9 +76,7 @@ public class Defend extends AbstractAction implements IAction {
 	
 	public void setCanFightBack(Boolean canFightBack) {
 		// TODO Auto-generated method stub
-		if(!canFightBack.equals(this.canFightBack)){
-			this.canFightBack = canFightBack;
-		}
+		this.canFightBack = canFightBack;
 	}
 
 	@Override

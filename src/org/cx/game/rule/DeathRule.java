@@ -4,7 +4,9 @@ import org.cx.game.action.Death;
 import org.cx.game.core.AbstractPlayer;
 import org.cx.game.core.Player;
 import org.cx.game.corps.AbstractCorps;
+import org.cx.game.corps.Corps;
 import org.cx.game.tools.Logger;
+import org.cx.game.widget.treasure.EmpiricValue;
 
 public class DeathRule extends AbstractRule {
 
@@ -13,7 +15,7 @@ public class DeathRule extends AbstractRule {
 		// TODO Auto-generated method stub
 		super.after(args);
 		
-		AbstractCorps corps = getOwner().getOwner();
+		Corps corps = getOwner().getOwner();
 		AbstractPlayer player = corps.getPlayer();
 		
 		player.getCorpsList().remove(corps);

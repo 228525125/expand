@@ -26,33 +26,6 @@ public class CallRule extends AbstractRule {
 		return isInvoke;
 	}
 	
-	private Place place = null;
-	private Integer nop = 0;
-	
-	@Override
-	public void before(Object[] args) {
-		// TODO Auto-generated method stub
-		this.place = (Place)((Object[]) args[0])[0];
-		this.nop = (Integer)((Object[]) args[0])[1];
-		
-		Call call = getOwner();
-
-		Corps owner = call.getOwner();
-		AbstractGround ground = owner.getPlayer().getContext().getGround();
-		
-		/*
-		 * 招募分为创建一支部队和补充兵源，这里处理补充兵源的情况；
-		 */
-		Corps corps = place.getCorps();
-		if(null!=corps){
-			Integer n = corps.getCall().getNop();
-			n += this.nop;
-			corps.getCall().setNop(n); 
-			
-			this.isInvoke = false;
-		}
-	}
-	
 	@Override
 	public void after(Object[] args) {
 		// TODO Auto-generated method stub

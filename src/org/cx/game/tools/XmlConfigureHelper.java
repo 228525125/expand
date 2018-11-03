@@ -79,12 +79,10 @@ public class XmlConfigureHelper {
 		String [] datas = data.split(",");
 		Integer corpsID = Integer.valueOf(datas[0]);
 		Integer level = Integer.valueOf(datas[1]);
-		Integer nop = Integer.valueOf(datas[2]);
-		Integer troop = Integer.valueOf(datas[3]);
+		Integer troop = Integer.valueOf(datas[2]);
 		
 		Corps corps = (Corps) CorpsFactory.getInstance(corpsID);
 		corps.setTroop(troop);
-		corps.getCall().setNop(nop);            //设置数量
 		corps.getUpgrade().setLevel(level);     //设置等级
 		
 		return corps;

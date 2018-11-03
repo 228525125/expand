@@ -17,7 +17,7 @@ public class Attack extends AbstractAction implements IAction {
 	private Integer extraAtk = 0;                     //额外攻击力
 	private Integer landformAtk = 0;                  //地形攻击力
 	private Integer weaponAtk = 0;                    //武器攻击力
-	private Boolean fightBack = false;            //是否是反击
+	private Boolean fightBack = false;                //是否是反击
 	private Boolean attackable = false;
 	private Boolean mobile = false;                   //是否可移动攻击
 	
@@ -112,8 +112,7 @@ public class Attack extends AbstractAction implements IAction {
 	public void updateDmg() {
 		// TODO Auto-generated method stub
 		Integer [] dmg = IntegerToDamage(getOwner().getDmg());
-		Call call = getOwner().getCall();
-		Integer d = DamageToInteger(new Integer[]{dmg[0]*call.getNop(),dmg[1]*call.getNop()});
+		Integer d = DamageToInteger(new Integer[]{dmg[0],dmg[1]});
 		setDmg(d);
 	}
 

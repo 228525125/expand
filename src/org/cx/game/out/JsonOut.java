@@ -100,7 +100,7 @@ public class JsonOut extends AbstractResponse {
 					Corps corps = (Corps) arg0;
 					return new JSONObject().element("activate", corps.getActivate(), getConfig())
 							.element("attack", corps.getAttack(),getConfig())
-							.element("attacked", corps.getDefend(),getConfig())
+							.element("defend", corps.getDefend(),getConfig())
 							.element("buffList", corps.getBuffList(),getConfig())
 							.element("call", corps.getCall(),getConfig())
 							.element("death", corps.getDeath(),getConfig())
@@ -127,7 +127,7 @@ public class JsonOut extends AbstractResponse {
 					Hero hero = (Hero) arg0;
 					return new JSONObject().element("activate", hero.getActivate(), getConfig())
 							.element("attack", hero.getAttack(), getConfig())
-							.element("attacked", hero.getDefend(), getConfig())
+							.element("defend", hero.getDefend(), getConfig())
 							.element("affected", hero.getAffected(), getConfig())
 							.element("buffList", hero.getBuffList(), getConfig())
 							.element("call", hero.getCall(), getConfig())
@@ -190,7 +190,7 @@ public class JsonOut extends AbstractResponse {
 					return new JSONObject().element("armourDef", obj.getArmourDef())
 							.element("def", obj.getDef())
 							.element("extraDef", obj.getExtraDef())
-							.element("fightBack", obj.isCanFightBack())
+							.element("canFightBack", obj.isCanFightBack())
 							.element("landformDef", obj.getLandformDef());
 				}
 			});
@@ -222,7 +222,6 @@ public class JsonOut extends AbstractResponse {
 					// TODO Auto-generated method stub
 					Call obj = (Call) arg0;
 					return new JSONObject().element("consume", obj.getConsume(), getConfig())
-							.element("nop", obj.getNop())
 							.element("ration", obj.getRation());
 				}
 			});

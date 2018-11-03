@@ -19,8 +19,6 @@ public class Call extends AbstractAction implements IAction {
 	private Mineral consume = new Mineral();
 	private Integer ration = 1;
 	
-	private Integer nop = 1;           //人数 
-	
 	@Override
 	public Corps getOwner() {
 		// TODO Auto-generated method stub
@@ -46,26 +44,12 @@ public class Call extends AbstractAction implements IAction {
 		this.ration = ration;
 	}
 	
-	public Integer getNop() {
-		return nop;
-	}
-
-	public void setNop(Integer nop) {
-		this.nop = nop;
-		getOwner().getAttack().updateDmg();
-	}
-	
 	@Override
 	public void action(Object...objects) {
 		// TODO Auto-generated method stub
 
 		AbstractPlace place = (Place) objects[0];
 		Integer nop = (Integer) objects[1];
-		
-		/*
-		 * 招募人数
-		 */
-		setNop(nop);
 		
 		getOwner().getDeath().setStatus(CommonIdentifierE.Death_Status_Live);
 		
