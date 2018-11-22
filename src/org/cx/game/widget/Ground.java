@@ -234,7 +234,7 @@ public abstract class Ground extends AbstractGround {
 			@Override
 			public Boolean content(Place t) {
 				// TODO Auto-generated method stub
-				return isEmpty && t.isEmpty();
+				return t.isEmpty().equals(isEmpty);
 			}
 			
 		});

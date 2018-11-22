@@ -120,6 +120,14 @@ public abstract class HoneycombGround extends Ground {
 		return MAP;
 	}
 	
+	/**
+	 * 初始化MAP，并加载地形、站位等信息
+	 * @param landform 地形
+	 * @param stance 站位
+	 * @param foe 敌我关系
+	 * @param moveType 移动类型
+	 * @return
+	 */
 	private int[][] updateMAP(Boolean landform, Boolean stance, Boolean foe, Integer moveType) {
 		int[][] MAP = updateMAP();
 		
@@ -182,30 +190,6 @@ public abstract class HoneycombGround extends Ground {
 		return MAP;
 	}
 	
-	/**
-	 * 更新MAP加载地形和站位；
-	 * @param moveType 移动类型
-	 * @return
-	 
-	private int[][] updateMAP_Landform(Integer moveType){
-		int[][] MAP = createMAP();
-		
-		List<Integer> m = SpaceArithmetic.rectangle(Integer.valueOf(1+SpaceArithmetic.space+1), Integer.valueOf(getXBorder()+SpaceArithmetic.space+getYBorder()));
-		
-		for(Integer i : m){
-			String [] is = i.toString().split(SpaceArithmetic.space);
-			Integer ix = Integer.valueOf(is[0]);
-			Integer iy = Integer.valueOf(is[1]);
-			AbstractPlace p = getPlace(i);
-			if(p.isEmpty())
-				MAP[ix][iy] = LandformEffect.getConsume(moveType, p.getLandform());
-			else
-				MAP[ix][iy] = balk;
-		}
-		
-		return MAP;
-	}*/
-	
 	protected List route(Integer start, Integer stop){
 		return SpaceArithmetic.route(start, stop, updateMAP(), hit);
 	}
@@ -239,6 +223,30 @@ public abstract class HoneycombGround extends Ground {
 	/*
 	protected List route(Integer start, Integer stop, Integer moveType, AbstractPlayer control) {
 		return SpaceArithmetic.route(start, stop, updateMAP_LandformAndStance(moveType, control), hit);
+	}*/
+	
+	/**
+	 * 更新MAP加载地形和站位；
+	 * @param moveType 移动类型
+	 * @return
+	 
+	private int[][] updateMAP_Landform(Integer moveType){
+		int[][] MAP = createMAP();
+		
+		List<Integer> m = SpaceArithmetic.rectangle(Integer.valueOf(1+SpaceArithmetic.space+1), Integer.valueOf(getXBorder()+SpaceArithmetic.space+getYBorder()));
+		
+		for(Integer i : m){
+			String [] is = i.toString().split(SpaceArithmetic.space);
+			Integer ix = Integer.valueOf(is[0]);
+			Integer iy = Integer.valueOf(is[1]);
+			AbstractPlace p = getPlace(i);
+			if(p.isEmpty())
+				MAP[ix][iy] = LandformEffect.getConsume(moveType, p.getLandform());
+			else
+				MAP[ix][iy] = balk;
+		}
+		
+		return MAP;
 	}*/
 	
 	/**

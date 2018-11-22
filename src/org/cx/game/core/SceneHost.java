@@ -28,6 +28,7 @@ import org.cx.game.widget.GroundFactory;
 import org.cx.game.widget.HoneycombGround;
 import org.cx.game.widget.Place;
 import org.cx.game.widget.Scene;
+import org.cx.game.widget.SceneFactory;
 import org.cx.game.widget.building.AbstractBuilding;
 import org.cx.game.widget.building.CallOption.OptionCallExecute;
 
@@ -41,7 +42,7 @@ public class SceneHost extends AbstractHost {
 		// TODO Auto-generated constructor stub
 		super(playNo);
 		
-		scene = (Scene) GroundFactory.getInstance(mapId);
+		scene = SceneFactory.getInstance(mapId);
 		
 		playerJoinGame(account, troop);
 		

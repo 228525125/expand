@@ -61,26 +61,32 @@ public class Corps extends AbstractCorps {
 		return agent;
 	}
 	
+	@Override
 	public void setHp(Integer hp) {
 		super.setHp(hp);
 	}
 
+	@Override
 	public void setRation(Integer ration) {
 		super.setRation(ration);
 	}
 
+	@Override
 	public void setEnergy(Integer energy) {
 		super.setEnergy(energy);
 	}
 	
+	@Override
 	public void setMoveType(Integer moveType) {
 		super.setMoveType(moveType);
 	}
 
+	@Override
 	public void setHide(Boolean hide) {
 		super.setHide(hide);
 	}
 
+	@Override
 	public void setAtk(Integer atk) {
 		super.setAtk(atk);
 	}
@@ -94,22 +100,27 @@ public class Corps extends AbstractCorps {
 		this.getAttack().setAtk(atk + weaponAtk + landformAtk + extraAtk);
 	}
 	
+	@Override
 	public void setDmg(Integer dmg) {
 		super.setDmg(dmg);
 	}
 
+	@Override
 	public void setAttackRange(Integer attackRange) {
 		super.setAttackRange(attackRange);
 	}
 	
+	@Override
 	public void setAttackMode(Integer attackMode) {
 		super.setAttackMode(attackMode);
 	}
 	
+	@Override
 	public void setMobile(Boolean mobile) {
 		super.setMobile(mobile);
 	}
 	
+	@Override
 	public void setDef(Integer def){
 		super.setDef(def);
 	}
@@ -122,38 +133,52 @@ public class Corps extends AbstractCorps {
 		this.getDefend().setDef(def + armourDef + landformDef + extraDef);
 	}
 	
+	@Override
 	public void setSpeed(Integer speed) {
 		super.setSpeed(speed);
 	}
 	
+	@Override
 	public void setFleeChance(Integer fleeChance) {
 		super.setFleeChance(fleeChance);
 	}
 
+	@Override
 	public void setLockChance(Integer lockChance) {
 		super.setLockChance(lockChance);
 	}
 	
+	@Override
 	public void setHero(Boolean hero) {
 		super.setHero(hero);
 	}
 	
+	@Override
 	public void setStar(Integer star) {
 		super.setStar(star);
 	}
 	
+	@Override
 	public void setRank(Integer rank) {
 		// TODO Auto-generated method stub
 		super.setRank(rank);
 	}
 	
+	@Override
 	public void setConsume(Mineral consume) {
 		// TODO Auto-generated method stub
 		super.setConsume(consume);
 	}
 	
+	@Override
 	public void setLevel(Integer level){
 		super.setLevel(level);
+	}
+	
+	@Override
+	public void setEmpiricValue(Integer empiricValue) {
+		// TODO Auto-generated method stub
+		super.setEmpiricValue(empiricValue);
 	}
 	
 	@Override

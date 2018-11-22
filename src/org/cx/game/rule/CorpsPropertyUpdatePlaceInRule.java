@@ -1,5 +1,7 @@
 package org.cx.game.rule;
 
+import java.util.List;
+
 import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 import org.cx.game.tools.CommonIdentifierE;
@@ -30,14 +32,22 @@ public class CorpsPropertyUpdatePlaceInRule extends AbstractRule {
 	}
 	
 	private void updateLandformAtk(Corps corps, Integer landform) {
-		Integer profession = corps.queryTagForCategory(CommonIdentifierE.Profession).get(0);
+		List<Integer> list = corps.queryTagForCategory(CommonIdentifierE.Profession);
+		if(list.isEmpty())
+			return;
+		
+		Integer profession = list.get(0);
 		corps.getAttack().setLandformAtk(corps.getAtk()*LandformEffect.getAttackAdvantage(profession, landform)/100);
 		
 		corps.updateAtk();
 	}
 	
 	private void updateLandformDef(Corps corps, Integer landform) {
-		Integer profession = corps.queryTagForCategory(CommonIdentifierE.Profession).get(0);
+		List<Integer> list = corps.queryTagForCategory(CommonIdentifierE.Profession);
+		if(list.isEmpty())
+			return;
+		
+		Integer profession = list.get(0);
 		corps.getDefend().setLandformDef(corps.getDef()*LandformEffect.getDefendAdvantage(profession, landform)/100);
 		
 		corps.updateDef();
