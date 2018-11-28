@@ -58,22 +58,6 @@ public class SceneHost extends AbstractHost {
 		this.corpsDataMap.put(troop, corpsData);
 	}
 	
-	/*public List<AbstractOption> getCorpsDataOfTroop(Integer troop) {
-		List<AbstractOption> list = new ArrayList<AbstractOption>();
-		String data = this.corpsDataMap.get(troop);
-		List<String> corpsDataList = XmlConfigureHelper.convertList(data);
-		for(String corpsData : corpsDataList){
-			String [] datas = corpsData.split(",");
-			Integer type = Integer.valueOf(datas[0]);
-			Integer level = Integer.valueOf(datas[1]);
-			Integer nop = Integer.valueOf(datas[2]);
-			AbstractOption option = new PlacementOption(type, level, nop, troop, this);
-			list.add(option);
-		}
-		
-		return list;
-	}*/
-	
 	public String getCorpsDataOfTroop(Integer troop) {
 		return this.corpsDataMap.get(troop);
 	}

@@ -40,10 +40,5 @@ public class AreaHost extends AbstractHost {
 		
 		getContext().setStatus(AbstractContext.Status_Start);
 	}
-	
-	@Override
-	public void go(AbstractPlayer player) {
-		// TODO Auto-generated method stub
-		
-	}
+
 }

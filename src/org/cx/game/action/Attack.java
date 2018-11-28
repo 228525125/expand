@@ -1,8 +1,10 @@
 package org.cx.game.action;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
@@ -187,6 +189,13 @@ public class Attack extends AbstractAction implements IAction {
 			addActionResult("dmg", DamageToInteger(new Integer[]{dmg[0]/2,dmg[1]/2}));
 		}else{
 			addActionResult("dmg", getDmg());
+			
+			/*
+			 * 判断是否受到干扰，远程射击时如果受到干扰攻击力减半
+			 */
+			if(isDisturbance()){
+				addActionResult("atk", getAtk()/2);
+			}
 		}
 		
 		/*
@@ -210,5 +219,17 @@ public class Attack extends AbstractAction implements IAction {
 	
 	public static Integer DamageToInteger(Integer [] dmg){
 		return Integer.valueOf(dmg[0]+space+dmg[1]);
+	}
+	
+	private Boolean isDisturbance() {
+		Boolean ret = false;
+		AbstractGround ground = getOwner().getGround();
+		List<Integer> list = ground.areaForDistance(getOwner().getPosition(), 1, AbstractGround.Equal);
+		for(Integer pos : list){
+			AbstractCorps corps = ground.getCorps(pos);
+			if(null!=corps && !getOwner().getPlayer().equals(corps.getPlayer()))
+				return true;
+		}
+		return ret;
 	}
 }

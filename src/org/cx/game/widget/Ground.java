@@ -258,14 +258,7 @@ public abstract class Ground extends AbstractGround {
 			 * 当远程单位在战场上时，如果附近有敌方单位，则只能近身攻击
 			 */
 			if(CommonIdentifierE.Attack_Mode_Far.equals(sc.getAttack().getMode())){
-				List<Integer> list = areaForDistance(corps.getPosition(), 1, AbstractGround.Equal);
-				for(Integer position : list){
-					AbstractCorps c = getCorps(position);
-					if(null!=c && !c.getPlayer().equals(c.getPlayer())){
-						range = 1;
-						break;
-					}
-				}
+				range = sc.isLock() ? 1 : range;
 			}
 			
 			positionList = areaForDistance(corps.getPosition(), range, Contain);  //1：表示范围内的所有单元格，0：表示等于范围的单元格

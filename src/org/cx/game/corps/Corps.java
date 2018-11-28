@@ -22,6 +22,7 @@ import org.cx.game.action.CorpsUpgrade;
 import org.cx.game.ai.CorpsAgent;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.magic.IMagic;
+import org.cx.game.magic.buff.AttackLockBuff;
 import org.cx.game.magic.skill.AbstractSkill;
 import org.cx.game.widget.AbstractPlace;
 import org.cx.game.widget.treasure.Mineral;
@@ -330,6 +331,10 @@ public class Corps extends AbstractCorps {
 			leave.setOwner(this);
 		}
 		return this.leave;
+	}
+	
+	public Boolean isLock() {
+		return !getBuff(AttackLockBuff.class).isEmpty();
 	}
 	
 	/**

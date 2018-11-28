@@ -85,6 +85,12 @@ public class Hero extends Corps {
 	}
 	
 	@Override
+	public void setDmg(Integer dmg) {
+		// TODO Auto-generated method stub
+		super.setDmg(dmg);
+	}
+	
+	@Override
 	public void setDef(Integer def) {
 		// TODO Auto-generated method stub
 		super.setDef(def);

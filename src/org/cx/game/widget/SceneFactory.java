@@ -16,6 +16,7 @@ import org.cx.game.exception.BuilderException;
 import org.cx.game.exception.ParseException;
 import org.cx.game.tools.PropertiesUtil;
 import org.cx.game.tools.XmlUtil;
+import org.cx.game.tools.XmlUtilE;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -43,7 +44,7 @@ public class SceneFactory {
 		Element mapEl = null;
 		for(Iterator it = getRoot().elementIterator();it.hasNext();){
 			Element el = (Element) it.next();
-			if(mapId.equals(Integer.valueOf(el.attribute(XmlUtil.Scene_Scene_Id).getText())))
+			if(mapId.equals(Integer.valueOf(el.attribute(XmlUtilE.Scene_Scene_Id).getText())))
 				mapEl = el;
 		}
 		

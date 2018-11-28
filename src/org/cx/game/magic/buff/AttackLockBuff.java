@@ -29,6 +29,12 @@ public class AttackLockBuff extends AbstractBuff {
 		return (Corps) super.getOwner();
 	}
 	
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return super.getName()+"["+getLocker().getName()+getLocker().getId()+"]";
+	}
+	
 	/**
 	 * 发起锁定的一方
 	 * @return

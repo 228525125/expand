@@ -32,22 +32,12 @@ public class DefendRule extends AbstractRule {
 		if(death.getHp()<=0){
 			defend.death();
 			
-			//经验值的基数与阶层对应的等级有关，一般来说一个阶层应该对应一个等级，经验值基数 = 阶层的等级所需经验值*?%
-			Integer dRank = defend.getRank();
-			Integer dLevel = defend.getUpgrade().getLevel();
-			Integer baseEmp = 100;
-			
-			Integer aRank = attack.getRank();
-			
-			//如果死者阶层大于攻击者，则有经验加成
-			Integer scale = (dRank-aRank)>0 ? 10*(dRank-aRank) : 100;
+			Integer ev = defend.getEmpiricValue();
 			
 			CorpsUpgrade cu = (CorpsUpgrade) attack.getUpgrade();
-			cu.setEmpiricValue(Util.Sum, baseEmp);
+			cu.setEmpiricValue(Util.Sum, ev);
 			
-			if(cu.isUpgrade()){
-				attack.upgrade();
-			}
+			if(cu.isUpgrade()) attack.upgrade();
 		}else{
 			/*
 			 * 反击
