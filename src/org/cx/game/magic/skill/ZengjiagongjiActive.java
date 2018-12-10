@@ -13,7 +13,7 @@ public class ZengjiagongjiActive extends ActiveSkill {
 	private Integer bout = 0;
 	
 	public ZengjiagongjiActive(Integer cooldown, Integer bout, Integer atk) {
-		super(ZengjiagongjiActive_ID, cooldown);
+		super(ZengjiagongjiActive_ID, cooldown, 0);
 		// TODO Auto-generated constructor stub
 		this.bout = bout;
 		this.atk = atk;

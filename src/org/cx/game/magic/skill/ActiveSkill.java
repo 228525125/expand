@@ -21,6 +21,7 @@ import org.cx.game.widget.AbstractOption;
 public abstract class ActiveSkill extends AbstractSkill {
 
 	private Integer cooldown = 1;             //冷却回合
+	private Integer prepare = 0;              //准备（蓄力）回合
 	private Integer range = 0;
 	private String target = null;
 	
@@ -30,11 +31,13 @@ public abstract class ActiveSkill extends AbstractSkill {
 	 * 
 	 * @param id 
 	 * @param cooldown 冷却回合 
+	 * @param prepare 准备回合
 	 */
-	public ActiveSkill(Integer type, Integer cooldown) {
+	public ActiveSkill(Integer type, Integer cooldown, Integer prepare) {
 		// TODO Auto-generated constructor stub
 		super(type);
 		this.cooldown = cooldown;
+		this.prepare = prepare;
 	}
 	
 	@Override
@@ -80,6 +83,18 @@ public abstract class ActiveSkill extends AbstractSkill {
 		this.cooldown = cooldown;
 	}
 	
+	/**
+	 * 技能准备（蓄力）回合数
+	 * @return
+	 */
+	public Integer getPrepare() {
+		return prepare;
+	}
+
+	public void setPrepare(Integer prepare) {
+		this.prepare = prepare;
+	}
+
 	public Upgrade getUpgrade() {		
 		if(null==upgrade){
 			Upgrade upgrade = new SkillUpgrade();

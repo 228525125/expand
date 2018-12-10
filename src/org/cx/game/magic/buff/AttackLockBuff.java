@@ -122,16 +122,6 @@ public class AttackLockBuff extends AbstractBuff {
 			}
 		};
 		recordIntercepter(getOwner().getMove(), moveIn);
-		
-		/*IIntercepter deathIn = new AbstractIntercepter(){
-			
-			@Override
-			public void after(Object[] args) {
-				// TODO Auto-generated method stub
-				invalid();
-			}
-		};
-		recordIntercepter(attack.getDeath(), deathIn);*/
 	}
 
 	@Override

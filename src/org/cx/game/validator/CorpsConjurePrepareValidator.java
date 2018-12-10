@@ -4,11 +4,12 @@ import org.cx.game.corps.Corps;
 import org.cx.game.magic.skill.ActiveSkill;
 import org.cx.game.tools.I18n;
 
-public class CorpsAttackableValidator extends Validator {
+public class CorpsConjurePrepareValidator extends Validator {
 
 	private ActiveSkill skill = null;
 	
-	public CorpsAttackableValidator(ActiveSkill skill) {
+	public CorpsConjurePrepareValidator(ActiveSkill skill) {
+		// TODO Auto-generated constructor stub
 		this.skill = skill;
 	}
 	
@@ -19,11 +20,11 @@ public class CorpsAttackableValidator extends Validator {
 		
 		Corps corps = (Corps) this.skill.getOwner();
 		
-		if(corps.getAttack().getAttackable()){
+		if(skill.getPrepare()<=corps.getGrow().getPower()){
 			ret = true;
 		}else{
+			addMessage(I18n.getMessage(CorpsConjurePrepareValidator.class.getName()));
 			ret = false;
-			addMessage(I18n.getMessage(CorpsAttackableValidator.class.getName()));
 		}
 		
 		return ret; 

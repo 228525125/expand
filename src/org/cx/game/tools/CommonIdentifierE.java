@@ -34,7 +34,7 @@ public class CommonIdentifierE extends CommonIdentifier {
 	public static final Integer Func_Astrict = 201;         //移动限制
 	public static final Integer Func_Damage = 202;          //直接伤害
 	public static final Integer Func_Call = 203;            //召唤
-	public static final Integer Func_Cure = 204;            //增益
+	public static final Integer Func_Cure = 204;            //治疗
 	public static final Integer Func_Loss = 205;            //损益
 	public static final Integer Func_SustainedHarm = 206;   //持续伤害
 	public static final Integer Func_Trick = 207;           //陷阱
@@ -102,6 +102,7 @@ public class CommonIdentifierE extends CommonIdentifier {
 	public final static String Corps_Pick = "Corps_Pick";
 	public final static String Corps_Merge = "Corps_Merge";
 	public final static String Corps_Leave = "Corps_Leave";
+	public final static String Corps_Grow = "Corps_Grow";
 	public final static String Treasure_Picked = "Treasure_Picked";
 	
 	public final static String Corps_Hide = "Corps_Hide";

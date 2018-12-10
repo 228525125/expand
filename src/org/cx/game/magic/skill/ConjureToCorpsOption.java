@@ -19,7 +19,7 @@ public class ConjureToCorpsOption extends ConjureOption {
 	@Override
 	public void execute(Object... objects) throws RuleValidatorException {
 		// TODO Auto-generated method stub
-		AbstractGround ground = getOwner().getOwner().getPlayer().getContext().getGround();
+		AbstractGround ground = getOwner().getOwner().getGround();
 		setParameterTypeValidator(new Class[]{Place.class}, new String[]{"corps"}, ground.getLivingCorpsList().toArray());
 		
 		super.execute(objects);

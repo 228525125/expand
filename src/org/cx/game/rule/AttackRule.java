@@ -18,6 +18,11 @@ public class AttackRule extends AbstractRule {
 		Corps attacked = (Corps)((Object[]) args[0])[0];
 		Corps attack = getOwner().getOwner();
 		
+		/*
+		 * 蓄力归零
+		 */
+		attack.getGrow().setPower(0);
+		
 		AbstractGround ground = getOwner().getOwner().getGround();
 		Integer distance = ground.distance(attacked.getPosition(), attack.getPosition());
 		if(CommonIdentifierE.Death_Status_Live.equals(attacked.getDeath().getStatus())

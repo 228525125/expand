@@ -1,6 +1,7 @@
 package org.cx.game.corps;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.cx.game.action.ActionProxyHelper;
@@ -12,6 +13,7 @@ import org.cx.game.action.Call;
 import org.cx.game.action.Chuck;
 import org.cx.game.action.Conjure;
 import org.cx.game.action.Death;
+import org.cx.game.action.Grow;
 import org.cx.game.action.IAction;
 import org.cx.game.action.Leave;
 import org.cx.game.action.Merge;
@@ -37,6 +39,7 @@ public class Corps extends AbstractCorps {
 	private Defend defend = null;
 	private CorpsAgent agent = null;
 	private Conjure conjure = null;
+	private Grow grow = null;
 	private Affected affected = null;
 	private Move move = null;
 	private Call call = null;
@@ -199,6 +202,12 @@ public class Corps extends AbstractCorps {
 			corps.setPosition(position);
 		}
 	}
+	
+	@Override
+	public void setSkillList(List<AbstractSkill> skillList) {
+		// TODO Auto-generated method stub
+		super.setSkillList(skillList);
+	}
 
 	public Activate getActivate() {
 		if(null==activate){
@@ -239,6 +248,14 @@ public class Corps extends AbstractCorps {
 			conjure.setOwner(this);
 		}
 		return conjure;
+	}
+	
+	public Grow getGrow() {
+		if(null==grow){
+			grow = new Grow();
+			grow.setOwner(this);
+		}
+		return grow;
 	}
 	
 	public Affected getAffected() {
@@ -381,6 +398,14 @@ public class Corps extends AbstractCorps {
 	public void conjure(AbstractSkill skill, Object...objects) {
 		IAction action = new ActionProxyHelper(getConjure());
 		action.action(skill,objects);
+	}
+	
+	/**
+	 * 蓄力
+	 */
+	public void grow() {
+		IAction action = new ActionProxyHelper(getGrow());
+		action.action();
 	}
 	
 	/**

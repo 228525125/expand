@@ -42,7 +42,7 @@ public class Death extends AbstractAction implements IAction {
 		this.hp = Death.this.hp>0 ? Death.this.hp : 0;       //判断下限
 		this.hp = Death.this.hp<getHpLimit() ? Death.this.hp : getHpLimit(); //判断上限
 		
-		Logger.debug(this, getOwner().getName()+"HP("+beforeHp+") [改变]("+(this.hp-beforeHp)+"); 当前HP="+this.hp);
+		Logger.debug(this, getOwner().getName()+"HP("+beforeHp+"/"+getHpLimit()+") [改变]("+(this.hp-beforeHp)+"); 当前HP="+this.hp+"/"+getHpLimit());
 	}
 	
 	public Integer getHpLimit() {

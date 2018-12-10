@@ -25,7 +25,7 @@ public class ShieldHit extends ActiveSkill {
 	 * @param bout 眩晕回合
 	 */
 	public ShieldHit(Integer id, Integer cooldown, Integer atkScale, Integer bout) {
-		super(id, cooldown);
+		super(id, cooldown, 0);
 		// TODO Auto-generated constructor stub
 		this.atkScale = atkScale;
 		this.bout = bout;

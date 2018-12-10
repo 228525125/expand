@@ -111,12 +111,12 @@ public class Attack extends AbstractAction implements IAction {
 		this.dmg = dmg;
 	}
 
-	public void updateDmg() {
+	/*public void updateDmg() {
 		// TODO Auto-generated method stub
 		Integer [] dmg = IntegerToDamage(getOwner().getDmg());
 		Integer d = DamageToInteger(new Integer[]{dmg[0],dmg[1]});
 		setDmg(d);
-	}
+	}*/
 
 	public Integer getLockChance() {
 		// TODO Auto-generated method stub

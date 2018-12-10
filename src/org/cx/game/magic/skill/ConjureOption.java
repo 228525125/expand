@@ -10,11 +10,17 @@ import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.validator.CorpsAttackableValidator;
+import org.cx.game.validator.CorpsConjurePrepareValidator;
 import org.cx.game.widget.AbstractControlQueue;
 import org.cx.game.widget.AbstractGround;
 import org.cx.game.widget.AbstractOption;
 import org.cx.game.widget.Place;
 
+/**
+ * 施法，代替Conjure功能
+ * @author admin
+ *
+ */
 public class ConjureOption extends AbstractOption {
 	
 	private String name = null;
@@ -51,7 +57,17 @@ public class ConjureOption extends AbstractOption {
 		// TODO Auto-generated method stub
 		return (ActiveSkill) super.getOwner();
 	}
-
+	
+	@Override
+	public void setOwner(Object owner) {
+		// TODO Auto-generated method stub
+		super.setOwner(owner);
+		
+		ActiveSkill skill = (ActiveSkill) owner;
+		addValidator(new CorpsAttackableValidator(skill));
+		addValidator(new CorpsConjurePrepareValidator(skill));
+	}
+	
 	@Override
 	protected AbstractControlQueue getControlQueue() {
 		// TODO Auto-generated method stub
@@ -69,14 +85,6 @@ public class ConjureOption extends AbstractOption {
 			this.execute = execute;
 		}
 		return this.execute;
-	}
-	
-	@Override
-	public void execute(Object... objects) throws RuleValidatorException {
-		// TODO Auto-generated method stub
-		addValidator(new CorpsAttackableValidator((Corps) getOwner().getOwner()));
-		
-		super.execute(objects);
 	}
 	
 	class ConjureOptionExecute extends Execute implements IAction {

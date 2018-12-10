@@ -23,7 +23,7 @@ public class TauntActive extends ActiveSkill {
 	private final static Integer Taunt_ID = 10200006;
 	
 	public TauntActive(Integer cooldown) {
-		super(Taunt_ID, cooldown);
+		super(Taunt_ID, cooldown, 0);
 		// TODO Auto-generated constructor stub
 	}
 	

@@ -47,6 +47,7 @@ public class Call extends AbstractAction implements IAction {
 	@Override
 	public void action(Object...objects) {
 		// TODO Auto-generated method stub
+		super.action(objects);
 
 		AbstractPlace place = (Place) objects[0];
 		Integer nop = (Integer) objects[1];
