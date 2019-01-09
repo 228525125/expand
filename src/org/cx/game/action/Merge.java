@@ -41,6 +41,7 @@ public class Merge extends AbstractAction implements IAction {
 		AbstractGround ground = getOwner().getGround();
 		
 		ground.removeCorps(getOwner());
+		ground.getQueue().remove(getOwner());
 		leader.addCorpsToTeammateList(getOwner());
 		
 		getOwner().activate(false);

@@ -48,6 +48,8 @@ public class BuildingUpgradeOption extends AbstractOption {
 		super.setOwner(building);
 		
 		inquiryBuildingIsAllowUpdate();
+		AbstractBuilding b = (AbstractBuilding) building;
+		addValidator(new BuildingUpgradeConsumeValidator(b));
 	}
 	
 	@Override
@@ -57,7 +59,7 @@ public class BuildingUpgradeOption extends AbstractOption {
 	}
 	
 	@Override
-	public List<Integer> getExecuteRange(AbstractGround ground) {
+	public List<Integer> getExecuteRange() {
 		// TODO Auto-generated method stub
 		List<Integer> positionList = new ArrayList<Integer>();
 		return positionList;
@@ -81,15 +83,6 @@ public class BuildingUpgradeOption extends AbstractOption {
 			this.execute = execute;
 		}
 		return this.execute;
-	}
-	
-	@Override
-	public void execute(Object... objects) throws RuleValidatorException {
-		// TODO Auto-generated method stub
-		AbstractBuilding building = getOwner();
-		addValidator(new BuildingUpgradeConsumeValidator(building.getUpgrade(), building.getPlayer()));
-		
-		super.execute(objects);
 	}
 	
 	@Override

@@ -20,6 +20,7 @@ import org.cx.game.validator.RationLimitOfPlaceValidator;
 import org.cx.game.widget.AbstractControlQueue;
 import org.cx.game.widget.AbstractGround;
 import org.cx.game.widget.AbstractOption;
+import org.cx.game.widget.Ground;
 import org.cx.game.widget.Place;
 
 public class CallOption extends AbstractOption {
@@ -58,9 +59,10 @@ public class CallOption extends AbstractOption {
 	}
 	
 	@Override
-	public List<Integer> getExecuteRange(AbstractGround ground) {
+	public List<Integer> getExecuteRange() {
 		// TODO Auto-generated method stub
 		List<Integer> positionList = new ArrayList<Integer>();
+		Ground ground = (Ground) getOwner().getPlace().getOwner();
 		positionList = ground.areaForDistance(getOwner().getPlace().getPosition(), 1, AbstractGround.Contain);
 		positionList.retainAll(ground.queryPositionList(true));
 		return positionList;

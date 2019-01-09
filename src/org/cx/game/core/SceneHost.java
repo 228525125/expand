@@ -109,6 +109,7 @@ public class SceneHost extends AbstractHost {
 			for(AbstractOption option : corps.getOptionByClass(PlacementOption.class)){
 				corps.removeOption(option);
 			}
+			getGround().getQueue().add(corps);
 		}
 		
 		if(isStatus(Status_WaitStart)){

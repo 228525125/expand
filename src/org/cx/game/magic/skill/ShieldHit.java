@@ -30,20 +30,7 @@ public class ShieldHit extends ActiveSkill {
 		this.atkScale = atkScale;
 		this.bout = bout;
 	}
-	
-	@Override
-	public void afterConstruct() {
-		// TODO Auto-generated method stub
-		AbstractOption option = new ConjureToCorpsOption(this);
-		addOption(option);
-	}
 
-	@Override
-	public Integer getRange() {
-		// TODO Auto-generated method stub
-		return 1;
-	}
-	
 	@Override
 	public void affect(Object... objects) {
 		// TODO Auto-generated method stub
@@ -51,17 +38,9 @@ public class ShieldHit extends ActiveSkill {
 		
 		Corps corps = (Corps) objects[0];
 		Integer atk = getOwner().getAtk();
+		Integer harm = atk*atkScale/100;
 		
-		corps.getDeath().setHp(Util.Sub, atk*atkScale/100);
-		new DizzyBuff(bout, corps).effect();
-	}
-	
-	@Override
-	public void useSkill(Object... objects) {
-		// TODO Auto-generated method stub
-		
-		Place place = (Place) objects[0];
-		Corps corps = place.getCorps();
-		corps.affected(this);
+		if(harmToCorps(harm, corps))
+			new DizzyBuff(bout, corps).effect();
 	}
 }

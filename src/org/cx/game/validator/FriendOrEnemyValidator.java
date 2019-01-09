@@ -23,6 +23,13 @@ public class FriendOrEnemyValidator extends Validator {
 		this.isFriend = isFriend;
 	}
 	
+	public FriendOrEnemyValidator(AbstractCorps owner, AbstractCorps enemy, Boolean isFriend) {
+		// TODO Auto-generated constructor stub
+		this.owner = owner.getPlayer();
+		this.enemy = enemy.getPlayer();
+		this.isFriend = isFriend;
+	}
+	
 	@Override
 	public Boolean validate() {
 		// TODO Auto-generated method stub

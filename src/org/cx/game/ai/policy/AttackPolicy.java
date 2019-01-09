@@ -42,18 +42,25 @@ public class AttackPolicy extends AbstractPolicy<CorpsAgent> {
 		 * 是否可发动攻击
 		 */
 		AttackableFormula af = new AttackableFormula(corps);
-		doValidator(af);
-		if(hasError())
+		try {
+			doValidator(af);
+		} catch (ValidatorException e) {
+			// TODO Auto-generated catch block
 			return ;
+		}
+		
 		
 		/*
 		 * 判断在攻击范围内，是否有敌人
 		 */
 		ShechengneidedirenFormula scFormula = new ShechengneidedirenFormula(corps);
-		doValidator(scFormula);
+		try {
+			doValidator(scFormula);
+		} catch (ValidatorException e) {
+			// TODO Auto-generated catch block
+			return ;
+		}
 		
-		if(hasError())
-			return;
 		
 		/*
 		 * 判断是否被锁定
@@ -61,8 +68,18 @@ public class AttackPolicy extends AbstractPolicy<CorpsAgent> {
 		List<Corps> lockerList = new ArrayList<Corps>();
 		
 		LockFormula lockFormula = new LockFormula(corps);
-		doValidator(lockFormula);
-		if(hasError()){       //没有被锁，搜索射程范围内的最近的敌人
+		Boolean isLock = null;
+		try {
+			doValidator(lockFormula);
+			isLock = true;
+		} catch (ValidatorException e) {
+			// TODO Auto-generated catch block
+			isLock = false;
+		}
+		
+		
+		
+		if(isLock){       //没有被锁，搜索射程范围内的最近的敌人
 			Corps enemy = scFormula.getNearEnemy();
 			this.cmdStr = "attack ground place"+enemy.getPosition()+" corps";
 			

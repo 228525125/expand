@@ -28,6 +28,7 @@ public class Leave extends AbstractAction implements IAction {
 		
 		AbstractGround ground = leader.getGround();
 		ground.placementCorps(place.getPosition(), getOwner());
+		ground.getQueue().add(getOwner());
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("corps", getOwner());

@@ -13,6 +13,7 @@ import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.tools.Debug;
 import org.cx.game.widget.AbstractPlace;
 import org.cx.game.widget.AbstractGround;
+import org.cx.game.widget.Ground;
 import org.cx.game.widget.Place;
 
 public class Move extends AbstractAction implements IAction {
@@ -111,7 +112,7 @@ public class Move extends AbstractAction implements IAction {
 		
 		Integer start = getOwner().getPosition();
 		
-		AbstractGround ground = getOwner().getGround();
+		Ground ground = (Ground) getOwner().getGround();
 		List<Integer> route = ground.move(getOwner(), place.getPosition(), type);
 		
 		getOwner().setPosition(place.getPosition());

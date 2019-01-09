@@ -50,7 +50,6 @@ public class Call extends AbstractAction implements IAction {
 		super.action(objects);
 
 		AbstractPlace place = (Place) objects[0];
-		Integer nop = (Integer) objects[1];
 		
 		getOwner().getDeath().setStatus(CommonIdentifierE.Death_Status_Live);
 		
@@ -69,6 +68,7 @@ public class Call extends AbstractAction implements IAction {
 		ground.placementCorps(place.getPosition(), getOwner());
 		
 		getOwner().setPosition(place.getPosition());
+		ground.getQueue().add(getOwner());
 	}
 
 }

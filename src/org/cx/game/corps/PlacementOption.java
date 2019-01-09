@@ -22,6 +22,11 @@ import org.cx.game.widget.Ground;
 import org.cx.game.widget.HoneycombGround;
 import org.cx.game.widget.Place;
 
+/**
+ * 放置
+ * @author chenxian
+ *
+ */
 public class PlacementOption extends AbstractOption {
 	
 	public PlacementOption(AbstractCorps corps) {
@@ -36,9 +41,10 @@ public class PlacementOption extends AbstractOption {
 	}
 	
 	@Override
-	public List<Integer> getExecuteRange(AbstractGround ground) {
+	public List<Integer> getExecuteRange() {
 		// TODO Auto-generated method stub
 		List<Integer> positionList = new ArrayList<Integer>();
+		Ground ground = (Ground) getOwner().getGround();
 		positionList = ground.getEntranceList(getOwner().getTroop());
 		positionList.retainAll(ground.queryPositionList(true));
 		return positionList;
@@ -66,7 +72,7 @@ public class PlacementOption extends AbstractOption {
 		// TODO Auto-generated method stub
 		Place place = (Place) objects[0];
 		
-		addValidator(new CorpsPlacementRangeValidator(getOwner().getGround().getEntranceList(getOwner().getTroop()), place.getPosition()));
+		doValidator(new CorpsPlacementRangeValidator(getOwner(), place.getPosition()));
 		super.execute(place.getPosition(), getOwner());
 	}
 	

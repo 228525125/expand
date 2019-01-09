@@ -7,6 +7,7 @@ import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 import org.cx.game.magic.buff.AbstractBuff;
 import org.cx.game.widget.AbstractGround;
+import org.cx.game.widget.Ground;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.intercepter.AbstractIntercepter;
 import org.cx.game.intercepter.IIntercepter;
@@ -84,7 +85,7 @@ public abstract class Aureole extends PassiveSkill {
 	}
 
 	private void refurbish(){
-		AbstractGround ground = getOwner().getPlayer().getContext().getGround();
+		Ground ground = (Ground) getOwner().getPlayer().getContext().getGround();
 		List<AbstractCorps> ls = ground.getCorpsList(getOwner().getPosition(), getRange(), AbstractGround.Contain);
 		
 		List<AbstractCorps> tempList = new ArrayList<AbstractCorps>();  //将离开范围的corps去掉buff

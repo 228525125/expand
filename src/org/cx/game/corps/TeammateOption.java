@@ -14,6 +14,7 @@ import org.cx.game.validator.OperatePowerValidator;
 import org.cx.game.widget.AbstractControlQueue;
 import org.cx.game.widget.AbstractGround;
 import org.cx.game.widget.AbstractOption;
+import org.cx.game.widget.Ground;
 import org.cx.game.widget.Place;
 
 public class TeammateOption extends AbstractOption {
@@ -30,8 +31,9 @@ public class TeammateOption extends AbstractOption {
 	}
 	
 	@Override
-	public List<Integer> getExecuteRange(AbstractGround ground) {
+	public List<Integer> getExecuteRange() {
 		// TODO Auto-generated method stub
+		Ground ground = (Ground) getOwner().getGround();
 		return ground.queryRange(getOwner(), CommonIdentifierE.Command_Query_Move);
 	}
 
@@ -39,6 +41,15 @@ public class TeammateOption extends AbstractOption {
 	public Corps getOwner() {
 		// TODO Auto-generated method stub
 		return (Corps) super.getOwner();
+	}
+	
+	@Override
+	public void setOwner(Object owner) {
+		// TODO Auto-generated method stub
+		Corps corps = (Corps) owner;
+		addValidator(new CorpsMoveableValidator(corps));
+		addValidator(new OperatePowerValidator(corps.getPlayer()));
+		super.setOwner(owner);
 	}
 
 	@Override
@@ -58,15 +69,6 @@ public class TeammateOption extends AbstractOption {
 			this.execute = execute;
 		}
 		return this.execute;
-	}
-	
-	@Override
-	public void execute(Object... objects) throws RuleValidatorException {
-		// TODO Auto-generated method stub
-		addValidator(new CorpsMoveableValidator(getOwner()));
-		addValidator(new OperatePowerValidator(getOwner().getPlayer()));
-		
-		super.execute(objects);
 	}
 	
 	class LeaveOptionExecute extends Execute implements IAction {

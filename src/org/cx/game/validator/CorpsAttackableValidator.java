@@ -4,20 +4,19 @@ import org.cx.game.corps.Corps;
 import org.cx.game.magic.skill.ActiveSkill;
 import org.cx.game.tools.I18n;
 
-public class CorpsAttackableValidator extends Validator {
+public class CorpsAttackableValidator extends CorpsActivateValidator {
 
-	private ActiveSkill skill = null;
+	private Corps corps = null;
 	
-	public CorpsAttackableValidator(ActiveSkill skill) {
-		this.skill = skill;
+	public CorpsAttackableValidator(Corps corps) {
+		super(corps);
+		this.corps = corps;
 	}
 	
 	@Override
 	public Boolean validate() {
 		// TODO Auto-generated method stub
 		Boolean ret = super.validate();
-		
-		Corps corps = (Corps) this.skill.getOwner();
 		
 		if(corps.getAttack().getAttackable()){
 			ret = true;

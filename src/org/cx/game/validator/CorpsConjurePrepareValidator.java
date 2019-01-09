@@ -4,6 +4,11 @@ import org.cx.game.corps.Corps;
 import org.cx.game.magic.skill.ActiveSkill;
 import org.cx.game.tools.I18n;
 
+/**
+ * 蓄力的验证，当技能允许蓄力，且corps已经满足蓄力条件，则通过验证；
+ * @author chenxian
+ *
+ */
 public class CorpsConjurePrepareValidator extends Validator {
 
 	private ActiveSkill skill = null;
@@ -19,7 +24,6 @@ public class CorpsConjurePrepareValidator extends Validator {
 		Boolean ret = super.validate();
 		
 		Corps corps = (Corps) this.skill.getOwner();
-		
 		if(skill.getPrepare()<=corps.getGrow().getPower()){
 			ret = true;
 		}else{

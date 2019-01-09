@@ -16,6 +16,7 @@ import org.cx.game.validator.SelectOptionBufferValidator;
 import org.cx.game.validator.SelectSkillBufferValidator;
 import org.cx.game.widget.AbstractGround;
 import org.cx.game.widget.AbstractOption;
+import org.cx.game.widget.Ground;
 
 public class QueryCommand extends InteriorCommand {
 
@@ -46,7 +47,7 @@ public class QueryCommand extends InteriorCommand {
 		// TODO Auto-generated method stub
 		super.execute();
 		
-		AbstractGround ground = this.player.getContext().getGround();
+		Ground ground = (Ground) this.player.getContext().getGround();
 		
 		if("attack".equals(parameter)){
 			doValidator(new SelectCorpsBufferValidator(buffer));

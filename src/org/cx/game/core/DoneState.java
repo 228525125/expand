@@ -9,6 +9,7 @@ import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
+import org.cx.game.widget.Ground;
 
 public class DoneState extends AbstractPlayState {
 
@@ -24,7 +25,8 @@ public class DoneState extends AbstractPlayState {
 		// TODO Auto-generated method stub
 		Player curPlayer = (Player) context.getControlPlayer();
 		Context cont = (Context) context;
-		for(AbstractCorps corps : cont.getGround().getCorpsList(curPlayer, CommonIdentifierE.Death_Status_Live)){
+		Ground ground = (Ground) cont.getGround();
+		for(AbstractCorps corps : ground.getCorpsList(curPlayer)){
 			Corps sc = (Corps) corps;
 			if(sc.getActivate().getActivation().equals(true))
 				sc.activate(false);

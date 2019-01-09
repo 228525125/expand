@@ -9,23 +9,30 @@ import org.cx.game.core.AbstractPlayer;
 import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
+import org.cx.game.tools.I18n;
 import org.cx.game.validator.CorpsAttackableValidator;
 import org.cx.game.validator.CorpsConjurePrepareValidator;
+import org.cx.game.validator.FriendOrEnemyValidator;
+import org.cx.game.validator.IValidator;
+import org.cx.game.validator.OptionExecuteRangeValidator;
+import org.cx.game.validator.ParameterTypeValidator;
 import org.cx.game.widget.AbstractControlQueue;
 import org.cx.game.widget.AbstractGround;
 import org.cx.game.widget.AbstractOption;
 import org.cx.game.widget.Place;
+
+import com.sun.imageio.plugins.common.I18N;
 
 /**
  * 施法，代替Conjure功能
  * @author admin
  *
  */
-public class ConjureOption extends AbstractOption {
+public class ConjureToPlaceOption extends AbstractOption {
 	
 	private String name = null;
 	
-	public ConjureOption(ActiveSkill skill) {
+	public ConjureToPlaceOption(ActiveSkill skill) {
 		// TODO Auto-generated constructor stub
 		setOwner(skill);
 		setSpacingWait(skill.getCooldown());
@@ -35,18 +42,19 @@ public class ConjureOption extends AbstractOption {
 	public String getName() {
 		// TODO Auto-generated method stub
 		if(null==name){
-			name = super.getName();
+			name = I18n.getMessage(ConjureToPlaceOption.class, "name");
 			name += getOwner().getName();
 		}
 		return name;
 	}
 	
 	@Override
-	public List<Integer> getExecuteRange(AbstractGround ground) {
+	public List<Integer> getExecuteRange() {
 		// TODO Auto-generated method stub
 		List<Integer> positionList = new ArrayList<Integer>();
 		ActiveSkill as = (ActiveSkill) getOwner();
 		AbstractCorps corps = as.getOwner();
+		AbstractGround ground = corps.getGround();
 		Integer position = corps.getPosition();
 		positionList = ground.areaForDistance(position, as.getRange(), AbstractGround.Contain);
 		return positionList;
@@ -64,7 +72,7 @@ public class ConjureOption extends AbstractOption {
 		super.setOwner(owner);
 		
 		ActiveSkill skill = (ActiveSkill) owner;
-		addValidator(new CorpsAttackableValidator(skill));
+		addValidator(new CorpsAttackableValidator((Corps)skill.getOwner()));
 		addValidator(new CorpsConjurePrepareValidator(skill));
 	}
 	
@@ -74,21 +82,39 @@ public class ConjureOption extends AbstractOption {
 		return getOwner().getOwner().getGround().getQueue();
 	}
 	
+	@Override
+	public void execute(Object... objects) throws RuleValidatorException {
+		// TODO Auto-generated method stub
+		/*
+		 * 验证参数
+		 */
+		IValidator validator = new ParameterTypeValidator(objects,new Class[]{Place.class});
+		doValidator(validator);
+		
+		/*
+		 * 验证范围
+		 */
+		Place place = (Place) objects[0];
+		doValidator(new OptionExecuteRangeValidator(place.getPosition(), this));
+		
+		super.execute(objects);
+	}
+	
 	private Execute execute = null;
 	
 	@Override
 	public Execute getExecute() {
 		// TODO Auto-generated method stub
 		if(null==this.execute){
-			Execute execute = new ConjureOptionExecute();
+			Execute execute = new ConjureToPlaceOptionExecute();
 			execute.setOwner(this);
 			this.execute = execute;
 		}
 		return this.execute;
 	}
 	
-	class ConjureOptionExecute extends Execute implements IAction {
-		
+	public class ConjureToPlaceOptionExecute extends Execute implements IAction {
+
 		@Override
 		public void action(Object... objects) {
 			// TODO Auto-generated method stub
@@ -101,9 +127,9 @@ public class ConjureOption extends AbstractOption {
 		}
 		
 		@Override
-		public ConjureOption getOwner() {
+		public ConjureToPlaceOption getOwner() {
 			// TODO Auto-generated method stub
-			return (ConjureOption) super.getOwner();
+			return (ConjureToPlaceOption) super.getOwner();
 		}
 	}
 

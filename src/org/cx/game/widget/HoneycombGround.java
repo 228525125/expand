@@ -45,7 +45,8 @@ public abstract class HoneycombGround extends Ground {
 	@Override
 	public Integer getPosition(Integer stand, Integer direction) {
 		// TODO Auto-generated method stub
-		return SpaceArithmetic.getPosition(stand, direction);
+		Integer ret = SpaceArithmetic.getPosition(stand, direction);
+		return isOver(ret) ? null : ret;
 	}
 	
 	@Override
@@ -74,20 +75,6 @@ public abstract class HoneycombGround extends Ground {
 				return pos;
 		}
 		return null;
-	}
-	
-	/**
-	 * 判断是否超出边界
-	 * @param position
-	 * @return
-	 */
-	private Boolean isOver(Integer position){
-		Integer [] ps = SpaceArithmetic.integerToPoint(position);
-		if(ps[0]<1||ps[0]>getXBorder())
-			return true;
-		if(ps[1]<1||ps[1]>getYBorder())
-			return true;
-		return false;
 	}
 	
 	/**
@@ -162,10 +149,10 @@ public abstract class HoneycombGround extends Ground {
 			List<Integer> pList = new ArrayList<Integer>();         //敌方单位的站位，友方允许穿过
 			List<Integer> nList = new ArrayList<Integer>();         //敌方单位附近1个单元格
 			
-			AbstractPlayer control = getLivingCorpsList().get(0).getPlayer().getContext().getControlPlayer();
-			List<AbstractCorps> cList = getCorpsList(control, CommonIdentifierE.Death_Status_Live);
-			List<AbstractCorps> eList = getCorpsList(CommonIdentifierE.Death_Status_Live);            //非友方单位
-			eList.removeAll(cList);
+			AbstractPlayer control = getCorpsList().get(0).getPlayer().getContext().getControlPlayer();
+			List<AbstractCorps> cList = getCorpsList(control);
+			List<AbstractCorps> eList = getCorpsList();            
+			eList.removeAll(cList);                                  //非友方单位
 			
 			for(AbstractCorps corps : eList){
 				pList.add(corps.getPosition());
@@ -190,12 +177,12 @@ public abstract class HoneycombGround extends Ground {
 		return MAP;
 	}
 	
-	protected List route(Integer start, Integer stop){
+	protected List<Node> route(Integer start, Integer stop){
 		return SpaceArithmetic.route(start, stop, updateMAP(), hit);
 	}
 	
-	protected List route(Integer start, Integer stop, Integer moveType) {
-		List list = null;
+	protected List<Node> route(Integer start, Integer stop, Integer moveType) {
+		List<Node> list = null;
 		switch (moveType) {
 		case 141:    //步行
 			list = SpaceArithmetic.route(start, stop, updateMAP(true,true,false,moveType), hit);
@@ -351,6 +338,12 @@ public abstract class HoneycombGround extends Ground {
 		System.out.println(Math.abs(x1-x2)+Math.abs(y1-y2)) ;*/
 		Random r = new Random();
 		System.out.println(r.nextInt(10));
+		
+		List<Integer> list = new ArrayList<Integer>();
+		
+		
+		
+		System.out.print(list.remove(0));
 		
 		//AbstractGround ground = new HoneycombGround(21,13,null);
 		//System.out.println(ground);

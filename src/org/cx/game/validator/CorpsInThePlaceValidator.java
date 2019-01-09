@@ -4,7 +4,7 @@ import org.cx.game.tools.I18n;
 import org.cx.game.widget.AbstractGround;
 
 /**
- * 验证指定的位置是否存在对象
+ * 验证Corps是否在指定的位置上
  * @author chenxian
  * 
  */

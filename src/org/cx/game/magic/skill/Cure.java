@@ -9,7 +9,7 @@ import org.cx.game.widget.AbstractOption;
 import org.cx.game.widget.Place;
 
 /**
- * 治疗，治疗量有下限，上限与攻击力相同
+ * 治疗，治疗量 = 基础治疗量*（100+英雄法术*10）/100
  * @author chenxian
  *
  */
@@ -19,36 +19,25 @@ public class Cure extends ActiveSkill {
 	
 	private Integer cureValue = null;
 	private Integer antibodyBout = null;
-	private Integer range = 1;
 	
 	/**
 	 * 
 	 * @param cureValue 暂时固定值
-	 * @param antibodyBout 产生抗体回合数
+	 * @param antibodyBout 产生抗体回合数 
 	 * @param range
 	 */
-	public Cure(Integer id, Integer cureValue, Integer antibodyBout, Integer range, Integer prepare) {
+	public Cure(Integer id, Integer cureValue, Integer antibodyBout, String range) {
 		// TODO Auto-generated constructor stub
-		super(id, 0, prepare);
+		super(id, 0, 0);
 		this.cureValue = cureValue;
 		this.antibodyBout = antibodyBout;
-		this.range = range;
+		setRange(range);
 	}
 	
 	@Override
-	public void afterConstruct() {
+	public String getRange() {
 		// TODO Auto-generated method stub
-		AbstractOption option = new ConjureToCorpsOption(this);
-		addOption(option);
-	}
-	
-	@Override
-	public void useSkill(Object... objects) {
-		// TODO Auto-generated method stub
-		
-		Place place = (Place) objects[0];
-		Corps corps = place.getCorps();
-		corps.affected(this);
+		return "1-1";
 	}
 	
 	@Override
@@ -63,24 +52,16 @@ public class Cure extends ActiveSkill {
 		corps.getDeath().setHp(Util.Sum, this.cureValue);
 		new AntibodyBuff(antibodyBout,corps).effect();
 	}
-
+	
 	@Override
-	public Integer getRange() {
+	public void setUseItOnFriendOrFoeOrAll(Integer useItOnFriendOrFoeOrAll) {
 		// TODO Auto-generated method stub
-		return this.range;
-	}
-
-	public Integer getCureValue() {
-		return cureValue;
-	}
-
-	public void setCureValue(Integer cureValue) {
-		this.cureValue = cureValue;
+		super.setUseItOnFriendOrFoeOrAll(useItOnFriendOrFoeOrAll);
 	}
 	
 	@Override
-	public void setPrepare(Integer prepare) {
+	public void setUseItOnYouself(Boolean useItOnYouself) {
 		// TODO Auto-generated method stub
-		super.setPrepare(prepare);
+		super.setUseItOnYouself(useItOnYouself);
 	}
 }

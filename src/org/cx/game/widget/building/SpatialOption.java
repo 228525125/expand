@@ -55,7 +55,7 @@ public class SpatialOption extends AbstractOption {
 	}
 	
 	@Override
-	public List<Integer> getExecuteRange(AbstractGround ground) {
+	public List<Integer> getExecuteRange() {
 		// TODO Auto-generated method stub
 		List<Integer> list = new ArrayList<Integer>();
 		return list;
@@ -78,10 +78,8 @@ public class SpatialOption extends AbstractOption {
 	public void execute(Object... objects) throws RuleValidatorException {
 		// TODO Auto-generated method stub
 		AbstractPlace place = getOwner().getPlace();
-		addValidator(new CorpsInThePlaceValidator(place.getOwner(), place.getPosition()));
-		
-		if(null!=place.getCorps())
-			addValidator(new CorpsMoveEnergyValidator((Corps) place.getCorps()));
+		doValidator(new CorpsInThePlaceValidator(place.getOwner(), place.getPosition()));
+		doValidator(new CorpsMoveEnergyValidator((Corps) place.getCorps()));
 		
 		super.execute(objects);
 	}

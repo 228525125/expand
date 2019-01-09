@@ -36,7 +36,7 @@ public class Area extends AbstractArea {
 		super.setAtlas(atlas);
 		
 		for(Integer mapId : atlas){
-			AbstractGround ground = getGround(mapId);
+			Ground ground = (Ground) getGround(mapId);
 
 			for(AbstractBuilding building : ground.getBuildingList(SpatialBuilding.class)){
 				addSpatialBuilding(building);

@@ -9,6 +9,7 @@ import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.tools.Logger;
 import org.cx.game.tools.Util;
 import org.cx.game.widget.AbstractGround;
+import org.cx.game.widget.Scene;
 
 public class Death extends AbstractAction implements IAction {
 	
@@ -74,7 +75,8 @@ public class Death extends AbstractAction implements IAction {
 		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Corps_Death,map);
 		super.notifyObservers(info);           //通知所有卡片对象，死亡事件
 		
-		AbstractGround ground = owner.getGround();     //只有在战场上才会死亡
+		Scene ground = (Scene) owner.getGround();     //只有在战场上才会死亡
 		ground.inCemetery(owner);
+		ground.getQueue().remove(owner);
 	}
 }

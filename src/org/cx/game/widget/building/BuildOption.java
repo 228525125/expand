@@ -24,7 +24,7 @@ public class BuildOption extends AbstractOption {
 	}
 	
 	@Override
-	public List<Integer> getExecuteRange(AbstractGround ground) {
+	public List<Integer> getExecuteRange() {
 		// TODO Auto-generated method stub
 		List<Integer> list = new ArrayList<Integer>();
 		return list;
@@ -52,8 +52,8 @@ public class BuildOption extends AbstractOption {
 	public void setOwner(Object building) {
 		// TODO Auto-generated method stub
 		super.setOwner(building);
-		
-		addValidator(new BuildConsumeValidator(getOwner()));
+		AbstractBuilding b = (AbstractBuilding) building;
+		addValidator(new BuildConsumeValidator(b));
 	}
 
 	private Execute execute = null;

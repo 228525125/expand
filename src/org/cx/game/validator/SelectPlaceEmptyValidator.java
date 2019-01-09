@@ -3,6 +3,11 @@ package org.cx.game.validator;
 import org.cx.game.tools.I18n;
 import org.cx.game.widget.Place;
 
+/**
+ * 选择的位置是否为空
+ * @author chenxian
+ *
+ */
 public class SelectPlaceEmptyValidator extends Validator {
 
 	private Boolean empty = false;

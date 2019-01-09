@@ -16,11 +16,15 @@ import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.tools.I18n;
 import org.cx.game.validator.CorpsCallConsumeValidator;
 import org.cx.game.validator.CorpsCallRangeValidator;
+import org.cx.game.validator.IValidator;
+import org.cx.game.validator.ParameterTypeValidator;
 import org.cx.game.widget.AbstractControlQueue;
 import org.cx.game.widget.AbstractGround;
 import org.cx.game.widget.AbstractOption;
 import org.cx.game.widget.AbstractPlace;
+import org.cx.game.widget.Ground;
 import org.cx.game.widget.Place;
+import org.cx.game.widget.Scene;
 
 /**
  * 英雄复活
@@ -37,7 +41,7 @@ public class ReviveOption extends AbstractOption {
 		this.hero = hero;
 		this.hero.getDeath().addObserver(new OptionObserver());
 		
-		setParameterTypeValidator(new Class[]{AbstractPlace.class}, new String[]{"empty"}, new Object[]{true});
+		addValidator(new CorpsCallConsumeValidator(this.hero, 1));
 	}
 	
 	@Override
@@ -63,9 +67,10 @@ public class ReviveOption extends AbstractOption {
 	}
 	
 	@Override
-	public List<Integer> getExecuteRange(AbstractGround ground) {
+	public List<Integer> getExecuteRange() {
 		// TODO Auto-generated method stub
 		List<Integer> positionList = new ArrayList<Integer>();
+		Ground ground = (Ground) getOwner().getPlace().getOwner();
 		positionList = ground.areaForDistance(getOwner().getPlace().getPosition(), 1, AbstractGround.Contain);
 		positionList.retainAll(ground.queryPositionList(true));
 		return positionList;
@@ -85,10 +90,15 @@ public class ReviveOption extends AbstractOption {
 	@Override
 	public void execute(Object... objects) throws RuleValidatorException {
 		// TODO Auto-generated method stub
+		/*
+		 * 验证参数
+		 */
+		IValidator validator = new ParameterTypeValidator(objects,new Class[]{AbstractPlace.class}, new String[]{"empty"}, new Object[]{true});
+		doValidator(validator);
+		
 		Place place = (Place) objects[0];
 		
-		addValidator(new CorpsCallConsumeValidator(this.hero, 1));
-		addValidator(new CorpsCallRangeValidator((AbstractBuilding) getOwner(), place));
+		doValidator(new CorpsCallRangeValidator((AbstractBuilding) getOwner(), place));
 		
 		super.execute(objects);
 	}
@@ -131,7 +141,8 @@ public class ReviveOption extends AbstractOption {
 			super.action(objects);
 			
 			AbstractPlace place = (Place) objects[0];
-			place.getOwner().outCemetery(hero);
+			Scene scene = (Scene) place.getOwner();
+			scene.outCemetery(hero);
 			this.hero.call(place,1);
 		}
 	}
