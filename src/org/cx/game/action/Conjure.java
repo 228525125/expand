@@ -32,6 +32,8 @@ public class Conjure extends AbstractAction implements IAction {
 		map.put("card", getOwner());
 		map.put("position", getOwner().getPosition());
 		map.put("skill", skill);
+		String desc = getOwner().getName()+" 【使用技能】 "+skill.getName();
+		map.put("description", desc);
 		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Corps_Conjure,map);
 		super.notifyObservers(info);	
 		

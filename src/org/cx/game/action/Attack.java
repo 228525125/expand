@@ -168,6 +168,8 @@ public class Attack extends AbstractAction implements IAction {
 		map.put("attack", getOwner());
 		map.put("attacked", attacked);
 		map.put("position", getOwner().getPosition());
+		String desc = getOwner().getName()+" "+(isFightBack() ? "【反击】" : "【攻击】")+attacked.getName()+"； 攻击力："+getAtk()+"，伤害："+Attack.IntegerToDamage(getDmg())[0]+"-"+Attack.IntegerToDamage(getDmg())[1]+"，mode:"+(getMode().equals(CommonIdentifierE.Attack_Mode_Near) ? "近战" : "远程");
+		map.put("description", desc);
 		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Corps_Attack,map);
 		super.notifyObservers(info);
 		

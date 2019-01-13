@@ -36,7 +36,7 @@ public class AttackRule extends AbstractRule {
 		Boolean isFightBack = (Boolean) getOwner().getActionResult("isFightBack");
 		Integer attackMode = (Integer) getOwner().getActionResult("attackMode");
 		
-		Logger.debug(this, attack.getName()+" "+(isFightBack ? "[反击]" : "[攻击]")+attacked.getName()+"; atk:"+atk+"/dmg:"+Attack.IntegerToDamage(dmg)[0]+"-"+Attack.IntegerToDamage(dmg)[1]+"/mode:"+(attackMode.equals(115) ? "近战" : "远程"));
+		//Logger.debug(this, attack.getName()+" "+(isFightBack ? "[反击]" : "[攻击]")+attacked.getName()+"; atk:"+atk+"/dmg:"+Attack.IntegerToDamage(dmg)[0]+"-"+Attack.IntegerToDamage(dmg)[1]+"/mode:"+(attackMode.equals(115) ? "近战" : "远程"));
 		
 		attacked.defend(attack, atk, dmg, isFightBack, attackMode);
 	}

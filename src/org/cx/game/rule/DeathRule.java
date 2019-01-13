@@ -23,7 +23,7 @@ public class DeathRule extends AbstractRule {
 		corps.clearBuff();
 		corps.clearNexusBuff();
 		
-		Logger.debug(this, corps.getName()+" [死亡] ;");
+		//Logger.debug(this, corps.getName()+" [死亡] ;");
 	}
 	
 	@Override

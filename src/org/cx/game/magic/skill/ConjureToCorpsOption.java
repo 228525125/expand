@@ -1,13 +1,17 @@
 package org.cx.game.magic.skill;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.cx.game.action.Execute;
 import org.cx.game.action.IAction;
 import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
+import org.cx.game.observer.NotifyInfo;
+import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.tools.I18n;
 import org.cx.game.validator.CorpsAttackableValidator;
 import org.cx.game.validator.CorpsConjurePrepareValidator;

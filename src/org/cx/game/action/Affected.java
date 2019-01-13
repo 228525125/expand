@@ -38,6 +38,8 @@ public class Affected extends AbstractAction implements IAction {
 		map.put("card", getOwner());
 		map.put("position", getOwner().getPosition());
 		map.put("magic", magic);
+		String desc = getOwner().getName()+" 【受到】 "+magic.getName()+" 效果影响！";
+		map.put("description", desc);
 		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Corps_Affected,map);
 		super.notifyObservers(info);
 		

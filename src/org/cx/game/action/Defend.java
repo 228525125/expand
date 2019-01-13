@@ -105,6 +105,8 @@ public class Defend extends AbstractAction implements IAction {
 		map.put("attacked", getOwner());
 		map.put("position", getOwner().getPosition());
 		map.put("damage", damage);
+		String desc = getOwner().getName()+" 【受伤】 伤害："+damage+"；def："+getDef()+"，允许反击："+isCanFightBack();
+		map.put("description", desc);
 		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Corps_Attacked,map);
 		super.notifyObservers(info);
 		

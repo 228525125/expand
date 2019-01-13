@@ -23,7 +23,7 @@ public class DefendRule extends AbstractRule {
 		Integer damageValue = (Integer) getOwner().getActionResult("damageValue");
 		Boolean isCanFightBack = (Boolean) getOwner().getActionResult("isCanFightBack");
 		
-		Logger.debug(this, defend.getName()+" [受伤]; 伤害："+damageValue+"/def："+getOwner().getDef()+"/允许反击："+isCanFightBack);
+		//Logger.debug(this, defend.getName()+" [受伤]; 伤害："+damageValue+"/def："+getOwner().getDef()+"/允许反击："+isCanFightBack);
 		
 		//造成的实际伤害
 		Death death = defend.getDeath();

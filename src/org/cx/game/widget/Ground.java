@@ -216,14 +216,14 @@ public abstract class Ground extends AbstractGround {
 	public List<Integer> move(AbstractCorps corps, Integer position, Integer type) {
 		// TODO Auto-generated method stub
 		List<Integer> route = new ArrayList<Integer>();
-		Corps sc = (Corps) corps;
-		List<Node> path = route(getPosition(sc), position, type);
+		Corps c = (Corps) corps;
+		List<Node> path = route(getPosition(c), position, type);
 		
 		if(null==path)
 			return route;
 		
 		AbstractCorps lastCorps = null;
-		Integer lastPosition = sc.getPosition();
+		Integer lastPosition = c.getPosition();
 		route.add(lastPosition);
 		
 		for(int i=1;i<path.size();i++){
@@ -231,7 +231,7 @@ public abstract class Ground extends AbstractGround {
 			/*
 			 * moveable状态可能会在place.in中改变
 			 */
-			if(!sc.getMove().getMoveable())
+			if(!c.getMove().getMoveable())
 				break;
 			
 			Node node = (Node) path.get(i);
@@ -245,30 +245,29 @@ public abstract class Ground extends AbstractGround {
 			
 			place = getPlace(curPosition);
 			lastCorps = place.out();
-			place.in(sc);
+			place.in(c);
 			
 			/*
 			 * 减少精力
 			 */
-			Integer energy = sc.getMove().getEnergy();
+			Integer energy = c.getMove().getEnergy();
 			//System.out.println(sc.getName()+":"+energy);
 			energy -= node.consume;
 			//System.out.println("("+node._Pos.x+","+node._Pos.y+")"+node.consume);
-			sc.getMove().setEnergy(energy);
+			c.getMove().setEnergy(energy);
 			
 			/*
 			 * 生成朝向信息
 			 */
 			if(null!=lastPosition){
-				AbstractGround ground = sc.getPlayer().getContext().getGround();
-				Integer direction = ground.getDirection(lastPosition, sc.getPosition());
-				sc.getMove().setDirection(direction);
+				Integer direction = getDirection(lastPosition, curPosition);
+				c.getMove().setDirection(direction);
 			}
 			
 			/*
 			 * 添加路径
 			 */
-			route.add(sc.getPosition());
+			route.add(curPosition);
 			
 			lastPosition = curPosition;
 		}

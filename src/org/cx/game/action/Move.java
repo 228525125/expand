@@ -122,6 +122,8 @@ public class Move extends AbstractAction implements IAction {
 		map.put("route", route);
 		map.put("start", start);
 		map.put("position", getOwner().getPosition());
+		String desc = getOwner().getName()+" 【移动】 "+getOwner().getPosition()+"； 朝向："+getDirection()+"，路径："+route;
+		map.put("description", desc);
 		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Corps_Move,map);
 		super.notifyObservers(info);
 		
