@@ -79,7 +79,7 @@ public class Death extends AbstractAction implements IAction {
 		map.put("card", getOwner());
 		map.put("position", owner.getPosition());
 		String desc = getOwner().getName()+" 【死亡】；";
-		map.put("desciption", desc);
+		map.put("description", desc);
 		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Corps_Death,map);
 		super.notifyObservers(info);           //通知所有卡片对象，死亡事件
 		

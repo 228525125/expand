@@ -62,8 +62,7 @@ public class DizzyBuff extends AbstractBuff {
 		// TODO Auto-generated method stub
 		super.affect(objects);
 
-		getOwner().getActivate().action(false);
-		getOwner().getDefend().setCanFightBack(false);
+		getOwner().activate(false);
 	}
 
 	@Override

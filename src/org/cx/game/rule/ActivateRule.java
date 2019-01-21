@@ -24,14 +24,24 @@ public class ActivateRule extends AbstractRule {
 			for(AbstractBuff buff : buffs){
 				buff.invalid();
 			}
-		}/*else{
 			
-			 * 当活力值大于一次行动消耗时，再次获得一次行动
-			 
-			if(owner.getActivate().getVigour()>=Activate.ActivationConsume){
-				owner.activate(true);
-			}
-		}*/
+			/*
+			 * 激活相关状态
+			 */
+			owner.getAttack().setAttackable(true);
+			owner.getConjure().setConjureable(true);
+			owner.getMove().setMoveable(true);
+			owner.getMove().setEnergy(owner.getEnergy());
+			owner.getDefend().setCanFightBack(true);
+		}else{
+			
+			/*
+			 * 改变相关状态
+			 */
+			owner.getAttack().setAttackable(false);
+			owner.getMove().setMoveable(false);
+			owner.getConjure().setConjureable(false);
+		}
 	}
 	
 	@Override

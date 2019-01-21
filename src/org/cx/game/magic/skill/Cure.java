@@ -28,7 +28,7 @@ public class Cure extends ActiveSkill {
 	 */
 	public Cure(Integer id, Integer cureValue, Integer antibodyBout, String range) {
 		// TODO Auto-generated constructor stub
-		super(id, 0, 0);
+		super(id);
 		this.cureValue = cureValue;
 		this.antibodyBout = antibodyBout;
 		setRange(range);
@@ -63,5 +63,23 @@ public class Cure extends ActiveSkill {
 	public void setUseItOnYouself(Boolean useItOnYouself) {
 		// TODO Auto-generated method stub
 		super.setUseItOnYouself(useItOnYouself);
+	}
+	
+	@Override
+	public void setCooldown(Integer cooldown) {
+		// TODO Auto-generated method stub
+		super.setCooldown(cooldown);
+	}
+	
+	@Override
+	public void setConjureWait(Integer conjureWait) {
+		// TODO Auto-generated method stub
+		super.setConjureWait(conjureWait);
+	}
+	
+	@Override
+	public void setPrepare(Integer prepare) {
+		// TODO Auto-generated method stub
+		super.setPrepare(prepare);
 	}
 }

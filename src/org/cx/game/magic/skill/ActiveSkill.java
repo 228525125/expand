@@ -1,23 +1,9 @@
 package org.cx.game.magic.skill;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.cx.game.action.IAction;
 import org.cx.game.action.Upgrade;
 import org.cx.game.action.SkillUpgrade;
-import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
-import org.cx.game.exception.RuleValidatorException;
-import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.Util;
-import org.cx.game.validator.Errors;
-import org.cx.game.validator.FriendOrEnemyValidator;
-import org.cx.game.validator.IValidator;
-import org.cx.game.validator.ParameterTypeValidator;
-import org.cx.game.widget.AbstractGround;
 import org.cx.game.widget.AbstractOption;
 import org.cx.game.widget.Place;
 
@@ -29,29 +15,23 @@ public abstract class ActiveSkill extends AbstractSkill {
 
 	private Integer cooldown = 1;             //冷却回合
 	private Integer prepare = 0;              //准备（蓄力）回合
+	private Boolean isReserve = false;         //是否允许蓄力
+	private Integer conjureWait = 0;          //施法等待
+	
 	private String range = "1-1";             //range不一定总是从1开始计算，例如3-8；因此用一个字符串来表示
 	private String target = null;
 	private Integer useItOnFriendOrFoeOrAll = UseItOnFoe;
 	private Boolean useItOnYouself = false;
-	private Boolean isReserve = false;
 	
 	private Upgrade upgrade = null;
 	
 	/**
 	 * 
-	 * @param id 
-	 * @param cooldown 冷却回合 
-	 * @param prepare 准备回合
+	 * @param type 唯一标识 
 	 */
-	public ActiveSkill(Integer type, Integer cooldown, Integer prepare) {
+	public ActiveSkill(Integer type) {
 		// TODO Auto-generated constructor stub
 		super(type);
-		this.cooldown = cooldown;
-		if(prepare>0){
-			this.prepare = prepare;
-			this.isReserve = true;
-		}
-			
 	}
 	
 	@Override
@@ -102,7 +82,7 @@ public abstract class ActiveSkill extends AbstractSkill {
 	}
 
 	public void setCooldown(Integer cooldown) {
-		this.cooldown = cooldown;
+		this.cooldown = cooldown;		
 	}
 	
 	/**
@@ -115,8 +95,21 @@ public abstract class ActiveSkill extends AbstractSkill {
 
 	public void setPrepare(Integer prepare) {
 		this.prepare = prepare;
+		this.isReserve = prepare>0;
 	}
 	
+	/**
+	 * 施法等待，法术使用后一定回合才会生效
+	 * @return
+	 */
+	public Integer getConjureWait() {
+		return conjureWait;
+	}
+
+	public void setConjureWait(Integer conjureWait) {
+		this.conjureWait = conjureWait;
+	}
+
 	/**
 	 * 是否支持蓄力
 	 * @return

@@ -22,8 +22,8 @@ public class TauntActive extends ActiveSkill {
 
 	private final static Integer Taunt_ID = 10200006;
 	
-	public TauntActive(Integer cooldown) {
-		super(Taunt_ID, cooldown, 0);
+	public TauntActive(Integer id) {
+		super(id);
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -71,6 +71,12 @@ public class TauntActive extends ActiveSkill {
 		
 		Corps corps = (Corps) objects[0];
 		new TauntBuff((Corps) getOwner(),corps).effect();
+	}
+	
+	@Override
+	public void setCooldown(Integer cooldown) {
+		// TODO Auto-generated method stub
+		super.setCooldown(cooldown);
 	}
 
 }

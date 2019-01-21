@@ -27,12 +27,15 @@ import org.cx.game.corps.PlacementOption;
 import org.cx.game.corps.TeammateOption;
 import org.cx.game.magic.buff.AntibodyBuff;
 import org.cx.game.magic.buff.AttackLockBuff;
+import org.cx.game.magic.buff.ConjureWaitBuff;
 import org.cx.game.magic.buff.DizzyBuff;
 import org.cx.game.magic.skill.Bump;
 import org.cx.game.magic.skill.Bump.BumpOption;
 import org.cx.game.magic.skill.ConjureToPlaceOption;
 import org.cx.game.magic.skill.ConjureToCorpsOption;
 import org.cx.game.magic.skill.Cure;
+import org.cx.game.magic.skill.Dive;
+import org.cx.game.magic.skill.Dive.DiveOption;
 import org.cx.game.magic.skill.ShieldHit;
 import org.cx.game.magic.trick.ITrick;
 import org.cx.game.observer.NotifyInfo;
@@ -110,6 +113,7 @@ public class JsonOut extends AbstractResponse {
 							.element("defend", corps.getDefend(),getConfig())
 							.element("buffList", corps.getBuffList(),getConfig())
 							.element("call", corps.getCall(),getConfig())
+							.element("conjure", corps.getConjure(), getConfig())
 							.element("death", corps.getDeath(),getConfig())
 							.element("hero", corps.isHero())
 							.element("id", corps.getType())
@@ -182,8 +186,7 @@ public class JsonOut extends AbstractResponse {
 							.element("extraAtk", obj.getExtraAtk())
 							.element("landformAtk", obj.getLandformAtk())
 							.element("lockChance", obj.getLockChance())
-							.element("mode", obj.getMode())
-							.element("mobile", obj.getMobile())
+							.element("mode", obj.getMode())							
 							.element("range", obj.getRange())
 							.element("weaponAtk", obj.getWeaponAtk());
 				}
@@ -229,7 +232,7 @@ public class JsonOut extends AbstractResponse {
 				public JSONObject processBean(Object arg0, JsonConfig arg1) {
 					// TODO Auto-generated method stub
 					Conjure obj = (Conjure) arg0;
-					return new JSONObject();
+					return new JSONObject().element("conjureable", obj.getConjureable());
 				}
 			});
 			
@@ -267,6 +270,7 @@ public class JsonOut extends AbstractResponse {
 							.element("energy", obj.getEnergy())
 							.element("flee", obj.getFlee())
 							.element("hide", obj.getHide())
+							.element("mobile", obj.getMobile())
 							.element("moveable", obj.getMoveable())
 							.element("type", obj.getType());
 				}
@@ -517,7 +521,7 @@ public class JsonOut extends AbstractResponse {
 				public JSONObject processBean(Object arg0, JsonConfig arg1) {
 					// TODO Auto-generated method stub
 					BuildOption obj = (BuildOption) arg0;
-					return new JSONObject().element("allow", obj.getAllow())
+					return new JSONObject().element("status", obj.getStatus())
 							.element("executeRemainBout", obj.getExecuteRemainBout())
 							.element("executeWait", obj.getExecuteWait())
 							.element("name", obj.getName())
@@ -532,7 +536,7 @@ public class JsonOut extends AbstractResponse {
 				public JSONObject processBean(Object arg0, JsonConfig arg1) {
 					// TODO Auto-generated method stub
 					BuildingUpgradeOption obj = (BuildingUpgradeOption) arg0;
-					return new JSONObject().element("allow", obj.getAllow())
+					return new JSONObject().element("status", obj.getStatus())
 							.element("executeRemainBout", obj.getExecuteRemainBout())
 							.element("executeWait", obj.getExecuteWait())
 							.element("name", obj.getName())
@@ -547,7 +551,7 @@ public class JsonOut extends AbstractResponse {
 				public JSONObject processBean(Object arg0, JsonConfig arg1) {
 					// TODO Auto-generated method stub
 					CallOption obj = (CallOption) arg0;
-					return new JSONObject().element("allow", obj.getAllow())
+					return new JSONObject().element("status", obj.getStatus())
 							.element("executeRemainBout", obj.getExecuteRemainBout())
 							.element("executeWait", obj.getExecuteWait())
 							.element("name", obj.getName())
@@ -562,7 +566,7 @@ public class JsonOut extends AbstractResponse {
 				public JSONObject processBean(Object arg0, JsonConfig arg1) {
 					// TODO Auto-generated method stub
 					ReviveOption obj = (ReviveOption) arg0;
-					return new JSONObject().element("allow", obj.getAllow())
+					return new JSONObject().element("status", obj.getStatus())
 							.element("executeRemainBout", obj.getExecuteRemainBout())
 							.element("executeWait", obj.getExecuteWait())
 							.element("name", obj.getName())
@@ -577,7 +581,7 @@ public class JsonOut extends AbstractResponse {
 				public JSONObject processBean(Object arg0, JsonConfig arg1) {
 					// TODO Auto-generated method stub
 					SpatialOption obj = (SpatialOption) arg0;
-					return new JSONObject().element("allow", obj.getAllow())
+					return new JSONObject().element("status", obj.getStatus())
 							.element("executeRemainBout", obj.getExecuteRemainBout())
 							.element("executeWait", obj.getExecuteWait())
 							.element("name", obj.getName())
@@ -592,7 +596,7 @@ public class JsonOut extends AbstractResponse {
 				public JSONObject processBean(Object arg0, JsonConfig arg1) {
 					// TODO Auto-generated method stub
 					TeammateOption obj = (TeammateOption) arg0;
-					return new JSONObject().element("allow", obj.getAllow())
+					return new JSONObject().element("status", obj.getStatus())
 							.element("name", obj.getName());
 				}
 			});
@@ -603,7 +607,7 @@ public class JsonOut extends AbstractResponse {
 				public JSONObject processBean(Object arg0, JsonConfig arg1) {
 					// TODO Auto-generated method stub
 					ConjureToPlaceOption obj = (ConjureToPlaceOption) arg0;
-					return new JSONObject().element("allow", obj.getAllow())
+					return new JSONObject().element("status", obj.getStatus())
 							.element("executeRemainBout", obj.getExecuteRemainBout())
 							.element("executeWait", obj.getExecuteWait())
 							.element("name", obj.getName())
@@ -618,7 +622,7 @@ public class JsonOut extends AbstractResponse {
 				public JSONObject processBean(Object arg0, JsonConfig arg1) {
 					// TODO Auto-generated method stub
 					ConjureToCorpsOption obj = (ConjureToCorpsOption) arg0;
-					return new JSONObject().element("allow", obj.getAllow())
+					return new JSONObject().element("status", obj.getStatus())
 							.element("executeRemainBout", obj.getExecuteRemainBout())
 							.element("executeWait", obj.getExecuteWait())
 							.element("name", obj.getName())
@@ -633,7 +637,22 @@ public class JsonOut extends AbstractResponse {
 				public JSONObject processBean(Object arg0, JsonConfig arg1) {
 					// TODO Auto-generated method stub
 					BumpOption obj = (BumpOption) arg0;
-					return new JSONObject().element("allow", obj.getAllow())
+					return new JSONObject().element("status", obj.getStatus())
+							.element("executeRemainBout", obj.getExecuteRemainBout())
+							.element("executeWait", obj.getExecuteWait())
+							.element("name", obj.getName())
+							.element("spacingRemainBout", obj.getSpacingRemainBout())
+							.element("spacingWait", obj.getSpacingWait());
+				}
+			});
+			
+			config.registerJsonBeanProcessor(DiveOption.class, new JsonBeanProcessor() {
+				
+				@Override
+				public JSONObject processBean(Object arg0, JsonConfig arg1) {
+					// TODO Auto-generated method stub
+					DiveOption obj = (DiveOption) arg0;
+					return new JSONObject().element("status", obj.getStatus())
 							.element("executeRemainBout", obj.getExecuteRemainBout())
 							.element("executeWait", obj.getExecuteWait())
 							.element("name", obj.getName())
@@ -648,7 +667,7 @@ public class JsonOut extends AbstractResponse {
 				public JSONObject processBean(Object arg0, JsonConfig arg1) {
 					// TODO Auto-generated method stub
 					PlacementOption obj = (PlacementOption) arg0;
-					return new JSONObject().element("allow", obj.getAllow())
+					return new JSONObject().element("status", obj.getStatus())
 							.element("executeRemainBout", obj.getExecuteRemainBout())
 							.element("executeWait", obj.getExecuteWait())
 							.element("name", obj.getName())
@@ -742,6 +761,7 @@ public class JsonOut extends AbstractResponse {
 					return new JSONObject().element("name", obj.getName())
 							.element("cooldown", obj.getCooldown())
 							.element("prepare", obj.getPrepare())
+							.element("conjureWait", obj.getConjureWait())
 							.element("range", obj.getRange())
 							.element("upgrade", obj.getUpgrade(), getConfig())
 							.element("optionList", obj.getOptionList(), getConfig());
@@ -757,6 +777,7 @@ public class JsonOut extends AbstractResponse {
 					return new JSONObject().element("name", obj.getName())
 							.element("cooldown", obj.getCooldown())
 							.element("prepare", obj.getPrepare())
+							.element("conjureWait", obj.getConjureWait())
 							.element("range", obj.getRange())
 							.element("upgrade", obj.getUpgrade(), getConfig())
 							.element("optionList", obj.getOptionList(), getConfig());
@@ -772,6 +793,23 @@ public class JsonOut extends AbstractResponse {
 					return new JSONObject().element("name", obj.getName())
 							.element("cooldown", obj.getCooldown())
 							.element("prepare", obj.getPrepare())
+							.element("conjureWait", obj.getConjureWait())
+							.element("range", obj.getRange())
+							.element("upgrade", obj.getUpgrade(), getConfig())
+							.element("optionList", obj.getOptionList(), getConfig());
+				}
+			});
+			
+			config.registerJsonBeanProcessor(Dive.class, new JsonBeanProcessor() {
+				
+				@Override
+				public JSONObject processBean(Object arg0, JsonConfig arg1) {
+					// TODO Auto-generated method stub
+					Dive obj = (Dive) arg0;
+					return new JSONObject().element("name", obj.getName())
+							.element("cooldown", obj.getCooldown())
+							.element("prepare", obj.getPrepare())
+							.element("conjureWait", obj.getConjureWait())
 							.element("range", obj.getRange())
 							.element("upgrade", obj.getUpgrade(), getConfig())
 							.element("optionList", obj.getOptionList(), getConfig());
@@ -807,6 +845,17 @@ public class JsonOut extends AbstractResponse {
 				public JSONObject processBean(Object arg0, JsonConfig arg1) {
 					// TODO Auto-generated method stub
 					DizzyBuff obj = (DizzyBuff) arg0;
+					return new JSONObject().element("name", obj.getName())
+							.element("depiction", obj.getDepiction());
+				}
+			});
+			
+			config.registerJsonBeanProcessor(ConjureWaitBuff.class, new JsonBeanProcessor() {
+				
+				@Override
+				public JSONObject processBean(Object arg0, JsonConfig arg1) {
+					// TODO Auto-generated method stub
+					ConjureWaitBuff obj = (ConjureWaitBuff) arg0;
 					return new JSONObject().element("name", obj.getName())
 							.element("depiction", obj.getDepiction());
 				}

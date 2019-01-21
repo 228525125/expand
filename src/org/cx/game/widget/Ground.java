@@ -310,7 +310,7 @@ public abstract class Ground extends AbstractGround {
 	 * @param type
 	 * @return
 	 */
-	public List<AbstractCorps> getCorpsList(Integer stand, Integer step, Integer type) {
+	public List<AbstractCorps> queryCorpsList(Integer stand, Integer step, Integer type) {
 		// TODO Auto-generated method stub
 		List<AbstractCorps> ls = new ArrayList<AbstractCorps>();
 		

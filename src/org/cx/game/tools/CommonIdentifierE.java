@@ -140,7 +140,6 @@ public class CommonIdentifierE extends CommonIdentifier {
 	public final static String Command_Query_Pick = "Command_Query_Pick";
 	public final static String Command_Query_Merge = "Command_Query_Merge";
 	public final static String Command_Query_Leave = "Command_Query_Leave";
-	public final static String Command_Reload = "Command_Reload";
 	public final static String Command_Switch = "Command_Switch";
 	public final static String Command_Deploy = "Command_Deploy";
 	public final static String Command_Ready = "Command_Ready";
@@ -149,4 +148,5 @@ public class CommonIdentifierE extends CommonIdentifier {
 	public final static String Context_Deploy = "Context_Deploy";
 	public final static String Context_Done = "Context_Done";
 	public final static String Context_Finish = "Context_Finish";
+	
 }

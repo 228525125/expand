@@ -30,6 +30,8 @@ public class Move extends AbstractAction implements IAction {
 	private Integer flee = 0;         //逃离成功率
 	private Boolean hide = false;           //隐形状态
 	
+	private Boolean mobile = false;                   //是否可移动攻击
+	
 	private List<Integer> path = new ArrayList<Integer>();
 	
 	private Integer direction = AbstractGround.Relative_Right;
@@ -48,6 +50,19 @@ public class Move extends AbstractAction implements IAction {
 	public void setType(Integer type) {
 		// TODO Auto-generated method stub
 		this.type = type;
+		
+		switch (type) {
+		case 142:              //骑行
+			setMobile(true);
+			break;
+		
+		case 144:              //飞行
+			setMobile(true);
+			break;
+			
+		default:
+			break;
+		}
 	}
 	
 	public Integer getConsume() {
@@ -102,6 +117,18 @@ public class Move extends AbstractAction implements IAction {
 
 	public void setDirection(Integer direction) {
 		this.direction = direction;
+	}
+	
+	/**
+	 * 移动攻击，例如，骑兵
+	 * @return
+	 */
+	public Boolean getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(Boolean mobile) {
+		this.mobile = mobile;
 	}
 
 	@Override

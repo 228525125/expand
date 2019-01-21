@@ -86,7 +86,7 @@ public abstract class Aureole extends PassiveSkill {
 
 	private void refurbish(){
 		Ground ground = (Ground) getOwner().getPlayer().getContext().getGround();
-		List<AbstractCorps> ls = ground.getCorpsList(getOwner().getPosition(), getRange(), AbstractGround.Contain);
+		List<AbstractCorps> ls = ground.queryCorpsList(getOwner().getPosition(), getRange(), AbstractGround.Contain);
 		
 		List<AbstractCorps> tempList = new ArrayList<AbstractCorps>();  //将离开范围的corps去掉buff
 		tempList.addAll(affectedList);

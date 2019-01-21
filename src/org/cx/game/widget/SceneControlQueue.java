@@ -17,7 +17,9 @@ public class SceneControlQueue extends AbstractControlQueue<Corps> {
 			}
 			
 		};
-		place.setCount(t.getSpeed());
+		
+		Integer speed = t.getActivate().getSpeed();
+		place.setCount(speed);
 		
 		insert(place);
 	}

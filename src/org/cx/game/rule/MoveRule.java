@@ -12,11 +12,6 @@ public class MoveRule extends AbstractRule {
 		Corps owner = getOwner().getOwner();
 		
 		/*
-		 * 蓄力归零
-		 */
-		owner.getGrow().setPower(0);
-		
-		/*
 		 * 远程单位，疲劳惩罚
 		 */
 		if(CommonIdentifierE.Attack_Mode_Far.equals(owner.getAttackMode())){

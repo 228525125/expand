@@ -3,7 +3,6 @@ package org.cx.game.widget.building;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.cx.game.action.Execute;
 import org.cx.game.action.IAction;
 import org.cx.game.core.AbstractPlayer;
 import org.cx.game.corps.AbstractCorps;
@@ -111,7 +110,7 @@ public class CallOption extends AbstractOption {
 		super.setNumber(number);
 	}
 	
-	public class OptionCallExecute extends Execute implements IAction {
+	class OptionCallExecute extends Execute implements IAction {
 		
 		@Override
 		public void action(Object... objects) {

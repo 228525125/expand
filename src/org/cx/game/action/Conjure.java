@@ -15,6 +15,16 @@ import org.cx.game.tools.CommonIdentifierE;
  */
 public class Conjure extends AbstractAction implements IAction {
 	
+	private Boolean conjureable = false;
+	
+	public Boolean getConjureable() {
+		return conjureable;
+	}
+
+	public void setConjureable(Boolean conjureable) {
+		this.conjureable = conjureable;
+	}
+
 	@Override
 	public Corps getOwner() {
 		// TODO Auto-generated method stub
@@ -28,18 +38,21 @@ public class Conjure extends AbstractAction implements IAction {
 		
 		ActiveSkill skill = (ActiveSkill) objects[0];
 		
-		Map<String,Object> map = new HashMap<String,Object>();
+		/*
+		 * 由ConjureOptionBeforeExecute负责发送通知
+		 */
+		/*Map<String,Object> map = new HashMap<String,Object>();
 		map.put("card", getOwner());
 		map.put("position", getOwner().getPosition());
 		map.put("skill", skill);
 		String desc = getOwner().getName()+" 【使用技能】 "+skill.getName();
 		map.put("description", desc);
 		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Corps_Conjure,map);
-		super.notifyObservers(info);	
+		super.notifyObservers(info);*/
 		
 		Object [] parameter = (Object[]) objects[1];
 		skill.useSkill(parameter);
 		
-		getOwner().getAttack().setAttackable(false);
+		setConjureable(false);
 	}
 }

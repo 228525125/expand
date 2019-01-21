@@ -3,17 +3,19 @@ package org.cx.game.validator;
 import org.cx.game.corps.Corps;
 import org.cx.game.magic.skill.ActiveSkill;
 import org.cx.game.tools.I18n;
+import org.cx.game.tools.Util;
 
 /**
- * 蓄力的验证，当技能允许蓄力，且corps已经满足蓄力条件，则通过验证；
+ * 蓄力的验证，当没有蓄力不足，且moveable为false时，无法通过；
  * @author chenxian
  *
  */
-public class CorpsConjurePrepareValidator extends Validator {
+public class CorpsConjurePrepareValidator extends CorpsMoveableValidator {
 
 	private ActiveSkill skill = null;
 	
 	public CorpsConjurePrepareValidator(ActiveSkill skill) {
+		super((Corps) skill.getOwner());
 		// TODO Auto-generated constructor stub
 		this.skill = skill;
 	}
@@ -24,13 +26,21 @@ public class CorpsConjurePrepareValidator extends Validator {
 		Boolean ret = super.validate();
 		
 		Corps corps = (Corps) this.skill.getOwner();
-		if(skill.getPrepare()<=corps.getGrow().getPower()){
-			ret = true;
-		}else{
-			addMessage(I18n.getMessage(CorpsConjurePrepareValidator.class.getName()));
-			ret = false;
-		}
 		
+		if(!ret){
+			if(skill.getPrepare()<=corps.getGrow().getPower()){
+				ret = true;
+				
+				/*
+				 * 如果power满足技能需求，则通过并扣减power
+				 */
+				corps.getGrow().setPower(Util.Sub, skill.getPrepare());
+			}else{
+				addMessage(I18n.getMessage(CorpsConjurePrepareValidator.class.getName()));
+				ret = false;
+			}
+		}
+
 		return ret; 
 	}
 }

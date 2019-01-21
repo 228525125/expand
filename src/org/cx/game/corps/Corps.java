@@ -227,7 +227,6 @@ public class Corps extends AbstractCorps {
 			attack.setRange(getAttackRange());
 			attack.setLockChance(getLockChance());
 			attack.setMode(getAttackMode());
-			attack.setMobile(getMobile());
 			attack.setOwner(this);
 		}
 		return attack;
@@ -273,6 +272,7 @@ public class Corps extends AbstractCorps {
 			move.setFlee(getFleeChance());
 			move.setType(getMoveType());
 			move.setHide(getHide());
+			move.setMobile(getMobile());
 			move.setOwner(this);
 		}
 		return move;

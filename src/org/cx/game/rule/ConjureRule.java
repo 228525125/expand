@@ -23,9 +23,16 @@ public class ConjureRule extends AbstractRule {
 		Corps owner = getOwner().getOwner();
 		
 		/*
-		 * 蓄力归零
+		 * 判断移动攻击
 		 */
-		owner.getGrow().setPower(0);
+		if(!getOwner().getOwner().getMobile()){
+			getOwner().getOwner().getMove().setMoveable(false);
+		}
+		
+		/*
+		 * 一回合只能选择施法或攻击
+		 */
+		getOwner().getOwner().getAttack().setAttackable(false);
 	}
 
 }

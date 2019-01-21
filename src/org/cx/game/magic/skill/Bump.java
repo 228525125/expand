@@ -8,13 +8,14 @@ import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.magic.buff.DizzyBuff;
 import org.cx.game.tools.Util;
+import org.cx.game.validator.CorpsConjurePrepareValidator;
 import org.cx.game.validator.CorpsMoveableValidator;
 import org.cx.game.widget.AbstractGround;
 import org.cx.game.widget.AbstractOption;
 import org.cx.game.widget.Ground;
 
 /**
- * 标准技能，冲撞，一般为骑兵主要技能
+ * 标准技能，冲锋，一般为骑兵主要技能
  * @author chenxian
  *
  */
@@ -33,8 +34,8 @@ public class Bump extends ActiveSkill {
 	 * @param range 范围
 	 * @param dizzyBout 击晕回合
 	 */
-	public Bump(Integer id, Integer cooldown, String range, Integer atkScale, Integer dizzyBout) {
-		super(id, cooldown, 0);
+	public Bump(Integer id, String range, Integer atkScale, Integer dizzyBout) {
+		super(id);
 		// TODO Auto-generated constructor stub
 		super.setRange(range);
 		this.atkScale = atkScale;
@@ -57,6 +58,19 @@ public class Bump extends ActiveSkill {
 		 * 使用技能必须保证Corps可移动
 		 */
 		this.bumpOption.addValidator(new CorpsMoveableValidator((Corps) corps));
+		//this.bumpOption.addValidator(new CorpsConjurePrepareValidator(this));
+	}
+	
+	@Override
+	public void setCooldown(Integer cooldown) {
+		// TODO Auto-generated method stub
+		super.setCooldown(cooldown);
+	}
+	
+	@Override
+	public void setPrepare(Integer prepare) {
+		// TODO Auto-generated method stub
+		super.setPrepare(prepare);
 	}
 
 	@Override

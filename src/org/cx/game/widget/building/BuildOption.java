@@ -3,7 +3,6 @@ package org.cx.game.widget.building;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.cx.game.action.Execute;
 import org.cx.game.action.IAction;
 import org.cx.game.core.AbstractPlayer;
 import org.cx.game.exception.RuleValidatorException;
@@ -56,8 +55,20 @@ public class BuildOption extends AbstractOption {
 		addValidator(new BuildConsumeValidator(b));
 	}
 
+	private BeforeExecute beforeExecute = null;
 	private Execute execute = null;
 
+	@Override
+	public BeforeExecute getBeforeExecute() {
+		// TODO Auto-generated method stub
+		if(null==this.beforeExecute){
+			this.beforeExecute = new OptionBuildBeforeExecute();
+			this.beforeExecute.setOwner(this);
+		}
+		return this.beforeExecute;
+	}
+	
+	@Override
 	public Execute getExecute() {
 		if(null==this.execute){
 			Execute execute = new OptionBuildExecute();
@@ -79,9 +90,9 @@ public class BuildOption extends AbstractOption {
 	}
 
 	@Override
-	public Boolean getAllow() {
+	public Integer getStatus() {
 		// TODO Auto-generated method stub
-		Boolean ret = true;
+		Integer ret = super.getStatus();
 		
 		/*
 		 * 判断基础建筑物是否建造
@@ -97,24 +108,39 @@ public class BuildOption extends AbstractOption {
 			
 			for(Integer type : getOwner().getNeedBuilding()){
 				if(!list.contains(type)){
-					ret = false;
+					ret = AbstractOption.Status_Unenforceable;
 					break;
 				}
 			}
 		}
+		
+		if(!AbstractBuilding.Building_Status_Nothingness.equals(getOwner().getStatus())){
+			ret = AbstractOption.Status_Unenforceable;
+		}
 			
-		return ret && AbstractBuilding.Building_Status_Nothingness.equals(getOwner().getStatus());
+		return ret;
 	}
 	
-	@Override
-	public void beforeExecute() {
-		// TODO Auto-generated method stub
-		AbstractBuilding building = getOwner();
-		building.getPlayer().setMineral(Util.Sub, building.getConsume());
-		building.setStatus(AbstractBuilding.Building_Status_Build);
+	class OptionBuildBeforeExecute extends BeforeExecute implements IAction {
+		
+		@Override
+		public void action(Object... objects) {
+			// TODO Auto-generated method stub
+			super.action(objects);
+			
+			AbstractBuilding building = getOwner().getOwner();
+			building.getPlayer().setMineral(Util.Sub, building.getConsume());
+			building.setStatus(AbstractBuilding.Building_Status_Build);
+		}
+		
+		@Override
+		public BuildOption getOwner() {
+			// TODO Auto-generated method stub
+			return (BuildOption) super.getOwner();
+		}
 	}
 	
-	public class OptionBuildExecute extends Execute implements IAction {
+	class OptionBuildExecute extends Execute implements IAction {
 
 		@Override
 		public void action(Object... objects) {

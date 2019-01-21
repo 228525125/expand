@@ -2,6 +2,7 @@ package org.cx.game.validator;
 
 import org.cx.game.command.CommandBuffer;
 import org.cx.game.tools.I18n;
+import org.cx.game.widget.AbstractOption;
 
 /**
  * 验证选项是否能被执行
@@ -21,7 +22,7 @@ public class OptionAllowBufferValidator extends SelectOptionBufferValidator {
 		Boolean ret = super.validate();
 		
 		if(ret){
-			ret = getOption().getAllow();
+			ret = AbstractOption.Status_Executable.equals(getOption().getStatus());
 			if(!ret){
 				addMessage(I18n.getMessage(OptionAllowBufferValidator.class.getName()));
 			}

@@ -1,36 +1,18 @@
 package org.cx.game.core;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
-import org.cx.game.action.Execute;
-import org.cx.game.action.IAction;
 import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
-import org.cx.game.corps.CorpsFactory;
 import org.cx.game.corps.PlacementOption;
-import org.cx.game.exception.RuleValidatorException;
-import org.cx.game.observer.NotifyInfo;
-import org.cx.game.tools.CommonIdentifierE;
-import org.cx.game.tools.I18n;
 import org.cx.game.tools.Util;
 import org.cx.game.tools.XmlConfigureHelper;
-import org.cx.game.validator.CorpsCallRangeValidator;
-import org.cx.game.validator.CorpsPlacementRangeValidator;
-import org.cx.game.widget.AbstractControlQueue;
-import org.cx.game.widget.AbstractGround;
 import org.cx.game.widget.AbstractOption;
 import org.cx.game.widget.Ground;
-import org.cx.game.widget.GroundFactory;
-import org.cx.game.widget.HoneycombGround;
-import org.cx.game.widget.Place;
 import org.cx.game.widget.Scene;
 import org.cx.game.widget.SceneFactory;
-import org.cx.game.widget.building.AbstractBuilding;
-import org.cx.game.widget.building.CallOption.OptionCallExecute;
 
 public class SceneHost extends AbstractHost {
 

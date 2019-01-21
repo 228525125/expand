@@ -24,8 +24,8 @@ public class ShieldHit extends ActiveSkill {
 	 * @param atkScale 攻击比例
 	 * @param bout 眩晕回合
 	 */
-	public ShieldHit(Integer id, Integer cooldown, Integer atkScale, Integer bout) {
-		super(id, cooldown, 0);
+	public ShieldHit(Integer id, Integer atkScale, Integer bout) {
+		super(id);
 		// TODO Auto-generated constructor stub
 		this.atkScale = atkScale;
 		this.bout = bout;
@@ -42,5 +42,11 @@ public class ShieldHit extends ActiveSkill {
 		
 		if(harmToCorps(harm, corps))
 			new DizzyBuff(bout, corps).effect();
+	}
+	
+	@Override
+	public void setCooldown(Integer cooldown) {
+		// TODO Auto-generated method stub
+		super.setCooldown(cooldown);
 	}
 }

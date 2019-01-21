@@ -3,7 +3,6 @@ package org.cx.game.widget.building;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.cx.game.action.Execute;
 import org.cx.game.action.IAction;
 import org.cx.game.core.AbstractPlayer;
 import org.cx.game.exception.RuleValidatorException;
@@ -18,7 +17,6 @@ import org.cx.game.widget.treasure.Mineral;
 public class BuildingUpgradeOption extends AbstractOption {
  
 	private String name = null;
-	private Boolean allow = false;
 	
 	@Override
 	public String getName() {
@@ -53,12 +51,6 @@ public class BuildingUpgradeOption extends AbstractOption {
 	}
 	
 	@Override
-	public Boolean getAllow() {
-		// TODO Auto-generated method stub
-		return super.getAllow() && this.allow;
-	}
-	
-	@Override
 	public List<Integer> getExecuteRange() {
 		// TODO Auto-generated method stub
 		List<Integer> positionList = new ArrayList<Integer>();
@@ -74,8 +66,20 @@ public class BuildingUpgradeOption extends AbstractOption {
 		return getOwner().getBuildWait();
 	}
 	
+	private BeforeExecute beforeExecute = null;
 	private Execute execute = null;
 
+	@Override
+	public BeforeExecute getBeforeExecute() {
+		// TODO Auto-generated method stub
+		if(null==this.beforeExecute){
+			this.beforeExecute = new OptionBuildingUpgradeBeforeExecute();
+			this.beforeExecute.setOwner(this);
+		}
+		return this.beforeExecute;
+	}
+	
+	@Override
 	public Execute getExecute() {
 		if(null==this.execute){
 			Execute execute = new OptionBuildingUpgradeExecute();
@@ -85,16 +89,27 @@ public class BuildingUpgradeOption extends AbstractOption {
 		return this.execute;
 	}
 	
-	@Override
-	protected void beforeExecute() {
-		// TODO Auto-generated method stub
-		AbstractPlayer player = getOwner().getPlayer();
-		player.setMineral(Util.Sub, (Mineral) getOwner().getUpgrade().getRequirement());
+	class OptionBuildingUpgradeBeforeExecute extends BeforeExecute implements IAction {
 		
-		getOwner().setStatus(AbstractBuilding.Building_Status_Build);
+		@Override
+		public void action(Object... objects) {
+			// TODO Auto-generated method stub
+			super.action(objects);
+			
+			AbstractPlayer player = getOwner().getOwner().getPlayer();
+			player.setMineral(Util.Sub, (Mineral) getOwner().getOwner().getUpgrade().getRequirement());
+			
+			getOwner().setStatus(AbstractBuilding.Building_Status_Build);
+		}
+		
+		@Override
+		public BuildingUpgradeOption getOwner() {
+			// TODO Auto-generated method stub
+			return (BuildingUpgradeOption) super.getOwner();
+		}
 	}
 	
-	public class OptionBuildingUpgradeExecute extends Execute implements IAction{
+	class OptionBuildingUpgradeExecute extends Execute implements IAction{
 
 		@Override
 		public void action(Object... objects) {
@@ -114,6 +129,9 @@ public class BuildingUpgradeOption extends AbstractOption {
 	private void inquiryBuildingIsAllowUpdate() {
 		Integer level = getOwner().getUpgrade().getLevel();
 		Integer levelLimit = getOwner().getUpgrade().getLevelLimit();
-		this.allow = level<levelLimit;
+		if(AbstractOption.Status_Executable.equals(getStatus()) && level<levelLimit)
+			setStatus(AbstractOption.Status_Executable);
+		else
+			setStatus(AbstractOption.Status_Unenforceable); 
 	}
 }

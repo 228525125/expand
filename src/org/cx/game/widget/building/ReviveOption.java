@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
-import org.cx.game.action.Execute;
 import org.cx.game.action.IAction;
 import org.cx.game.core.AbstractPlayer;
 import org.cx.game.corps.Hero;
@@ -124,7 +123,7 @@ public class ReviveOption extends AbstractOption {
 		}	
 	}
 	
-	public class OptionReviveExecute extends Execute implements IAction {
+	class OptionReviveExecute extends Execute implements IAction {
 		
 		private Hero hero = null;
 

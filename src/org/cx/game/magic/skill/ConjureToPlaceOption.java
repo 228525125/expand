@@ -1,14 +1,17 @@
 package org.cx.game.magic.skill;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import org.cx.game.action.Execute;
 import org.cx.game.action.IAction;
 import org.cx.game.core.AbstractPlayer;
 import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
+import org.cx.game.observer.NotifyInfo;
+import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.tools.I18n;
 import org.cx.game.validator.CorpsAttackableValidator;
 import org.cx.game.validator.CorpsConjurePrepareValidator;
@@ -28,58 +31,11 @@ import com.sun.imageio.plugins.common.I18N;
  * @author admin
  *
  */
-public class ConjureToPlaceOption extends AbstractOption {
-	
-	private String name = null;
+public class ConjureToPlaceOption extends ConjureOption {
 	
 	public ConjureToPlaceOption(ActiveSkill skill) {
 		// TODO Auto-generated constructor stub
-		setOwner(skill);
-		setSpacingWait(skill.getCooldown());
-	}
-	
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		if(null==name){
-			name = I18n.getMessage(ConjureToPlaceOption.class, "name");
-			name += getOwner().getName();
-		}
-		return name;
-	}
-	
-	@Override
-	public List<Integer> getExecuteRange() {
-		// TODO Auto-generated method stub
-		List<Integer> positionList = new ArrayList<Integer>();
-		ActiveSkill as = (ActiveSkill) getOwner();
-		AbstractCorps corps = as.getOwner();
-		AbstractGround ground = corps.getGround();
-		Integer position = corps.getPosition();
-		positionList = ground.areaForDistance(position, as.getRange(), AbstractGround.Contain);
-		return positionList;
-	}
-	
-	@Override
-	public ActiveSkill getOwner() {
-		// TODO Auto-generated method stub
-		return (ActiveSkill) super.getOwner();
-	}
-	
-	@Override
-	public void setOwner(Object owner) {
-		// TODO Auto-generated method stub
-		super.setOwner(owner);
-		
-		ActiveSkill skill = (ActiveSkill) owner;
-		addValidator(new CorpsAttackableValidator((Corps)skill.getOwner()));
-		addValidator(new CorpsConjurePrepareValidator(skill));
-	}
-	
-	@Override
-	protected AbstractControlQueue getControlQueue() {
-		// TODO Auto-generated method stub
-		return getOwner().getOwner().getGround().getQueue();
+		super(skill);
 	}
 	
 	@Override
@@ -124,6 +80,13 @@ public class ConjureToPlaceOption extends AbstractOption {
 			Corps corps = (Corps) skill.getOwner();
 			
 			corps.conjure(skill, objects);
+			
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("corps", corps);
+			map.put("option", skill);
+			map.put("position", corps.getPosition());
+			NotifyInfo info = new NotifyInfo(CommonIdentifierE.Option_Executed,map);
+			notifyObservers(info);
 		}
 		
 		@Override

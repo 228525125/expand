@@ -19,9 +19,16 @@ public class AttackRule extends AbstractRule {
 		Corps attack = getOwner().getOwner();
 		
 		/*
-		 * 蓄力归零
+		 * 判断移动攻击
 		 */
-		attack.getGrow().setPower(0);
+		if(!getOwner().getOwner().getMove().getMobile()){
+			getOwner().getOwner().getMove().setMoveable(false);
+		}
+		
+		/*
+		 * 一回合只能选择施法或攻击
+		 */
+		getOwner().getOwner().getConjure().setConjureable(false);
 		
 		AbstractGround ground = getOwner().getOwner().getGround();
 		Integer distance = ground.distance(attacked.getPosition(), attack.getPosition());

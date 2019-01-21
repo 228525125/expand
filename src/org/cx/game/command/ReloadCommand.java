@@ -21,6 +21,12 @@ public class ReloadCommand extends InteriorCommand {
 	}
 	
 	@Override
+	public Boolean isNeedControl() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	@Override
 	public void execute() throws ValidatorException {
 		// TODO Auto-generated method stub
 		super.execute();

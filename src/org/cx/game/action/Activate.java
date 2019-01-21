@@ -42,20 +42,6 @@ public class Activate extends AbstractAction implements IAction {
 		this.speed = speed;
 	}
 	
-	public void setSpeed(Integer funType, Integer speed) {
-		this.speed = Util.operating(funType, this.speed, speed);
-	}
-	
-	/*public Integer getVigour() {
-		// TODO Auto-generated method stub
-		return this.vigour;
-	}*/
-	
-	/*public void setVigour(Integer funType, Integer vigour) {
-		this.vigour = Util.operating(funType, this.vigour, vigour);
-		this.vigour = this.vigour > 200 ? 200 : this.vigour;         //最多一个回合只能行动两次
-	}*/
-	
 	@Override
 	public void action(Object... objects) {
 		// TODO Auto-generated method stub
@@ -67,22 +53,12 @@ public class Activate extends AbstractAction implements IAction {
 		Corps owner = getOwner();
 		
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("card", owner);
+		map.put("corps", owner);
 		map.put("position", owner.getPosition());
 		map.put("activate", activate);
+		String desc = getOwner().getName()+" 【激活】 ；";
+		map.put("description", desc);
 		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Corps_Activate,map);
 		notifyObservers(info);
-		
-		if(activation){
-			owner.getAttack().setAttackable(true);
-			owner.getMove().setMoveable(true);
-			owner.getMove().setEnergy(owner.getEnergy());
-			owner.getDefend().setCanFightBack(true);
-			
-			//setVigour(Util.Sub, ActivationConsume);
-		}else{
-			owner.getAttack().setAttackable(false);
-			owner.getMove().setMoveable(false);
-		}
 	}
 }

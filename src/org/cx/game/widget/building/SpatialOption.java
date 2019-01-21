@@ -3,7 +3,6 @@ package org.cx.game.widget.building;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.cx.game.action.Execute;
 import org.cx.game.action.IAction;
 import org.cx.game.core.AbstractPlayer;
 import org.cx.game.corps.Corps;
@@ -84,7 +83,7 @@ public class SpatialOption extends AbstractOption {
 		super.execute(objects);
 	}
 	
-	public class SpatialOptionExecute extends Execute implements IAction {
+	class SpatialOptionExecute extends Execute implements IAction {
 		
 		@Override
 		public void action(Object... objects) {
