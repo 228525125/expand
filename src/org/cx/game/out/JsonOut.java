@@ -29,6 +29,7 @@ import org.cx.game.magic.buff.AntibodyBuff;
 import org.cx.game.magic.buff.AttackLockBuff;
 import org.cx.game.magic.buff.ConjureWaitBuff;
 import org.cx.game.magic.buff.DizzyBuff;
+import org.cx.game.magic.buff.SneakBuff;
 import org.cx.game.magic.skill.Bump;
 import org.cx.game.magic.skill.Bump.BumpOption;
 import org.cx.game.magic.skill.ConjureToPlaceOption;
@@ -37,6 +38,7 @@ import org.cx.game.magic.skill.Cure;
 import org.cx.game.magic.skill.Dive;
 import org.cx.game.magic.skill.Dive.DiveOption;
 import org.cx.game.magic.skill.ShieldHit;
+import org.cx.game.magic.skill.Sneak;
 import org.cx.game.magic.trick.ITrick;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.JsonHelper;
@@ -752,6 +754,22 @@ public class JsonOut extends AbstractResponse {
 			
 			//---------------------- skill ------------------------//
 			
+			config.registerJsonBeanProcessor(Sneak.class, new JsonBeanProcessor() {
+				
+				@Override
+				public JSONObject processBean(Object arg0, JsonConfig arg1) {
+					// TODO Auto-generated method stub
+					Sneak obj = (Sneak) arg0;
+					return new JSONObject().element("name", obj.getName())
+							.element("cooldown", obj.getCooldown())
+							.element("prepare", obj.getPrepare())
+							.element("conjureWait", obj.getConjureWait())
+							.element("range", obj.getRange())
+							.element("upgrade", obj.getUpgrade(), getConfig())
+							.element("optionList", obj.getOptionList(), getConfig());
+				}
+			});
+			
 			config.registerJsonBeanProcessor(ShieldHit.class, new JsonBeanProcessor() {
 				
 				@Override
@@ -823,6 +841,17 @@ public class JsonOut extends AbstractResponse {
 				public JSONObject processBean(Object arg0, JsonConfig arg1) {
 					// TODO Auto-generated method stub
 					AttackLockBuff obj = (AttackLockBuff) arg0;
+					return new JSONObject().element("name", obj.getName())
+							.element("depiction", obj.getDepiction());
+				}
+			});
+			
+			config.registerJsonBeanProcessor(SneakBuff.class, new JsonBeanProcessor() {
+				
+				@Override
+				public JSONObject processBean(Object arg0, JsonConfig arg1) {
+					// TODO Auto-generated method stub
+					SneakBuff obj = (SneakBuff) arg0;
 					return new JSONObject().element("name", obj.getName())
 							.element("depiction", obj.getDepiction());
 				}

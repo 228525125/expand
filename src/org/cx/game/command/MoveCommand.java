@@ -4,13 +4,12 @@ import org.cx.game.core.AbstractPlayer;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.CommandValidatorException;
 import org.cx.game.exception.ValidatorException;
+import org.cx.game.validator.CorpsMoveIntoPlaceValidator;
 import org.cx.game.validator.CorpsMoveableBufferValidator;
 import org.cx.game.validator.CorpsMoveRangeValidator;
 import org.cx.game.validator.OperatePowerValidator;
-import org.cx.game.validator.SelectCorpsNotHideValidator;
 import org.cx.game.validator.TauntAtTheTimeOfMoveBufferValidator;
 import org.cx.game.validator.SelectGroundBufferValidator;
-import org.cx.game.validator.SelectPlaceEmptyValidator;
 import org.cx.game.widget.Place;
 
 public class MoveCommand extends InteriorCommand {
@@ -27,7 +26,7 @@ public class MoveCommand extends InteriorCommand {
 	public void setParameter(Object parameter) {
 		// TODO Auto-generated method stub
 		super.setParameter(parameter);
-		addValidator(new SelectPlaceEmptyValidator((Place) parameter, true));
+		addValidator(new CorpsMoveIntoPlaceValidator((Corps) buffer.getCorps(), (Place) parameter));
 		addValidator(new CorpsMoveRangeValidator((Corps) buffer.getCorps(), ((Place) parameter).getPosition()));
 	}
 	

@@ -393,7 +393,7 @@ public class Corps extends AbstractCorps {
 	/**
 	 * 施法
 	 * @param skill ActiveSkill
-	 * @param objects
+	 * @param objects Corps/Place/...
 	 */
 	public void conjure(AbstractSkill skill, Object...objects) {
 		IAction action = new ActionProxyHelper(getConjure());

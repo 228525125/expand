@@ -1,10 +1,11 @@
 package org.cx.game.validator;
 
+import org.cx.game.corps.Corps;
 import org.cx.game.tools.I18n;
 import org.cx.game.widget.Place;
 
 /**
- * 选择的位置是否为空
+ * 选择的位置是否为空，隐身状态除外
  * @author chenxian
  *
  */

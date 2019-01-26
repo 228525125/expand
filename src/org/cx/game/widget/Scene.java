@@ -14,6 +14,7 @@ import org.cx.game.widget.treasure.Treasure;
 
 /**
  * 战斗场景
+ * 该场景增加了墓地，但墓地中的Corps不在Ground中；
  * @author chenxian
  * 
  */
@@ -70,21 +71,19 @@ public class Scene extends HoneycombGround {
 	}
 	
 	/**
-	 * 进入指定位置的墓地
+	 * 进入指定位置的墓地，墓地的Corps并不在Ground中
 	 * @param corps 
 	 */
 	public void inCemetery(AbstractCorps corps, Integer position) {
 		// TODO Auto-generated method stub
 		AbstractPlace place = getPlace(position);
-		//place.out();
 		place.inCemetery(corps);
 		
-		//this.livingCorpsList.remove(corps);
 		this.deadCorpsList.add(corps);
 	}
 	
 	/**
-	 * 将战场上的corps丢进墓地,例如Corps在战场上死亡
+	 * 将战场上的corps丢进墓地，例如Corps在战场上死亡，死亡后的Corps不在Ground中，只能通过getDeadCorpsList查找
 	 * @param corps
 	 */
 	public void inCemetery(AbstractCorps corps) {

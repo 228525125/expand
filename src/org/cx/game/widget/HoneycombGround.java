@@ -199,6 +199,9 @@ public abstract class HoneycombGround extends Ground {
 		case 145:    //传送
 			list = SpaceArithmetic.route(start, stop, updateMAP(false,false,false,moveType), hit);
 			break;
+		case 146:    //潜行
+			list = SpaceArithmetic.route(start, stop, updateMAP(false,false,false,moveType), hit);
+			break;
 			
 		default:
 			break;

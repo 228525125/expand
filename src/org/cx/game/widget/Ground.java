@@ -217,7 +217,8 @@ public abstract class Ground extends AbstractGround {
 		// TODO Auto-generated method stub
 		List<Integer> route = new ArrayList<Integer>();
 		Corps c = (Corps) corps;
-		List<Node> path = route(getPosition(c), position, type);
+		Integer stand = getPosition(c);
+		List<Node> path = route(stand, position, type);
 		
 		if(null==path)
 			return route;
@@ -237,14 +238,15 @@ public abstract class Ground extends AbstractGround {
 			Node node = (Node) path.get(i);
 			
 			AbstractPlace place = getPlace(lastPosition);
-			place.out();
+			place.out(c);
 			if(null!=lastCorps)
 				place.in(lastCorps);
 			
 			Integer curPosition = SpaceArithmetic.pointToInteger(node._Pos.x, node._Pos.y);
 			
 			place = getPlace(curPosition);
-			lastCorps = place.out();
+			lastCorps = place.getCorps();
+			place.out(lastCorps);
 			place.in(c);
 			
 			/*

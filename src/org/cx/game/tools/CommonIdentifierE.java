@@ -105,7 +105,7 @@ public class CommonIdentifierE extends CommonIdentifier {
 	public final static String Corps_Grow = "Corps_Grow";
 	public final static String Treasure_Picked = "Treasure_Picked";
 	
-	public final static String Corps_Hide = "Corps_Hide";
+	public final static String Corps_Move_Hide_Change = "Corps_Move_Hide_Change";
 	public final static String Corps_Death_Hp_Change = "Corps_Death_Hp_Change";
 	public final static String Corps_Armour = "Corps_Armour";
 	public final static String Corps_Atk = "Corps_Atk";

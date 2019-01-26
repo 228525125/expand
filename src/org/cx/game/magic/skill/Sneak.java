@@ -1,37 +1,21 @@
 package org.cx.game.magic.skill;
 
-import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
-import org.cx.game.magic.skill.PassiveSkill;
+import org.cx.game.magic.buff.SneakBuff;
 
-/**
- * 潜行
- * @author chenxian
- * 
- */
-public class Sneak extends PassiveSkill {
-	
+public class Sneak extends ActiveSkill {
+
 	public static final Integer Sneak_ID = 10200002;
 	
-	public Sneak() {
+	public Sneak(Integer type) {
+		super(type);
 		// TODO Auto-generated constructor stub
-		super(Sneak_ID);
-	}
-
-	@Override
-	public void setOwner(AbstractCorps corps) {
-		// TODO Auto-generated method stub
-		super.setOwner(corps);
-		
-		Corps cs = (Corps) corps;
-		
-		cs.getCall().addIntercepter(this);
 	}
 	
 	@Override
-	public void after(Object[] args) {
+	public String getRange() {
 		// TODO Auto-generated method stub
-		affect();
+		return "0-0";
 	}
 	
 	@Override
@@ -39,19 +23,28 @@ public class Sneak extends PassiveSkill {
 		// TODO Auto-generated method stub
 		super.affect(objects);
 		
-		((Corps) getOwner()).getMove().setHide(true);
-	}
-
-	@Override
-	public void before(Object[] args) {
-		// TODO Auto-generated method stub
+		Corps corps = getOwner();
+		corps.getMove().changeHide(true);
 		
+		new SneakBuff(10, corps).effect();
 	}
-
+	
 	@Override
-	public void finish(Object[] args) {
+	public Corps getOwner() {
 		// TODO Auto-generated method stub
-		
+		return (Corps) super.getOwner();
+	}
+	
+	@Override
+	public void setUseItOnYouself(Boolean useItOnYouself) {
+		// TODO Auto-generated method stub
+		super.setUseItOnYouself(useItOnYouself);
+	}
+	
+	@Override
+	public void setUseItOnFriendOrFoeOrAll(Integer useItOnFriendOrFoeOrAll) {
+		// TODO Auto-generated method stub
+		super.setUseItOnFriendOrFoeOrAll(useItOnFriendOrFoeOrAll);
 	}
 
 }

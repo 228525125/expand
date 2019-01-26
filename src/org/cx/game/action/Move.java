@@ -1,16 +1,12 @@
 package org.cx.game.action;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
-import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
-import org.cx.game.tools.Debug;
 import org.cx.game.widget.AbstractPlace;
 import org.cx.game.widget.AbstractGround;
 import org.cx.game.widget.Ground;
@@ -18,21 +14,21 @@ import org.cx.game.widget.Place;
 
 public class Move extends AbstractAction implements IAction {
 
-	public static final Integer Consume = 1; //单格移动消耗
+	public static final Integer Consume = 1;          //单格移动消耗
 	public static final Integer Energy_Max = 20;      //最大精力，表示可移动到任意位置
 	public static final Integer Energy_Min = 0;       //最小精力，表示不可移动
-	public static final Integer TurnoverRatio = 60; //资源转换率
+	public static final Integer TurnoverRatio = 60;   //资源转换率
 	
 	private Integer energy = 0;
-	private Integer consume = Consume;        //移动一格的消耗
+	private Integer consume = Consume;                //移动一格的消耗
 	private Integer type = CommonIdentifierE.Move_Type_Walk;
-	private Boolean moveable = false;   //是否能移动，回合内只能移动一次
-	private Integer flee = 0;         //逃离成功率
-	private Boolean hide = false;           //隐形状态
+	private Boolean moveable = false;                 //是否能移动，回合内只能移动一次
+	private Integer flee = 0;                         //逃离成功率
+	private Boolean hide = false;                     //隐形状态
 	
 	private Boolean mobile = false;                   //是否可移动攻击
 	
-	private List<Integer> path = new ArrayList<Integer>();
+	//private List<Integer> path = new ArrayList<Integer>();
 	
 	private Integer direction = AbstractGround.Relative_Right;
 	
@@ -44,7 +40,7 @@ public class Move extends AbstractAction implements IAction {
 	
 	public Integer getType() {
 		// TODO Auto-generated method stub
-		return this.type;
+		return type;
 	}
 	
 	public void setType(Integer type) {
@@ -102,6 +98,30 @@ public class Move extends AbstractAction implements IAction {
 	public void setHide(Boolean hide) {
 		this.hide = hide;
 	}
+	
+	/**
+	 * 显示的改变隐身状态
+	 * @param hide
+	 */
+	public void changeHide(Boolean hide) {
+		this.hide = hide;
+		
+		/*
+		 * 前提是只有步行能与潜行相互转换
+		 */
+		if(hide)
+			setType(CommonIdentifierE.Move_Type_Sneak);
+		else
+			setType(CommonIdentifierE.Move_Type_Walk);
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("card", getOwner());
+		map.put("position", getOwner().getPosition());
+		String desc = getOwner().getName()+(hide ? "【隐藏】" : "【显形】");
+		map.put("description", desc);
+		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Corps_Move_Hide_Change,map);
+		super.notifyObservers(info);
+	}
 
 	public Boolean getMoveable() {
 		return moveable;
@@ -140,7 +160,7 @@ public class Move extends AbstractAction implements IAction {
 		Integer start = getOwner().getPosition();
 		
 		Ground ground = (Ground) getOwner().getGround();
-		List<Integer> route = ground.move(getOwner(), place.getPosition(), type);
+		List<Integer> route = ground.move(getOwner(), place.getPosition(), getType());
 		
 		getOwner().setPosition(place.getPosition());
 		

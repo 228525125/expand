@@ -2,6 +2,7 @@ package org.cx.game.widget;
 
 import org.cx.game.action.AbstractAction;
 import org.cx.game.action.IAction;
+import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 
 public class Place extends AbstractPlace {
@@ -14,7 +15,12 @@ public class Place extends AbstractPlace {
 	@Override
 	public Corps getCorps() {
 		// TODO Auto-generated method stub
-		return (Corps) super.getCorps();
+		for(AbstractCorps corps : getCorpsList()){
+			Corps c = (Corps) corps;
+			if(!c.getMove().getHide())
+				return c;
+		}
+		return null;
 	}
 	
 	private IAction placeInAction = null;
@@ -33,8 +39,7 @@ public class Place extends AbstractPlace {
 		public void action(Object... objects) {
 			// TODO Auto-generated method stub
 			Corps corps = (Corps) objects[0];
-			setCorps(corps);
-			setIsEmpty(false);
+			addCorps(corps);
 			
 			/*
 			 * corps移动、招募、放置都会触发这个消息，可能引起混淆
