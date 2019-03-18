@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.cx.game.action.IAction;
-import org.cx.game.corps.AbstractCorps;
+import org.cx.game.corps.Corps;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
@@ -16,7 +16,7 @@ import org.cx.game.validator.IValidator;
 import org.cx.game.validator.OptionExecuteRangeValidator;
 import org.cx.game.validator.ParameterTypeValidator;
 import org.cx.game.validator.UseItOnYourselfValidator;
-import org.cx.game.widget.AbstractGround;
+import org.cx.game.widget.Ground;
 import org.cx.game.widget.Place;
 
 /**
@@ -38,7 +38,7 @@ public class ConjureToCorpsOption extends ConjureOption {
 		/*
 		 * 验证参数
 		 */
-		AbstractGround ground = getOwner().getOwner().getGround();
+		Ground ground = getOwner().getOwner().getGround();
 		IValidator validator = new ParameterTypeValidator(objects,new Class[]{Place.class},new String[]{"corps"},ground.getCorpsList().toArray());
 		doValidator(validator);
 		

@@ -1,16 +1,16 @@
 package org.cx.game.widget;
 
-import org.cx.game.core.AbstractPlayer;
+import org.cx.game.core.Player;
 
-public class ZoneControlQueue extends AbstractControlQueue<AbstractPlayer> {
+public class ZoneControlQueue extends AbstractControlQueue<Player> {
 	
 	@Override
-	public void add(AbstractPlayer t) {
+	public void add(Player t) {
 		// TODO Auto-generated method stub
-		Place<AbstractPlayer> place = new Place<AbstractPlayer>(t){
+		Place<Player> place = new Place<Player>(t){
 
 			@Override
-			void loadSpeed(AbstractPlayer player, AbstractControlQueue<AbstractPlayer>.Place<AbstractPlayer> place) {
+			void loadSpeed(Player player, AbstractControlQueue<Player>.Place<Player> place) {
 				// TODO Auto-generated method stub
 				place.setSpeed(100);
 			}

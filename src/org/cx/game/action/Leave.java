@@ -7,7 +7,7 @@ import org.cx.game.corps.Corps;
 import org.cx.game.corps.Hero;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
-import org.cx.game.widget.AbstractGround;
+import org.cx.game.widget.Ground;
 import org.cx.game.widget.Place;
 
 public class Leave extends AbstractAction implements IAction {
@@ -26,7 +26,7 @@ public class Leave extends AbstractAction implements IAction {
 		Corps leader = ((Merge) getOwner().getMerge()).getLeader();
 		leader.removeCorpsFromTeammateList(getOwner());
 		
-		AbstractGround ground = leader.getGround();
+		Ground ground = leader.getGround();
 		ground.placementCorps(place.getPosition(), getOwner());
 		ground.getQueue().add(getOwner());
 		

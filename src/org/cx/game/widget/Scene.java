@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.cx.game.core.AbstractPlayer;
-import org.cx.game.corps.AbstractCorps;
+import org.cx.game.core.Player;
 import org.cx.game.corps.Corps;
 import org.cx.game.tools.CommonIdentifier;
 import org.cx.game.tools.CommonIdentifierE;
@@ -18,11 +17,11 @@ import org.cx.game.widget.treasure.Treasure;
  * @author chenxian
  * 
  */
-public class Scene extends HoneycombGround {
+public class Scene extends Ground {
 
 	private SceneControlQueue queue = new SceneControlQueue();
 	
-	private List<AbstractCorps> deadCorpsList = new ArrayList<AbstractCorps>();
+	private List<Corps> deadCorpsList = new ArrayList<Corps>();
 	
 	public Scene(Integer id, String name, Integer xBorder, Integer yBorder,
 			String imagePath) {
@@ -45,12 +44,12 @@ public class Scene extends HoneycombGround {
 		List<Integer> entranceList2 = getEntranceList(corpsList2.get(0).getTroop());
 		
 		for(int i=0;i<entranceList1.size() && i<corpsList1.size();i++) {
-			AbstractCorps corps = corpsList1.get(i);
+			Corps corps = corpsList1.get(i);
 			placementCorps(entranceList1.get(i), corps);
 		}
 		
 		for(int i=0;i<entranceList2.size() && i<corpsList2.size();i++) {
-			AbstractCorps corps = corpsList2.get(i);
+			Corps corps = corpsList2.get(i);
 			placementCorps(entranceList2.get(i), corps);
 		}
 	}*/
@@ -58,7 +57,7 @@ public class Scene extends HoneycombGround {
 	//----------------------- Corps -----------------------
 	
 	@Override
-	public Boolean removeCorps(AbstractCorps corps) {
+	public Boolean removeCorps(Corps corps) {
 		// TODO Auto-generated method stub
 		Boolean ret = super.removeCorps(corps);
 		if(!ret){                                       //处理墓地的情况
@@ -74,9 +73,9 @@ public class Scene extends HoneycombGround {
 	 * 进入指定位置的墓地，墓地的Corps并不在Ground中
 	 * @param corps 
 	 */
-	public void inCemetery(AbstractCorps corps, Integer position) {
+	public void inCemetery(Corps corps, Integer position) {
 		// TODO Auto-generated method stub
-		AbstractPlace place = getPlace(position);
+		Place place = getPlace(position);
 		place.inCemetery(corps);
 		
 		this.deadCorpsList.add(corps);
@@ -86,9 +85,9 @@ public class Scene extends HoneycombGround {
 	 * 将战场上的corps丢进墓地，例如Corps在战场上死亡，死亡后的Corps不在Ground中，只能通过getDeadCorpsList查找
 	 * @param corps
 	 */
-	public void inCemetery(AbstractCorps corps) {
+	public void inCemetery(Corps corps) {
 		// TODO Auto-generated method stub
-		AbstractPlace place = getPlace(corps.getPosition());
+		Place place = getPlace(corps.getPosition());
 		if(removeCorps(corps)){
 			place.inCemetery(corps);
 			this.deadCorpsList.add(corps);
@@ -99,9 +98,9 @@ public class Scene extends HoneycombGround {
 	 * 移出墓地，例如英雄复活
 	 * @param corps
 	 */
-	public void outCemetery(AbstractCorps corps) {
+	public void outCemetery(Corps corps) {
 		// TODO Auto-generated method stub
-		AbstractPlace place = getPlace(corps.getPosition());
+		Place place = getPlace(corps.getPosition());
 		place.outCemetery(corps);
 		
 		this.deadCorpsList.remove(corps);
@@ -111,9 +110,9 @@ public class Scene extends HoneycombGround {
 	 * 战场上死亡的corps，但要试图通过getDeadCorpsList()调用方法来改变this.deadCorpsList；
 	 * @return
 	 */
-	public List<AbstractCorps> getDeadCorpsList() {
+	public List<Corps> getDeadCorpsList() {
 		// TODO Auto-generated method stub
-		List<AbstractCorps> retList = new ArrayList<AbstractCorps>();
+		List<Corps> retList = new ArrayList<Corps>();
 		retList.addAll(this.deadCorpsList);
 		return retList;
 	} 
@@ -123,9 +122,9 @@ public class Scene extends HoneycombGround {
 	 * @param player
 	 * @return
 	 */
-	public List<AbstractCorps> getCorpsList(Integer status) {
+	public List<Corps> getCorpsList(Integer status) {
 		// TODO Auto-generated method stub
-		List<AbstractCorps> ret = new ArrayList<AbstractCorps>();
+		List<Corps> ret = new ArrayList<Corps>();
 		
 		if(CommonIdentifier.Death_Status_Live.equals(status))
 			ret.addAll(getCorpsList());
@@ -141,19 +140,19 @@ public class Scene extends HoneycombGround {
 	 * @param player
 	 * @return
 	 */
-	public List<AbstractCorps> getCorpsList(AbstractPlayer player, Integer status) {
+	public List<Corps> getCorpsList(Player player, Integer status) {
 		// TODO Auto-generated method stub
-		List<AbstractCorps> ret = new ArrayList<AbstractCorps>();
+		List<Corps> ret = new ArrayList<Corps>();
 		
 		if(CommonIdentifier.Death_Status_Live.equals(status)){
-			for(AbstractCorps corps : getCorpsList()){
+			for(Corps corps : getCorpsList()){
 				if(player.equals(corps.getPlayer()))
 					ret.add(corps);
 			}
 		}
 		
 		if(CommonIdentifier.Death_Status_Death.equals(status)){
-			for(AbstractCorps corps : getDeadCorpsList()){
+			for(Corps corps : getDeadCorpsList()){
 				if(player.equals(corps.getPlayer()))
 					ret.add(corps);
 			}
@@ -163,7 +162,7 @@ public class Scene extends HoneycombGround {
 	}
 	
 	@Override
-	public List<Integer> queryRange(AbstractCorps corps, String action) {
+	public List<Integer> queryRange(Corps corps, String action) {
 		// TODO Auto-generated method stub
 		List<Integer> positionList = super.queryRange(corps, action);
 		Corps sc = (Corps) corps;
@@ -183,37 +182,5 @@ public class Scene extends HoneycombGround {
 		}
 		
 		return positionList;
-	}
-
-	@Override
-	public void setTroopList(List<Integer> troopList) {
-		// TODO Auto-generated method stub
-		super.setTroopList(troopList);
-	}
-	
-	@Override
-	public void setEntranceMap(Map<Integer, Integer> entranceMap) {
-		// TODO Auto-generated method stub
-		super.setEntranceMap(entranceMap);
-	}
-	
-	//----------------------- Building ------------------------
-
-	public void setBuildingData(List<String> buildings) {
-		super.setBuildingData(buildings);
-	}
-	
-	//----------------------- Landform ---------------------------
-	
-	public void setLandformMap(Map<Integer, Integer> landformMap) {
-		// TODO Auto-generated method stub
-		super.setLandformMap(landformMap);
-	}
-	
-	//----------------------- TreasureMap ------------------------
-	@Override
-	public void setTreasureMap(Map<Integer, Treasure> treasureMap) {
-		// TODO Auto-generated method stub
-		super.setTreasureMap(treasureMap);
 	}
 }

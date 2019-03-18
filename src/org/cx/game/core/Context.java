@@ -1,184 +1,185 @@
 package org.cx.game.core;
 
-import org.cx.game.widget.AbstractGround;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Context extends AbstractContext {
+import org.cx.game.corps.Corps;
+import org.cx.game.exception.RuleValidatorException;
+import org.cx.game.widget.Ground;
 
-	//private int bout = 0;  //回合	
-	//private Integer day = 0; //天
-	//private Integer week = 0; //星期几
+public class Context implements IContext {
+
+	private String playNo = null;
+	private Integer status = Status_Start;
 	
-	public Context(String playNo, AbstractGround ground) {
+	private AbstractPlayState playState = null;
+	
+	private Player controlPlayer = null;
+	private Corps controlCorps = null;
+	private Ground ground = null;
+	
+	private List<Player> playerList = new ArrayList<Player>();
+	
+	public Context(String playNo, Ground ground) {
 		// TODO Auto-generated constructor stub
-		super(playNo, ground);
+		this.playNo = playNo;           //比赛唯一编号
+		this.ground = ground;
 	}
 	
-	@Override
-	public void start() {
+	/**
+	 * 编号，用于保存比赛进度
+	 * @return
+	 */
+	public String getPlayNo() {
+		return playNo;
+	}
+	
+	public Integer getStatus() {
+		return status;
+	}
+	
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	
+	public void setPlayState(AbstractPlayState playState) {
+		this.playState = playState;
+		this.playState.setContext(this);
+	}
+	
+	//---------------- Player -----------------
+	
+	/**
+	 * 初始化game时，调用
+	 * @param player 
+	 */
+	public void addPlayer(Player player) {
 		// TODO Auto-generated method stub
-		setPlayState(new StartState());
-		super.start();
+		this.playerList.add(player);
+		player.setContext(this);
 	}
 	
-	
-	
-	@Override
-	public AbstractGround getGround() {
+	/**
+	 * 阵营玩家和非阵营玩家结束后，都会被移除；
+	 * @param player
+	 */
+	public void removePlayer(IPlayer player) {
 		// TODO Auto-generated method stub
-		return (AbstractGround) super.getGround();
+		this.playerList.remove(player);
 	}
 	
-	@Override
-	public AbstractGround getGround(Integer id) {
+	/**
+	 * 所有player，包含中立player
+	 * @return
+	 */
+	public List<Player> getPlayerList() {
+		// TODO Auto-generated method stub
+		return this.playerList;
+	}
+	
+	/**
+	 * 当前操作比赛的玩家对象
+	 */
+	public Player getControlPlayer() {
+		return controlPlayer;
+	}
+
+	public void setControlPlayer(Player controlPlayer) {
+		this.controlPlayer = controlPlayer;
+	}
+	
+	/**
+	 * 根据troop查找player
+	 */
+	public Player getPlayer(Integer troop) {
+		// TODO Auto-generated method stub
+		for(Player player : getPlayerList()){
+			if(troop.equals(player.getTroop()))
+				return player;
+		}
+		return null;
+	}
+	
+	//------------------ Corps ---------------
+	
+	public Corps getControlCorps() {
+		return controlCorps;
+	}
+	
+	public void setControlCorps(Corps controlCorps) {
+		controlCorps.activate(true);
+		this.controlCorps = controlCorps;
+		
+		setControlPlayer(controlCorps.getPlayer());
+	}
+	
+	//------------------ Ground --------------
+	
+	public Ground getGround() {
+		// TODO Auto-generated method stub
+		return this.ground;
+	}
+	
+	public Ground getGround(Integer id) {
 		// TODO Auto-generated method stub
 		if(null==getGround().getArea())
 			return getGround();
 		
-		return (AbstractGround) getGround().getArea().getGround(id);
+		return (Ground) getGround().getArea().getGround(id);
 	}
 	
-	/*@Override
-	public Integer getBout() {
-		return bout;
-	}
-	
-	private IAction addBoutAction = null;
-	
-	@Override
-	public IAction getAddBoutAction(){
-		if(null==this.addBoutAction){
-			this.addBoutAction = new ContextAddBout();
-			addBoutAction.setOwner(this);
-		}
-		return this.addBoutAction;
-	}
-
-	@Override
-	public Integer getDay() {
+	/**
+	 * 切换当前ground，因为有area的存在
+	 * @param ground
+	 */
+	public void setGround(Ground ground) {
 		// TODO Auto-generated method stub
-		return day;
+		this.ground = ground;
 	}
 	
-	private IAction addDayAction = null;
 	
-	@Override
-	public IAction getAddDayAction(){
-		if(null==this.addDayAction){
-			IAction ad = new ContextAddDay();
-			ad.setOwner(this);
-			this.addDayAction = ad;
-		}
-		return this.addDayAction;
-	}
-	
-	@Override
-	public Integer getWeek() {
+	public void start() {
 		// TODO Auto-generated method stub
-		return this.week;
+		setStatus(Status_Start);
+		setPlayState(new StartState());
+		this.playState.start();
 	}
 	
-	private IAction addWeekAction = null;
-	
-	@Override
-	public IAction getAddWeekAction(){
-		if(null==this.addWeekAction){
-			IAction aw = new ContextAddWeek();
-			aw.setOwner(this);
-			this.addWeekAction = aw;
-		}
-		return this.addWeekAction;
-	}*/
-	
-	/*public class ContextAddBout extends AbstractAction implements IAction {
-		
-		@Override
-		public void action(Object... objects) {
-			// TODO Auto-generated method stub
-			bout++;
-			/*if(1==bout%getPlayerList().size()){
-				addDay();
-				if(1==day%7)
-					addWeek();
-			}
-			
-			AbstractPlayer player = getControlPlayer();			
-			player.addBout();
-		}
-		
-		@Override
-		public Context getOwner() {
-			// TODO Auto-generated method stub
-			return (Context) super.getOwner();
-		}
+	/**
+	 * 部署
+	 */
+	public void deploy(){
+		this.playState.deploy();
 	}
 	
-	public class ContextAddDay extends AbstractAction implements IAction {
-		
-		@Override
-		public void action(Object... objects) {
-			// TODO Auto-generated method stub
-			day++;
-			
-			/*
-			 * 产出
-			 
-			AbstractGround ground = getOwner().getGround();
-			List<AbstractBuilding> list = ground.getBuildingList();
-			for(AbstractBuilding building : list){
-				if(building instanceof TownBuilding){
-					TownBuilding town = (TownBuilding) building;
-					for(AbstractBuilding innerBuilding :town.getBuildings()){
-						if(innerBuilding instanceof MineralBuilding){
-							MineralBuilding br = (MineralBuilding) innerBuilding;
-							br.output();           
-						}
-					}
-				}
-				
-				if(building instanceof MineralBuilding){
-					MineralBuilding br = (MineralBuilding) building;
-					br.output();
-				}
-			}
-		}
-		
-		@Override
-		public Context getOwner() {
-			// TODO Auto-generated method stub
-			return (Context) super.getOwner();
-		}
+	/**
+	 * 操作完毕
+	 */
+	public void done(){
+		this.playState.done();
 	}
 	
-	public class ContextAddWeek extends AbstractAction implements IAction {
+	/**
+	 * 游戏结束
+	 */
+	public void finish(){
+		this.playState.finish();
+	}
+	
+	/**
+	 * 交换比赛控制权
+	 * @throws RuleValidatorException 
+	 */
+	public void switchControl() {
 		
-		@Override
-		public void action(Object... objects) {
-			// TODO Auto-generated method stub
-			week++;
-			
-			/*
-			 * 产出
-			
-			AbstractGround ground = getOwner().getGround();
-			List<AbstractBuilding> list = ground.getBuildingList();
-			for(AbstractBuilding building : list){
-				if(building instanceof TownBuilding){
-					TownBuilding town = (TownBuilding) building;
-					for(AbstractBuilding innerBuilding :town.getBuildings()){
-						if(innerBuilding instanceof CallBuilding){
-							CallBuilding bc = (CallBuilding) innerBuilding;
-							bc.output();           
-						}
-					}
-				}
-			}
-		}
+		Object object = this.ground.getQueue().out();
 		
-		@Override
-		public Context getOwner() {
-			// TODO Auto-generated method stub
-			return (Context) super.getOwner();
+		if (object instanceof Player) {
+			Player player = (Player) object;
+			setControlPlayer(player);
+		}else{
+			Corps corps = (Corps) object;
+			setControlCorps(corps);
 		}
-	}*/
-
+	}
 }

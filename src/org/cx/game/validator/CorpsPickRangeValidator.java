@@ -3,7 +3,7 @@ package org.cx.game.validator;
 import org.cx.game.action.Pick;
 import org.cx.game.corps.Corps;
 import org.cx.game.tools.I18n;
-import org.cx.game.widget.AbstractGround;
+import org.cx.game.widget.Ground;
 import org.cx.game.widget.Place;
 
 /**
@@ -26,7 +26,7 @@ public class CorpsPickRangeValidator extends Validator {
 	public Boolean validate() {
 		// TODO Auto-generated method stub
 		Boolean ret = true;
-		AbstractGround ground = this.corps.getPlayer().getContext().getGround();
+		Ground ground = this.corps.getPlayer().getContext().getGround();
 		Integer distance = ground.distance(this.corps.getPosition(), this.place.getPosition());
 		if(Pick.Pick_Range_Defautl<distance){
 			ret = false;

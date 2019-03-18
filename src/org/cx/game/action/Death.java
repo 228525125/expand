@@ -8,7 +8,7 @@ import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.tools.Logger;
 import org.cx.game.tools.Util;
-import org.cx.game.widget.AbstractGround;
+import org.cx.game.widget.Ground;
 import org.cx.game.widget.Scene;
 
 public class Death extends AbstractAction implements IAction {

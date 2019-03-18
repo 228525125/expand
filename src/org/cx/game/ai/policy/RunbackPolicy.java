@@ -8,7 +8,7 @@ import org.cx.game.command.Command;
 import org.cx.game.command.CommandFactory;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.ValidatorException;
-import org.cx.game.widget.AbstractGround;
+import org.cx.game.widget.Ground;
 
 /**
  * 回到起始位置的策略
@@ -40,7 +40,7 @@ public class RunbackPolicy extends AbstractPolicy<CorpsAgent> {
 		Integer guardPosition = getAgent().getGuardPosition();
 		Corps corps = getAgent().getOwner();
 		
-		AbstractGround ground = corps.getGround();
+		Ground ground = corps.getGround();
 		Integer position = ground.getPointByWay(corps.getPosition(), guardPosition, corps.getMove().getEnergy(), corps.getMove().getType());
 		
 		this.cmdStr = "move ground place"+position+";";
@@ -71,10 +71,10 @@ public class RunbackPolicy extends AbstractPolicy<CorpsAgent> {
 			String cmd = "select ground place"+corps.getPosition()+" corps;";
 			try {
 				//invoker.receiveCommand(owner.getPlayer(), cmd);
-				Command command= CommandFactory.getInstance(corps.getPlayer(),cmd);
+				Command command= CommandFactory.getInstance(cmd, corps.getPlayer().getCommandBuffer());
 				command.execute();
 				
-				super.command = CommandFactory.getInstance(corps.getPlayer(),this.cmdStr);
+				super.command = CommandFactory.getInstance(this.cmdStr, corps.getPlayer().getCommandBuffer());
 				super.command.doValidator();
 				if(!super.command.hasError()){
 					setPri(AbstractPolicy.PRI_High);

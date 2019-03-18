@@ -3,7 +3,7 @@ package org.cx.game.core;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.cx.game.corps.AbstractCorps;
+import org.cx.game.corps.Corps;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
 
@@ -12,12 +12,12 @@ public class DeployState extends AbstractPlayState {
 	@Override
 	public void deploy() {
 		// TODO Auto-generated method stub
-		AbstractPlayer conPlayer = context.getControlPlayer();
-		AbstractCorps conCorps = context.getControlCorps();
+		Player conPlayer = getContext().getControlPlayer();
+		Corps conCorps = getContext().getControlCorps();
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("player", conPlayer);
 		map.put("corps", conCorps);
-		map.put("bout", context.getGround().getQueue().getBout());
+		map.put("bout", getContext().getGround().getQueue().getBout());
 		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Context_Deploy,map);
 		super.notifyObservers(info);
 		
@@ -30,22 +30,28 @@ public class DeployState extends AbstractPlayState {
 	public void done() {
 		// TODO Auto-generated method stub
 		//操作完毕
-		context.setPlayState(new DoneState());
-		context.done();
+		getContext().setPlayState(new DoneState());
+		getContext().done();
 	}
 
 	@Override
 	public void finish() {
 		// TODO Auto-generated method stub
 		//操作中比赛随时可能结束
-		context.setPlayState(new FinishState());
-		context.finish();
+		getContext().setPlayState(new FinishState());
+		getContext().finish();
 	}
 
 	@Override
 	public void start() {
 		// TODO Auto-generated method stub
 
+	}
+	
+	@Override
+	public Context getContext() {
+		// TODO Auto-generated method stub
+		return (Context) super.getContext();
 	}
 
 }

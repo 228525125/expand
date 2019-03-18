@@ -1,8 +1,8 @@
 package org.cx.game.rule;
 
-import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
-import org.cx.game.corps.AbstractCorps.CorpsRemoveBuffAction;
+import org.cx.game.corps.Corps;
+import org.cx.game.corps.Corps.CorpsRemoveBuffAction;
 
 public class CorpsPropertyUpdateRemoveBuffRule extends AbstractRule {
 

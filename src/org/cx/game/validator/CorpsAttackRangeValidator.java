@@ -3,10 +3,8 @@ package org.cx.game.validator;
 import java.util.List;
 
 import org.cx.game.corps.Corps;
-import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.tools.I18n;
-import org.cx.game.widget.AbstractGround;
 import org.cx.game.widget.Ground;
 
 /**

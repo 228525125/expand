@@ -1,67 +1,112 @@
 package org.cx.game.core;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.cx.game.action.AbstractAction;
-import org.cx.game.action.IAction;
-import org.cx.game.corps.AbstractCorps;
+import org.cx.game.command.CommandBuffer;
 import org.cx.game.corps.Corps;
-import org.cx.game.observer.NotifyInfo;
-import org.cx.game.tools.CommonIdentifierE;
-import org.cx.game.tools.Util;
 import org.cx.game.widget.treasure.Mineral;
-import org.cx.game.widget.treasure.Resource;
+import org.cx.game.widget.treasure.ResourceHelper;
 
-public class Player extends AbstractPlayer {
+public class Player implements IPlayer {
 	
 	public static final String Neutral = "neutral";
 	
-	private Integer bout = 0;
+	private Integer troop = 0;
+	private String name = null;
+	private Boolean isComputer = false;
 	
 	private AbstractHost host = null;
-	//private IAction addBoutAction = null;
-	//private IPolicyGroup groupPolicy = null;
+	private Context context = null;
+	private CommandBuffer commandBuffer = null;
+	private Mineral mineral = null;
 	
-	public Player(Integer id, String name) {
-		super(id, name);
+	private List<Corps> corpsList = new ArrayList<Corps>();
+	
+	public Player(Integer id, String name, AbstractHost host) {
 		// TODO Auto-generated constructor stub
+		
+		this.troop = id;
+		this.name = name;
+		this.host = host;
+		this.commandBuffer = new CommandBuffer(this);
+		
+		this.mineral = new Mineral();
 		
 		//this.groupPolicy = PolicyGroupFactory.getInstance(10450001);
 		//this.groupPolicy.setOwner(this);
-	}
-	
-	/*@Override
-	public Integer getBout() {
-		// TODO Auto-generated method stub
-		return this.bout;
-	}*/
-	
-	public void setHost(AbstractHost host) {
-		this.host = host;
 	}
 	
 	public AbstractHost getHost() {
 		return host;
 	}
 	
-	/*@Override
-	public IAction getAddBoutAction(){
-		if(null==this.addBoutAction){
-			this.addBoutAction = new PlayerAddBout();
-			addBoutAction.setOwner(this);
-		}
-		return this.addBoutAction;
-	}*/
-	
-	@Override
-	public void setMineral(Mineral mineral) {
+	public Integer getTroop() {
 		// TODO Auto-generated method stub
-		super.setMineral(mineral);
+		return this.troop;
 	}
 	
+	public void setTroop(Integer troop) {
+		this.troop = troop;
+	}
+	
+	public String getName() {
+		// TODO Auto-generated method stub
+		return this.name;
+	}
+	
+	public Boolean isComputer() {
+		// TODO Auto-generated method stub
+		return this.isComputer;
+	}
+	
+	public void setIsComputer(Boolean isComputer) {
+		// TODO Auto-generated method stub
+		this.isComputer = isComputer;
+	}
+	
+	public CommandBuffer getCommandBuffer() {
+		return commandBuffer;
+	}
+
+	public Context getContext() {
+		// TODO Auto-generated method stub
+		return context;
+	}
+	
+	public void setContext(Context context) {
+		// TODO Auto-generated method stub
+		this.context = context;
+	}
+	
+	/**
+	 * player控制的live状态的corps
+	 * @return
+	 */
+	public List<Corps> getCorpsList() {
+		return corpsList;
+	}
+	
+	/**
+	 * 资源
+	 * @return
+	 */
+	public Mineral getMineral() {
+		return this.mineral;
+	}
+	
+	/**
+	 * 用于xml配置
+	 * @param res
+	 */
+	public void setMineral(Mineral mineral) {
+		this.mineral = mineral;
+	}
+	
+	public void setMineral(Integer funType, Mineral mineral) {
+		this.mineral = (Mineral) ResourceHelper.operating(funType, this.mineral, mineral);
+	}
+
 	/**
 	 * 使用AI自动操作
 	 */
@@ -80,34 +125,13 @@ public class Player extends AbstractPlayer {
 		getContext().done();
 	}
 	
-	/*public class PlayerAddBout extends AbstractAction implements IAction {
-		
-		@Override
-		public void action(Object... objects) {
-			// TODO Auto-generated method stub
-			Player.this.bout++;
-			
-			Map<String,Object> map = new HashMap<String,Object>();
-			map.put("player", Player.this);
-			map.put("bout", Player.this.bout);
-			NotifyInfo info = new NotifyInfo(CommonIdentifierE.Player_Bout,map);
-			notifyObservers(info);
-			
-			/*
-			 * 获得控制权的玩家单位被激活
-			 
-			for(AbstractCorps corps : getOwner().getCorpsList()){
-				Corps sc = (Corps) corps;
-				//Integer speed = sc.getActivate().getSpeed();
-				//sc.getActivate().setVigour(Util.Sum, speed);
-				sc.activate(true);
-			}
+	@Override
+	public boolean equals(Object arg0) {
+		// TODO Auto-generated method stub
+		if (arg0 instanceof IPlayer) {
+			IPlayer player = (IPlayer) arg0;
+			return player.getTroop().equals(getTroop());
 		}
-		
-		@Override
-		public Player getOwner() {
-			// TODO Auto-generated method stub
-			return (Player) super.getOwner();
-		}
-	}*/
+		return super.equals(arg0);
+	}
 }

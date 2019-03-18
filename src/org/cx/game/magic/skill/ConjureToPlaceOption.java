@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.cx.game.action.IAction;
-import org.cx.game.core.AbstractPlayer;
-import org.cx.game.corps.AbstractCorps;
+import org.cx.game.core.Player;
+import org.cx.game.corps.Corps;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
@@ -20,7 +20,7 @@ import org.cx.game.validator.IValidator;
 import org.cx.game.validator.OptionExecuteRangeValidator;
 import org.cx.game.validator.ParameterTypeValidator;
 import org.cx.game.widget.AbstractControlQueue;
-import org.cx.game.widget.AbstractGround;
+import org.cx.game.widget.Ground;
 import org.cx.game.widget.AbstractOption;
 import org.cx.game.widget.Place;
 

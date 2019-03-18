@@ -23,9 +23,9 @@ public class FinishState extends AbstractPlayState {
 	@Override
 	public void finish() {
 		// TODO Auto-generated method stub
-		for(AbstractPlayer player : context.getPlayerList()){
+		/*for(AbstractPlayer player : context.getPlayerList()){
 			player.getCommandBuffer().clear();
-		}
+		}*/
 		Map<String,Object> map = new HashMap<String,Object>();
 		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Context_Finish,map);
 		super.notifyObservers(info);

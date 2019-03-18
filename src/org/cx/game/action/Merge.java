@@ -7,7 +7,7 @@ import org.cx.game.corps.Corps;
 import org.cx.game.corps.Hero;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
-import org.cx.game.widget.AbstractGround;
+import org.cx.game.widget.Ground;
 
 public class Merge extends AbstractAction implements IAction {
 
@@ -38,7 +38,7 @@ public class Merge extends AbstractAction implements IAction {
 		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Corps_Merge,map);
 		super.notifyObservers(info);
 		
-		AbstractGround ground = getOwner().getGround();
+		Ground ground = getOwner().getGround();
 		
 		ground.removeCorps(getOwner());
 		ground.getQueue().remove(getOwner());

@@ -52,34 +52,4 @@ public class Cure extends ActiveSkill {
 		corps.getDeath().setHp(Util.Sum, this.cureValue);
 		new AntibodyBuff(antibodyBout,corps).effect();
 	}
-	
-	@Override
-	public void setUseItOnFriendOrFoeOrAll(Integer useItOnFriendOrFoeOrAll) {
-		// TODO Auto-generated method stub
-		super.setUseItOnFriendOrFoeOrAll(useItOnFriendOrFoeOrAll);
-	}
-	
-	@Override
-	public void setUseItOnYouself(Boolean useItOnYouself) {
-		// TODO Auto-generated method stub
-		super.setUseItOnYouself(useItOnYouself);
-	}
-	
-	@Override
-	public void setCooldown(Integer cooldown) {
-		// TODO Auto-generated method stub
-		super.setCooldown(cooldown);
-	}
-	
-	@Override
-	public void setConjureWait(Integer conjureWait) {
-		// TODO Auto-generated method stub
-		super.setConjureWait(conjureWait);
-	}
-	
-	@Override
-	public void setPrepare(Integer prepare) {
-		// TODO Auto-generated method stub
-		super.setPrepare(prepare);
-	}
 }

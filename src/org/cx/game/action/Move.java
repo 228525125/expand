@@ -7,10 +7,9 @@ import java.util.Map;
 import org.cx.game.corps.Corps;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
-import org.cx.game.widget.AbstractPlace;
-import org.cx.game.widget.AbstractGround;
-import org.cx.game.widget.Ground;
 import org.cx.game.widget.Place;
+import org.cx.game.widget.Ground;
+import org.cx.game.widget.IGround;
 
 public class Move extends AbstractAction implements IAction {
 
@@ -30,7 +29,7 @@ public class Move extends AbstractAction implements IAction {
 	
 	//private List<Integer> path = new ArrayList<Integer>();
 	
-	private Integer direction = AbstractGround.Relative_Right;
+	private Integer direction = IGround.Relative_Right;
 	
 	@Override
 	public Corps getOwner() {
@@ -155,7 +154,7 @@ public class Move extends AbstractAction implements IAction {
 	public void action(Object...objects) {
 		// TODO Auto-generated method stub
 		
-		AbstractPlace place = (Place) objects[0];
+		Place place = (Place) objects[0];
 		
 		Integer start = getOwner().getPosition();
 		

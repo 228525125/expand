@@ -3,16 +3,12 @@ package org.cx.game.action;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
-import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
-import org.cx.game.widget.AbstractPlace;
-import org.cx.game.widget.AbstractGround;
+import org.cx.game.widget.Ground;
 import org.cx.game.widget.Place;
 import org.cx.game.widget.treasure.Mineral;
-import org.cx.game.widget.treasure.Resource;
 
 public class Call extends AbstractAction implements IAction {
 	
@@ -49,7 +45,7 @@ public class Call extends AbstractAction implements IAction {
 		// TODO Auto-generated method stub
 		super.action(objects);
 
-		AbstractPlace place = (Place) objects[0];
+		Place place = (Place) objects[0];
 		
 		getOwner().getDeath().setStatus(CommonIdentifierE.Death_Status_Live);
 		
@@ -64,7 +60,7 @@ public class Call extends AbstractAction implements IAction {
 		 * 放置到战场
 		 * 因为顺序问题，没有写在Rule中
 		 */
-		AbstractGround ground = getOwner().getPlayer().getContext().getGround();
+		Ground ground = getOwner().getPlayer().getContext().getGround();
 		ground.placementCorps(place.getPosition(), getOwner());
 		
 		getOwner().setPosition(place.getPosition());

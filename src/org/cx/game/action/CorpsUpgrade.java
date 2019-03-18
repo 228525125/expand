@@ -9,6 +9,7 @@ import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.tools.Util;
 import org.cx.game.widget.treasure.EmpiricValue;
+import org.cx.game.widget.treasure.ResourceHelper;
 
 public class CorpsUpgrade extends Upgrade implements IAction {
 	
@@ -25,7 +26,7 @@ public class CorpsUpgrade extends Upgrade implements IAction {
 	}
 	
 	public void setEmpiricValue(Integer funType, EmpiricValue empiricValue) {
-		this.empiricValue = (EmpiricValue) Util.operating(funType, this.empiricValue, empiricValue);
+		this.empiricValue = (EmpiricValue) ResourceHelper.operating(funType, this.empiricValue, empiricValue);
 	}
 	
 	public void setEmpiricValue(Integer funType, Integer empiricValue) {

@@ -3,22 +3,19 @@ package org.cx.game.corps;
 import java.util.List;
 
 import org.cx.game.action.IAction;
-import org.cx.game.core.AbstractPlayer;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.validator.CorpsActivateValidator;
-import org.cx.game.validator.CorpsMoveableBufferValidator;
 import org.cx.game.validator.CorpsMoveableValidator;
 import org.cx.game.validator.OperatePowerValidator;
 import org.cx.game.widget.AbstractControlQueue;
-import org.cx.game.widget.AbstractGround;
 import org.cx.game.widget.AbstractOption;
 import org.cx.game.widget.Ground;
 import org.cx.game.widget.Place;
 
 public class TeammateOption extends AbstractOption {
 	
-	public TeammateOption(AbstractCorps corps) {
+	public TeammateOption(Corps corps) {
 		// TODO Auto-generated constructor stub
 		setOwner(corps);
 	}

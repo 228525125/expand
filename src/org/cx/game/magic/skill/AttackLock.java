@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.cx.game.action.IAction;
-import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 import org.cx.game.magic.buff.AbstractBuff;
 import org.cx.game.exception.RuleValidatorException;
@@ -12,7 +11,7 @@ import org.cx.game.magic.buff.AttackLockBuff;
 import org.cx.game.magic.buff.TauntBuff;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
-import org.cx.game.widget.AbstractGround;
+import org.cx.game.widget.Ground;
 
 /**
  * 锁定攻击目标，该动作发生在attack时，不管是否击中目标
@@ -66,7 +65,7 @@ public class AttackLock extends PassiveSkill {
 		}
 		
 		Boolean taunt = true;
-		AbstractGround ground = getOwner().getPlayer().getContext().getGround();
+		Ground ground = getOwner().getPlayer().getContext().getGround();
 		
 		if(getOwner().containsBuff(TauntBuff.class)){
 			TauntBuff buff = (TauntBuff) getOwner().getBuff(TauntBuff.class);

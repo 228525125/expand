@@ -1,14 +1,14 @@
 package org.cx.game.validator;
 
-import org.cx.game.core.AbstractContext;
+import org.cx.game.core.Context;
 import org.cx.game.tools.I18n;
 
 public class ContextStatusValidator extends Validator {
 
 	private Integer status = 0;
-	private AbstractContext context = null;
+	private Context context = null;
 	
-	public ContextStatusValidator(AbstractContext context, Integer status) {
+	public ContextStatusValidator(Context context, Integer status) {
 		// TODO Auto-generated constructor stub
 		this.context = context;
 		this.status = status;

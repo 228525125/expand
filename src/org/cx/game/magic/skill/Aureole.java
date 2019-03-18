@@ -3,14 +3,10 @@ package org.cx.game.magic.skill;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
 import org.cx.game.magic.buff.AbstractBuff;
-import org.cx.game.widget.AbstractGround;
 import org.cx.game.widget.Ground;
-import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.intercepter.AbstractIntercepter;
-import org.cx.game.intercepter.IIntercepter;
 
 /**
  * 光环
@@ -23,7 +19,7 @@ public abstract class Aureole extends PassiveSkill {
 	public final static Integer Default_AureoleBuff_Bout = 99;
 	
 	private Integer range = 0;
-	private List<AbstractCorps> affectedList = new ArrayList<AbstractCorps>();
+	private List<Corps> affectedList = new ArrayList<Corps>();
 	
 	public Aureole(Integer id, Integer range) {
 		super(id);
@@ -32,7 +28,7 @@ public abstract class Aureole extends PassiveSkill {
 	}
 
 	@Override
-	public void setOwner(AbstractCorps corps) {
+	public void setOwner(Corps corps) {
 		// TODO Auto-generated method stub
 		super.setOwner(corps);
 		
@@ -52,7 +48,7 @@ public abstract class Aureole extends PassiveSkill {
 			public void after(Object[] args) {
 				// TODO Auto-generated method stub
 				getOwner().getGround().getQueue().getAddBoutAction().deleteIntercepter(this);
-				for(AbstractCorps corps : affectedList){
+				for(Corps corps : affectedList){
 					List<AbstractBuff> buffs = corps.getBuff(getBuffClass());
 					if(buffs.isEmpty())
 						buffs.get(0).invalid();
@@ -77,22 +73,22 @@ public abstract class Aureole extends PassiveSkill {
 		this.range = range;
 	}
 	
-	public abstract void leave(AbstractCorps corps);
+	public abstract void leave(Corps corps);
 	public abstract Class getBuffClass();
 	
-	public void into(AbstractCorps corps){
+	public void into(Corps corps){
 		((Corps) corps).affected(this);
 	}
 
 	private void refurbish(){
 		Ground ground = (Ground) getOwner().getPlayer().getContext().getGround();
-		List<AbstractCorps> ls = ground.queryCorpsList(getOwner().getPosition(), getRange(), AbstractGround.Contain);
+		List<Corps> ls = ground.queryCorpsList(getOwner().getPosition(), getRange(), Ground.Contain);
 		
-		List<AbstractCorps> tempList = new ArrayList<AbstractCorps>();  //将离开范围的corps去掉buff
+		List<Corps> tempList = new ArrayList<Corps>();  //将离开范围的corps去掉buff
 		tempList.addAll(affectedList);
 		
 		tempList.removeAll(ls);
-		for(AbstractCorps corps : tempList){
+		for(Corps corps : tempList){
 			leave(corps);
 		}
 		
@@ -100,7 +96,7 @@ public abstract class Aureole extends PassiveSkill {
 		tempList.addAll(ls);
 		
 		tempList.removeAll(affectedList);
-		for(AbstractCorps corps : tempList){
+		for(Corps corps : tempList){
 			into(corps);
 		}
 		
@@ -123,6 +119,12 @@ public abstract class Aureole extends PassiveSkill {
 	public Boolean isInvoke() {
 		// TODO Auto-generated method stub
 		return true;
+	}
+	
+	@Override
+	public Corps getOwner() {
+		// TODO Auto-generated method stub
+		return (Corps) super.getOwner();
 	}
 
 }

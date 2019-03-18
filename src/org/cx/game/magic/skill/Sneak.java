@@ -34,17 +34,5 @@ public class Sneak extends ActiveSkill {
 		// TODO Auto-generated method stub
 		return (Corps) super.getOwner();
 	}
-	
-	@Override
-	public void setUseItOnYouself(Boolean useItOnYouself) {
-		// TODO Auto-generated method stub
-		super.setUseItOnYouself(useItOnYouself);
-	}
-	
-	@Override
-	public void setUseItOnFriendOrFoeOrAll(Integer useItOnFriendOrFoeOrAll) {
-		// TODO Auto-generated method stub
-		super.setUseItOnFriendOrFoeOrAll(useItOnFriendOrFoeOrAll);
-	}
 
 }

@@ -2,7 +2,7 @@ package org.cx.game.rule;
 
 import java.util.List;
 
-import org.cx.game.corps.AbstractCorps;
+import org.cx.game.corps.Corps;
 import org.cx.game.corps.Corps;
 import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.widget.LandformEffect;

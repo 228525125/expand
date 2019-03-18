@@ -6,15 +6,14 @@ import java.util.List;
 
 import org.cx.game.action.Merge;
 import org.cx.game.core.Context;
-import org.cx.game.core.AbstractPlayer;
 import org.cx.game.core.Player;
 import org.cx.game.corps.Corps;
 import org.cx.game.corps.CorpsFactory;
 import org.cx.game.widget.Area;
 import org.cx.game.widget.Ground;
-import org.cx.game.widget.HoneycombGround;
 import org.cx.game.widget.building.AbstractBuilding;
 import org.cx.game.widget.building.BuildingFactory;
+import org.cx.game.widget.building.AbstractBuilding;
 import org.cx.game.widget.building.SpatialBuilding;
  
 public class XmlConfigureHelper {

@@ -43,10 +43,4 @@ public class ShieldHit extends ActiveSkill {
 		if(harmToCorps(harm, corps))
 			new DizzyBuff(bout, corps).effect();
 	}
-	
-	@Override
-	public void setCooldown(Integer cooldown) {
-		// TODO Auto-generated method stub
-		super.setCooldown(cooldown);
-	}
 }

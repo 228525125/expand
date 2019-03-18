@@ -1,7 +1,7 @@
 package org.cx.game.validator;
 
-import org.cx.game.core.AbstractContext;
-import org.cx.game.core.AbstractPlayer;
+import org.cx.game.core.Context;
+import org.cx.game.core.Player;
 import org.cx.game.tools.I18n;
 
 /**
@@ -11,13 +11,13 @@ import org.cx.game.tools.I18n;
  */ 
 public class OperatePowerValidator extends Validator {
 
-	private AbstractPlayer operatedPlayer = null;
+	private Player operatedPlayer = null;
 	
 	/**
 	 * 
 	 * @param operated 被操作对象的player
 	 */
-	public OperatePowerValidator(AbstractPlayer operated) {
+	public OperatePowerValidator(Player operated) {
 		// TODO Auto-generated constructor stub
 		this.operatedPlayer = operated;
 	}
@@ -25,7 +25,7 @@ public class OperatePowerValidator extends Validator {
 	@Override
 	public Boolean validate() {
 		// TODO Auto-generated method stub
-		AbstractContext context = operatedPlayer.getContext();
+		Context context = operatedPlayer.getContext();
 		if(operatedPlayer.equals(context.getControlPlayer()))
 			return true;
 		else{

@@ -8,7 +8,7 @@ import org.cx.game.magic.buff.AttackLockBuff;
 import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.tools.Logger;
 import org.cx.game.tools.Util;
-import org.cx.game.widget.AbstractGround;
+import org.cx.game.widget.Ground;
 
 public class AttackRule extends AbstractRule {
  
@@ -30,7 +30,7 @@ public class AttackRule extends AbstractRule {
 		 */
 		getOwner().getOwner().getConjure().setConjureable(false);
 		
-		AbstractGround ground = getOwner().getOwner().getGround();
+		Ground ground = getOwner().getOwner().getGround();
 		Integer distance = ground.distance(attacked.getPosition(), attack.getPosition());
 		if(CommonIdentifierE.Death_Status_Live.equals(attacked.getDeath().getStatus())
 		&& CommonIdentifierE.Death_Status_Live.equals(attack.getDeath().getStatus())

@@ -5,6 +5,7 @@ import java.util.Map;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.tools.Util;
 import org.cx.game.widget.treasure.EmpiricValue;
+import org.cx.game.widget.treasure.ResourceHelper;
 import org.cx.game.widget.treasure.SkillCount;
 
 public class HeroUpgrade extends CorpsUpgrade implements IAction {
@@ -25,7 +26,7 @@ public class HeroUpgrade extends CorpsUpgrade implements IAction {
 	}
 	
 	public void setSkillCount(Integer funType, SkillCount sc) {
-		this.skillCount = (SkillCount) Util.operating(funType, this.skillCount, sc);
+		this.skillCount = (SkillCount) ResourceHelper.operating(funType, this.skillCount, sc);
 	}
 	
 	@Override

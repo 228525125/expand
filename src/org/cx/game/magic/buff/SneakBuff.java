@@ -1,6 +1,6 @@
 package org.cx.game.magic.buff;
 
-import org.cx.game.corps.AbstractCorps;
+import org.cx.game.corps.Corps;
 import org.cx.game.corps.Corps;
 import org.cx.game.intercepter.AbstractIntercepter;
 import org.cx.game.intercepter.IIntercepter;
@@ -14,7 +14,7 @@ public class SneakBuff extends AbstractBuff {
 
 	public static final Integer SneakBuff_ID = 10300002;
 	
-	public SneakBuff(Integer bout, AbstractCorps corps) {
+	public SneakBuff(Integer bout, Corps corps) {
 		super(SneakBuff_ID, bout, corps);
 		// TODO Auto-generated constructor stub
 	}

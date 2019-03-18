@@ -3,16 +3,17 @@ package org.cx.game.magic.skill;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.cx.game.corps.AbstractCorps;
+import org.cx.game.corps.Corps;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.magic.buff.DizzyBuff;
 import org.cx.game.tools.Util;
 import org.cx.game.validator.CorpsConjurePrepareValidator;
 import org.cx.game.validator.CorpsMoveableValidator;
-import org.cx.game.widget.AbstractGround;
+import org.cx.game.widget.Ground;
 import org.cx.game.widget.AbstractOption;
 import org.cx.game.widget.Ground;
+import org.cx.game.widget.IGround;
 
 /**
  * 标准技能，冲锋，一般为骑兵主要技能
@@ -50,7 +51,7 @@ public class Bump extends ActiveSkill {
 	}
 	
 	@Override
-	public void setOwner(AbstractCorps corps) {
+	public void setOwner(Corps corps) {
 		// TODO Auto-generated method stub
 		super.setOwner(corps);
 		
@@ -59,18 +60,6 @@ public class Bump extends ActiveSkill {
 		 */
 		this.bumpOption.addValidator(new CorpsMoveableValidator((Corps) corps));
 		//this.bumpOption.addValidator(new CorpsConjurePrepareValidator(this));
-	}
-	
-	@Override
-	public void setCooldown(Integer cooldown) {
-		// TODO Auto-generated method stub
-		super.setCooldown(cooldown);
-	}
-	
-	@Override
-	public void setPrepare(Integer prepare) {
-		// TODO Auto-generated method stub
-		super.setPrepare(prepare);
 	}
 
 	@Override
@@ -106,16 +95,16 @@ public class Bump extends ActiveSkill {
 			// TODO Auto-generated method stub
 			List<Integer> positionList = new ArrayList<Integer>();
 			ActiveSkill as = (ActiveSkill) getOwner();
-			AbstractCorps corps = as.getOwner();
+			Corps corps = as.getOwner();
 			Ground g = (Ground) corps.getGround();
 			Integer position = corps.getPosition();
 			Integer begin = Integer.valueOf(as.getRange().split("-")[0]);
 			Integer step = Integer.valueOf(as.getRange().split("-")[1]);
-			List<Integer> leftList = g.getLine(position, AbstractGround.Relative_Left, step, true, corps.getMoveType());
+			List<Integer> leftList = g.getLine(position, Ground.Relative_Left, step, true, corps.getMoveType());
 			
 			if(!leftList.isEmpty()){
 				Integer p = leftList.get(leftList.size()-1);
-				p = g.getPosition(p, AbstractGround.Relative_Left);
+				p = g.getPosition(p, Ground.Relative_Left);
 				if(null!=p && null!=g.getCorps(p) && !g.getCorps(p).getPlayer().equals(getOwner().getOwner().getPlayer()))
 					leftList.add(p);
 			}
@@ -123,10 +112,10 @@ public class Bump extends ActiveSkill {
 				positionList.add(leftList.get(i-1));
 			}
 			
-			List<Integer> leftBottomList = g.getLine(position, AbstractGround.Relative_LeftBottom, step, true, corps.getMoveType());
+			List<Integer> leftBottomList = g.getLine(position, Ground.Relative_LeftBottom, step, true, corps.getMoveType());
 			if(!leftBottomList.isEmpty()){
 				Integer p = leftBottomList.get(leftBottomList.size()-1);
-				p = g.getPosition(p, AbstractGround.Relative_LeftBottom);
+				p = g.getPosition(p, Ground.Relative_LeftBottom);
 				if(null!=p && null!=g.getCorps(p) && !g.getCorps(p).getPlayer().equals(getOwner().getOwner().getPlayer()))
 					leftBottomList.add(p);
 			}
@@ -134,10 +123,10 @@ public class Bump extends ActiveSkill {
 				positionList.add(leftBottomList.get(i-1));
 			}
 			
-			List<Integer> rightBottomList = g.getLine(position, AbstractGround.Relative_RightBottom, step, true, corps.getMoveType());
+			List<Integer> rightBottomList = g.getLine(position, Ground.Relative_RightBottom, step, true, corps.getMoveType());
 			if(!rightBottomList.isEmpty()){
 				Integer p = rightBottomList.get(rightBottomList.size()-1);
-				p = g.getPosition(p, AbstractGround.Relative_RightBottom);
+				p = g.getPosition(p, Ground.Relative_RightBottom);
 				if(null!=p && null!=g.getCorps(p) && !g.getCorps(p).getPlayer().equals(getOwner().getOwner().getPlayer()))
 					rightBottomList.add(p);
 			}
@@ -145,10 +134,10 @@ public class Bump extends ActiveSkill {
 				positionList.add(rightBottomList.get(i-1));
 			}
 			
-			List<Integer> rightList = g.getLine(position, AbstractGround.Relative_Right, step, true, corps.getMoveType());
+			List<Integer> rightList = g.getLine(position, Ground.Relative_Right, step, true, corps.getMoveType());
 			if(!rightList.isEmpty()){
 				Integer p = rightList.get(rightList.size()-1);
-				p = g.getPosition(p, AbstractGround.Relative_Right);
+				p = g.getPosition(p, Ground.Relative_Right);
 				if(null!=p && null!=g.getCorps(p) && !g.getCorps(p).getPlayer().equals(getOwner().getOwner().getPlayer()))
 					rightList.add(p);
 			}
@@ -156,10 +145,10 @@ public class Bump extends ActiveSkill {
 				positionList.add(rightList.get(i-1));
 			}
 			
-			List<Integer> rightTopList = g.getLine(position, AbstractGround.Relative_RightTop, step, true, corps.getMoveType());
+			List<Integer> rightTopList = g.getLine(position, Ground.Relative_RightTop, step, true, corps.getMoveType());
 			if(!rightTopList.isEmpty()){
 				Integer p = rightTopList.get(rightTopList.size()-1);
-				p = g.getPosition(p, AbstractGround.Relative_RightTop);
+				p = g.getPosition(p, Ground.Relative_RightTop);
 				if(null!=p && null!=g.getCorps(p) && !g.getCorps(p).getPlayer().equals(getOwner().getOwner().getPlayer()))
 					rightTopList.add(p);
 			}
@@ -167,10 +156,10 @@ public class Bump extends ActiveSkill {
 				positionList.add(rightTopList.get(i-1));
 			}
 			
-			List<Integer> leftTopList = g.getLine(position, AbstractGround.Relative_LeftTop, step, true, corps.getMoveType());
+			List<Integer> leftTopList = g.getLine(position, Ground.Relative_LeftTop, step, true, corps.getMoveType());
 			if(!leftTopList.isEmpty()){
 				Integer p = leftTopList.get(leftTopList.size()-1);
-				p = g.getPosition(p, AbstractGround.Relative_LeftTop);
+				p = g.getPosition(p, Ground.Relative_LeftTop);
 				if(null!=p && null!=g.getCorps(p) && !g.getCorps(p).getPlayer().equals(getOwner().getOwner().getPlayer()))
 					leftTopList.add(p);
 			}

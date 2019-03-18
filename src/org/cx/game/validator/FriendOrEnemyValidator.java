@@ -1,7 +1,7 @@
 package org.cx.game.validator;
 
-import org.cx.game.core.AbstractPlayer;
-import org.cx.game.corps.AbstractCorps;
+import org.cx.game.core.Player;
+import org.cx.game.corps.Corps;
 import org.cx.game.tools.I18n;
 
 /**
@@ -13,17 +13,17 @@ public class FriendOrEnemyValidator extends Validator {
 
 	private Boolean isFriend = null;
 	
-	private AbstractPlayer owner = null;
-	private AbstractPlayer enemy = null;
+	private Player owner = null;
+	private Player enemy = null;
 	
-	public FriendOrEnemyValidator(AbstractPlayer owner, AbstractPlayer enemy, Boolean isFriend) {
+	public FriendOrEnemyValidator(Player owner, Player enemy, Boolean isFriend) {
 		// TODO Auto-generated constructor stub
 		this.owner = owner;
 		this.enemy = enemy;
 		this.isFriend = isFriend;
 	}
 	
-	public FriendOrEnemyValidator(AbstractCorps owner, AbstractCorps enemy, Boolean isFriend) {
+	public FriendOrEnemyValidator(Corps owner, Corps enemy, Boolean isFriend) {
 		// TODO Auto-generated constructor stub
 		this.owner = owner.getPlayer();
 		this.enemy = enemy.getPlayer();

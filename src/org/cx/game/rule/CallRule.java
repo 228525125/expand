@@ -1,12 +1,12 @@
 package org.cx.game.rule;
 
 import org.cx.game.action.Call;
-import org.cx.game.core.AbstractPlayer;
-import org.cx.game.corps.AbstractCorps;
+import org.cx.game.core.Player;
+import org.cx.game.corps.Corps;
 import org.cx.game.corps.Hero;
 import org.cx.game.corps.Corps;
 import org.cx.game.tools.Util;
-import org.cx.game.widget.AbstractGround;
+import org.cx.game.widget.Ground;
 import org.cx.game.widget.Place;
 import org.cx.game.widget.treasure.Mineral;
 import org.cx.game.widget.treasure.Resource;
@@ -29,8 +29,8 @@ public class CallRule extends AbstractRule {
 	@Override
 	public void after(Object[] args) {
 		// TODO Auto-generated method stub
-		AbstractCorps corps = getOwner().getOwner();
-		AbstractPlayer player = corps.getPlayer();
+		Corps corps = getOwner().getOwner();
+		Player player = (Player) corps.getPlayer();
 		player.getCorpsList().add(corps);
 	}
 	
@@ -45,9 +45,8 @@ public class CallRule extends AbstractRule {
 		/*
 		 * 扣减资源
 		 */
-		AbstractPlayer player = owner.getPlayer();
+		Player player = owner.getPlayer();
 		Mineral consume = call.getConsume();		
-		player.setMineral(Util.Sub, consume);
 		
 		this.isInvoke = true;
 	}

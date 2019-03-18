@@ -1,7 +1,7 @@
 package org.cx.game.validator;
 
 import org.cx.game.tools.I18n;
-import org.cx.game.widget.AbstractGround;
+import org.cx.game.widget.Ground;
 
 /**
  * 验证Corps是否在指定的位置上
@@ -10,10 +10,10 @@ import org.cx.game.widget.AbstractGround;
  */
 public class CorpsInThePlaceValidator extends Validator {
 
-	private AbstractGround ground = null;
+	private Ground ground = null;
 	private Integer position = null;
 	
-	public CorpsInThePlaceValidator(AbstractGround ground, Integer position) {
+	public CorpsInThePlaceValidator(Ground ground, Integer position) {
 		// TODO Auto-generated constructor stub
 		this.ground = ground;
 		this.position = position;

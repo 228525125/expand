@@ -1,34 +1,18 @@
 package org.cx.game.core;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.cx.game.action.Death;
-import org.cx.game.corps.AbstractCorps;
-import org.cx.game.corps.Corps;
-import org.cx.game.corps.CorpsFactory;
-import org.cx.game.corps.Hero;
-import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
-import org.cx.game.tools.JsonHelper;
-import org.cx.game.tools.XmlConfigureHelper;
-import org.cx.game.widget.AbstractPlace;
-import org.cx.game.widget.Ground;
-import org.cx.game.widget.HoneycombGround;
-import org.cx.game.widget.SceneFactory;
-import org.cx.game.widget.building.AbstractBuilding;
-import org.cx.game.widget.building.ReviveOption;
-import org.cx.game.widget.treasure.Treasure;
 
 public class StartState extends AbstractPlayState {
 	
 	@Override
 	public void deploy() {
 		// TODO Auto-generated method stub
-		context.setPlayState(new DeployState());
-		context.deploy();
+		getContext().setPlayState(new DeployState());
+		getContext().deploy();
 	}
 
 	@Override
@@ -48,13 +32,19 @@ public class StartState extends AbstractPlayState {
 		// TODO Auto-generated method stub
 		
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("ground", context.getGround());
+		map.put("ground", getContext().getGround());
 		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Context_Start,map);
 		super.notifyObservers(info);
 		
-		context.switchControl();
+		getContext().switchControl();
 		
 		deploy();
+	}
+	
+	@Override
+	public Context getContext() {
+		// TODO Auto-generated method stub
+		return (Context) super.getContext();
 	}
 	
 	/**

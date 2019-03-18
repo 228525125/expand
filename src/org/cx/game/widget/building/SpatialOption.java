@@ -4,15 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.cx.game.action.IAction;
-import org.cx.game.core.AbstractPlayer;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.validator.CorpsInThePlaceValidator;
 import org.cx.game.validator.CorpsMoveEnergyValidator;
 import org.cx.game.widget.AbstractControlQueue;
 import org.cx.game.widget.AbstractOption;
-import org.cx.game.widget.AbstractPlace;
-import org.cx.game.widget.AbstractGround;
+import org.cx.game.widget.Place;
 
 /**
  * 传送选项
@@ -76,7 +74,7 @@ public class SpatialOption extends AbstractOption {
 	@Override
 	public void execute(Object... objects) throws RuleValidatorException {
 		// TODO Auto-generated method stub
-		AbstractPlace place = getOwner().getPlace();
+		Place place = getOwner().getPlace();
 		doValidator(new CorpsInThePlaceValidator(place.getOwner(), place.getPosition()));
 		doValidator(new CorpsMoveEnergyValidator((Corps) place.getCorps()));
 		

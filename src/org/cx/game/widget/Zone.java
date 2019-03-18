@@ -3,10 +3,10 @@ package org.cx.game.widget;
 import java.util.List;
 import java.util.Map;
 
-import org.cx.game.corps.AbstractCorps;
+import org.cx.game.corps.Corps;
 import org.cx.game.widget.treasure.Treasure;
 
-public class Zone extends HoneycombGround {
+public class Zone extends Ground {
 
 	private ZoneControlQueue queue = new ZoneControlQueue();
 	

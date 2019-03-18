@@ -9,8 +9,7 @@ import java.util.List;
 
 import org.cx.game.builder.ObjectTypeBuilder;
 import org.cx.game.builder.ObjectTypeParse;
-import org.cx.game.core.AbstractPlayer;
-import org.cx.game.corps.AbstractCorps;
+import org.cx.game.corps.Corps;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.BuilderException;
 import org.cx.game.exception.ParseException;

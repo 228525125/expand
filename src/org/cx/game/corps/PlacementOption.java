@@ -14,11 +14,8 @@ import org.cx.game.tools.I18n;
 import org.cx.game.validator.CorpsPlacementRangeValidator;
 import org.cx.game.validator.OperatePowerValidator;
 import org.cx.game.widget.AbstractControlQueue;
-import org.cx.game.widget.AbstractGround;
 import org.cx.game.widget.AbstractOption;
-import org.cx.game.widget.AbstractPlace;
 import org.cx.game.widget.Ground;
-import org.cx.game.widget.HoneycombGround;
 import org.cx.game.widget.Place;
 
 /**
@@ -28,15 +25,15 @@ import org.cx.game.widget.Place;
  */
 public class PlacementOption extends AbstractOption {
 	
-	public PlacementOption(AbstractCorps corps) {
+	public PlacementOption(Corps corps) {
 		// TODO Auto-generated constructor stub
 		setOwner(corps);
 	}
 	
 	@Override
-	public AbstractCorps getOwner() {
+	public Corps getOwner() {
 		// TODO Auto-generated method stub
-		return (AbstractCorps) super.getOwner();
+		return (Corps) super.getOwner();
 	}
 	
 	@Override
@@ -90,7 +87,7 @@ public class PlacementOption extends AbstractOption {
 			corps.setPosition(position);
 			
 			Map<String,Object> map = new HashMap<String,Object>();
-			Ground ground = (HoneycombGround) getOwner().getOwner().getGround();
+			Ground ground = getOwner().getOwner().getGround();
 
 			map.put("ground", ground);
 			NotifyInfo info = new NotifyInfo(CommonIdentifierE.Ground_LoadMap,map);

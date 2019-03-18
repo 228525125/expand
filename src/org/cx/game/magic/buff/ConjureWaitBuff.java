@@ -1,6 +1,6 @@
 package org.cx.game.magic.buff;
 
-import org.cx.game.corps.AbstractCorps;
+import org.cx.game.corps.Corps;
 import org.cx.game.corps.Corps;
 import org.cx.game.intercepter.AbstractIntercepter;
 import org.cx.game.intercepter.IIntercepter;
@@ -17,7 +17,7 @@ public class ConjureWaitBuff extends AbstractBuff {
 	
 	private AbstractOption option = null;
 	
-	public ConjureWaitBuff(Integer bout, AbstractOption option, AbstractCorps corps) {
+	public ConjureWaitBuff(Integer bout, AbstractOption option, Corps corps) {
 		super(ConjureWaitBuff_ID, bout, corps);
 		// TODO Auto-generated constructor stub
 		this.option = option;

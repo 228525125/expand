@@ -1,7 +1,7 @@
 package org.cx.game.validator;
 
 import org.cx.game.command.CommandBuffer;
-import org.cx.game.corps.AbstractCorps;
+import org.cx.game.corps.Corps;
 import org.cx.game.corps.Corps;
 import org.cx.game.tools.I18n;
 
@@ -13,10 +13,10 @@ import org.cx.game.tools.I18n;
 public class UseItOnYourselfValidator extends Validator {
 
 	private Boolean enable = false;
-	private AbstractCorps owner = null;
-	private AbstractCorps corps = null;
+	private Corps owner = null;
+	private Corps corps = null;
 	
-	public UseItOnYourselfValidator(Boolean enable, AbstractCorps owner, AbstractCorps corps) {
+	public UseItOnYourselfValidator(Boolean enable, Corps owner, Corps corps) {
 		// TODO Auto-generated constructor stub
 		this.enable  =enable;
 		this.owner = owner;

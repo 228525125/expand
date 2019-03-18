@@ -3,7 +3,7 @@ package org.cx.game.ai.policy;
 import java.util.Comparator;
 
 import org.cx.game.corps.Corps;
-import org.cx.game.widget.AbstractGround;
+import org.cx.game.widget.Ground;
 
 public class DistanceComparator implements Comparator<Corps> {
 
@@ -17,7 +17,7 @@ public class DistanceComparator implements Comparator<Corps> {
 	@Override
 	public int compare(Corps o1, Corps o2) {
 		// TODO Auto-generated method stub
-		AbstractGround ground = o1.getGround();
+		Ground ground = o1.getGround();
 		Integer distance1 = ground.distance(position, o1.getPosition());
 		Integer distance2 = ground.distance(position, o2.getPosition());
 		return distance1.compareTo(distance2);

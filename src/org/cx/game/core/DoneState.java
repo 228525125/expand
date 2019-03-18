@@ -4,9 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.cx.game.corps.AbstractCorps;
 import org.cx.game.corps.Corps;
-import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.widget.Ground;
@@ -16,17 +14,16 @@ public class DoneState extends AbstractPlayState {
 	@Override
 	public void deploy() {
 		// TODO Auto-generated method stub
-		context.setPlayState(new DeployState());
-		context.deploy();
+		getContext().setPlayState(new DeployState());
+		getContext().deploy();
 	}
 
 	@Override
 	public void done() {
 		// TODO Auto-generated method stub
-		Player curPlayer = (Player) context.getControlPlayer();
-		Context cont = (Context) context;
-		Ground ground = (Ground) cont.getGround();
-		for(AbstractCorps corps : ground.getCorpsList(curPlayer)){
+		Player curPlayer = getContext().getControlPlayer();
+		Ground ground = getContext().getGround();
+		for(Corps corps : ground.getCorpsList(curPlayer)){
 			Corps sc = (Corps) corps;
 			if(sc.getActivate().getActivation().equals(true))
 				sc.activate(false);
@@ -37,7 +34,7 @@ public class DoneState extends AbstractPlayState {
 		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Context_Done,map);
 		super.notifyObservers(info);
 
-		context.switchControl();                   //转换控制权
+		getContext().switchControl();                   //转换控制权
 		
 		deploy();                //部署
 	}
@@ -52,6 +49,12 @@ public class DoneState extends AbstractPlayState {
 	public void start() {
 		// TODO Auto-generated method stub
 
+	}
+	
+	@Override
+	public Context getContext() {
+		// TODO Auto-generated method stub
+		return (Context) super.getContext();
 	}
 
 }

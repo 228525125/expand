@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.cx.game.action.IAction;
-import org.cx.game.core.AbstractPlayer;
+import org.cx.game.core.Player;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.tools.Util;
-import org.cx.game.validator.BuildConsumeValidator;
 import org.cx.game.validator.OperatePowerValidator;
 import org.cx.game.widget.AbstractControlQueue;
-import org.cx.game.widget.AbstractGround;
+import org.cx.game.widget.Ground;
 import org.cx.game.widget.AbstractOption;
 
 public class BuildOption extends AbstractOption {
@@ -52,7 +51,7 @@ public class BuildOption extends AbstractOption {
 		// TODO Auto-generated method stub
 		super.setOwner(building);
 		AbstractBuilding b = (AbstractBuilding) building;
-		addValidator(new BuildConsumeValidator(b));
+		//addValidator(new BuildConsumeValidator(b));
 	}
 
 	private BeforeExecute beforeExecute = null;
@@ -88,38 +87,6 @@ public class BuildOption extends AbstractOption {
 		
 		return name;
 	}
-
-	@Override
-	public Integer getStatus() {
-		// TODO Auto-generated method stub
-		Integer ret = super.getStatus();
-		
-		/*
-		 * 判断基础建筑物是否建造
-		 */
-		if(getOwner().getOwner() instanceof TownBuilding && !getOwner().getNeedBuilding().isEmpty()){
-			TownBuilding town = (TownBuilding) getOwner().getOwner();
-			List<AbstractBuilding> buildings = town.getBuildings();
-			List<Integer> list = new ArrayList<Integer>();
-			for(AbstractBuilding building : buildings){
-				if(AbstractBuilding.Building_Status_Complete.equals(building.getStatus()))
-					list.add(building.getType());
-			}
-			
-			for(Integer type : getOwner().getNeedBuilding()){
-				if(!list.contains(type)){
-					ret = AbstractOption.Status_Unenforceable;
-					break;
-				}
-			}
-		}
-		
-		if(!AbstractBuilding.Building_Status_Nothingness.equals(getOwner().getStatus())){
-			ret = AbstractOption.Status_Unenforceable;
-		}
-			
-		return ret;
-	}
 	
 	class OptionBuildBeforeExecute extends BeforeExecute implements IAction {
 		
@@ -129,7 +96,7 @@ public class BuildOption extends AbstractOption {
 			super.action(objects);
 			
 			AbstractBuilding building = getOwner().getOwner();
-			building.getPlayer().setMineral(Util.Sub, building.getConsume());
+			//building.getPlayer().setMineral(Util.Sub, building.getConsume());
 			building.setStatus(AbstractBuilding.Building_Status_Build);
 		}
 		

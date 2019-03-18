@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.cx.game.action.IAction;
-import org.cx.game.corps.AbstractCorps;
+import org.cx.game.corps.Corps;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.magic.buff.ConjureWaitBuff;
@@ -16,7 +16,7 @@ import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.tools.I18n;
 import org.cx.game.validator.CorpsConjureableValidator;
 import org.cx.game.widget.AbstractControlQueue;
-import org.cx.game.widget.AbstractGround;
+import org.cx.game.widget.Ground;
 import org.cx.game.widget.AbstractOption;
 
 public abstract class ConjureOption extends AbstractOption {
@@ -80,10 +80,10 @@ public abstract class ConjureOption extends AbstractOption {
 		// TODO Auto-generated method stub
 		List<Integer> positionList = new ArrayList<Integer>();
 		ActiveSkill as = (ActiveSkill) getOwner();
-		AbstractCorps corps = as.getOwner();
-		AbstractGround ground = corps.getGround();
+		Corps corps = as.getOwner();
+		Ground ground = corps.getGround();
 		Integer position = corps.getPosition();
-		positionList = ground.areaForDistance(position, as.getRange(), AbstractGround.Contain);
+		positionList = ground.areaForDistance(position, as.getRange(), Ground.Contain);
 		return positionList;
 	}
 

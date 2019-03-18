@@ -2,7 +2,7 @@ package org.cx.game.validator;
 
 import org.cx.game.tools.CommonIdentifierE;
 import org.cx.game.tools.I18n;
-import org.cx.game.widget.AbstractGround;
+import org.cx.game.widget.Ground;
 import org.cx.game.widget.Place;
 import org.cx.game.widget.building.AbstractBuilding;
 
@@ -29,7 +29,7 @@ public class CorpsCallRangeValidator extends SelectBuildingTypeValidator {
 		Boolean ret = super.validate();
 		
 		if(ret){
-			AbstractGround ground = buildingCall.getPlayer().getContext().getGround();
+			Ground ground = buildingCall.getPlayer().getContext().getGround();
 			if(Integer.valueOf(1).equals(ground.distance(buildingCall.getPlace().getPosition(), place.getPosition())))
 				ret = true;
 			else{

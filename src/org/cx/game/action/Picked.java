@@ -6,7 +6,7 @@ import java.util.Map;
 import org.cx.game.corps.Hero;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
-import org.cx.game.widget.AbstractGround;
+import org.cx.game.widget.Ground;
 import org.cx.game.widget.treasure.Treasure;
 
 public class Picked extends AbstractAction implements IAction {
@@ -31,7 +31,7 @@ public class Picked extends AbstractAction implements IAction {
 		NotifyInfo info = new NotifyInfo(CommonIdentifierE.Treasure_Picked,map);
 		super.notifyObservers(info);
 		
-		AbstractGround ground = hero.getGround();
+		Ground ground = hero.getGround();
 		ground.removeTreasure(getOwner());
 	}
 }

@@ -3,7 +3,7 @@ package org.cx.game.ai.policy.formula;
 import org.cx.game.corps.Corps;
 import org.cx.game.tools.I18n;
 import org.cx.game.validator.Validator;
-import org.cx.game.widget.AbstractGround;
+import org.cx.game.widget.Ground;
 
 public class Chaochushecheng extends Validator {
 
@@ -21,7 +21,7 @@ public class Chaochushecheng extends Validator {
 		// TODO Auto-generated method stub
 		Boolean ret = false;
 		
-		AbstractGround ground = this.corps.getGround();
+		Ground ground = this.corps.getGround();
 		Integer distance = ground.distance(this.corps.getPosition(), targetPosition);
 		Integer range = this.corps.getAttackRange();
 		

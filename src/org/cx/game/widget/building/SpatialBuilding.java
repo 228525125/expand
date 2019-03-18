@@ -8,12 +8,13 @@ import java.util.Map;
 import org.cx.game.action.AbstractAction;
 import org.cx.game.action.ActionProxyHelper;
 import org.cx.game.action.IAction;
-import org.cx.game.corps.AbstractCorps;
+import org.cx.game.corps.Corps;
 import org.cx.game.corps.Corps;
 import org.cx.game.observer.NotifyInfo;
 import org.cx.game.tools.CommonIdentifierE;
-import org.cx.game.widget.AbstractGround;
-import org.cx.game.widget.AbstractPlace;
+import org.cx.game.widget.Ground;
+import org.cx.game.widget.IPlace;
+import org.cx.game.widget.Place;
 
 /**
  * 传送站，用于链接不同地图空间的节点，但区别于时空门；
@@ -44,7 +45,7 @@ public class SpatialBuilding extends AbstractBuilding {
 	 * @param destNode 节点
 	 */
 	public void transmit(SpatialBuilding destNode) {
-		AbstractCorps corps = getPlace().getCorps();
+		Corps corps = getPlace().getCorps();
 		IAction action = new ActionProxyHelper(getTransmitAction());
 		action.action(destNode, corps);
 	}
@@ -53,17 +54,10 @@ public class SpatialBuilding extends AbstractBuilding {
 	 * 接收一位传送来的英雄，当然只有英雄才可使用传送点
 	 * @param hero 英雄
 	 */
-	public void receive(AbstractCorps corps) {
-		AbstractPlace place = getPlace();
+	public void receive(Corps corps) {
+		Place place = getPlace();
 		IAction action = new ActionProxyHelper(getReceiveAction());
 		action.action(place, corps);
-	}
-	
-	@Override
-	public void setPlace(AbstractPlace place) {
-		// TODO Auto-generated method stub
-		super.setPlace(place);
-		
 	}
 	
 	public Boolean getTransmissionIsUsable() {
@@ -90,6 +84,12 @@ public class SpatialBuilding extends AbstractBuilding {
 		this.spatialBuildingList.add(spatialBuilding);
 		SpatialOption option = new SpatialOption(spatialBuilding, this);
 		addOption(option);
+	}
+	
+	@Override
+	public void setPlace(IPlace place) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private IAction transmitAction = null;
@@ -118,9 +118,9 @@ public class SpatialBuilding extends AbstractBuilding {
 		public void action(Object... objects) {
 			// TODO Auto-generated method stub
 			SpatialBuilding sb = (SpatialBuilding) objects[0];
-			AbstractCorps corps = (AbstractCorps) objects[1];
+			Corps corps = (Corps) objects[1];
 			
-			AbstractGround ground = corps.getGround();
+			Ground ground = corps.getGround();
 			ground.removeCorps(corps);
 			
 			Map<String,Object> map = new HashMap<String,Object>();
@@ -138,9 +138,9 @@ public class SpatialBuilding extends AbstractBuilding {
 		@Override
 		public void action(Object... objects) {
 			// TODO Auto-generated method stub
-			AbstractPlace place = (AbstractPlace) objects[0];
+			Place place = (Place) objects[0];
 			Corps corps = (Corps) objects[1];
-			AbstractGround ground = place.getOwner();
+			Ground ground = place.getOwner();
 			
 			/*
 			 * 消耗精力

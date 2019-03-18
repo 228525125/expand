@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.cx.game.action.IAction;
-import org.cx.game.core.AbstractPlayer;
+import org.cx.game.core.Player;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.tools.I18n;
 import org.cx.game.tools.Util;
-import org.cx.game.validator.BuildingUpgradeConsumeValidator;
 import org.cx.game.widget.AbstractControlQueue;
-import org.cx.game.widget.AbstractGround;
+import org.cx.game.widget.Ground;
 import org.cx.game.widget.AbstractOption;
 import org.cx.game.widget.treasure.Mineral;
 
@@ -47,7 +46,7 @@ public class BuildingUpgradeOption extends AbstractOption {
 		
 		inquiryBuildingIsAllowUpdate();
 		AbstractBuilding b = (AbstractBuilding) building;
-		addValidator(new BuildingUpgradeConsumeValidator(b));
+		//addValidator(new BuildingUpgradeConsumeValidator(b));
 	}
 	
 	@Override
@@ -96,8 +95,8 @@ public class BuildingUpgradeOption extends AbstractOption {
 			// TODO Auto-generated method stub
 			super.action(objects);
 			
-			AbstractPlayer player = getOwner().getOwner().getPlayer();
-			player.setMineral(Util.Sub, (Mineral) getOwner().getOwner().getUpgrade().getRequirement());
+			Player player = getOwner().getOwner().getPlayer();
+			//player.setMineral(Util.Sub, (Mineral) getOwner().getOwner().getUpgrade().getRequirement());
 			
 			getOwner().setStatus(AbstractBuilding.Building_Status_Build);
 		}

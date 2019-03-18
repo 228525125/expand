@@ -97,10 +97,10 @@ public class AttackPolicy extends AbstractPolicy<CorpsAgent> {
 		Corps corps = getAgent().getOwner();
 		String cmd = "select ground place"+corps.getPosition()+" corps;";
 		try {
-			Command command= CommandFactory.getInstance(corps.getPlayer(),cmd);
+			Command command= CommandFactory.getInstance(cmd, corps.getPlayer().getCommandBuffer());
 			command.execute();
 			
-			super.command = CommandFactory.getInstance(corps.getPlayer(),this.cmdStr);
+			super.command = CommandFactory.getInstance(this.cmdStr, corps.getPlayer().getCommandBuffer());
 			super.command.doValidator();
 			if(!super.command.hasError()){
 				setPri(AbstractPolicy.PRI_High);

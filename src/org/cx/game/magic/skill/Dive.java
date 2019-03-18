@@ -3,7 +3,7 @@ package org.cx.game.magic.skill;
 import java.util.Collections;
 import java.util.List;
 
-import org.cx.game.corps.AbstractCorps;
+import org.cx.game.corps.Corps;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.RuleValidatorException;
 import org.cx.game.magic.buff.DizzyBuff;
@@ -47,7 +47,7 @@ public class Dive extends ActiveSkill {
 	}
 	
 	@Override
-	public void setOwner(AbstractCorps corps) {
+	public void setOwner(Corps corps) {
 		// TODO Auto-generated method stub
 		super.setOwner(corps);
 		
@@ -58,12 +58,6 @@ public class Dive extends ActiveSkill {
 	}
 	
 	@Override
-	public void setCooldown(Integer cooldown) {
-		// TODO Auto-generated method stub
-		super.setCooldown(cooldown);
-	}
-	
-	@Override
 	public void useSkill(Object... objects) {
 		// TODO Auto-generated method stub
 		Place place = (Place) objects[0];
@@ -71,7 +65,7 @@ public class Dive extends ActiveSkill {
 		
 		Ground ground = (Ground) owner.getGround();
 		
-		List<AbstractCorps> corpsList = ground.queryCorpsList(place.getPosition(), 1, Ground.Contain);
+		List<Corps> corpsList = ground.queryCorpsList(place.getPosition(), 1, Ground.Contain);
 		if(!corpsList.isEmpty()){
 			Collections.shuffle(corpsList);
 			Corps corps = (Corps) corpsList.get(0);
@@ -134,7 +128,7 @@ public class Dive extends ActiveSkill {
 			// TODO Auto-generated method stub
 			super.execute(objects);
 			
-			AbstractCorps corps =  getOwner().getOwner();
+			Corps corps =  getOwner().getOwner();
 			
 			Ground ground = (Ground) corps.getGround();
 			ground.removeCorps(corps);

@@ -2,16 +2,16 @@ package org.cx.game.validator;
 
 import java.util.List;
 
-import org.cx.game.corps.AbstractCorps;
+import org.cx.game.corps.Corps;
 import org.cx.game.tools.I18n;
 import org.cx.game.widget.Place;
 
 public class CorpsPlacementRangeValidator extends Validator {
 
 	private Integer position = null;
-	private AbstractCorps corps = null;
+	private Corps corps = null;
 	
-	public CorpsPlacementRangeValidator(AbstractCorps corps, Integer position) {
+	public CorpsPlacementRangeValidator(Corps corps, Integer position) {
 		// TODO Auto-generated constructor stub
 		this.position = position;
 		this.corps = corps;

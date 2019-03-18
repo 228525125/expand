@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.cx.game.corps.AbstractCorps;
+import org.cx.game.corps.Corps;
 import org.cx.game.corps.Corps;
 import org.cx.game.corps.PlacementOption;
 import org.cx.game.tools.Util;
@@ -20,13 +20,13 @@ public class SceneHost extends AbstractHost {
 	private Map<Integer, String> corpsDataMap = new HashMap<Integer, String>();
 	private Map<Integer, Integer> troopStatusMap = new HashMap<Integer, Integer>();
 	
-	public SceneHost(Integer mapId, String account, Integer troop, String playNo) {
+	public SceneHost(String hostName, String playNo, String account, Integer mapId) {
 		// TODO Auto-generated constructor stub
-		super(playNo);
+		super(hostName, playNo);
 		
 		scene = SceneFactory.getInstance(mapId);
 		
-		playerJoinGame(account, troop);
+		playerJoinGame(account, 1);
 		
 		setStatus(Status_WaitJoin);
 	}
@@ -56,11 +56,11 @@ public class SceneHost extends AbstractHost {
 		// TODO Auto-generated method stub
 		super.ready();
 		
-		getContext().setStatus(AbstractContext.Status_Prepare);
+		getContext().setStatus(Context.Status_Prepare);
 	}
 	
-	public void deploy(AbstractPlayer player) {
-		Integer troop = player.getTroop();
+	public void deploy(Integer troop) {
+		Player player = getPlayer(troop);
 		String data = this.corpsDataMap.get(troop);
 		List<Corps> corpsList = XmlConfigureHelper.convertCorpsListByString(data);
 		
@@ -83,11 +83,12 @@ public class SceneHost extends AbstractHost {
 		}
 	}
 	
-	public void go(AbstractPlayer player) {
+	public void go(Integer troop) {
+		Player player = getPlayer(troop);
 		this.troopStatusMap.put(player.getTroop(), Status_WaitStart);
 		
-		List<AbstractCorps> corpsList = player.getCorpsList();
-		for(AbstractCorps corps : corpsList){
+		List<Corps> corpsList = player.getCorpsList();
+		for(Corps corps : corpsList){
 			for(AbstractOption option : corps.getOptionByClass(PlacementOption.class)){
 				corps.removeOption(option);
 			}
@@ -95,15 +96,15 @@ public class SceneHost extends AbstractHost {
 		}
 		
 		if(isStatus(Status_WaitStart)){
-			getContext().setStatus(AbstractContext.Status_Ready);
+			getContext().setStatus(Context.Status_Ready);
 		}
 	}
 	
 	private Boolean isStatus(Integer status) {
 		Boolean ret = true;
 		
-		List<AbstractPlayer> playerList = getPlayerList();
-		for(AbstractPlayer player : playerList){
+		List<Player> playerList = getPlayerList();
+		for(Player player : playerList){
 			if(!status.equals(this.troopStatusMap.get(player.getTroop()))){
 				ret = false;
 				break;

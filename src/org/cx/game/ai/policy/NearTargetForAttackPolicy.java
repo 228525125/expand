@@ -8,7 +8,7 @@ import org.cx.game.command.Command;
 import org.cx.game.command.CommandFactory;
 import org.cx.game.corps.Corps;
 import org.cx.game.exception.ValidatorException;
-import org.cx.game.widget.AbstractGround;
+import org.cx.game.widget.Ground;
 
 public class NearTargetForAttackPolicy extends AbstractPolicy<CorpsAgent> {
 
@@ -58,17 +58,17 @@ public class NearTargetForAttackPolicy extends AbstractPolicy<CorpsAgent> {
 			System.out.println(getErrors().getMessage());
 		}else{
 			
-			AbstractGround ground = corps.getGround();
+			Ground ground = corps.getGround();
 			Integer position = ground.getPointByWay(corps.getPosition(), target.getPosition(), corps.getMove().getEnergy(), corps.getMove().getType());
 			
 			this.cmdStr = "move ground place"+position+";";
 			
 			String cmd = "select ground place"+corps.getPosition()+" corps;";
 			try {
-				Command command= CommandFactory.getInstance(corps.getPlayer(),cmd);
+				Command command= CommandFactory.getInstance(cmd, corps.getPlayer().getCommandBuffer());
 				command.execute();
 				
-				super.command = CommandFactory.getInstance(corps.getPlayer(),this.cmdStr);
+				super.command = CommandFactory.getInstance(this.cmdStr, corps.getPlayer().getCommandBuffer());
 				super.command.doValidator();
 				if(!super.command.hasError()){
 					setPri(AbstractPolicy.PRI_Default);
